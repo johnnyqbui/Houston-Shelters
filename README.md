@@ -1,6 +1,6 @@
-This app displays list of shelters in Houston for Hurricane Harvey evacuees from API endpoint: https://data.world/sya/harvey-resources/workspace/file?datasetid=list-of-shelters-around-texas&filename=Texas-area-shelter-availability.xlsx and https://docs.google.com/spreadsheets/d/14GHRHQ_7cqVrj0B7HCTVE5EbfpNFMbSI9Gi8azQyn-k
+This app displays list of shelters in Houston for Hurricane Harvey evacuees from: https://docs.google.com/spreadsheets/d/14GHRHQ_7cqVrj0B7HCTVE5EbfpNFMbSI9Gi8azQyn-k
 
-Thanks Sya and Sketch City Members
+Thanks to everyone working to constantly keep this sheet updated
 
 
 ## How to run development

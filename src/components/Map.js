@@ -14,7 +14,6 @@ const Map = withScriptjs(
 				return 'Did Not Respond/Unknown'
 			}
 		}
-
 		return (
 		<GoogleMap
 			ref={props.onMapLoad}
