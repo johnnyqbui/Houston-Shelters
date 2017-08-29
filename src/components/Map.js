@@ -22,21 +22,21 @@ const Map = withScriptjs(
     		defaultCenter={ currentLocation ? currentLocation : { lat: 29.760427, lng: -95.369803 } }
     	>
         	{shelters.map((shelter, index) => {
-        		const { county, name, address, phone, location, accepting, pets, notes, supplyNeeds, volunteerNeeds } = shelter;
+        		const { county, name, address, phone, location, accepting, pets, notes, supplyNeeds, volunteerNeeds, lastUpdated } = shelter;
 
         		return (
         			<Marker
 	        			key={index}
 	        			position={{
-	        					lat: shelter.location.lat,
-	        					lng: shelter.location.lng
+	        					lat: location.lat,
+	        					lng: location.lng
 	        			}}
 	        			onClick={() => onMarkerClick(shelter)}
 	        		>
 	        		{shelter.showInfo && (
 			          <InfoWindow onCloseClick={() => onMarkerClose(shelter)}>
 			            <div style={{fontSize: '14px'}}>
-				            <p><span style={{fontWeight: 'bold'}}>County:</span> {county}<br/>
+				            <p><span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
 				            <span style={{fontWeight: 'bold'}}>{name}</span><br/>
 				            {address}<br/>
 				            {phone ? phone : 'No Phone Number'}<br/></p>
@@ -44,7 +44,8 @@ const Map = withScriptjs(
 				            <span style={{fontWeight: 'bold'}}>Pets?</span> { pets ? pets : 'Unkonwn' }<br/><br/>
 				            <span style={{fontWeight: 'bold'}}>Notes:</span> {notes}<br/>
 				            <span style={{fontWeight: 'bold'}}>Supply Needs:</span> {supplyNeeds}<br/>
-				            <span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {volunteerNeeds}
+				            <span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {volunteerNeeds}<br/><br/>
+				            <span style={{fontWeight: 'bold'}}>Last Updated:</span> {lastUpdated}
 				            </p>
 
 
