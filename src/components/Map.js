@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import withScriptjs from "react-google-maps/lib/async/withScriptjs";
 
@@ -33,7 +33,6 @@ const Map = withScriptjs(
 	        			}}
 	        			onClick={() => onMarkerClick(shelter)}
 	        		>
-	        		{console.log(shelter)}
 	        		{shelter.showInfo && (
 			          <InfoWindow onCloseClick={() => onMarkerClose(shelter)}>
 			            <div style={{fontSize: '14px'}}>
