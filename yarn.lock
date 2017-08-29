@@ -3803,6 +3803,10 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
+leaflet@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.2.0.tgz#fd5d93d9cb00091f5f8a69206d0d6744c1c82697"
+
 leven@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-2.1.0.tgz#c2e7a9f772094dee9d34202ae8acce4687875580"
@@ -3867,6 +3871,10 @@ locate-path@^2.0.0:
   dependencies:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
+
+lodash-es@^4.0.0:
+  version "4.17.4"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.4.tgz#dcc1d7552e150a0640073ba9cb31d70f032950e7"
 
 lodash._reinterpolate@~3.0.0:
   version "3.0.0"
@@ -5108,6 +5116,14 @@ react-google-maps@^7.2.0:
     react-display-name "^0.2.0"
     react-prop-types-element-of-type "^2.2.0"
     scriptjs "^2.5.8"
+    warning "^3.0.0"
+
+react-leaflet@^1.6.4:
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-1.6.4.tgz#86c2e91df48243c96091d88024ec05046eedbc31"
+  dependencies:
+    lodash "^4.0.0"
+    lodash-es "^4.0.0"
     warning "^3.0.0"
 
 react-prop-types-element-of-type@^2.2.0:
