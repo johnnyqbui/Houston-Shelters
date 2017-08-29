@@ -4,43 +4,11 @@ import withScriptjs from "react-google-maps/lib/async/withScriptjs";
 
 const Map = withScriptjs(
 	withGoogleMap(props => {
-		const { rescues, shelters, currentLocation, onMarkerClick, onMarkerClose } = props;
-		// const missions = rescues.filter(data =>
-		// 	typeof data['Longitude Coordinate'] === 'number' &&
-		// 	typeof data['Latitude Coordinate'] === 'number')
-		// .map((data) => {
-		// 	const lat = data['Latitude Coordinate']
-		// 	const lng = data['Longitude Coordinate']
-		// 	return {
-		// 		position: {
-		// 			lat: lat,
-		// 			lng: lng
-		// 		}
-		// 	}
-		// })
-
-		// const locateShelters = shelters.map(shelter => {
-		// 	return {
-		// 		location: {
-		// 			position: {
-		// 				lat: shelter.Lat,
-		// 				lng: shelter.Lng
-		// 			}
-		// 			info: {
-		// 				name: shelter.Name,
-		// 				address: shelter.Address,
-
-		// 			}
-		// 		}
-
-		// 	}
-		// })
-
+		const { shelters, currentLocation, onMarkerClick, onMarkerClose } = props;
 		const acceptingPeople = (accepting) => {
-			console.log(accepting)
-			if (accepting === 'TRUE') {
+			if (accepting === 'true') {
 				return 'Yes'
-			} else if (accepting === 'FALSE') {
+			} else if (accepting === 'false') {
 				return 'No'
 			} else {
 				return 'Did Not Respond/Unknown'
@@ -53,28 +21,40 @@ const Map = withScriptjs(
 			defaultZoom={ currentLocation ? 12 : 10 }
     		defaultCenter={ currentLocation ? currentLocation : { lat: 29.760427, lng: -95.369803 } }
     	>
-        	{shelters.map((shelter, index) => (
+        	{shelters.map((shelter, index) => {
+        		const { county, name, address, phone, location, accepting, pets, notes, supplyNeeds, volunteerNeeds } = shelter;
+
+        		return (
         			<Marker
 	        			key={index}
 	        			position={{
-	        					lat: shelter.Lat,
-	        					lng: shelter.Lng
+	        					lat: shelter.location.lat,
+	        					lng: shelter.location.lng
 	        			}}
 	        			onClick={() => onMarkerClick(shelter)}
 	        		>
+	        		{console.log(shelter)}
 	        		{shelter.showInfo && (
 			          <InfoWindow onCloseClick={() => onMarkerClose(shelter)}>
 			            <div style={{fontSize: '14px'}}>
-				            <p>{shelter.Location}<br/>
-				            {shelter.Address}<br/>
-				            {shelter['Phone Number'].length > 5 ? shelter['Phone Number'] : 'No Phone Number'}</p>
-				            <p style={{fontWeight: 'bold'}}>Accepting People? { acceptingPeople(shelter.Accepting) }</p>
+				            <p><span style={{fontWeight: 'bold'}}>County:</span> {county}<br/>
+				            <span style={{fontWeight: 'bold'}}>{name}</span><br/>
+				            {address}<br/>
+				            {phone ? phone : 'No Phone Number'}<br/></p>
+				            <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> { acceptingPeople(accepting) }<br/>
+				            <span style={{fontWeight: 'bold'}}>Pets?</span> { pets ? pets : 'Unkonwn' }<br/><br/>
+				            <span style={{fontWeight: 'bold'}}>Notes:</span> {notes}<br/>
+				            <span style={{fontWeight: 'bold'}}>Supply Needs:</span> {supplyNeeds}<br/>
+				            <span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {volunteerNeeds}
+				            </p>
+
+
 			            </div>
 			          </InfoWindow>
 			        )}
 	        		</Marker>
         		)
-        	)}
+        	})}
 		</GoogleMap>
 		)}
 	)
