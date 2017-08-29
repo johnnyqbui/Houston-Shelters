@@ -21,5 +21,5 @@
     "eject": "react-scripts eject",
     "deploy" : "yarn build&&gh-pages -d build"
   },
-  "homepage": "https://github.com/johnnyqbui/Houston-Shelters"
+  "homepage": "https://github.com/johnnyqbui/Houston-Shelters/tree/gh-pages"
 }
