@@ -21,6 +21,8 @@ class App extends Component {
     .then(data => {
       const shelterData = data.feed.entry;
       const allShelter = shelterData.map((shelter) => {
+        let latitude = parseFloat(shelter.gsx$latitude.$t)
+        let longitude = parseFloat(shelter.gsx$longitude.$t)
         return {
           county: shelter.gsx$county.$t,
           name: shelter.gsx$shelter.$t,
@@ -29,8 +31,8 @@ class App extends Component {
           pets: shelter.gsx$pets.$t,
           accepting: shelter.gsx$accepting.$t,
           location: {
-            lat: shelter.gsx$latitude.$t ? parseFloat(shelter.gsx$latitude.$t) : 0,
-            lng: shelter.gsx$latitude.$t ? parseFloat(shelter.gsx$longitude.$t) : 0
+            lat: latitude ? parseFloat(shelter.gsx$latitude.$t) : 0,
+            lng: longitude ? parseFloat(shelter.gsx$longitude.$t) : 0
           },
           lastUpdated: shelter.gsx$lastupdated.$t,
           notes: shelter.gsx$notes.$t,
