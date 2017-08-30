@@ -1,33 +1,101 @@
 .App {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .map {
-	width: 100vw;
-    height: 100vh;
     z-index: 2;
+    width: 100vw;
+    height: 100vh;
 }
 
 .geoLocate {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	width: 300px;
-	height: 100px;
-	background: rgba(100, 100, 100, .5);
-	z-index: 3;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    position: absolute;
+    z-index: 3;
+    top: 10px;
+    right: 20px;
+    display: flex;
+    width: 260px;
+    height: 60px;
+    background: rgba(100, 100, 100, .5);
+    justify-content: center;
+    align-items: center;
 }
 
-.geoLocate button {
-	padding: 20px 50px;
-	background: rgb(20, 180, 200);
-	border: none;
-	color: white;
+.geoLocate input {
+    font-size: 16px;
+    padding: 10px 50px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background: rgb(230, 60, 50);
+}
+
+.togglePanelButton {
+	position: absolute;
+	z-index: 3;
+	width: 300px;
+	height: 40px;
+	left: 10px;
+	bottom: 20px;
 	cursor: pointer;
-	font-size: 16px;
+	color: white;
+    border: none;
+    background: rgb(90, 80, 160);
+    font-size: 1em;
+}
+
+.filterPanel {
+    position: absolute;
+    z-index: 3;
+    top: 85px;
+    left: 10px;
+    width: 100%;
+    max-width: 300px;
+    height: 80vh;
+    background: rgba(100, 100, 100, .85);
+    transition: .3s;
+}
+
+.filterPanel p {
+    font-size: 2em;
+    text-align: center;
+    color: white;
+}
+
+.filterPanel input {
+    font-size: 16px;
+    display: block;
+    width: 260px;
+    height: 50px;
+    margin: 10px auto;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background: rgb(20, 180, 250);
+}
+
+.filterPanel .volunteerButton {
+	background: rgb(20, 180, 70);
+}
+
+.filterPanel .supplyButton {
+	background: rgb(20, 180, 70);
+}
+
+.filterPanel .lastUpdatedButton {
+	background: rgb(200, 80, 50);
+}
+
+.closePanel {
+	top: 100%;
+}
+
+.numberOfShelters {
+    font-size: 1.3em;
+    margin: 40px;
+    color: white;
+    text-align: center;
 }

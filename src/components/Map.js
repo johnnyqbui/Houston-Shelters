@@ -1,35 +1,44 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Map, Marker, Popup, TileLayer, CircleMarker } from 'react-leaflet';
-import withScriptjs from "react-google-maps/lib/async/withScriptjs";
 
 const Lmap = (props) => {
-	const { shelters, viewport, currentLocation } = props;
+	const { markers, viewport, currentLocation } = props;
+	const acceptingPeople = (accepting) => {
+		if (accepting === 'TRUE') {
+			return 'Yes'
+		} else if (accepting === 'FALSE') {
+			return 'No'
+		} else {
+			return 'Did Not Respond/Unknown'
+		}
+	}
+
 	return (
-		<Map className='map' viewport={ viewport } animate={true}>
+		<Map className='map' viewport={ viewport } animate={true} >
 			<TileLayer
 			  url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
 			  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 			/>
 			{currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
-			{shelters.map((shelter, index) => {
-        		const { county, name, address, phone, location, accepting, pets, notes, supplyNeeds, volunteerNeeds, lastUpdated } = shelter;
-
-        		const acceptingPeople = (accepting) => {
-					if (accepting === 'true') {
-						return 'Yes'
-					} else if (accepting === 'false') {
-						return 'No'
-					} else {
-						return 'Did Not Respond/Unknown'
-					}
-				}
-
+			{markers.map((marker, index) => {
+        		const {
+					county,
+					name,
+					address,
+					phone,
+					location,
+					accepting,
+					pets,
+					notes,
+					supplyNeeds,
+					volunteerNeeds,
+					lastUpdated } = marker;
         		return (
         			<Marker
 	        			key={index}
 	        			position={[location.lat, location.lng]}
 	        		>
-					<Popup >
+					<Popup>
 						<div style={{fontSize: '14px'}}>
 						    <p><span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
 						    <span style={{fontWeight: 'bold'}}>{name}</span><br/>

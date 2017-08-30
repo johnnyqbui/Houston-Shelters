@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate'
+import FilterMarkers from './components/FilterMarkers'
 
 class App extends Component {
   state = {
-    shelters: [],
+    OGMarkers: [],
+    markers: [],
     viewport: {
       center: [29.760427, -95.369803],
       zoom: 11
@@ -38,7 +40,8 @@ class App extends Component {
         }
       })
       this.setState({
-        shelters: allShelter
+        OGMarkers: allShelter,
+        markers: allShelter
       })
     })
   }
@@ -53,14 +56,28 @@ class App extends Component {
     })
   }
 
+  handleFilteredList = (filteredMarkers) => {
+    this.setState({
+      markers: filteredMarkers
+    })
+  }
+
   render() {
-    const { shelters, viewport, currentLocation } = this.state;
+    const { OGMarkers, markers, viewport, currentLocation } = this.state;
     return (
       <div className="App">
-        <GeoLocate onClickLocate = { this.handleLocate }/>
+        <FilterMarkers
+          OGMarkers={ OGMarkers }
+          markers={ markers }
+          onClickFilter={ this.handleFilteredList }
+        />
+        <GeoLocate
+          currentLocation={ currentLocation }
+          onClickLocate={ this.handleLocate }
+        />
         <Lmap
-          currentLocation = { currentLocation }
-          shelters={ shelters }
+          currentLocation={ currentLocation }
+          markers={ markers }
           viewport={ viewport }
         />
       </div>

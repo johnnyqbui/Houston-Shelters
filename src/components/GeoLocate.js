@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 
 const GeoLocate = (props) => {
-    const { onClickLocate } = props;
+    const { currentLocation, onClickLocate } = props;
     const locate = () => {
         const success = (position) => {
             const currentLocation = [position.coords.latitude, position.coords.longitude]
@@ -13,12 +13,12 @@ const GeoLocate = (props) => {
 
         !navigator.geolocation ?
         console.log('Browser does not support Geolocation') :
-        navigator.geolocation.getCurrentPosition(success, error, options)
+        navigator.geolocation.watchPosition(success, error, options)
     }
 
     return (
         <div className='geoLocate'>
-            <button onClick={() => {locate()}}>Find my location</button>
+            { currentLocation.length > 0 ? <p style={{color: 'white'}}>Your location is now being tracked</p> : <input type="button" onClick={() => {locate()}} value='Find my location'/>}
         </div>
     )
 }
