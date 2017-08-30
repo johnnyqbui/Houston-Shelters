@@ -61,13 +61,7 @@
     height: auto;
     background: rgba(100, 100, 100, .85);
     transition: .3s;
-}
-
-.filterPanel p {
-	width: 100%;
-    font-size: 1.5em;
-    text-align: center;
-    color: white;
+    overflow-y: scroll;
 }
 
 .filterPanel input {
@@ -115,13 +109,11 @@
 	.togglePanelButton {
 		top: 10px;
 	}
-	.filterPanel p {
-	    font-size: 2em;
-	}
+
 	.filterPanel {
 	    top: 85px;
 	    bottom: auto;
-	    height: 80vh;
+	    height: 85vh;
 	}
 	.filterPanel input {
 		font-size: 16px;

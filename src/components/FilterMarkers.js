@@ -17,7 +17,7 @@ class FilterMarkers extends Component {
 		value === "Shelters that need Volunteers"  && ( filtered = origMarkers.filter(marker => (marker.volunteerNeeds.length > 0)))
 		value === "Shelters that need Supplies"    && ( filtered = origMarkers.filter(marker => (marker.supplyNeeds.length > 0)))
 		value === "Added within the last 12 hours" && ( filtered = origMarkers.filter(marker => (console.log(marker.lastUpdated))))
-		
+
 		onClickFilter(filtered)
 	}
 
@@ -34,7 +34,6 @@ class FilterMarkers extends Component {
 			<div>
 				<input type='button' value={ isActive ? 'Close Panel' : 'Open Panel'} className='togglePanelButton' onClick={this.handleTogglePanel} />
 				<div className={ isActive ? 'filterPanel' : 'filterPanel closePanel' }>
-					<p>Shelters</p>
 					<input type='button' value='All Shelters' onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Accepting People' onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Not Accepting People' onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
