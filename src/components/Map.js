@@ -14,11 +14,12 @@ const Map = withScriptjs(
 				return 'Did Not Respond/Unknown'
 			}
 		}
+		console.log(currentLocation)
 		return (
 		<GoogleMap
 			ref={props.onMapLoad}
-			defaultZoom={ currentLocation ? 12 : 10 }
-    		defaultCenter={ currentLocation ? currentLocation : { lat: 29.760427, lng: -95.369803 } }
+			defaultZoom={ 11 }
+    		defaultCenter={{ lat: 29.760427, lng: -95.369803 }}
     	>
         	{shelters.map((shelter, index) => {
         		const { county, name, address, phone, location, accepting, pets, notes, supplyNeeds, volunteerNeeds, lastUpdated } = shelter;
