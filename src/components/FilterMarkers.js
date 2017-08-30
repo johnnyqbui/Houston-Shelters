@@ -11,10 +11,13 @@ class FilterMarkers extends Component {
 		let filtered;
 		value === "All Shelters"	 			   && ( filtered = origMarkers )
 		value === "Accepting People" 			   && ( filtered = origMarkers.filter(marker => (marker.accepting === 'TRUE')))
+		value === "Not Accepting People" 		   && ( filtered = origMarkers.filter(marker => (marker.accepting === 'FALSE')))
+		value === "Unknown If Accepting" 		   && ( filtered = origMarkers.filter(marker => (marker.accepting === 'DNR')))
 		value === "Pets" 			 			   && ( filtered = origMarkers.filter(marker => (marker.pets.length > 0 && marker.pets.match(/yes/ig))))
 		value === "Shelters that need Volunteers"  && ( filtered = origMarkers.filter(marker => (marker.volunteerNeeds.length > 0)))
 		value === "Shelters that need Supplies"    && ( filtered = origMarkers.filter(marker => (marker.supplyNeeds.length > 0)))
 		value === "Added within the last 12 hours" && ( filtered = origMarkers.filter(marker => (console.log(marker.lastUpdated))))
+		
 		onClickFilter(filtered)
 	}
 
@@ -34,6 +37,8 @@ class FilterMarkers extends Component {
 					<p>Shelters</p>
 					<input type='button' value='All Shelters' onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Accepting People' onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
+					<input type='button' value='Not Accepting People' onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
+					<input type='button' value='Unknown If Accepting' onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Pets' onClick={(e) => {{this.runFilter(e.target.value, OGMarkers)}}}/>
 					<input type='button' value='Shelters that need Volunteers' className='volunteerButton' onClick={(e) => {{this.runFilter(e.target.value, OGMarkers)}}}/>
 					<input type='button' value='Shelters that need Supplies' className='supplyButton' onClick={(e) => {{this.runFilter(e.target.value, OGMarkers)}}}/>
