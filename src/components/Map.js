@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { Map, Marker, Popup, TileLayer, CircleMarker } from 'react-leaflet';
-import { L } from 'leaflet'
+import L from 'leaflet';
 
 const Lmap = (props) => {
 	const { markers, viewport, currentLocation } = props;
@@ -14,12 +14,17 @@ const Lmap = (props) => {
 		}
 	}
 
+	// const icon = new L.icon({
+	// 	iconUrl: redMarkerIcon
+	// })
+
 	return (
 		<Map className='map' viewport={ viewport } animate={true} >
 			<TileLayer
 			  url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
 			  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 			/>
+
 			{currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
 			{markers.map((marker, index) => {
         		const {

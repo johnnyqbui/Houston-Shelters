@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Lmap from './components/Map';
-import GeoLocate from './components/GeoLocate'
-import FilterMarkers from './components/FilterMarkers'
+import GeoLocate from './components/GeoLocate';
+import FilterMarkers from './components/FilterMarkers';
+import AddAShelter from './components/AddAShelter';
 
 class App extends Component {
   state = {
@@ -82,6 +83,7 @@ class App extends Component {
           markers={ markers }
           viewport={ viewport }
         />
+        <AddAShelter />
       </div>
     )
   }
