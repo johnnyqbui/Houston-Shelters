@@ -10,7 +10,7 @@ class App extends Component {
     markers: [],
     viewport: {
       center: [29.760427, -95.369803],
-      zoom: 11
+      zoom: 9
     },
     currentLocation: []
   }
