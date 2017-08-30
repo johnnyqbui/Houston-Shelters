@@ -11,11 +11,11 @@
     height: 100vh;
 }
 
-.geoLocate {
+.geoLocateButton {
     position: absolute;
     z-index: 3;
     top: 10px;
-    right: 20px;
+    left: 50px;
     display: flex;
     width: 260px;
     height: 60px;
@@ -24,7 +24,7 @@
     align-items: center;
 }
 
-.geoLocate input {
+.geoLocateButton input {
     font-size: 16px;
     padding: 10px 50px;
     cursor: pointer;
@@ -36,10 +36,10 @@
 .togglePanelButton {
 	position: absolute;
 	z-index: 3;
-	width: 300px;
+	width: 250px;
 	height: 40px;
-	left: 10px;
-	bottom: 20px;
+	left: 50px;
+	top: 80px;
 	cursor: pointer;
 	color: white;
     border: none;
@@ -48,29 +48,36 @@
 }
 
 .filterPanel {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
     position: absolute;
     z-index: 3;
-    top: 85px;
+    top: 50%;
+    transform: translateY(-50%);
     left: 10px;
     width: 100%;
     max-width: 300px;
-    height: 80vh;
+    height: 60vh;
     background: rgba(100, 100, 100, .85);
     transition: .3s;
 }
 
 .filterPanel p {
-    font-size: 2em;
+	width: 100%;
+    font-size: 1.5em;
     text-align: center;
     color: white;
 }
 
 .filterPanel input {
-    font-size: 16px;
+	white-space: normal;
+    font-size: 14px;
     display: block;
-    width: 260px;
+    width: 40%;
     height: 50px;
-    margin: 10px auto;
+    margin: 10px;
     cursor: pointer;
     color: white;
     border: none;
@@ -85,17 +92,50 @@
 	background: rgb(20, 180, 70);
 }
 
-.filterPanel .lastUpdatedButton {
-	background: rgb(200, 80, 50);
-}
+/*.filterPanel .lastUpdatedButton {
+	background: rgb(200, 50, 50);
+}*/
 
 .closePanel {
-	top: 100%;
+	top: 200%;
 }
 
 .numberOfShelters {
-    font-size: 1.3em;
+    font-size: 1.0em;
     margin: 40px;
     color: white;
     text-align: center;
+}
+
+@media (min-width: 600px) {
+	.geoLocateButton {
+		top: 10px;
+		right: 20px;
+		left: auto;
+	}
+	.togglePanelButton {
+		top: 10px;
+	}
+	.filterPanel p {
+	    font-size: 2em;
+	}
+	.filterPanel {
+	    top: 85px;
+	    transform: translateY(0);
+	    height: 80vh;
+	}
+	.filterPanel input {
+		font-size: 16px;
+	    width: 250px;
+	    height: 50px;
+	    margin: 10px;
+	}
+	.numberOfShelters {
+	    font-size: 1.3em;
+	    margin: 20px;
+	}
+	.closePanel {
+		top: 200%;
+	}
+
 }

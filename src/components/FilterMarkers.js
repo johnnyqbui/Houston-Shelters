@@ -29,10 +29,9 @@ class FilterMarkers extends Component {
 		const { isActive } = this.state;
 		return (
 			<div>
-			{console.log(isActive)}
-			<input type='button' value='Close Panel' className='togglePanelButton' onClick={this.handleTogglePanel} />
+				<input type='button' value={ isActive ? 'Close Panel' : 'Open Panel'} className='togglePanelButton' onClick={this.handleTogglePanel} />
 				<div className={ isActive ? 'filterPanel' : 'filterPanel closePanel' }>
-					<p>What are you looking for?</p>
+					<p>Shelters</p>
 					<input type='button' value='All Shelters' onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Accepting People' onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Pets' onClick={(e) => {{this.runFilter(e.target.value, OGMarkers)}}}/>
