@@ -23,7 +23,7 @@ const GeoLocate = (props) => {
     return (
         <div className='geoLocateButton'>
             { currentLocation.length > 0 ?
-                <p style={{color: 'white'}}>Your location is now being tracked</p> :
+                <p style={{color: 'white'}}>Your current location: <br/>lat: {currentLocation[0].toFixed(4)}, lng: {currentLocation[1].toFixed(4)}</p> :
                 <input type="button" onClick={() => {locate()}} value='Find My Location'/>
             }
         </div>

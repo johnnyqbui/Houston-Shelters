@@ -1,5 +1,6 @@
 import React from 'react'
 import { Map, Marker, Popup, TileLayer, CircleMarker } from 'react-leaflet';
+import { L } from 'leaflet'
 
 const Lmap = (props) => {
 	const { markers, viewport, currentLocation } = props;
