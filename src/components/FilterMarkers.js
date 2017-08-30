@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import '../App.css';
 
 class FilterMarkers extends Component {
@@ -17,7 +18,9 @@ class FilterMarkers extends Component {
 		value === "Pets" 			 			   && ( filtered = origMarkers.filter(marker => (marker.pets.length > 0 && marker.pets.match(/yes/ig))))
 		value === "Shelters that need Volunteers"  && ( filtered = origMarkers.filter(marker => (marker.volunteerNeeds.length > 0)))
 		value === "Shelters that need Supplies"    && ( filtered = origMarkers.filter(marker => (marker.supplyNeeds.length > 0)))
-		value === "Added within the last 12 hours" && ( filtered = origMarkers.filter(marker => (console.log(marker.lastUpdated))))
+		value === "Added within the last 12 hours" && ( filtered = origMarkers.filter(marker => (
+			moment(marker.lastUpdated).add(12, 'hours').isAfter(moment().format('YYYY-MM-DD hh:mm A'))
+		)))
 
 		onClickFilter(filtered)
 	}
