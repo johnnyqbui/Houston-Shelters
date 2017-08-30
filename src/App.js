@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
-import Map from './components/Map';
+import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate'
 
 class App extends Component {
   state = {
     shelters: [],
-    currentLocation: {}
+    viewport: {
+      center: [29.760427, -95.369803],
+      zoom: 11
+    },
+    currentLocation: []
   }
 
   componentDidMount() {
@@ -16,15 +20,15 @@ class App extends Component {
       const shelterData = data.feed.entry;
       const allShelter = shelterData.map((shelter) => {
         return {
-          county: shelter.gsx$area.$t,
+          county: shelter.gsx$county.$t,
           name: shelter.gsx$shelter.$t,
           address: shelter.gsx$address.$t,
           phone: shelter.gsx$phone.$t,
           pets: shelter.gsx$pets.$t,
           accepting: shelter.gsx$accepting.$t,
           location: {
-            lat: parseFloat(shelter.gsx$latitude.$t),
-            lng: parseFloat(shelter.gsx$longitude.$t)
+            lat: shelter.gsx$latitude.$t ? parseFloat(shelter.gsx$latitude.$t) : 0,
+            lng: shelter.gsx$latitude.$t ? parseFloat(shelter.gsx$longitude.$t) : 0
           },
           lastUpdated: shelter.gsx$lastupdated.$t,
           notes: shelter.gsx$notes.$t,
@@ -39,43 +43,25 @@ class App extends Component {
     })
   }
 
-  handleMarkerClick = (targetShelter) => {
-    this.setState(prevState => ({
-      markers: this.state.shelters.map(shelter => {
-        return shelter === targetShelter ? shelter.showInfo = true : shelter.showInfo = false
-      })
-    }))
-  }
-
-  handleCloseMarker = (targetShelter) => {
-    this.setState(prevState => ({
-      markers: this.state.shelters.map(shelter => {
-        return shelter === targetShelter ? shelter.showInfo = false : ''
-      })
-    }))
-  }
-
   handleLocate = (currentLocation) => {
     this.setState({
+      viewport: {
+        center: currentLocation,
+        zoom: 13
+      },
       currentLocation: currentLocation
     })
   }
 
   render() {
-    const { shelters, currentLocation } = this.state;
+    const { shelters, viewport, currentLocation } = this.state;
     return (
       <div className="App">
         <GeoLocate onClickLocate = { this.handleLocate }/>
-        <Map
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.27&libraries=places,geometry&key=AIzaSyCiyRP-YLCAtBPP3GnCGsUmu0vooOfoY_A"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `100%` }} />}
-          mapElement={<div style={{ height: `100%`}} />}
-
+        <Lmap
+          currentLocation = { currentLocation }
           shelters={ shelters }
-          currentLocation={ currentLocation }
-          onMarkerClick = { this.handleMarkerClick }
-          onMarkerClose = { this.handleCloseMarker }
+          viewport={ viewport }
         />
       </div>
     )

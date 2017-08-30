@@ -5,10 +5,7 @@ const GeoLocate = (props) => {
     const { onClickLocate } = props;
     const locate = () => {
         const success = (position) => {
-            const currentLocation = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            }
+            const currentLocation = [position.coords.latitude, position.coords.longitude]
             onClickLocate(currentLocation)
         }
         const error = (err) => { console.log('Could not obtain locaiton', err)}
