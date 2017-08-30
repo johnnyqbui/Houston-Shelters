@@ -13,7 +13,9 @@ const GeoLocate = (props) => {
 
         !navigator.geolocation ?
         console.log('Browser does not support Geolocation') :
-        navigator.geolocation.watchPosition(success, error, options)
+        navigator.geolocation.getCurrentPosition(success, error, options)
+        // navigator.geolocation.watchPosition(success, error, options)
+
     }
 
     return (

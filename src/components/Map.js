@@ -16,7 +16,7 @@ const Lmap = (props) => {
 	return (
 		<Map className='map' viewport={ viewport } animate={true} >
 			<TileLayer
-			  url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+			  url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
 			  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 			/>
 			{currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}

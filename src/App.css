@@ -54,12 +54,11 @@
 	align-items: center;
     position: absolute;
     z-index: 3;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 15px;
     left: 10px;
     width: 100%;
     max-width: 300px;
-    height: 60vh;
+    height: auto;
     background: rgba(100, 100, 100, .85);
     transition: .3s;
 }
@@ -121,7 +120,7 @@
 	}
 	.filterPanel {
 	    top: 85px;
-	    transform: translateY(0);
+	    bottom: auto;
 	    height: 80vh;
 	}
 	.filterPanel input {
