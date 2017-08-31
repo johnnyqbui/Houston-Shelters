@@ -1,22 +1,10 @@
 import React, { Component } from 'react';
-import L from'leaflet';
 import './App.css';
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
 import FilterMarkers from './components/FilterMarkers';
 import AddAShelter from './components/AddAShelter';
-
-import blueIconImg from './images/marker-icon-blue.png';
-import redIconImg from './images/marker-icon-red.png';
-import greenIconImg from './images/marker-icon-green.png';
-import violetIconImg from './images/marker-icon-violet.png';
-import yellowIconImg from './images/marker-icon-yellow.png';
-
-const blueMarkerIcon = new L.icon({ iconUrl: blueIconImg })
-const redMarkerIcon = new L.icon({ iconUrl: redIconImg })
-const greenMarkerIcon = new L.icon({ iconUrl: greenIconImg })
-const violetMarkerIcon = new L.icon({ iconUrl: violetIconImg })
-const yellowMarkerIcon = new L.icon({ iconUrl: yellowIconImg })
+import VolunteerShelterLink from './components/VolunteerShelterLink';
 
 class App extends Component {
   state = {
@@ -27,7 +15,6 @@ class App extends Component {
       zoom: 9
     },
     currentLocation: [],
-    selectedFilter: 'All Shelters'
   }
 
   componentDidMount() {
@@ -58,25 +45,10 @@ class App extends Component {
         }
       })
 
-      // const allShelterData = addShelterData.map((shelter) => {
-      //   const { accepting, pets, lastUpdated, supplyNeeds, volunteerNeeds } = shelter;
-      //   let addIcon;
-
-      //   addIcon = {...shelter, icon: blueMarkerIcon}
-      //   accepting === "TRUE" ? (addIcon = {...shelter, icon: blueMarkerIcon}) :
-      //   accepting === "FALSE" && (addIcon = {...shelter, icon: redMarkerIcon})
-
-      //   accepting === "NOTOPEN" && (addIcon = {...shelter, icon: redMarkerIcon})
-      //   accepting === "DNR" && (addIcon = {...shelter, icon: redMarkerIcon})
-      //   accepting === "STAGING" && (addIcon = {...shelter, icon: redMarkerIcon})
-
-
-      //   return addIcon
-      // })
-
       this.setState({
         OGMarkers: allShelterData,
-        markers: allShelterData
+        // Accepting shelters set to default
+        markers: allShelterData.filter(marker => (marker.accepting === 'TRUE'))
       })
     })
   }
@@ -91,15 +63,14 @@ class App extends Component {
     })
   }
 
-  handleFilteredList = (filteredMarkers, selectedFilter) => {
+  handleFilteredList = (filteredMarkers) => {
     this.setState({
       markers: filteredMarkers,
-      selectedFilter: selectedFilter
     })
   }
 
   render() {
-    const { OGMarkers, markers, viewport, currentLocation, selectedFilter } = this.state;
+    const { OGMarkers, markers, viewport, currentLocation } = this.state;
     return (
       <div className="App">
         <FilterMarkers
@@ -114,10 +85,10 @@ class App extends Component {
         <Lmap
           currentLocation={ currentLocation }
           markers={ markers }
-          selectedFilter={ selectedFilter }
           viewport={ viewport }
         />
         <AddAShelter />
+        <VolunteerShelterLink />
       </div>
     )
   }

@@ -11,54 +11,17 @@
     height: 100vh;
 }
 
-.geoLocateButton {
-    position: absolute;
-    z-index: 3;
-    top: 10px;
-    left: 50px;
-    display: flex;
-    width: 260px;
-    height: 60px;
-    background: rgba(100, 100, 100, .8);
-    justify-content: center;
-    align-items: center;
-}
-
-.geoLocateButton input {
-    font-size: 16px;
-    padding: 10px 50px;
-    cursor: pointer;
-    color: white;
-    border: none;
-    background: rgb(230, 60, 50);
-}
-
-.togglePanelButton {
-	position: absolute;
-	z-index: 3;
-	width: 250px;
-	height: 40px;
-	left: 50px;
-	top: 80px;
-	cursor: pointer;
-	color: white;
-    border: none;
-    background: rgb(90, 90, 90);
-    font-size: 1em;
-}
-
 .filterPanel {
-	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
+/*	justify-content: center;
+*/	align-items: center;
     position: absolute;
     z-index: 3;
-    bottom: 15px;
+    top: 120px;
     left: 10px;
     width: 100%;
     max-width: 300px;
-    height: auto;
+    height: 50%;
     background: rgba(100, 100, 100, .85);
     transition: .3s;
     overflow-y: scroll;
@@ -66,14 +29,16 @@
 
 .filterPanel input {
 	white-space: normal;
+	vertical-align: top;
     font-size: 14px;
-    display: block;
-    width: 40%;
-    height: 50px;
+    display: inline;
+    width: 41%;
+    height: 75px;
     margin: 10px;
     cursor: pointer;
     color: white;
     border: none;
+    transition: .3s;
 }
 
 .blueButton {
@@ -96,6 +61,51 @@
 	top: 200%;
 }
 
+.filterPanel .selected {
+	background: rgb(20, 180, 160);
+}
+
+
+
+/*****BUTTONS*****/
+
+.togglePanelButton {
+	position: absolute;
+	z-index: 3;
+	width: 250px;
+	height: 50px;
+	left: 50px;
+	top: 65px;
+	cursor: pointer;
+	color: white;
+    border: none;
+    background: rgb(90, 90, 90);
+    font-size: 1em;
+}
+
+.geoLocateButton {
+    position: absolute;
+    z-index: 3;
+    top: 10px;
+    left: 50px;
+    display: flex;
+    width: 250px;
+	height: 50px;
+    background: rgba(100, 100, 100, .8);
+    justify-content: center;
+    align-items: center;
+    border-radius: .3rem;
+}
+
+.geoLocateButton input {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background: rgb(226, 70, 70);
+}
+
 .numberOfShelters {
     font-size: 1.0em;
     margin: 40px;
@@ -103,14 +113,12 @@
     text-align: center;
 }
 
-.addAShelter {
+.externalLinkButton {
 	position: absolute;
 	z-index: 2;
-    bottom: 40px;
-    right: 10px;
 }
 
-.addAShelter a {
+.externalLinkButton a {
 	text-decoration: none;
 	color: #ecf0f1;;
 	padding: 15px 30px;
@@ -119,30 +127,52 @@
 	border-radius: .3rem;
 }
 
+.volunteerSuppliesButton {
+	bottom: 35px;
+    right: -100%;
+}
+
+.addAShelterButton {
+	bottom: 85px;
+    right: -100%;
+}
+
 input {
 	border-radius: .3rem;
 }
+
+
+
+/******Responsiveness*****/
 
 @media (min-width: 600px) {
 	.geoLocateButton {
 		top: 10px;
 		right: 20px;
 		left: auto;
+		height: 50px;
+		width: 260px;
 	}
+
+	.geoLocateButton input {
+	    font-size: 16px;
+	}
+
 	.togglePanelButton {
 		top: 10px;
 	}
 
 	.filterPanel {
+		transform: translateY(0);
 	    top: 85px;
 	    bottom: auto;
 	    height: 85vh;
 	}
 	.filterPanel input {
+		display: block;
 		font-size: 16px;
 	    width: 250px;
 	    height: 50px;
-	    margin: 10px;
 	}
 	.numberOfShelters {
 	    font-size: 1.3em;
@@ -152,4 +182,17 @@ input {
 		top: 200%;
 	}
 
+	.filterPanel .selected {
+		margin-left: 25px;
+	}
+
+	.volunteerSuppliesButton {
+		bottom: 35px;
+	    right: 10px;
+	}
+
+	.addAShelterButton {
+		bottom: 85px;
+	    right: 10px;
+	}
 }

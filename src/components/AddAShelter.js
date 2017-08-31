@@ -3,10 +3,10 @@ import '../App.css';
 
 const AddAShelter = () => {
 	return (
-		<div className='addAShelter'>
+		<div className='externalLinkButton addAShelterButton'>
 			<a href='http://harveyneeds.org/'
-			target='_blank'>
-				Add Shelter and/or Request for Help
+			target='_blank' rel='noopener noreferrer' >
+				To Add Shelter
 			</a>
 		</div>
 	)
