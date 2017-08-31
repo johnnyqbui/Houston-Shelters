@@ -2,7 +2,7 @@ This app displays list of shelters for Hurricane Harvey evacuees from: https://d
 
 Created using React and Leaflet map
 
-Thanks to everyone working to constantly keep this sheet updated
+Thanks to everyone working to keep this sheet constantly updated
 
 
 ## How to run development

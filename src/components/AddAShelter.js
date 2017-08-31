@@ -4,9 +4,9 @@ import '../App.css';
 const AddAShelter = () => {
 	return (
 		<div className='addAShelter'>
-			<a href='https://docs.google.com/forms/d/e/1FAIpQLSeaZpCVk2-Nt24HCCIPs_zPoCNC8xIh_IE4aqaxe0DZ7qbNAA/viewform'
+			<a href='http://harveyneeds.org/'
 			target='_blank'>
-				Add Shelter
+				Add Shelter and/or Request for Help
 			</a>
 		</div>
 	)
