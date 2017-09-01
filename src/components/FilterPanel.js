@@ -3,7 +3,7 @@ import moment from 'moment';
 import '../App.css';
 import ExternalLinks from './ExternalLinks';
 
-class FilterMarkers extends Component {
+class FilterPanel extends Component {
   state = {
     isActive: false,
     selectedFilter: {
@@ -35,10 +35,11 @@ class FilterMarkers extends Component {
     value.indexOf('Staging') > -1 && (filtered = origMarkers.filter(marker => (marker.accepting === 'STAGING')))
     value === "Accepting Pets" && (filtered = origMarkers.filter(marker => (marker.pets.length > 0 && marker.pets.match(/yes/ig))))
     value.indexOf('Updated') > -1 && (filtered = origMarkers.filter(marker => {
-    	const lastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(12, 'hours').format()
-    	return lastUpdated !== 'Invalid date' && (
-    		moment(lastUpdated).isAfter(moment().format('YYYY-MM-DD hh:mm A'))
-    	)
+	if (marker.lastUpdated.length > 0) {
+		const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(12, 'hours').format()
+		const timeAfter = moment().format()
+		return replaceLastUpdated > timeAfter && (marker)
+	}
     }))
 
     onClickFilter(filtered, value)
@@ -136,4 +137,4 @@ class FilterMarkers extends Component {
   }
 }
 
-export default FilterMarkers
+export default FilterPanel

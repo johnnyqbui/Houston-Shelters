@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
-import FilterMarkers from './components/FilterMarkers';
+import FilterPanel from './components/FilterPanel';
 import FilterInfo from './components/FilterInfo';
 import LoadingIcon from './components/LoadingIcon';
 import * as SheltersApi from './utils/SheltersApi';
@@ -84,12 +84,13 @@ class App extends Component {
     return (
       <div className="App">
         { isLoading ? <LoadingIcon /> : ''}
-        <FilterMarkers
+        { isLoading ? '' : <FilterPanel
           OGMarkers={ OGMarkers }
           markers={ markers }
           toggledInfo={ toggledInfo }
           onClickFilter={ this.handleFilteredList }
-        />
+        />}
+
         <GeoLocate
           currentLocation={ currentLocation }
           toggledInfo={ toggledInfo }
