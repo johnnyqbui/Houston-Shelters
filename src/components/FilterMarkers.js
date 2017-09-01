@@ -34,7 +34,13 @@ class FilterMarkers extends Component {
     value === "Not Opened" && (filtered = origMarkers.filter(marker => (marker.accepting === 'NOTOPEN')))
     value.indexOf('Staging') > -1 && (filtered = origMarkers.filter(marker => (marker.accepting === 'STAGING')))
     value === "Accepting Pets" && (filtered = origMarkers.filter(marker => (marker.pets.length > 0 && marker.pets.match(/yes/ig))))
-    value.indexOf('Updated') > -1 && (filtered = origMarkers.filter(marker => (moment(marker.lastUpdated).add(12, 'hours').isAfter(moment().format('YYYY-MM-DD hh:mm A')))))
+    value.indexOf('Updated') > -1 && (filtered = origMarkers.filter(marker => {
+    	const lastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(12, 'hours').format()
+    	return lastUpdated !== 'Invalid date' && (
+    		moment(lastUpdated).isAfter(moment().format('YYYY-MM-DD hh:mm A'))
+    	)
+    }))
+
     onClickFilter(filtered, value)
 
     this.setState({
@@ -111,13 +117,13 @@ class FilterMarkers extends Component {
               onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
             <input
               type='button'
-              value='Accepting Pets'
-              className={ pets ? 'blueButton selected' : 'blueButton' }
+              value='Staging (Redirecting People, but can still come)'
+              className={ staging ? 'blueButton selected' : 'blueButton' }
               onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
             <input
               type='button'
-              value='Staging (Redirecting People, but can still come)'
-              className={ staging ? 'blueButton selected' : 'blueButton' }
+              value='Accepting Pets'
+              className={ pets ? 'blueButton selected' : 'blueButton' }
               onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
             <input
               type='button'
