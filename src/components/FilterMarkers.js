@@ -19,7 +19,6 @@ class FilterMarkers extends Component {
 	}
 
 	componentDidMount() {
-
 		// Show Panel on page load if not on mobile
 		window.innerWidth > 600 && ( this.handleTogglePanel() )
 

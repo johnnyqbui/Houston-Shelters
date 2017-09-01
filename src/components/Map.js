@@ -28,6 +28,7 @@ const Lmap = (props) => {
 					county,
 					name,
 					address,
+					city,
 					phone,
 					location,
 					accepting,
@@ -46,6 +47,7 @@ const Lmap = (props) => {
 							    <p><span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
 							    <span style={{fontWeight: 'bold'}}>{name}</span><br/>
 							    {address}<br/>
+							    {city}<br/>
 							    {phone ? phone : 'No Phone Number'}<br/></p>
 							    <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> { checkAccepting(accepting) }<br/>
 							    <span style={{fontWeight: 'bold'}}>Pets?</span> { pets ? pets : 'Unkonwn' }<br/><br/>
