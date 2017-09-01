@@ -3,7 +3,7 @@ import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-
 import L from 'leaflet';
 
 const Lmap = (props) => {
-	const { markers, viewport, currentLocation, clickToggleInfo, onToggleInfo } = props;
+	const { markers, viewport, currentLocation, toggledInfo, onToggleInfo } = props;
 	const checkAccepting = (accepting) => {
 		if (accepting === 'TRUE') {
 			return 'Yes'
@@ -21,7 +21,7 @@ const Lmap = (props) => {
 			  url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
 			  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 			/>
-			<ZoomControl position="bottomright" />
+			<ZoomControl position={toggledInfo ? 'bottomright' : 'topright'} />
 			{currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
 			{markers.map((marker, index) => {
         		const {

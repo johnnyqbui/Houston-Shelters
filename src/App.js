@@ -3,7 +3,6 @@ import './App.css';
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
 import FilterMarkers from './components/FilterMarkers';
-import ExternalLinks from './components/ExternalLinks';
 import FilterInfo from './components/FilterInfo';
 
 class App extends Component {
@@ -16,7 +15,7 @@ class App extends Component {
     },
     currentLocation: [],
     selectedFilter: 'Accepting People',
-    clickToggleInfo: false
+    toggledInfo: false
   }
 
   componentDidMount() {
@@ -75,33 +74,32 @@ class App extends Component {
 
   handleToggleInfo = () => {
     this.setState({
-      clickToggleInfo: !this.state.clickToggleInfo
+      toggledInfo: !this.state.toggledInfo
     })
   }
 
   render() {
-    const { OGMarkers, markers, viewport, currentLocation, selectedFilter, clickToggleInfo } = this.state;
+    const { OGMarkers, markers, viewport, currentLocation, selectedFilter, toggledInfo } = this.state;
     return (
       <div className="App">
         <FilterMarkers
           OGMarkers={ OGMarkers }
           markers={ markers }
-          clickToggleInfo={ clickToggleInfo }
+          toggledInfo={ toggledInfo }
           onClickFilter={ this.handleFilteredList }
         />
         <GeoLocate
           currentLocation={ currentLocation }
-          clickToggleInfo={ clickToggleInfo }
+          toggledInfo={ toggledInfo }
           onClickLocate={ this.handleLocate }
         />
         <Lmap
           currentLocation={ currentLocation }
           markers={ markers }
           viewport={ viewport }
-          clickToggleInfo={ clickToggleInfo }
+          toggledInfo={ toggledInfo }
           onToggleInfo={ this.handleToggleInfo }
         />
-        <ExternalLinks />
         <FilterInfo
           selectedFilter={selectedFilter}
           filterLength={markers.length}

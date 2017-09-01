@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import '../App.css';
+import ExternalLinks from './ExternalLinks';
 
 class FilterMarkers extends Component {
 	state = {
@@ -61,7 +62,7 @@ class FilterMarkers extends Component {
 	}
 
 	render() {
-		const { OGMarkers, clickToggleInfo } = this.props;
+		const { OGMarkers, toggledInfo } = this.props;
 		const { isActive, selectedFilter } = this.state;
 		const {
 			allShelters,
@@ -74,12 +75,13 @@ class FilterMarkers extends Component {
 			updated } = selectedFilter;
 
 		return (
-			<div className={ clickToggleInfo ? 'hideTopButtons filterComponent' : 'filterComponent' }>
-				<input type='button' value={ isActive ? 'Hide Filter Panel' : 'Show Filter Panel'} className='togglePanelButton' onClick={this.handleTogglePanel} />
+			<div className={ toggledInfo ? 'hideTopButtons filterComponent' : 'filterComponent' }>
+				<input type='button' value={ isActive ? 'Hide Panel' : 'Show Panel'} className='togglePanelButton' onClick={this.handleTogglePanel} />
 				<div className={ isActive ? 'filterPanel' : 'filterPanel closePanel' }>
-					<div className='numberOfShelters'>Filter Shelters</div>
-					<input type='button' value='All Shelters' className={ allShelters ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
+				    <ExternalLinks />
 					<hr/>
+					<div className='title'>Filter Shelters</div>
+					<input type='button' value='All Shelters' className={ allShelters ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Accepting People' className={ acceptingPeople ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Not Accepting People' className={ notAccepting ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Unknown If Accepting'className={ unknownAccepting ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>

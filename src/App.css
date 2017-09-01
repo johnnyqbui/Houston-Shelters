@@ -12,16 +12,12 @@
 }
 
 .filterPanel {
-	flex-wrap: wrap;
-/*	justify-content: center;
-*/	align-items: center;
     position: absolute;
     z-index: 3;
     top: 120px;
     left: 10px;
-    width: 100%;
     max-width: 300px;
-    height: 50%;
+    height: calc(100% - 200px);
     background: rgba(100, 100, 100, .85);
     overflow-y: scroll;
 }
@@ -30,7 +26,6 @@
 	white-space: normal;
 	vertical-align: top;
     font-size: 14px;
-    display: inline;
     width: 41%;
     height: 75px;
     margin: 10px;
@@ -40,32 +35,13 @@
     transition: .3s;
 }
 
-.filterPanel input:first-of-type {
-	width: 250px;
-}
-
-.blueButton {
-	background: rgb(20, 150, 250);
-}
-
-.redButton {
-	background: rgb(204, 45, 50);
-}
-
-.purpleButton {
-	background: rgb(160, 60, 140);
-}
-
-.greenButton {
-	background: rgb(20, 180, 70);
-}
-
 .closePanel {
-	top: 100%;
+	left: -300px;
 }
 
 .filterPanel .selected {
-	background: rgb(20, 180, 160);
+	background: rgb(20, 150, 250);
+	opacity: 1;
 }
 
 .leaflet-container a.leaflet-popup-close-button {
@@ -80,9 +56,9 @@
     left: 10px;
 	width: 280px;
     color: white;
-    background: rgba(86, 86, 86, .9);
+    background: rgb(90, 90, 90);
     padding: 10px;
-    border-radius: 1rem;
+    border-radius: .3rem;
     font-size: 16px;
     text-align: center;
 }
@@ -92,8 +68,32 @@ hr {
 	margin: 20px auto;
 }
 
+.externalLinkButton {
+	display: inline;
+}
 
 /*****BUTTONS*****/
+
+.externalLinkButton a {
+	text-decoration: none;
+}
+
+.blueButton {
+	background: rgb(52, 111, 140);
+	opacity: .8;
+}
+
+.redButton {
+	background: rgb(204, 45, 50);
+}
+
+.purpleButton {
+	background: rgb(129, 82, 120);
+}
+
+.greenButton {
+	background: rgb(20, 180, 70);
+}
 
 .togglePanelButton {
 	position: absolute;
@@ -132,35 +132,11 @@ hr {
     background: rgb(226, 70, 70);
 }
 
-.numberOfShelters {
-    font-size: 1.0em;
-    margin: 40px;
+.title {
+    font-size: 1.1em;
+    margin: 20px auto 5px;
     color: white;
     text-align: center;
-}
-
-.externalLinkButton {
-	position: absolute;
-	z-index: 2;
-}
-
-.externalLinkButton a {
-	text-decoration: none;
-	color: #ecf0f1;;
-	padding: 15px 30px;
-	background: #8e44ad;
-	font-size: 1em;
-	border-radius: .3rem;
-}
-
-.volunteerSuppliesButton {
-	bottom: 35px;
-    right: -100%;
-}
-
-.addAShelterButton {
-	bottom: 88px;
-    right: -100%;
 }
 
 input {
@@ -173,17 +149,13 @@ input {
 	display: none;
 }
 
-.hideZoomControl .leaflet-control-container .leaflet-top .leaflet-bar {
-	display: none;
-}
-
 /******Responsiveness*****/
 
 @media (min-width: 600px) {
 
 	.geoLocateButton {
 		top: 10px;
-		right: 20px;
+		right: 50px;
 		left: auto;
 		height: 50px;
 		width: 260px;
@@ -197,42 +169,47 @@ input {
 		top: 10px;
 	}
 
+	.externalLinkButton {
+		display: inline;
+	}
+
 	.filterPanel {
-		transform: translateY(0);
 	    top: 85px;
 	    bottom: auto;
 	    height: 75vh;
+	    transition: .15s;
 	}
+
+	.filterPanel .externalLinkButton input {
+		display: inline;
+		width: 41%;
+		height: 75px;
+		white-space: normal;
+    	vertical-align: top;
+    	padding: 10px;
+	}
+
 	.filterPanel input {
 		display: block;
 		font-size: 16px;
 	    width: 250px;
 	    height: 50px;
+	    font-size: 15px;
 	}
-	.numberOfShelters {
+	.title {
 	    font-size: 1.3em;
-	    margin: 20px;
+	    margin: 20px auto 10px;
 	}
 	.closePanel {
-		top: 100%;
+		left: -300px;
 	}
 
 	.filterPanel .selected {
 		margin-left: 25px;
 	}
 
-	.volunteerSuppliesButton {
-		bottom: 35px;
-	    right: 50px;
-	}
-
-	.addAShelterButton {
-		bottom: 88px;
-	    right: 50px;
-	}
-
 	.filterInfo {
 	    left: 10px;
-	    transform: translate(0);
 	}
+
 }

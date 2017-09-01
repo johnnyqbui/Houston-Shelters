@@ -4,16 +4,17 @@ import '../App.css';
 const ExternalLinks = () => {
 	return (
 		<div>
-			<div className='externalLinkButton addAShelterButton'>
+			<div className='title'>Want to Contribute?</div>
+			<div className='externalLinkButton'>
 				<a href='http://harveyneeds.org/'
 				target='_blank' rel='noopener noreferrer' >
-					To Add Shelter
+					<input className='purpleButton' type='button' value='To Add Shelter' />
 				</a>
 			</div>
-			<div className='externalLinkButton volunteerSuppliesButton'>
+			<div className='externalLinkButton'>
 				<a href='https://sketch-city.github.io/harvey-needs/'
 				target='_blank' rel='noopener noreferrer' >
-					To Volunteer / Provide Supplies
+					<input className='purpleButton' type='button' value='To Volunteer / Provide Supplies'/>
 				</a>
 			</div>
 		</div>
