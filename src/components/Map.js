@@ -1,4 +1,5 @@
 import React from 'react';
+import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
 
 const Lmap = (props) => {
@@ -36,8 +37,32 @@ const Lmap = (props) => {
           supplyNeeds,
           volunteerNeeds,
           lastUpdated } = marker;
+        let myIcon;
+        console.log(accepting);
+        switch(marker.accepting){
+          case 'TRUE':
+          myIcon = L.icon({
+            iconUrl:'../images/marker-icon-green.png'
+          });
+          break;
+          case 'FALSE':
+          myIcon = L.icon({
+            iconUrl:'../images/marker-icon-red.png'
+          });
+          break;
+          case 'DNR':
+          myIcon = L.icon({
+            iconUrl:'../images/marker-icon-grey.png'
+          });
+          break;
+          default:
+          myIcon = L.icon({
+            iconUrl:'../images/marker-icon-grey.png'
+          });
+        };
           return (
             <Marker
+              icon = {myIcon}
               key={index}
               position={[location.lat, location.lng]}
               >
