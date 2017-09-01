@@ -21,11 +21,10 @@ class App extends Component {
     toggledInfo: false
   }
 
-  componentDidMount() {
-
-    SheltersApi.getAll()
-    .then(data => {
-      const allShelterData = data.map(shelter => {
+  async componentDidMount() {
+    try {
+      const shelters = await SheltersApi.getAll();
+      const allShelterData = shelters.map((shelter) => {
         const { County, Shelter, Address, City, Phone, Pets, Accepting, latitude, longitude, Last_updated, Notes } = shelter;
         return {
           county: County,
@@ -43,40 +42,18 @@ class App extends Component {
           notes: Notes,
           showInfo: false
         }
-      })
+      });
 
       this.setState({
         isLoading: false,
         OGMarkers: allShelterData,
-        markers: allShelterData.filter(marker => (marker.accepting === 'TRUE')) // Accepting shelters set to default
-      })
-    })
-
-    // fetch('https://spreadsheets.google.com/feeds/list/14GHRHQ_7cqVrj0B7HCTVE5EbfpNFMbSI9Gi8azQyn-k/od6/public/values?alt=json')
-    // .then(data => data.json())
-    // .then(data => {
-    //   const shelterData = data.feed.entry;
-    //   const allShelterData = shelterData.map((shelter) => {
-    //     let latitude = parseFloat(shelter.gsx$latitude.$t)
-    //     let longitude = parseFloat(shelter.gsx$longitude.$t)
-    //     return {
-    //       county: shelter.gsx$county.$t,
-    //       name: shelter.gsx$shelter.$t,
-    //       address: shelter.gsx$address.$t,
-    //       phone: shelter.gsx$phone.$t,
-    //       pets: shelter.gsx$pets.$t,
-    //       accepting: shelter.gsx$accepting.$t,
-    //       location: {
-    //         lat: latitude ? parseFloat(shelter.gsx$latitude.$t) : 0,
-    //         lng: longitude ? parseFloat(shelter.gsx$longitude.$t) : 0
-    //       },
-    //       lastUpdated: shelter.gsx$lastupdated.$t,
-    //       notes: shelter.gsx$notes.$t,
-    //       supplyNeeds: shelter.gsx$supplyneeds.$t,
-    //       volunteerNeeds: shelter.gsx$volunteerneeds.$t,
-    //       showInfo: false
-    //     }
-    //   })
+        // Accepting shelters set to default
+        markers: allShelterData.filter(marker => (marker.accepting === 'TRUE'))
+      });
+    }
+    catch (error) {
+      console.log("Error", error);
+    }
   }
 
   handleLocate = (currentLocation) => {
