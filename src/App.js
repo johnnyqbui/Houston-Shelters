@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import MainUi from './components/MainUi'
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
 import FilterMarkers from './components/FilterMarkers';
@@ -7,6 +8,11 @@ import AddAShelter from './components/AddAShelter';
 import VolunteerShelterLink from './components/VolunteerShelterLink';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.changeMarker = this.changeMarker.bind(this);
+  }
+
   state = {
     OGMarkers: [],
     markers: [],
@@ -15,6 +21,7 @@ class App extends Component {
       zoom: 9
     },
     currentLocation: [],
+    currentMarker: []
   }
 
   componentDidMount() {
@@ -53,6 +60,10 @@ class App extends Component {
     })
   }
 
+  changeMarker(e) {
+    this.props.onChangeMarker(e);
+  }
+
   handleLocate = (currentLocation) => {
     this.setState({
       viewport: {
@@ -70,9 +81,10 @@ class App extends Component {
   }
 
   render() {
-    const { OGMarkers, markers, viewport, currentLocation } = this.state;
+    const { OGMarkers, markers, viewport, currentLocation, currentMarker } = this.state;
     return (
       <div className="App">
+        <MainUi />
         <FilterMarkers
           OGMarkers={ OGMarkers }
           markers={ markers }
@@ -82,11 +94,14 @@ class App extends Component {
           currentLocation={ currentLocation }
           onClickLocate={ this.handleLocate }
         />
+
         <Lmap
           currentLocation={ currentLocation }
           markers={ markers }
           viewport={ viewport }
+          currentMarker={ currentMarker }
         />
+
         <AddAShelter />
         <VolunteerShelterLink />
       </div>

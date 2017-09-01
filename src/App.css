@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+* {
+	font-family: 'Roboto', sans-serif !important;
+}
+
 .App {
     position: absolute;
     width: 100%;
@@ -66,6 +72,51 @@
 }
 
 
+
+/* main UI */
+
+.main-ui-container {
+	height:50px;
+	z-index:100;
+	background-color:#101620;
+	text-align:center;
+	position:static;
+}
+
+h1, h2, h3, h4 {
+	margin:0;
+	padding-top:.2em;
+}
+
+.main-ui-container h2 {
+	color:#FFF;
+}
+
+.map-container {
+	width:100%;
+	height:100%;
+}
+
+.leaflet-container {
+	width:100%;
+	height:calc(100% - 50px);
+	position:absolute;
+
+}
+
+.info-bar {
+	width:100%;
+	height:200px;
+	bottom:-200px;
+	position:absolute;
+	background-color:#FFF;
+	z-index:100;
+	transition: 0.2s bottom;
+}
+
+.info-bar.open {
+	bottom:0px;
+}
 
 /*****BUTTONS*****/
 
@@ -147,7 +198,7 @@ input {
 
 @media (min-width: 600px) {
 	.geoLocateButton {
-		top: 10px;
+		top: 60px;
 		right: 20px;
 		left: auto;
 		height: 50px;
@@ -159,18 +210,18 @@ input {
 	}
 
 	.togglePanelButton {
-		top: 10px;
+		top: 60px;
 	}
 
 	.filterPanel {
 		transform: translateY(0);
-	    top: 85px;
+	    top: 185px;
 	    bottom: auto;
 	    height: 85vh;
 	}
 	.filterPanel input {
 		display: block;
-		font-size: 16px;
+		font-size: 14px;
 	    width: 250px;
 	    height: 50px;
 	}
