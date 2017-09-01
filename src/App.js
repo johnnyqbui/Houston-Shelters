@@ -4,10 +4,12 @@ import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
 import FilterMarkers from './components/FilterMarkers';
 import FilterInfo from './components/FilterInfo';
+import LoadingIcon from './components/LoadingIcon';
 import * as SheltersApi from './utils/SheltersApi';
 
 class App extends Component {
   state = {
+    isLoading: true,
     OGMarkers: [],
     markers: [],
     viewport: {
@@ -20,6 +22,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+
     SheltersApi.getAll()
     .then(data => {
       const allShelterData = data.map(shelter => {
@@ -43,10 +46,9 @@ class App extends Component {
       })
 
       this.setState({
+        isLoading: false,
         OGMarkers: allShelterData,
-
-        // Accepting shelters set to default
-        markers: allShelterData.filter(marker => (marker.accepting === 'TRUE'))
+        markers: allShelterData.filter(marker => (marker.accepting === 'TRUE')) // Accepting shelters set to default
       })
     })
 
@@ -101,9 +103,10 @@ class App extends Component {
   }
 
   render() {
-    const { OGMarkers, markers, viewport, currentLocation, selectedFilter, toggledInfo } = this.state;
+    const { isLoading, OGMarkers, markers, viewport, currentLocation, selectedFilter, toggledInfo } = this.state;
     return (
       <div className="App">
+        { isLoading ? <LoadingIcon /> : ''}
         <FilterMarkers
           OGMarkers={ OGMarkers }
           markers={ markers }

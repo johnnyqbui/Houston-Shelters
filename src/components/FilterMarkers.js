@@ -34,8 +34,17 @@ class FilterMarkers extends Component {
 		value === "Not Opened" 		  		&& ( filtered = origMarkers.filter(marker => (marker.accepting === 'NOTOPEN')))
 		value.indexOf('Staging') > -1  		&& ( filtered = origMarkers.filter(marker => (marker.accepting === 'STAGING')))
 		value === "Accepting Pets" 			&& ( filtered = origMarkers.filter(marker => (marker.pets.length > 0 && marker.pets.match(/yes/ig))))
-		value.indexOf('Updated') > -1  	    && ( filtered = origMarkers.filter(marker => (moment(marker.lastUpdated).add(12, 'hours').isAfter(moment().format('YYYY-MM-DD hh:mm A')))))
+		value.indexOf('Updated') > -1  	    && ( filtered = origMarkers.filter(marker => {
+
+			const lastUpdatedFormatted = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(12, 'hours').format()
+			if (lastUpdatedFormatted !== 'Invalid date') {
+				return (
+						moment(lastUpdatedFormatted).isAfter(moment().format('YYYY-MM-DD hh:mm A'))
+					)
+				}
+			}))
 		onClickFilter(filtered, value)
+
 
 		this.setState({
 			selectedFilter: {
@@ -85,8 +94,8 @@ class FilterMarkers extends Component {
 					<input type='button' value='Not Accepting People' className={ notAccepting ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Unknown If Accepting'className={ unknownAccepting ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Not Opened' className={ notOpened ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
-					<input type='button' value='Accepting Pets' className={ pets ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Staging (Redirecting People, but can still come)' className={ staging ? 'blueButton selected' : 'blueButton' } onClick={(e) => {{this.runFilter(e.target.value, OGMarkers)}}}/>
+					<input type='button' value='Accepting Pets' className={ pets ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Updated within the last 12 hours' className={ updated ? 'blueButton selected' : 'blueButton' } onClick={(e) => {{this.runFilter(e.target.value, OGMarkers)}}}/>
 				</div>
 			</div>

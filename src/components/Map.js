@@ -1,6 +1,5 @@
 import React from 'react';
 import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
-import L from 'leaflet';
 
 const Lmap = (props) => {
 	const { markers, viewport, currentLocation, toggledInfo, onToggleInfo } = props;
@@ -13,6 +12,7 @@ const Lmap = (props) => {
 			return 'Did Not Respond/Unknown'
 		}
 	}
+
 	const checkToggleInfo = () => { window.innerWidth < 600 && ( onToggleInfo() ) }
 
 	return (
@@ -24,19 +24,7 @@ const Lmap = (props) => {
 			<ZoomControl position={toggledInfo ? 'bottomright' : 'topright'} />
 			{currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
 			{markers.map((marker, index) => {
-        		const {
-					county,
-					name,
-					address,
-					city,
-					phone,
-					location,
-					accepting,
-					pets,
-					notes,
-					supplyNeeds,
-					volunteerNeeds,
-					lastUpdated } = marker;
+        		const { county, name, address, city, phone, location, accepting, pets, notes, supplyNeeds, volunteerNeeds, lastUpdated } = marker;
         		return (
         			<Marker
 	        			key={index}
@@ -48,12 +36,10 @@ const Lmap = (props) => {
 							    <span style={{fontWeight: 'bold'}}>{name}</span><br/>
 							    {address}<br/>
 							    {city}<br/>
-							    {phone ? phone : 'No Phone Number'}<br/></p>
+							    <a href={phone ? `tel:${phone}` : ''}>{phone ? phone : 'No Phone Number'}</a><br/></p>
 							    <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> { checkAccepting(accepting) }<br/>
 							    <span style={{fontWeight: 'bold'}}>Pets?</span> { pets ? pets : 'Unkonwn' }<br/><br/>
-							    <span style={{fontWeight: 'bold'}}>Notes:</span> {notes}<br/>
-							    <span style={{fontWeight: 'bold'}}>Supply Needs:</span> {supplyNeeds}<br/>
-							    <span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {volunteerNeeds}<br/><br/>
+							    <span style={{fontWeight: 'bold'}}>Notes:</span> {notes}<br/><br/>
 							    <span style={{fontWeight: 'bold'}}>Lat:</span> {location.lat},
 							    <span style={{fontWeight: 'bold'}}> Lng:</span> {location.lng}<br/>
 							    <span style={{fontWeight: 'bold'}}>Last Updated:</span> {lastUpdated}<br/><br/>
