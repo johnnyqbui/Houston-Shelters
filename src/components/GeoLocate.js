@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 
 const GeoLocate = (props) => {
-    const { currentLocation, onClickLocate } = props;
+    const { currentLocation, onClickLocate, clickToggleInfo } = props;
     const locate = () => {
         const success = (position) => {
             const currentLocation = [position.coords.latitude, position.coords.longitude]
@@ -21,7 +21,7 @@ const GeoLocate = (props) => {
     }
 
     return (
-        <div className='geoLocateButton'>
+        <div className={ clickToggleInfo ? 'hideTopButtons geoLocateButton' : 'geoLocateButton' }>
             { currentLocation.length > 0 ?
                 <p style={{color: 'white'}}>Your current location: <br/>Lat: {currentLocation[0].toFixed(4)}, Lng: {currentLocation[1].toFixed(4)}</p> :
                 <input type="button" onClick={() => {locate()}} value='Find My Location'/>

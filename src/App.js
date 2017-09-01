@@ -3,8 +3,8 @@ import './App.css';
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
 import FilterMarkers from './components/FilterMarkers';
-import AddAShelter from './components/AddAShelter';
-import VolunteerShelterLink from './components/VolunteerShelterLink';
+import ExternalLinks from './components/ExternalLinks';
+import FilterInfo from './components/FilterInfo';
 
 class App extends Component {
   state = {
@@ -15,6 +15,8 @@ class App extends Component {
       zoom: 9
     },
     currentLocation: [],
+    selectedFilter: 'Accepting People',
+    clickToggleInfo: false
   }
 
   componentDidMount() {
@@ -47,6 +49,7 @@ class App extends Component {
 
       this.setState({
         OGMarkers: allShelterData,
+
         // Accepting shelters set to default
         markers: allShelterData.filter(marker => (marker.accepting === 'TRUE'))
       })
@@ -63,32 +66,46 @@ class App extends Component {
     })
   }
 
-  handleFilteredList = (filteredMarkers) => {
+  handleFilteredList = (filteredMarkers, selectedFilter) => {
     this.setState({
       markers: filteredMarkers,
+      selectedFilter: selectedFilter
+    })
+  }
+
+  handleToggleInfo = () => {
+    this.setState({
+      clickToggleInfo: !this.state.clickToggleInfo
     })
   }
 
   render() {
-    const { OGMarkers, markers, viewport, currentLocation } = this.state;
+    const { OGMarkers, markers, viewport, currentLocation, selectedFilter, clickToggleInfo } = this.state;
     return (
       <div className="App">
         <FilterMarkers
           OGMarkers={ OGMarkers }
           markers={ markers }
+          clickToggleInfo={ clickToggleInfo }
           onClickFilter={ this.handleFilteredList }
         />
         <GeoLocate
           currentLocation={ currentLocation }
+          clickToggleInfo={ clickToggleInfo }
           onClickLocate={ this.handleLocate }
         />
         <Lmap
           currentLocation={ currentLocation }
           markers={ markers }
           viewport={ viewport }
+          clickToggleInfo={ clickToggleInfo }
+          onToggleInfo={ this.handleToggleInfo }
         />
-        <AddAShelter />
-        <VolunteerShelterLink />
+        <ExternalLinks />
+        <FilterInfo
+          selectedFilter={selectedFilter}
+          filterLength={markers.length}
+        />
       </div>
     )
   }

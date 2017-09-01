@@ -13,7 +13,7 @@ class FilterMarkers extends Component {
 			notOpened: false,
 			staging: false,
 			pets: false,
-			added: false
+			updated: false
 		}
 	}
 
@@ -34,7 +34,7 @@ class FilterMarkers extends Component {
 		value === "Not Opened" 		  		&& ( filtered = origMarkers.filter(marker => (marker.accepting === 'NOTOPEN')))
 		value.indexOf('Staging') > -1  		&& ( filtered = origMarkers.filter(marker => (marker.accepting === 'STAGING')))
 		value === "Accepting Pets" 			&& ( filtered = origMarkers.filter(marker => (marker.pets.length > 0 && marker.pets.match(/yes/ig))))
-		value.indexOf('Added') > -1  	    && ( filtered = origMarkers.filter(marker => (moment(marker.lastUpdated).add(12, 'hours').isAfter(moment().format('YYYY-MM-DD hh:mm A')))))
+		value.indexOf('Updated') > -1  	    && ( filtered = origMarkers.filter(marker => (moment(marker.lastUpdated).add(12, 'hours').isAfter(moment().format('YYYY-MM-DD hh:mm A')))))
 		onClickFilter(filtered, value)
 
 		this.setState({
@@ -46,7 +46,7 @@ class FilterMarkers extends Component {
 				notOpened: value === "Not Opened",
 				staging: value.indexOf('Staging') > -1,
 				pets: value === "Accepting Pets",
-				added: value.indexOf('Added') > -1
+				updated: value.indexOf('Updated') > -1
 			}
 		})
 
@@ -61,7 +61,7 @@ class FilterMarkers extends Component {
 	}
 
 	render() {
-		const { OGMarkers, markers } = this.props;
+		const { OGMarkers, clickToggleInfo } = this.props;
 		const { isActive, selectedFilter } = this.state;
 		const {
 			allShelters,
@@ -71,21 +71,22 @@ class FilterMarkers extends Component {
 			notOpened,
 			pets,
 			staging,
-			added } = selectedFilter;
+			updated } = selectedFilter;
 
 		return (
-			<div>
+			<div className={ clickToggleInfo ? 'hideTopButtons filterComponent' : 'filterComponent' }>
 				<input type='button' value={ isActive ? 'Hide Filter Panel' : 'Show Filter Panel'} className='togglePanelButton' onClick={this.handleTogglePanel} />
 				<div className={ isActive ? 'filterPanel' : 'filterPanel closePanel' }>
-					<div className='numberOfShelters'>Showing: { markers.length } Shelters</div>
+					<div className='numberOfShelters'>Filter Shelters</div>
 					<input type='button' value='All Shelters' className={ allShelters ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
+					<hr/>
 					<input type='button' value='Accepting People' className={ acceptingPeople ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Not Accepting People' className={ notAccepting ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Unknown If Accepting'className={ unknownAccepting ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Not Opened' className={ notOpened ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Accepting Pets' className={ pets ? 'blueButton selected' : 'blueButton' } onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
 					<input type='button' value='Staging (Redirecting People, but can still come)' className={ staging ? 'blueButton selected' : 'blueButton' } onClick={(e) => {{this.runFilter(e.target.value, OGMarkers)}}}/>
-					<input type='button' value='Added within the last 12 hours' className={ added ? 'blueButton selected' : 'blueButton' } onClick={(e) => {{this.runFilter(e.target.value, OGMarkers)}}}/>
+					<input type='button' value='Updated within the last 12 hours' className={ updated ? 'blueButton selected' : 'blueButton' } onClick={(e) => {{this.runFilter(e.target.value, OGMarkers)}}}/>
 				</div>
 			</div>
 		)

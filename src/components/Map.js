@@ -1,8 +1,9 @@
 import React from 'react';
-import { Map, Marker, Popup, TileLayer, CircleMarker } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
+import L from 'leaflet';
 
 const Lmap = (props) => {
-	const { markers, viewport, currentLocation } = props;
+	const { markers, viewport, currentLocation, clickToggleInfo, onToggleInfo } = props;
 	const checkAccepting = (accepting) => {
 		if (accepting === 'TRUE') {
 			return 'Yes'
@@ -12,25 +13,15 @@ const Lmap = (props) => {
 			return 'Did Not Respond/Unknown'
 		}
 	}
-
-	const applyFilter = (marker) => {
-
-		// const {
-		// 	accepting,
-		// 	pets,
-		// 	supplyNeeds,
-		// 	volunteerNeeds,
-		// 	lastUpdated } = marker;
-
-		// accepting === 'TRUE'
-	}
+	const checkToggleInfo = () => { window.innerWidth < 600 && ( onToggleInfo() ) }
 
 	return (
-		<Map className='map' viewport={ viewport } animate={true} >
+		<Map className='map' viewport={ viewport } zoomControl={false}>
 			<TileLayer
 			  url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
 			  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 			/>
+			<ZoomControl position="bottomright" />
 			{currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
 			{markers.map((marker, index) => {
         		const {
@@ -50,7 +41,7 @@ const Lmap = (props) => {
 	        			key={index}
 	        			position={[location.lat, location.lng]}
 	        		>
-						<Popup onOpen={()=>{applyFilter(marker)}}>
+						<Popup onOpen={() => { checkToggleInfo()} } onClose={() => { checkToggleInfo() }}>
 							<div style={{fontSize: '14px'}}>
 							    <p><span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
 							    <span style={{fontWeight: 'bold'}}>{name}</span><br/>
