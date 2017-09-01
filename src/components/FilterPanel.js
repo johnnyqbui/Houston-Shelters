@@ -35,11 +35,11 @@ class FilterPanel extends Component {
     value.indexOf('Staging') > -1 && (filtered = origMarkers.filter(marker => (marker.accepting === 'STAGING')))
     value === "Accepting Pets" && (filtered = origMarkers.filter(marker => (marker.pets.length > 0 && marker.pets.match(/yes/ig))))
     value.indexOf('Updated') > -1 && (filtered = origMarkers.filter(marker => {
-	if (marker.lastUpdated.length > 0) {
-		const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(12, 'hours').format()
-		const timeAfter = moment().format()
-		return replaceLastUpdated > timeAfter && (marker)
-	}
+  	if (marker.lastUpdated.length > 0) {
+  		const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(12, 'hours').format()
+  		const timeAfter = moment().format()
+  		return replaceLastUpdated > timeAfter && (marker)
+  	}
     }))
 
     onClickFilter(filtered, value)

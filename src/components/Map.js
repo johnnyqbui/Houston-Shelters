@@ -47,12 +47,13 @@ const Lmap = (props) => {
                     <span style={{fontWeight: 'bold'}}>{name}</span><br/>
                     {address}<br/>
                     {city}<br/>
-                    {phone ? phone : 'No Phone Number'}<br/></p>
+                    {phone ?
+                    	<a className='popupPhone' href={`tel:${phone}`}>Call: {phone}</a> :
+                   		'No Phone Number'}
+                   	<br/></p>
                   <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> { checkAccepting(accepting) }<br/>
                     <span style={{fontWeight: 'bold'}}>Pets?</span> { pets ? pets : 'Unkonwn' }<br/><br/>
-                    <span style={{fontWeight: 'bold'}}>Notes:</span> {notes}<br/>
-                    <span style={{fontWeight: 'bold'}}>Supply Needs:</span> {supplyNeeds}<br/>
-                    <span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {volunteerNeeds}<br/><br/>
+                    <span style={{fontWeight: 'bold'}}>Notes:</span> {notes}<br/><br/>
                     <span style={{fontWeight: 'bold'}}>Lat:</span> {location.lat},
                     <span style={{fontWeight: 'bold'}}> Lng:</span> {location.lng}<br/>
                     <span style={{fontWeight: 'bold'}}>Last Updated:</span> {lastUpdated}<br/><br/>
