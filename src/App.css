@@ -112,6 +112,10 @@ h1, h2, h3, h4 {
 	background-color:#FFF;
 	z-index:100;
 	transition: 0.2s bottom;
+	padding:10px;
+	border-top:1px solid #000;
+	overflow-y:auto;
+	box-sizing:border-box;
 }
 
 .info-bar.open {

@@ -15,25 +15,34 @@ const Lmap = (props) => {
     }
   }
   const checkAcceptingIcon = (accepting) => {
-    let myIcon = new Icon({
-      iconUrl: '../images/marker-icon-black.png',
-      iconSize: [38, 95],
-      iconAnchor: [22, 94],
-      popupAnchor: [-3, -76],
+    let redIcon = new Icon({
+      iconUrl: '../images/marker-icon-red.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [12, -10],
     });
-    let myIcon2 = new Icon({
-      iconUrl: '../images/marker-icon-blue.png',
-      iconSize: [38, 95],
-      iconAnchor: [22, 94],
-      popupAnchor: [-3, -76],
+    let greenIcon = new Icon({
+      iconUrl: '../images/marker-icon-green.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [0, -45],
+    });
+
+
+
+    let greyIcon = new Icon({
+      iconUrl: '../images/marker-icon-grey.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [12, -10],
     });
 
     if (accepting === 'TRUE') {
-      return myIcon;
+      return greenIcon;
     } else if (accepting === 'FALSE') {
-      return myIcon2;
+      return redIcon;
     } else {
-      return myIcon2;
+      return greyIcon;
     }
   }
 
@@ -49,14 +58,29 @@ const Lmap = (props) => {
     // accepting === 'TRUE'
   }
 
-  const doAction = (marker) => {
+  const openInfo = (marker) => {
+    // this is NOT the react way to do things
+    // but I'm learning react on the fly and don't understand the binding mechanism
     console.log("opening");
     let obj = document.getElementById('nodeinfo')
+    let result = "";
 
+    result += "<strong>" + marker.name + "<br>" + marker.address + "</strong><br><br>";
+    result += "<table>";
+    result += "<tr><td>Accepting People?</td><td>" + checkAccepting(marker.accepting) + "</td></tr>";
+    result += "<tr><td>Pets OK?</td><td>" + (currentMarker.pets ? currentMarker.pets : 'Unknown') + "</td></tr></table>";
+
+
+    obj.innerHTML = result;
+
+    /*
     props.currentMarker.county = marker.county;
+
     currentMarker.accepting = marker.accepting;
     currentMarker.pets = marker.pets;
     currentMarker.notes = marker.notes;
+    */
+
 
     console.log(marker.county);
 
@@ -66,7 +90,7 @@ const Lmap = (props) => {
 
   }
 
-  const doClose = (marker) => {
+  const closeInfo = (marker) => {
     console.log("closing!" + marker.accepting);
     let obj = document.getElementById('nodeinfo')
     obj.classList.remove("open");
@@ -119,10 +143,10 @@ const Lmap = (props) => {
               <Popup
                 onOpen={() => {
                   applyFilter(marker);
-                  doAction(marker);
+                  openInfo(marker);
                 }}
                 onClose={() => {
-                  doClose(marker);
+                  closeInfo(marker);
                 }}>
                 <div style={{fontSize: '14px'}}>
                   <p><span style={{fontWeight: 'bold'}}>{name}</span><br/>
