@@ -1,9 +1,41 @@
 import React from 'react';
 import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
+import blueMarker from '../images/marker-icon-blue.png';
+import redMarker from '../images/marker-icon-red.png';
+import greyMarker from '../images/marker-icon-grey.png';
+import shadowMarker from '../images/marker-shadow.png'
+
+const blueMarkerIcon = new L.icon({
+	iconUrl: blueMarker,
+	iconSize: [25, 41],
+	iconAnchor: [12, 41],
+	shadowUrl: shadowMarker,
+	shadowSize: [41, 41],
+    shadowAnchor: [12, 41],
+    popupAnchor: [0, -28]
+})
+const redMarkerIcon = new L.icon({
+	iconUrl: redMarker,
+	iconSize: [25, 41],
+	iconAnchor: [12, 41],
+	shadowUrl: shadowMarker,
+	shadowSize: [41, 41],
+    shadowAnchor: [12, 41],
+    popupAnchor: [0, -28]
+})
+const greyMarkerIcon = new L.icon({
+	iconUrl: greyMarker,
+	iconSize: [25, 41],
+	iconAnchor: [12, 41],
+	shadowUrl: shadowMarker,
+	shadowSize: [41, 41],
+    shadowAnchor: [12, 41],
+    popupAnchor: [0, -28]
+})
 
 const Lmap = (props) => {
-  const { markers, viewport, currentLocation, toggledInfo, onToggleInfo } = props;
+  const { markers, viewport, currentLocation, selectedFilter, toggledInfo, onToggleInfo } = props;
   const checkAccepting = (accepting) => {
     if (accepting === 'TRUE') {
       return 'Yes'
@@ -37,32 +69,24 @@ const Lmap = (props) => {
           supplyNeeds,
           volunteerNeeds,
           lastUpdated } = marker;
-        let myIcon;
-        console.log(accepting);
+        let icon;
         switch(marker.accepting){
           case 'TRUE':
-          myIcon = L.icon({
-            iconUrl:'../images/marker-icon-green.png'
-          });
-          break;
+	          icon = blueMarkerIcon
+	          break;
           case 'FALSE':
-          myIcon = L.icon({
-            iconUrl:'../images/marker-icon-red.png'
-          });
-          break;
+	          icon = redMarkerIcon
+	          break;
           case 'DNR':
-          myIcon = L.icon({
-            iconUrl:'../images/marker-icon-grey.png'
-          });
-          break;
+	          icon = greyMarkerIcon
+	          break;
           default:
-          myIcon = L.icon({
-            iconUrl:'../images/marker-icon-grey.png'
-          });
+          		icon = greyMarkerIcon
+        	break;
         };
           return (
             <Marker
-              icon = {myIcon}
+              icon={icon}
               key={index}
               position={[location.lat, location.lng]}
               >
@@ -72,10 +96,7 @@ const Lmap = (props) => {
                     <span style={{fontWeight: 'bold'}}>{name}</span><br/>
                     {address}<br/>
                     {city}<br/>
-                    {phone ?
-                    	<a className='popupPhone' href={`tel:${phone}`}>Call: {phone}</a> :
-                   		'No Phone Number'}
-                   	<br/></p>
+                    {phone ? <a className='popupPhone' href={`tel:${phone}`}>Call: {phone}</a> : 'No Phone Number'}<br/></p>
                   <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> { checkAccepting(accepting) }<br/>
                     <span style={{fontWeight: 'bold'}}>Pets?</span> { pets ? pets : 'Unkonwn' }<br/><br/>
                     <span style={{fontWeight: 'bold'}}>Notes:</span> {notes}<br/><br/>

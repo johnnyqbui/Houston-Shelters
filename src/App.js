@@ -18,6 +18,7 @@ class App extends Component {
     },
     currentLocation: [],
     selectedFilter: 'Accepting People',
+    showStaging: false,
     toggledInfo: false
   }
 
@@ -48,7 +49,8 @@ class App extends Component {
         isLoading: false,
         OGMarkers: allShelterData,
         // Accepting shelters set to default
-        markers: allShelterData.filter(marker => (marker.accepting === 'TRUE'))
+        markers: allShelterData.filter(marker => (marker.accepting === 'TRUE')),
+        showStaging: allShelterData.filter(marker => (marker.accepting.indexOf('Staging') > -1))
       });
     }
     catch (error) {
@@ -80,7 +82,7 @@ class App extends Component {
   }
 
   render() {
-    const { isLoading, OGMarkers, markers, viewport, currentLocation, selectedFilter, toggledInfo } = this.state;
+    const { isLoading, OGMarkers, markers, viewport, currentLocation, selectedFilter, showStaging, toggledInfo } = this.state;
     return (
       <div className="App">
         { isLoading ? <LoadingIcon /> : ''}
@@ -89,7 +91,7 @@ class App extends Component {
           markers={ markers }
           toggledInfo={ toggledInfo }
           onClickFilter={ this.handleFilteredList }
-        />}
+        /> }
 
         <GeoLocate
           currentLocation={ currentLocation }
@@ -100,12 +102,14 @@ class App extends Component {
           currentLocation={ currentLocation }
           markers={ markers }
           viewport={ viewport }
+          selectedFilter={ selectedFilter }
           toggledInfo={ toggledInfo }
           onToggleInfo={ this.handleToggleInfo }
         />
         <FilterInfo
-          selectedFilter={selectedFilter}
-          filterLength={markers.length}
+          selectedFilter={ selectedFilter }
+          filterLength={ markers.length }
+          showStaging={ showStaging }
         />
       </div>
     )
