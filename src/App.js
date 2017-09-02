@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
-import FilterMarkers from './components/FilterMarkers';
+import FilterPanel from './components/FilterPanel';
 import FilterInfo from './components/FilterInfo';
 import LoadingIcon from './components/LoadingIcon';
 import * as SheltersApi from './utils/SheltersApi';
@@ -18,6 +18,7 @@ class App extends Component {
     },
     currentLocation: [],
     selectedFilter: 'Accepting People',
+    showStaging: false,
     toggledInfo: false
   }
 
@@ -48,7 +49,8 @@ class App extends Component {
         isLoading: false,
         OGMarkers: allShelterData,
         // Accepting shelters set to default
-        markers: allShelterData.filter(marker => (marker.accepting === 'TRUE'))
+        markers: allShelterData.filter(marker => (marker.accepting === 'TRUE')),
+        showStaging: allShelterData.filter(marker => (marker.accepting.indexOf('Staging') > -1))
       });
     }
     catch (error) {
@@ -80,16 +82,17 @@ class App extends Component {
   }
 
   render() {
-    const { isLoading, OGMarkers, markers, viewport, currentLocation, selectedFilter, toggledInfo } = this.state;
+    const { isLoading, OGMarkers, markers, viewport, currentLocation, selectedFilter, showStaging, toggledInfo } = this.state;
     return (
       <div className="App">
         { isLoading ? <LoadingIcon /> : ''}
-        <FilterMarkers
+        { isLoading ? '' : <FilterPanel
           OGMarkers={ OGMarkers }
           markers={ markers }
           toggledInfo={ toggledInfo }
           onClickFilter={ this.handleFilteredList }
-        />
+        /> }
+
         <GeoLocate
           currentLocation={ currentLocation }
           toggledInfo={ toggledInfo }
@@ -99,13 +102,15 @@ class App extends Component {
           currentLocation={ currentLocation }
           markers={ markers }
           viewport={ viewport }
+          selectedFilter={ selectedFilter }
           toggledInfo={ toggledInfo }
           onToggleInfo={ this.handleToggleInfo }
         />
         <FilterInfo
-          selectedFilter={selectedFilter}
-          filterLength={markers.length}
-        />  
+          selectedFilter={ selectedFilter }
+          filterLength={ markers.length }
+          showStaging={ showStaging }
+        />
       </div>
     )
   }

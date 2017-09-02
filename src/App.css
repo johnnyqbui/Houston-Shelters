@@ -74,6 +74,15 @@ hr {
 
 /*****BUTTONS*****/
 
+.leaflet-container .popupPhone {
+  background: rgb(20, 150, 250);
+  padding: 10px;
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  border-radius: .3rem;
+}
+
 .externalLinkButton a {
 	text-decoration: none;
 }

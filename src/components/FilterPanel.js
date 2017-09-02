@@ -3,7 +3,7 @@ import moment from 'moment';
 import '../App.css';
 import ExternalLinks from './ExternalLinks';
 
-class FilterMarkers extends Component {
+class FilterPanel extends Component {
   state = {
     isActive: false,
     selectedFilter: {
@@ -24,7 +24,7 @@ class FilterMarkers extends Component {
 
   }
 
-  runFilter = (value, origMarkers) => {
+  handleFilter = (value, origMarkers) => {
     const { onClickFilter } = this.props;
     let filtered;
     value === "All Shelters" && (filtered = origMarkers)
@@ -35,10 +35,11 @@ class FilterMarkers extends Component {
     value.indexOf('Staging') > -1 && (filtered = origMarkers.filter(marker => (marker.accepting === 'STAGING')))
     value === "Accepting Pets" && (filtered = origMarkers.filter(marker => (marker.pets.length > 0 && marker.pets.match(/yes/ig))))
     value.indexOf('Updated') > -1 && (filtered = origMarkers.filter(marker => {
-    	const lastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(12, 'hours').format()
-    	return lastUpdated !== 'Invalid date' && (
-    		moment(lastUpdated).isAfter(moment().format('YYYY-MM-DD hh:mm A'))
-    	)
+  	if (marker.lastUpdated.length > 0) {
+  		const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(12, 'hours').format()
+  		const timeAfter = moment().format()
+  		return replaceLastUpdated > timeAfter && (marker)
+  	}
     }))
 
     onClickFilter(filtered, value)
@@ -67,7 +68,7 @@ class FilterMarkers extends Component {
   }
 
   render() {
-    const { OGMarkers, toggledInfo } = this.props;
+    const { OGMarkers, showStaging, toggledInfo } = this.props;
     const { isActive, selectedFilter } = this.state;
     const {
       allShelters,
@@ -94,46 +95,49 @@ class FilterMarkers extends Component {
               type='button'
               value='All Shelters'
               className={ allShelters ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
             <input
               type='button'
               value='Accepting People'
               className={ acceptingPeople ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
             <input
               type='button'
               value='Not Accepting People'
               className={ notAccepting ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
             <input
               type='button'
               value='Unknown If Accepting'
               className={ unknownAccepting ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
             <input
               type='button'
               value='Not Opened'
               className={ notOpened ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
-            <input
-              type='button'
-              value='Staging (Redirecting People, but can still come)'
-              className={ staging ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
+              {showStaging}
+            { showStaging ?
+                <input
+                type='button'
+                value='Staging (Redirecting People, but can still come)'
+                className={ staging ? 'blueButton selected' : 'blueButton' }
+                onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/> : ''
+            }
             <input
               type='button'
               value='Accepting Pets'
               className={ pets ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
             <input
               type='button'
               value='Updated within the last 12 hours'
               className={ updated ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.runFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
           </div>
         </div>
       )
   }
 }
 
-export default FilterMarkers
+export default FilterPanel
