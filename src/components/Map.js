@@ -4,6 +4,7 @@ import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-
 import blueMarker from '../images/marker-icon-blue.png';
 import greyMarker from '../images/marker-icon-grey.png';
 import shadowMarker from '../images/marker-shadow.png'
+import InfoBox from './InfoBox'
 
 const blueMarkerIcon = new L.icon({
 	iconUrl: blueMarker,
@@ -28,8 +29,24 @@ const greyMarkerIcon = new L.icon({
 const Lmap = (props) => {
   const { markers, viewport, currentLocation, toggledInfo, onToggleInfo } = props;
   const checkToggleInfo = () => { window.innerWidth < 600 && ( onToggleInfo() ) }
+
+  const openInfo = (marker) => {
+    console.log("opening");
+    let obj = document.getElementById('nodeinfo')
+    this.infobox.handleMarker(marker);
+    obj.classList.add("open");
+  }
+
+  const closeInfo = (marker) => {
+    console.log("closing!" + marker.accepting);
+    let obj = document.getElementById('nodeinfo')
+    obj.classList.remove("open");
+  }
+
   return (
-    <Map className='map' viewport={ viewport } zoomControl={false}>
+    <div className='map-container'>
+      <InfoBox className='info-bar' id='nodeinfo' ref={ref => (this.infobox = ref)}/>
+    <Map className='map' viewport={ viewport } zoomControl={false} ref={ref => (this.map = ref)}>
       <TileLayer
         url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -58,26 +75,26 @@ const Lmap = (props) => {
 			  key={index}
 			  position={[location.lat, location.lng]}
 			  >
-			  <Popup onOpen={() => { checkToggleInfo()} } onClose={() => { checkToggleInfo() }}>
+			  <Popup
+          onOpen={() => {
+            openInfo(marker);
+            checkToggleInfo();
+          }}
+          onClose={() => {
+            closeInfo(marker);
+            checkToggleInfo();
+          }}>
 			    <div style={{fontSize: '14px'}}>
-			      <p><span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
-			        <span style={{fontWeight: 'bold'}}>{name}</span><br/>
-			        {address}<br/>
-			        {city}<br/>
-			        Phone: {phone ? <a className='popupPhone' href={`tel:${phone}`}>{phone}</a> : 'None'}<br/></p>
-			      <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }<br/>
-			        <span style={{fontWeight: 'bold'}}>Pets?</span> { pets ? pets : 'Unkonwn' }<br/><br/>
-			        <span style={{fontWeight: 'bold'}}>Notes:</span> {notes}<br/><br/>
-			        <span style={{fontWeight: 'bold'}}>Lat:</span> {location.lat},
-			        <span style={{fontWeight: 'bold'}}> Lng:</span> {location.lng}<br/>
-			        <span style={{fontWeight: 'bold'}}>Last Updated:</span> {lastUpdated}<br/><br/>
-			      </p>
+            <p><span style={{fontWeight: 'bold'}}>{name}</span><br/>
+              {address}<br/>
+              {phone ? phone : 'No Phone Number'}</p>
 			    </div>
 			  </Popup>
 			</Marker>
 		)
       })}
     </Map>
+    </div>
   )
 }
 
