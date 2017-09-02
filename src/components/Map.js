@@ -53,6 +53,7 @@ const Lmap = (props) => {
         url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
+
       <ZoomControl position={toggledInfo ? 'bottomright' : 'topright'} />
       {currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
       {markers.map((marker, index) => {
@@ -72,16 +73,16 @@ const Lmap = (props) => {
         let icon;
         switch(marker.accepting){
           case 'TRUE':
-	          icon = blueMarkerIcon
-	          break;
+			icon = blueMarkerIcon
+			break;
           case 'FALSE':
-	          icon = redMarkerIcon
-	          break;
+			icon = redMarkerIcon
+			break;
           case 'DNR':
-	          icon = greyMarkerIcon
-	          break;
+			icon = greyMarkerIcon
+			break;
           default:
-          		icon = greyMarkerIcon
+          	icon = greyMarkerIcon
         	break;
         };
           return (
@@ -96,7 +97,7 @@ const Lmap = (props) => {
                     <span style={{fontWeight: 'bold'}}>{name}</span><br/>
                     {address}<br/>
                     {city}<br/>
-                    {phone ? <a className='popupPhone' href={`tel:${phone}`}>Call: {phone}</a> : 'No Phone Number'}<br/></p>
+                    Phone: {phone ? <a className='popupPhone' href={`tel:${phone}`}>{phone}</a> : 'None'}<br/></p>
                   <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> { checkAccepting(accepting) }<br/>
                     <span style={{fontWeight: 'bold'}}>Pets?</span> { pets ? pets : 'Unkonwn' }<br/><br/>
                     <span style={{fontWeight: 'bold'}}>Notes:</span> {notes}<br/><br/>
