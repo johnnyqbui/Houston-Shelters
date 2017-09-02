@@ -352,6 +352,12 @@ input {
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
+#google_translate_element{
+  position:absolute;
+  top:35px;
+  left:300px;
+  z-index: 1000;
+}
 
 @-webkit-keyframes sk-circleFadeDelay {
   0%, 39%, 100% { opacity: 0; }
