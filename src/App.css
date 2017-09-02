@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -448,6 +450,9 @@ template {
 
 
 /*******MAIN CSS*******/
+* {
+    font-family: 'Roboto', sans-serif !important;
+}
 
 .App {
     position: absolute;
@@ -460,30 +465,46 @@ template {
     z-index: 2;
     width: 100vw;
     height: 100vh;
+
 }
 
 .filterPanel {
     position: absolute;
     z-index: 3;
-    top: 120px;
-    left: 10px;
-    overflow-y: scroll;
-    max-width: 300px;
-    height: calc(100% - 205px);
-    background: rgba(100, 100, 100, .85);
+    top: 100px;
+    left: 0px;
+    width: 100%;
+    background: rgba(100, 100, 100, .7);
+    transition:0.2s all;
+    padding:10px;
+    box-sizing:border-box;
 }
 
 .filterPanel input {
     font-size: 14px;
-    width: 41%;
-    height: 75px;
-    margin: 10px;
+    height: 40px;
+    margin-right:10px;
+    margin-bottom:10px;
+    background-color:#666;
     cursor: pointer;
     transition: .3s;
     vertical-align: top;
     white-space: normal;
     color: white;
     border: none;
+    box-sizing:border-box;
+    padding:0px 10px;
+}
+
+.current-filter-button {
+    background: rgb(20, 150, 250);
+    color:#fff;
+    border:0;
+    border-radius:.3rem;
+    height:36px;
+    margin-top:6px;
+    padding:0px 10px;
+    cursor:pointer;
 }
 
 .filterPanel .selected {
@@ -492,13 +513,13 @@ template {
 }
 
 .closePanel {
-    left: -300px;
+    left:-100%;
 }
 
 .title {
     font-size: 1.1em;
     margin: 20px auto 5px;
-    text-align: center;
+
     color: white;
 }
 
@@ -584,25 +605,24 @@ hr {
 
 .geoLocateButton {
     position: absolute;
-    z-index: 3;
-    top: 10px;
-    left: 10px;
-    display: flex;
-    width: 250px;
-    height: 50px;
-    border-radius: .3rem;
-    background: rgba(100, 100, 100, .8);
+    z-index: 30;
+    top:54px;
+    right: 10px;
+    height: 40px;
+    background: rgb(90, 90, 90);
     justify-content: center;
     align-items: center;
+    border-radius: .3rem;
 }
 
 .geoLocateButton input {
-    width: 100%;
     height: 100%;
+    width: 100%;
     cursor: pointer;
     color: white;
     border: none;
-    background: rgb(226, 70, 70);
+    font-size:14px;
+    background: rgb(90, 90, 90);
 }
 
 input {
@@ -615,23 +635,116 @@ input {
     display: none;
 }
 
+/* nolasco patch */
+
+.main-ui-container {
+    height:50px;
+    z-index:100;
+    background-color: #203b49;
+    padding:0px 10px;
+    position:absolute;
+    width:100%;
+    box-sizing:border-box;
+}
+
+.main-ui-controls {
+    height:50px;
+    background-color:#EEE;
+    padding:0 10px;
+    border-bottom:1px solid #CCC;
+    z-index:25;
+    position:absolute;
+    width:100%;
+    top:50px;
+    box-sizing:border-box;
+}
+
+h1, h2, h3, h4 {
+    margin:0;
+    padding-top:.4em;
+}
+
+.main-ui-container h2 {
+    color:#FFF;
+}
+
+.map-container {
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+}
+
+.info-bar {
+    width:100%;
+    height:40%;
+    bottom:-40%;
+    position:absolute;
+    background-color:#FFF;
+    z-index:50;
+    transition: 0.2s bottom;
+    padding:5px 10px;
+
+    overflow-y:auto;
+    box-sizing:border-box;
+}
+
+.info-bar p {
+    margin:5px 0;
+}
+
+.info-bar.open {
+    bottom:0px;
+    box-shadow: 0px 0px 20px #666;
+}
+
+.info-button {
+    right:10px;
+    top:10px;
+    position:absolute;
+
+}
+
+.info-links {
+    position:absolute;
+    top:50px;
+    left:100%;
+    width:100%;
+    background-color:#FFF;
+    transition:0.2s all;
+    height:100%;
+    z-index:100;
+    padding:10px;
+}
+
+.info-links.open {
+    left:0%;
+}
 
 /******Responsiveness*****/
 
 @media (min-width: 600px) {
+    .info-bar {
+        height:30%;
+        bottom:-30%;
+    }
+
+    /*
     .geoLocateButton {
         right: 50px;
         left: auto;
     }
+    */
     .geoLocateButton input {
         font-size: 16px;
     }
     .togglePanelButton {
-        top: 10px;
+        top: 60px;
     }
     .externalLinkButton {
         display: inline;
     }
+    /*
     .filterPanel {
         top: 65px;
         bottom: auto;
@@ -653,20 +766,27 @@ input {
         width: 250px;
         height: 50px;
     }
+    */
+    .numberOfShelters {
+        font-size: 1.3em;
+        margin: 20px 0;
+    }
+
     .title {
         font-size: 1.3em;
         margin: 20px auto 10px;
     }
     .closePanel {
-        left: -300px;
+        left:-100%;
     }
+    /*
     .filterPanel .blueButton.selected {
         margin-left: 25px;
     }
 
     .filterPanel .greyButton.selected {
         margin-left: 25px;
-    }
+    }*/
 
 }
 
@@ -680,7 +800,7 @@ input {
     left: 50%;
     width: 40px;
     height: 40px;
-    transform: translate(, -50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .sk-fading-circle .sk-circle {

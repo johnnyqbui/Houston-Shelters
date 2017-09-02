@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import MainUi from './components/MainUi'
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
 import FilterPanel from './components/FilterPanel';
@@ -51,6 +52,12 @@ class App extends Component {
       // Accepting shelters set to default
       markers: allMarkerData.filter(marker => (marker.accepting)),
     });
+
+    let update = {
+      filterText : "Accepting People",
+      filterCount : this.state.markers.length
+    }
+    this.updateFilterText(update)
   }
 
   handleLocate = (currentLocation) => {
@@ -76,23 +83,34 @@ class App extends Component {
     })
   }
 
+  handleFilterToggle = () => {
+    this.filters.handleTogglePanel();
+  }
+
+  updateFilterText = (update) => {
+    update.filterCount = this.state.markers.length
+    this.mainUi.updateFilterText(update);
+  }
+
   render() {
     const { isLoading, OGMarkers, markers, viewport, currentLocation, selectedFilter, toggledInfo } = this.state;
     return (
       <div className="App">
+        <MainUi filterToggle={this.handleFilterToggle.bind(this)} ref={(ref) => { this.mainUi = ref }}>
         { isLoading ? <LoadingIcon /> : ''}
         { isLoading ? '' :
         <FilterPanel
           OGMarkers={ OGMarkers }
           toggledInfo={ toggledInfo }
           onClickFilter={ this.handleFilteredList }
+          ref= {(ref) => { this.filters = ref }}
+          updateFilterText={this.updateFilterText.bind(this)}
         /> }
 
-        <GeoLocate
-          currentLocation={ currentLocation }
-          toggledInfo={ toggledInfo }
-          onClickLocate={ this.handleLocate }
-        />
+          <GeoLocate
+            currentLocation={ currentLocation }
+            onClickLocate={ this.handleLocate }
+          />
         <Lmap
           currentLocation={ currentLocation }
           markers={ markers }
@@ -104,6 +122,7 @@ class App extends Component {
           selectedFilter={ selectedFilter }
           filterLength={ markers.length }
         />
+        </MainUi>
       </div>
     )
   }
