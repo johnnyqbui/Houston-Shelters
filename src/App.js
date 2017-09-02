@@ -7,7 +7,6 @@ import FilterInfo from './components/FilterInfo';
 import LoadingIcon from './components/LoadingIcon';
 import * as SheltersApi from './utils/SheltersApi';
 
-
 class App extends Component {
   state = {
     isLoading: true,
@@ -106,8 +105,7 @@ class App extends Component {
         <FilterInfo
           selectedFilter={selectedFilter}
           filterLength={markers.length}
-        />
-        
+        />  
       </div>
     )
   }
