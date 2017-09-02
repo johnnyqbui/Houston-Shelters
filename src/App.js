@@ -32,8 +32,8 @@ class App extends Component {
         address: address,
         city: city,
         phone: phone,
-        pets: pets,
         accepting: accepting,
+        pets: pets,
         location: {
           lat: latitude ? parseFloat(latitude) : 0,
           lng: longitude ? parseFloat(longitude) : 0

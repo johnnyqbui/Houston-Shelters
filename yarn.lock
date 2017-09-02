@@ -3827,12 +3827,6 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-leaflet-routing-machine@^3.2.5:
-  version "3.2.5"
-  resolved "https://registry.yarnpkg.com/leaflet-routing-machine/-/leaflet-routing-machine-3.2.5.tgz#04ca8ff310458184f0d76998f2f85d66ed67bb03"
-  dependencies:
-    osrm-text-instructions "^0.1.0"
-
 leaflet@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.2.0.tgz#fd5d93d9cb00091f5f8a69206d0d6744c1c82697"
@@ -4454,10 +4448,6 @@ osenv@^0.1.0, osenv@^0.1.4:
   dependencies:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
-
-osrm-text-instructions@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/osrm-text-instructions/-/osrm-text-instructions-0.1.0.tgz#b64843afba20e691a1255e8597e2a891c3ddcd5a"
 
 p-finally@^1.0.0:
   version "1.0.0"

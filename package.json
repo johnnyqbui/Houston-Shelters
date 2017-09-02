@@ -4,9 +4,7 @@
   "private": true,
   "dependencies": {
     "gh-pages": "^1.0.0",
-    "google-translate": "^2.0.5",
     "leaflet": "^1.2.0",
-    "leaflet-routing-machine": "^3.2.5",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
@@ -21,7 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "yarn build&&gh-pages -d build"
+    "deploy:prod": "yarn build&&gh-pages -d build",
+    "deploy:stage":"yarn build&&surge"
   },
   "homepage": "http://github.com/Houston-Shelters/"
 }

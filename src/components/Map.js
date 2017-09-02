@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
 import blueMarker from '../images/marker-icon-blue.png';
@@ -26,78 +26,101 @@ const greyMarkerIcon = new L.icon({
     popupAnchor: [0, -28]
 })
 
-const Lmap = (props) => {
-  const { markers, viewport, currentLocation, toggledInfo, onToggleInfo } = props;
-  const checkToggleInfo = () => { window.innerWidth < 600 && ( onToggleInfo() ) }
+class Lmap extends Component {
 
-  const openInfo = (marker) => {
-    let obj = document.getElementById('nodeinfo')
-    this.infobox.handleMarker(marker);
-    obj.classList.add("open");
+	state = {
+		viewport: {},
+		bounds: []
+	}
 
-  }
+	componentDidMount() {
+		this.setState({
+			viewport: this.props.viewport,
+		})
+	}
 
-  const closeInfo = (marker) => {
-    let obj = document.getElementById('nodeinfo')
-    obj.classList.remove("open");
-  }
+	checkToggleInfo = () => {
+		window.innerWidth < 600 && ( this.props.onToggleInfo() )
+	}
 
-  return (
-    <div className='map-container'>
-    <InfoBox className='info-bar' id='nodeinfo' ref={ref => (this.infobox = ref)}/>
-    <Map className='map' viewport={ viewport } zoomControl={false} ref={ref => (this.map = ref)}>
-      <TileLayer
-        url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
+  	centerToMarker = (location) => {
+  		this.setState({
+  			bounds: location
+  		})
+  	}
 
-      <ZoomControl position={toggledInfo ? 'bottomright' : 'topright'} />
-      {currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
-      {markers.map((marker, index) => {
-        const {
-          county,
-          name,
-          address,
-          city,
-          phone,
-          location,
-          accepting,
-          pets,
-          supplyNeeds,
-          volunteerNeeds,
-          notes,
-          lastUpdated } = marker;
-        let icon;
-        accepting ? icon = blueMarkerIcon : icon = greyMarkerIcon
+  	resetBounds = () => {
+  		this.setState({
+  			bounds: []
+  		})
+  	}
+
+	openInfo = (marker) => {
+		let obj = document.getElementById('nodeinfo')
+		this.infobox.handleMarker(marker);
+		obj.classList.add("open");
+	}
+
+	closeInfo = (marker) => {
+		let obj = document.getElementById('nodeinfo')
+		obj.classList.remove("open");
+	}
+
+	render() {
+		const { viewport, bounds } = this.state;
+		const { markers, currentLocation, toggledInfo, onToggleInfo } = this.props;
 		return (
-			<Marker
-			  icon={icon}
-			  key={index}
-			  position={[location.lat, location.lng]}
-			  >
-			  <Popup
-          onOpen={() => {
-            openInfo(marker);
-            checkToggleInfo();
-          }}
-          onClose={() => {
-            closeInfo(marker);
-            checkToggleInfo();
-          }}>
-			    <div style={{fontSize: '14px'}}>
-			      <p><span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
-			        <span style={{fontWeight: 'bold', fontSize: '16px'}}>{name}</span><br/>
-			        {address}<br/>
-			        {city}<br/>
-			        {phone ? <a className='popupPhone' href={`tel:${phone.replace(/\D/g,'')}`}>Tap to Call</a> : 'No Phone Number'}<br/></p>
-			    </div>
-			  </Popup>
-			</Marker>
-		)
-      })}
-    </Map>
-    </div>
-  )
+		    <div className='map-container'>
+		    <InfoBox className='info-bar' id='nodeinfo' ref={ref => (this.infobox = ref)}/>
+		    <Map className='map' viewport={ viewport } center={ bounds } zoomControl={false} ref={ref => (this.map = ref)}>
+		      <TileLayer
+		        url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
+		        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		      />
+
+		      <ZoomControl position={toggledInfo ? 'bottomright' : 'topright'} />
+		      {currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
+		      {markers.map((marker, index) => {
+		        const {
+		          county,
+		          name,
+		          address,
+		          city,
+		          phone,
+		          accepting,
+		          location } = marker;
+		        let icon;
+		        accepting ? icon = blueMarkerIcon : icon = greyMarkerIcon
+					return (
+					<Marker
+						icon={icon}
+						key={index}
+						position={[location.lat, location.lng]}>
+						<Popup
+						onOpen={() => {
+							this.centerToMarker(location);
+							this.openInfo(marker);
+							this.checkToggleInfo();
+						}}
+						onClose={() => {
+							this.closeInfo(marker);
+							this.checkToggleInfo();
+						}}>
+						    <div style={{fontSize: '14px'}}>
+						      <p><span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
+						        <span style={{fontWeight: 'bold', fontSize: '16px'}}>{name}</span><br/>
+						        {address}<br/>
+						        {city}<br/>
+						        {phone ? <a className='popupPhone' href={`tel:${phone.replace(/\D/g,'')}`}>Tap to Call</a> : 'No Phone Number'}<br/></p>
+						    </div>
+						</Popup>
+					</Marker>
+				)
+		      })}
+		    </Map>
+		    </div>
+	  	)
+	}
 }
 
 export default Lmap
