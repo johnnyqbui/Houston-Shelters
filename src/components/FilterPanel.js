@@ -11,6 +11,8 @@ class FilterPanel extends Component {
       acceptingPeople: true,
       notAccepting: false,
       pets: false,
+      supplyNeeds: false,
+      volunteerNeeds: false,
       updated: false
     }
   }
@@ -18,34 +20,52 @@ class FilterPanel extends Component {
   componentDidMount() {
     // Show Panel on page load if not on mobile
     window.innerWidth > 600 && ( this.handleTogglePanel() )
-
   }
 
+
   handleFilter = (value, origMarkers) => {
-    const { onClickFilter, markers } = this.props;
+
+    const { onClickFilter } = this.props;
+    let allShelters = value === "All Shelters";
+    let acceptingPeople = value === "Accepting People";
+    let notAccepting = value === "Not Accepting People";
+    let pets = value === "Accepting Pets";
+    let supplyNeeds = value === "Need Supplies";
+    let volunteerNeeds = value === "Need Volunteers";
+    let updated = value.indexOf('Updated') > -1;
 
     this.setState({
       selectedFilter: {
-        allShelters: value === "All Shelters",
-        acceptingPeople: value === "Accepting People",
-        notAccepting: value === "Not Accepting People",
-        pets: value === "Accepting Pets",
-        updated: value.indexOf('Updated') > -1
+        allShelters: allShelters,
+        acceptingPeople: acceptingPeople,
+        notAccepting: notAccepting,
+        pets: pets,
+        supplyNeeds: supplyNeeds,
+        volunteerNeeds: volunteerNeeds,
+        updated: updated
       }
     })
 
-    let filtered;
-    value === "All Shelters" && (filtered = origMarkers)
-    value === "Accepting People" && (filtered = origMarkers.filter(marker => (marker.accepting)))
-    value === "Not Accepting People" && (filtered = origMarkers.filter(marker => (!marker.accepting)))
-    value === "Accepting Pets" && (filtered = origMarkers.filter(marker => (marker.pets.length > 0 && marker.pets.match(/yes/ig))))
-    value.indexOf('Updated') > -1 && (filtered = origMarkers.filter(marker => {
-      if (marker.lastUpdated.length > 0) {
-        const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(12, 'hours').format()
-        const timeAfter = moment().format()
-        return replaceLastUpdated > timeAfter && (marker)
-      }
-    }))
+    let filtered = origMarkers.filter(marker => {
+      if (allShelters) {return origMarkers}
+
+        else if (acceptingPeople) {return marker.accepting}
+
+          else if (notAccepting) {return !marker.accepting}
+
+            else if (pets) {return marker.pets.length > 0 && marker.pets.match(/yes/ig)}
+
+              else if (supplyNeeds) {return marker.supplyNeeds && !marker.supplyNeeds.match(/no\s/ig)}
+
+                else if (volunteerNeeds) {return marker.volunteerNeeds && !marker.volunteerNeeds.match(/no\s/ig)}
+
+                  else if (updated) {
+                    if (marker.lastUpdated.length > 0) {
+                    const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(12, 'hours').format()
+                    const timeAfter = moment().format()
+                    return replaceLastUpdated > timeAfter && (marker)
+                  }}
+    })
 
     onClickFilter(value, filtered)
 
@@ -74,6 +94,8 @@ class FilterPanel extends Component {
       acceptingPeople,
       notAccepting,
       pets,
+      supplyNeeds,
+      volunteerNeeds,
       updated } = selectedFilter;
       return (
         <div className={ toggledInfo ? 'hideTopButtons filterComponent' : 'filterComponent' }>
@@ -104,7 +126,16 @@ class FilterPanel extends Component {
               value='Updated within the last 12 hours'
               className={ updated ? 'blueButton selected' : 'blueButton' }
               onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
-            <ExternalLinks />
+            <input
+              type='button'
+              value='Need Supplies'
+              className={ supplyNeeds ? 'blueButton selected' : 'blueButton' }
+              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
+            <input
+              type='button'
+              value='Need Volunteers'
+              className={ volunteerNeeds ? 'blueButton selected' : 'blueButton' }
+              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
           </div>
         </div>
       )
