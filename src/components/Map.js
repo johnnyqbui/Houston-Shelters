@@ -36,6 +36,7 @@ const Lmap = (props) => {
       popupAnchor: [0, -45],
     });
 
+
     if (accepting === 'TRUE') {
       return greenIcon;
     } else if (accepting === 'FALSE') {

@@ -132,7 +132,7 @@ h1, h2, h3, h4 {
 	bottom:-40%;
 	position:absolute;
 	background-color:#FFF;
-	z-index:100;
+	z-index:50;
 	transition: 0.2s bottom;
 	padding:5px 10px;
 
@@ -148,6 +148,30 @@ h1, h2, h3, h4 {
 	bottom:0px;
 	box-shadow: 0px 0px 20px #666;
 }
+
+.info-button {
+	right:10px;
+	top:10px;
+	position:absolute;
+
+}
+
+.info-links {
+	position:absolute;
+	top:50px;
+	left:100%;
+	width:100%;
+	background-color:#FFF;
+	transition:0.2s all;
+	height:100%;
+	z-index:100;
+	padding:10px;
+}
+
+.info-links.open {
+	left:0%;
+}
+
 
 /*****BUTTONS*****/
 
@@ -168,11 +192,9 @@ h1, h2, h3, h4 {
 .geoLocateButton {
     position: absolute;
     z-index: 3;
-    top: 10px;
-    left: 50px;
-    display: flex;
-    width: 250px;
-	height: 50px;
+    top:54px;
+    right: 10px;
+	height: 40px;
     background: rgba(100, 100, 100, .8);
     justify-content: center;
     align-items: center;
@@ -232,13 +254,14 @@ input {
 		bottom:-30%;
 	}
 
+	/*
 	.geoLocateButton {
 		top: 60px;
 		right: 20px;
 		left: auto;
 		height: 50px;
 		width: 260px;
-	}
+	}*/
 
 	.geoLocateButton input {
 	    font-size: 16px;

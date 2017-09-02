@@ -114,6 +114,11 @@ class App extends Component {
             viewport={viewport}
             currentMarker={currentMarker}
           />
+          <GeoLocate
+            currentLocation={ currentLocation }
+            onClickLocate={ this.handleLocate }
+          />
+
           <AddAShelter/>
           <VolunteerShelterLink/>
         </MainUi>

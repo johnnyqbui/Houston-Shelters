@@ -45,7 +45,7 @@ class InfoBox extends Component {
   }
 
   getDirectionsLink = (a) => {
-    return "#todomapaddress";
+    return "https://www.google.com/maps/place/" +encodeURI(a);
   }
 
   checkAccepting = (accepting) => {
@@ -80,7 +80,7 @@ class InfoBox extends Component {
         <div>
           <h2>{m.name}</h2>
           {phone}
-          <h4><a href={this.getDirectionsLink(m.address)}>Get Directions</a></h4>
+          <h4><a href={this.getDirectionsLink(m.address)} target="_blank">Get Directions</a></h4>
           <br/>
           <p><span style={{fontWeight: 'bold'}}>Updated:</span> {m.lastUpdated}</p>
             <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {this.checkAccepting(m.accepting)}</p>
