@@ -47,11 +47,12 @@ const Lmap = (props) => {
           location,
           accepting,
           pets,
+          supplyNeeds,
+          volunteerNeeds,
           notes,
           lastUpdated } = marker;
         let icon;
         accepting ? icon = blueMarkerIcon : icon = greyMarkerIcon
-
 		return (
 			<Marker
 			  icon={icon}
@@ -67,6 +68,8 @@ const Lmap = (props) => {
 			        Phone: {phone ? <a className='popupPhone' href={`tel:${phone}`}>{phone}</a> : 'None'}<br/></p>
 			      <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }<br/>
 			        <span style={{fontWeight: 'bold'}}>Pets?</span> { pets ? pets : 'Unkonwn' }<br/><br/>
+			        <span style={{fontWeight: 'bold'}}>Supplies?</span> { supplyNeeds ? supplyNeeds : '' }<br/>
+			        <span style={{fontWeight: 'bold'}}>Volunteer?</span> { volunteerNeeds ? volunteerNeeds : '' }<br/><br/>
 			        <span style={{fontWeight: 'bold'}}>Notes:</span> {notes}<br/><br/>
 			        <span style={{fontWeight: 'bold'}}>Lat:</span> {location.lat},
 			        <span style={{fontWeight: 'bold'}}> Lng:</span> {location.lng}<br/>

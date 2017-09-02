@@ -24,7 +24,7 @@ class App extends Component {
   async componentDidMount() {
     const shelterData = await SheltersApi.getAll();
     const allMarkerData = shelterData.shelters.map((shelters) => {
-      const { county, shelter, address, city, phone, pets, accepting, latitude, longitude, last_updated, notes } = shelters;
+      const { county, shelter, address, city, phone, pets, accepting, latitude, longitude, last_updated, supply_needs, volunteer_needs, notes } = shelters;
       return {
         county: county,
         name: shelter,
@@ -38,6 +38,8 @@ class App extends Component {
           lng: longitude ? parseFloat(longitude) : 0
         },
         lastUpdated: last_updated,
+        supplyNeeds:  supply_needs,
+        volunteerNeeds: volunteer_needs,
         notes: notes,
         showInfo: false
       }
