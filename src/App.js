@@ -119,8 +119,6 @@ class App extends Component {
             onClickLocate={ this.handleLocate }
           />
 
-          <AddAShelter/>
-          <VolunteerShelterLink/>
         </MainUi>
       </div>
     )
