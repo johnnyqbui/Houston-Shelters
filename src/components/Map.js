@@ -38,7 +38,6 @@ const Lmap = (props) => {
           volunteerNeeds,
           lastUpdated } = marker;
         let myIcon;
-        console.log(accepting);
         switch(marker.accepting){
           case 'TRUE':
           myIcon = L.icon({

@@ -4,11 +4,13 @@
   "private": true,
   "dependencies": {
     "gh-pages": "^1.0.0",
+    "google-translate": "^2.0.5",
     "leaflet": "^1.2.0",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-intl": "^2.3.0",
     "react-leaflet": "^1.6.4"
   },
   "devDependencies": {
