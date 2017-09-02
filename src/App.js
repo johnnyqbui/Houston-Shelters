@@ -105,7 +105,10 @@ class App extends Component {
           updateFilterText={this.updateFilterText.bind(this)}
         /> }
 
-
+          <GeoLocate
+            currentLocation={ currentLocation }
+            onClickLocate={ this.handleLocate }
+          />
         <Lmap
           currentLocation={ currentLocation }
           markers={ markers }

@@ -35,6 +35,7 @@ const Lmap = (props) => {
     let obj = document.getElementById('nodeinfo')
     this.infobox.handleMarker(marker);
     obj.classList.add("open");
+
   }
 
   const closeInfo = (marker) => {
