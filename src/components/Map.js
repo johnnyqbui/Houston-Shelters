@@ -1,6 +1,7 @@
 import React from 'react';
 import {Map, Marker, Popup, TileLayer, CircleMarker} from 'react-leaflet';
 import {Icon} from 'leaflet'
+import InfoBox from './InfoBox'
 
 const Lmap = (props) => {
   const {markers, viewport, currentLocation, currentMarker} = props;
@@ -14,12 +15,13 @@ const Lmap = (props) => {
       return 'Did Not Respond/Unknown'
     }
   }
-  const checkAcceptingIcon = (accepting) => {
+
+  const getIcon = (accepting) => {
     let redIcon = new Icon({
       iconUrl: '../images/marker-icon-red.png',
       iconSize: [25, 41],
       iconAnchor: [12, 41],
-      popupAnchor: [12, -10],
+      popupAnchor: [0, -45],
     });
     let greenIcon = new Icon({
       iconUrl: '../images/marker-icon-green.png',
@@ -27,14 +29,11 @@ const Lmap = (props) => {
       iconAnchor: [12, 41],
       popupAnchor: [0, -45],
     });
-
-
-
     let greyIcon = new Icon({
       iconUrl: '../images/marker-icon-grey.png',
       iconSize: [25, 41],
       iconAnchor: [12, 41],
-      popupAnchor: [12, -10],
+      popupAnchor: [0, -45],
     });
 
     if (accepting === 'TRUE') {
@@ -59,61 +58,37 @@ const Lmap = (props) => {
   }
 
   const openInfo = (marker) => {
-    // this is NOT the react way to do things
-    // but I'm learning react on the fly and don't understand the binding mechanism
     console.log("opening");
+
+    console.log(this.map);
+    console.log(marker.location);
+    console.log(viewport.center);
+
+    this.setCenter(marker);
+
     let obj = document.getElementById('nodeinfo')
-    let result = "";
-
-    result += "<strong>" + marker.name + "<br>" + marker.address + "</strong><br><br>";
-    result += "<table>";
-    result += "<tr><td>Accepting People?</td><td>" + checkAccepting(marker.accepting) + "</td></tr>";
-    result += "<tr><td>Pets OK?</td><td>" + (currentMarker.pets ? currentMarker.pets : 'Unknown') + "</td></tr></table>";
-
-
-    obj.innerHTML = result;
-
-    /*
-    props.currentMarker.county = marker.county;
-
-    currentMarker.accepting = marker.accepting;
-    currentMarker.pets = marker.pets;
-    currentMarker.notes = marker.notes;
-    */
-
-
-    console.log(marker.county);
-
+    this.infobox.handleMarker(marker);
     obj.classList.add("open");
-
-
-
   }
 
   const closeInfo = (marker) => {
     console.log("closing!" + marker.accepting);
     let obj = document.getElementById('nodeinfo')
     obj.classList.remove("open");
+  }
 
+  this.setCenter = (m) => {
+    viewport.center = {lat:m.location.lat, lng:m.location.lng};
+  }
 
+  this.btnClick = () => {
+    this.infobox.handleTest();
   }
 
   return (
     <div className='map-container'>
-      <div id='nodeinfo' className='info-bar'>
-        <p><span style={{fontWeight: 'bold'}}>County:</span> {props.currentMarker.county}<br/><br/>
-        </p>
-        <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {checkAccepting(props.currentMarker.accepting)}<br/>
-          <span style={{fontWeight: 'bold'}}>Pets?</span> {currentMarker.pets ? currentMarker.pets : 'Unknown'}<br/><br/>
-          <span style={{fontWeight: 'bold'}}>Notes:</span> {currentMarker.notes}<br/>
-          <span style={{fontWeight: 'bold'}}>Supply Needs:</span> {currentMarker.supplyNeeds}<br/>
-          <span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {currentMarker.volunteerNeeds}<br/><br/>
-          <span style={{fontWeight: 'bold'}}>Lat:</span> {currentMarker.location ? currentMarker.location.lat : ''},
-          <span style={{fontWeight: 'bold'}}> Lng:</span> {currentMarker.location ? currentMarker.location.lng : ''}<br/>
-          <span style={{fontWeight: 'bold'}}>Last Updated:</span> {currentMarker.lastUpdated}<br/><br/>
-        </p>
-      </div>
-      <Map className='map' viewport={viewport} animate={true}>
+      <InfoBox className='info-bar' id='nodeinfo' ref={ref => (this.infobox = ref)}/>
+      <Map className='map' viewport={viewport} animate={true} ref={ref => (this.map = ref)}>
         <TileLayer
           url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -138,11 +113,10 @@ const Lmap = (props) => {
             <Marker
               key={index}
               position={[location.lat, location.lng]}
-              icon={checkAcceptingIcon(accepting)}
+              icon={getIcon(accepting)}
             >
               <Popup
                 onOpen={() => {
-                  applyFilter(marker);
                   openInfo(marker);
                 }}
                 onClose={() => {
@@ -152,7 +126,6 @@ const Lmap = (props) => {
                   <p><span style={{fontWeight: 'bold'}}>{name}</span><br/>
                     {address}<br/>
                     {phone ? phone : 'No Phone Number'}</p>
-
                 </div>
               </Popup>
             </Marker>
