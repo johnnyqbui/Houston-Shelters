@@ -31,7 +31,6 @@ const Lmap = (props) => {
   const checkToggleInfo = () => { window.innerWidth < 600 && ( onToggleInfo() ) }
 
   const openInfo = (marker) => {
-    console.log("opening");
     let obj = document.getElementById('nodeinfo')
     this.infobox.handleMarker(marker);
     obj.classList.add("open");
@@ -39,14 +38,13 @@ const Lmap = (props) => {
   }
 
   const closeInfo = (marker) => {
-    console.log("closing!" + marker.accepting);
     let obj = document.getElementById('nodeinfo')
     obj.classList.remove("open");
   }
 
   return (
     <div className='map-container'>
-      <InfoBox className='info-bar' id='nodeinfo' ref={ref => (this.infobox = ref)}/>
+    <InfoBox className='info-bar' id='nodeinfo' ref={ref => (this.infobox = ref)}/>
     <Map className='map' viewport={ viewport } zoomControl={false} ref={ref => (this.map = ref)}>
       <TileLayer
         url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -88,19 +86,10 @@ const Lmap = (props) => {
           }}>
 			    <div style={{fontSize: '14px'}}>
 			      <p><span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
-			        <span style={{fontWeight: 'bold'}}>{name}</span><br/>
+			        <span style={{fontWeight: 'bold', fontSize: '16px'}}>{name}</span><br/>
 			        {address}<br/>
 			        {city}<br/>
-			        Phone: {phone ? <a className='popupPhone' href={`tel:${phone}`}>{phone}</a> : 'None'}<br/></p>
-			      <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }<br/>
-			        <span style={{fontWeight: 'bold'}}>Pets?</span> { pets ? pets : 'Unkonwn' }<br/><br/>
-			        <span style={{fontWeight: 'bold'}}>Supplies?</span> { supplyNeeds ? supplyNeeds : '' }<br/>
-			        <span style={{fontWeight: 'bold'}}>Volunteer?</span> { volunteerNeeds ? volunteerNeeds : '' }<br/><br/>
-			        <span style={{fontWeight: 'bold'}}>Notes:</span> {notes}<br/><br/>
-			        <span style={{fontWeight: 'bold'}}>Lat:</span> {location.lat},
-			        <span style={{fontWeight: 'bold'}}> Lng:</span> {location.lng}<br/>
-			        <span style={{fontWeight: 'bold'}}>Last Updated:</span> {lastUpdated}<br/><br/>
-			      </p>
+			        {phone ? <a className='popupPhone' href={`tel:${phone.replace(/\D/g,'')}`}>Tap to Call</a> : 'No Phone Number'}<br/></p>
 			    </div>
 			  </Popup>
 			</Marker>

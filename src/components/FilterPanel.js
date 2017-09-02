@@ -29,7 +29,7 @@ class FilterPanel extends Component {
     let allShelters = value === "All Shelters";
     let acceptingPeople = value === "Accepting People";
     let notAccepting = value === "Not Accepting People";
-    let pets = value === "Accepting Pets";
+    let pets = value === "Pets Allowed";
     let supplyNeeds = value === "Need Supplies";
     let volunteerNeeds = value === "Need Volunteers";
     let updated = value.indexOf('Updated') > -1;
@@ -118,7 +118,7 @@ class FilterPanel extends Component {
               onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
             <input
               type='button'
-              value='Accepting Pets'
+              value='Pets Allowed'
               className={ pets ? 'blueButton selected' : 'blueButton' }
               onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
             <input

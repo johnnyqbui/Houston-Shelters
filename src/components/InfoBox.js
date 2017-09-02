@@ -48,16 +48,6 @@ class InfoBox extends Component {
     return "https://www.google.com/maps/place/" +encodeURI(a);
   }
 
-  checkAccepting = (accepting) => {
-    if (accepting === 'TRUE') {
-      return 'Yes'
-    } else if (accepting === 'FALSE') {
-      return 'No'
-    } else {
-      return 'Did Not Respond/Unknown'
-    }
-  }
-
   render() {
     let m = this.state.currentMarker;
 
@@ -83,7 +73,7 @@ class InfoBox extends Component {
           <h4><a href={this.getDirectionsLink(m.address)} target="_blank">Get Directions</a></h4>
           <br/>
           <p><span style={{fontWeight: 'bold'}}>Updated:</span> {m.lastUpdated}</p>
-            <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {this.checkAccepting(m.accepting)}</p>
+            <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {m.accepting ? 'Yes' : 'No' }</p>
             <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {m.pets ? m.pets : 'Unknown'}</p>
             {notes}
             {supplyNeeds}
