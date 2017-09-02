@@ -1,9 +1,9 @@
-const api = "https://sheetsu.com/apis/v1.0/1d3a0d0e1b21/sheets"
+const api = "https://api.harveyneeds.org/api/v1/shelters"
 
 export const getAll = () =>
-  fetch(`${api}/Shelters`)
+  fetch(api)
     .then(res => res.json())
 
 export const search = (query) =>
-  fetch(`${api}/Shelters/search?${query}&ignore_case=false`)
+  fetch(`${api}/?${query}`)
     .then(res => res.json())

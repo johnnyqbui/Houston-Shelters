@@ -1,8 +1,459 @@
+/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in
+ *    IE on Windows Phone and in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers (opinionated).
+ */
+
+body {
+  margin: 0;
+}
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+article,
+aside,
+footer,
+header,
+nav,
+section {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in IE.
+ */
+
+figcaption,
+figure,
+main { /* 1 */
+  display: block;
+}
+
+/**
+ * Add the correct margin in IE 8.
+ */
+
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ */
+
+a {
+  background-color: transparent; /* 1 */
+  -webkit-text-decoration-skip: objects; /* 2 */
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57- and Firefox 39-.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Prevent the duplicate application of `bolder` by the next rule in Safari 6.
+ */
+
+b,
+strong {
+  font-weight: inherit;
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font style in Android 4.3-.
+ */
+
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Add the correct background and color in IE 9-.
+ */
+
+mark {
+  background-color: #ff0;
+  color: #000;
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+audio,
+video {
+  display: inline-block;
+}
+
+/**
+ * Add the correct display in iOS 4-7.
+ */
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Remove the border on images inside links in IE 10-.
+ */
+
+img {
+  border-style: none;
+}
+
+/**
+ * Hide the overflow in IE.
+ */
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers (opinionated).
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: sans-serif; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
+ *    controls in Android 4.
+ * 2. Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+html [type="button"], /* 1 */
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; /* 2 */
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * 1. Add the correct display in IE 9-.
+ * 2. Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  display: inline-block; /* 1 */
+  vertical-align: baseline; /* 2 */
+}
+
+/**
+ * Remove the default vertical scrollbar in IE.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10-.
+ * 2. Remove the padding in IE 10-.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in Edge, IE, and Firefox.
+ */
+
+details, /* 1 */
+menu {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Scripting
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+canvas {
+  display: inline-block;
+}
+
+/**
+ * Add the correct display in IE.
+ */
+
+template {
+  display: none;
+}
+
+/* Hidden
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10-.
+ */
+
+[hidden] {
+  display: none;
+}
+
+
+/*******MAIN CSS*******/
+
 .App {
     position: absolute;
+    overflow: hidden;
     width: 100%;
     height: 100%;
-    overflow: hidden;
 }
 
 .map {
@@ -16,106 +467,119 @@
     z-index: 3;
     top: 120px;
     left: 10px;
-    max-width: 300px;
-    height: calc(100% - 200px);
-    background: rgba(100, 100, 100, .85);
     overflow-y: scroll;
+    max-width: 300px;
+    height: calc(100% - 205px);
+    background: rgba(100, 100, 100, .85);
 }
 
 .filterPanel input {
-	white-space: normal;
-	vertical-align: top;
     font-size: 14px;
     width: 41%;
     height: 75px;
     margin: 10px;
     cursor: pointer;
+    transition: .3s;
+    vertical-align: top;
+    white-space: normal;
     color: white;
     border: none;
-    transition: .3s;
-}
-
-.closePanel {
-	left: -300px;
 }
 
 .filterPanel .selected {
-	background: rgb(20, 150, 250);
-	opacity: 1;
+    opacity: 1;
+    background: rgb(20, 150, 250);
+}
+
+.closePanel {
+    left: -300px;
+}
+
+.title {
+    font-size: 1.1em;
+    margin: 20px auto 5px;
+    text-align: center;
+    color: white;
 }
 
 .leaflet-container a.leaflet-popup-close-button {
-	right: 12px;
-	font: 40px/30px Tahoma, Verdana, sans-serif;
+    font: 40px/30px Tahoma, Verdana, sans-serif;
+    right: 12px;
 }
 
 .filterInfo {
+    font-size: 16px;
     position: absolute;
     z-index: 3;
     bottom: 5px;
-    left: 10px;
-	width: 280px;
-    color: white;
-    background: rgba(90, 90, 90, .9);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
     padding: 10px;
-    border-radius: .3rem;
-    font-size: 16px;
     text-align: center;
+    color: white;
+    border-radius: .3rem;
+    background: rgba(90, 90, 90, .9);
 }
 
 hr {
-	width: 200px;
-	margin: 20px auto;
+    width: 200px;
+    margin: 20px auto;
 }
 
 .externalLinkButton {
-	display: inline;
+    display: inline;
 }
+
 
 /*****BUTTONS*****/
 
 .leaflet-container .popupPhone {
-  background: rgb(20, 150, 250);
-  padding: 10px;
-  display: inline-block;
-  text-decoration: none;
-  color: white;
-  border-radius: .3rem;
+    display: inline-block;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: .3rem;
+    background: rgb(20, 150, 250);
 }
 
 .externalLinkButton a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .blueButton {
-	background: rgb(52, 111, 140);
-	opacity: .8;
+    opacity: .8;
+    background: rgb(52, 111, 140);
 }
 
 .redButton {
-	background: rgb(204, 45, 50);
+    background: rgb(204, 45, 50);
 }
 
 .purpleButton {
-	background: rgb(129, 82, 120);
+    background: rgb(129, 82, 120);
 }
 
 .greenButton {
-	background: rgb(20, 180, 70);
+    background: rgb(20, 180, 70);
+}
+
+.greyButton {
+    background: rgb(135, 135, 135);
 }
 
 .togglePanelButton {
-	position: absolute;
-	z-index: 3;
-	width: 250px;
-	height: 50px;
-	left: 10px;
-	top: 65px;
-	cursor: pointer;
-	color: white;
+    font-size: 1em;
+    position: absolute;
+    z-index: 3;
+    top: 65px;
+    left: 10px;
+    width: 250px;
+    height: 50px;
+    cursor: pointer;
+    color: white;
     border: none;
     background: rgb(90, 90, 90);
-    font-size: 1em;
 }
 
 .geoLocateButton {
@@ -125,246 +589,266 @@ hr {
     left: 10px;
     display: flex;
     width: 250px;
-	height: 50px;
+    height: 50px;
+    border-radius: .3rem;
     background: rgba(100, 100, 100, .8);
     justify-content: center;
     align-items: center;
-    border-radius: .3rem;
 }
 
 .geoLocateButton input {
-    height: 100%;
     width: 100%;
+    height: 100%;
     cursor: pointer;
     color: white;
     border: none;
     background: rgb(226, 70, 70);
 }
 
-.title {
-    font-size: 1.1em;
-    margin: 20px auto 5px;
-    color: white;
-    text-align: center;
-}
-
 input {
-	border-radius: .3rem;
+    border-radius: .3rem;
 }
 
 /*END BUTTONS*/
 
 .hideTopButtons {
-	display: none;
+    display: none;
 }
+
 
 /******Responsiveness*****/
 
 @media (min-width: 600px) {
+    .geoLocateButton {
+        right: 50px;
+        left: auto;
+    }
+    .geoLocateButton input {
+        font-size: 16px;
+    }
+    .togglePanelButton {
+        top: 10px;
+    }
+    .externalLinkButton {
+        display: inline;
+    }
+    .filterPanel {
+        top: 65px;
+        bottom: auto;
+        transition: .15s;
+        height: calc(100% - 150px);
+    }
+    .filterPanel .externalLinkButton input {
+        display: inline;
+        width: 41%;
+        height: 75px;
+        padding: 10px;
+        vertical-align: top;
+        white-space: normal;
+    }
+    .filterPanel input {
+        font-size: 16px;
+        font-size: 15px;
+        display: block;
+        width: 250px;
+        height: 50px;
+    }
+    .title {
+        font-size: 1.3em;
+        margin: 20px auto 10px;
+    }
+    .closePanel {
+        left: -300px;
+    }
+    .filterPanel .blueButton.selected {
+        margin-left: 25px;
+    }
 
-	.geoLocateButton {
-		right: 50px;
-		left: auto;
-	}
-
-	.geoLocateButton input {
-	    font-size: 16px;
-	}
-
-	.togglePanelButton {
-		top: 10px;
-	}
-
-	.externalLinkButton {
-		display: inline;
-	}
-
-	.filterPanel {
-	    top: 85px;
-	    bottom: auto;
-	    height: 75vh;
-	    transition: .15s;
-	}
-
-	.filterPanel .externalLinkButton input {
-		display: inline;
-		width: 41%;
-		height: 75px;
-		white-space: normal;
-    	vertical-align: top;
-    	padding: 10px;
-	}
-
-	.filterPanel input {
-		display: block;
-		font-size: 16px;
-	    width: 250px;
-	    height: 50px;
-	    font-size: 15px;
-	}
-	.title {
-	    font-size: 1.3em;
-	    margin: 20px auto 10px;
-	}
-	.closePanel {
-		left: -300px;
-	}
-
-	.filterPanel .selected {
-		margin-left: 25px;
-	}
-
-	.filterInfo {
-	    left: 10px;
-	}
+    .filterPanel .greyButton.selected {
+        margin-left: 25px;
+    }
 
 }
-
 
 
 /*Loading*/
 
 .sk-fading-circle {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(,-50%, -50%);
-  z-index: 10;
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translate(, -50%, -50%);
 }
 
 .sk-fading-circle .sk-circle {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .sk-fading-circle .sk-circle:before {
-  content: '';
-  display: block;
-  margin: 0 auto;
-  width: 15%;
-  height: 15%;
-  background-color: #333;
-  border-radius: 100%;
-  -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
-          animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
+    display: block;
+    width: 15%;
+    height: 15%;
+    margin: 0 auto;
+    content: '';
+    -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
+    animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
+    border-radius: 100%;
+    background-color: #333;
 }
+
 .sk-fading-circle .sk-circle2 {
-  -webkit-transform: rotate(30deg);
-      -ms-transform: rotate(30deg);
-          transform: rotate(30deg);
+    -webkit-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
 }
+
 .sk-fading-circle .sk-circle3 {
-  -webkit-transform: rotate(60deg);
-      -ms-transform: rotate(60deg);
-          transform: rotate(60deg);
+    -webkit-transform: rotate(60deg);
+    -ms-transform: rotate(60deg);
+    transform: rotate(60deg);
 }
+
 .sk-fading-circle .sk-circle4 {
-  -webkit-transform: rotate(90deg);
-      -ms-transform: rotate(90deg);
-          transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
 }
+
 .sk-fading-circle .sk-circle5 {
-  -webkit-transform: rotate(120deg);
-      -ms-transform: rotate(120deg);
-          transform: rotate(120deg);
+    -webkit-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+    transform: rotate(120deg);
 }
+
 .sk-fading-circle .sk-circle6 {
-  -webkit-transform: rotate(150deg);
-      -ms-transform: rotate(150deg);
-          transform: rotate(150deg);
+    -webkit-transform: rotate(150deg);
+    -ms-transform: rotate(150deg);
+    transform: rotate(150deg);
 }
+
 .sk-fading-circle .sk-circle7 {
-  -webkit-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-          transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
+
 .sk-fading-circle .sk-circle8 {
-  -webkit-transform: rotate(210deg);
-      -ms-transform: rotate(210deg);
-          transform: rotate(210deg);
+    -webkit-transform: rotate(210deg);
+    -ms-transform: rotate(210deg);
+    transform: rotate(210deg);
 }
+
 .sk-fading-circle .sk-circle9 {
-  -webkit-transform: rotate(240deg);
-      -ms-transform: rotate(240deg);
-          transform: rotate(240deg);
+    -webkit-transform: rotate(240deg);
+    -ms-transform: rotate(240deg);
+    transform: rotate(240deg);
 }
+
 .sk-fading-circle .sk-circle10 {
-  -webkit-transform: rotate(270deg);
-      -ms-transform: rotate(270deg);
-          transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
 }
+
 .sk-fading-circle .sk-circle11 {
-  -webkit-transform: rotate(300deg);
-      -ms-transform: rotate(300deg);
-          transform: rotate(300deg);
+    -webkit-transform: rotate(300deg);
+    -ms-transform: rotate(300deg);
+    transform: rotate(300deg);
 }
+
 .sk-fading-circle .sk-circle12 {
-  -webkit-transform: rotate(330deg);
-      -ms-transform: rotate(330deg);
-          transform: rotate(330deg);
+    -webkit-transform: rotate(330deg);
+    -ms-transform: rotate(330deg);
+    transform: rotate(330deg);
 }
+
 .sk-fading-circle .sk-circle2:before {
-  -webkit-animation-delay: -1.1s;
-          animation-delay: -1.1s;
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
 }
+
 .sk-fading-circle .sk-circle3:before {
-  -webkit-animation-delay: -1s;
-          animation-delay: -1s;
+    -webkit-animation-delay: -1s;
+    animation-delay: -1s;
 }
+
 .sk-fading-circle .sk-circle4:before {
-  -webkit-animation-delay: -0.9s;
-          animation-delay: -0.9s;
+    -webkit-animation-delay: -.9s;
+    animation-delay: -.9s;
 }
+
 .sk-fading-circle .sk-circle5:before {
-  -webkit-animation-delay: -0.8s;
-          animation-delay: -0.8s;
+    -webkit-animation-delay: -.8s;
+    animation-delay: -.8s;
 }
+
 .sk-fading-circle .sk-circle6:before {
-  -webkit-animation-delay: -0.7s;
-          animation-delay: -0.7s;
+    -webkit-animation-delay: -.7s;
+    animation-delay: -.7s;
 }
+
 .sk-fading-circle .sk-circle7:before {
-  -webkit-animation-delay: -0.6s;
-          animation-delay: -0.6s;
+    -webkit-animation-delay: -.6s;
+    animation-delay: -.6s;
 }
+
 .sk-fading-circle .sk-circle8:before {
-  -webkit-animation-delay: -0.5s;
-          animation-delay: -0.5s;
+    -webkit-animation-delay: -.5s;
+    animation-delay: -.5s;
 }
+
 .sk-fading-circle .sk-circle9:before {
-  -webkit-animation-delay: -0.4s;
-          animation-delay: -0.4s;
+    -webkit-animation-delay: -.4s;
+    animation-delay: -.4s;
 }
+
 .sk-fading-circle .sk-circle10:before {
-  -webkit-animation-delay: -0.3s;
-          animation-delay: -0.3s;
+    -webkit-animation-delay: -.3s;
+    animation-delay: -.3s;
 }
+
 .sk-fading-circle .sk-circle11:before {
-  -webkit-animation-delay: -0.2s;
-          animation-delay: -0.2s;
+    -webkit-animation-delay: -.2s;
+    animation-delay: -.2s;
 }
+
 .sk-fading-circle .sk-circle12:before {
-  -webkit-animation-delay: -0.1s;
-          animation-delay: -0.1s;
-}
-#google_translate_element{
-  position:absolute;
-  top:35px;
-  left:300px;
-  z-index: 1000;
+    -webkit-animation-delay: -.1s;
+    animation-delay: -.1s;
 }
 
 @-webkit-keyframes sk-circleFadeDelay {
-  0%, 39%, 100% { opacity: 0; }
-  40% { opacity: 1; }
+    0%,
+    39%,
+    100% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
 }
 
 @keyframes sk-circleFadeDelay {
-  0%, 39%, 100% { opacity: 0; }
-  40% { opacity: 1; }
+    0%,
+    39%,
+    100% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+}
+
+#google_translate_element {
+    position: absolute;
+    z-index: 1000;
+    top: 10px;
+    left: 10px;
 }

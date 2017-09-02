@@ -18,44 +18,37 @@ class App extends Component {
     },
     currentLocation: [],
     selectedFilter: 'Accepting People',
-    showStaging: false,
     toggledInfo: false
   }
 
   async componentDidMount() {
-    try {
-      const shelters = await SheltersApi.getAll();
-      const allShelterData = shelters.map((shelter) => {
-        const { County, Shelter, Address, City, Phone, Pets, Accepting, latitude, longitude, Last_updated, Notes } = shelter;
-        return {
-          county: County,
-          name: Shelter,
-          address: Address,
-          city: City,
-          phone: Phone,
-          pets: Pets,
-          accepting: Accepting,
-          location: {
-            lat: latitude ? parseFloat(latitude) : 0,
-            lng: longitude ? parseFloat(longitude) : 0
-          },
-          lastUpdated: Last_updated,
-          notes: Notes,
-          showInfo: false
-        }
-      });
+    const shelterData = await SheltersApi.getAll();
+    const allMarkerData = shelterData.shelters.map((shelters) => {
+      const { county, shelter, address, city, phone, pets, accepting, latitude, longitude, last_updated, notes } = shelters;
+      return {
+        county: county,
+        name: shelter,
+        address: address,
+        city: city,
+        phone: phone,
+        pets: pets,
+        accepting: accepting,
+        location: {
+          lat: latitude ? parseFloat(latitude) : 0,
+          lng: longitude ? parseFloat(longitude) : 0
+        },
+        lastUpdated: last_updated,
+        notes: notes,
+        showInfo: false
+      }
+    });
 
-      this.setState({
-        isLoading: false,
-        OGMarkers: allShelterData,
-        // Accepting shelters set to default
-        markers: allShelterData.filter(marker => (marker.accepting === 'TRUE')),
-        showStaging: allShelterData.filter(marker => (marker.accepting.indexOf('Staging') > -1))
-      });
-    }
-    catch (error) {
-      console.log("Error", error);
-    }
+    this.setState({
+      isLoading: false,
+      OGMarkers: allMarkerData,
+      // Accepting shelters set to default
+      markers: allMarkerData.filter(marker => (marker.accepting)),
+    });
   }
 
   handleLocate = (currentLocation) => {
@@ -68,7 +61,7 @@ class App extends Component {
     })
   }
 
-  handleFilteredList = (filteredMarkers, selectedFilter) => {
+  handleFilteredList = (selectedFilter, filteredMarkers) => {
     this.setState({
       markers: filteredMarkers,
       selectedFilter: selectedFilter
@@ -82,13 +75,13 @@ class App extends Component {
   }
 
   render() {
-    const { isLoading, OGMarkers, markers, viewport, currentLocation, selectedFilter, showStaging, toggledInfo } = this.state;
+    const { isLoading, OGMarkers, markers, viewport, currentLocation, selectedFilter, toggledInfo } = this.state;
     return (
       <div className="App">
         { isLoading ? <LoadingIcon /> : ''}
-        { isLoading ? '' : <FilterPanel
+        { isLoading ? '' :
+        <FilterPanel
           OGMarkers={ OGMarkers }
-          markers={ markers }
           toggledInfo={ toggledInfo }
           onClickFilter={ this.handleFilteredList }
         /> }
@@ -102,14 +95,12 @@ class App extends Component {
           currentLocation={ currentLocation }
           markers={ markers }
           viewport={ viewport }
-          selectedFilter={ selectedFilter }
           toggledInfo={ toggledInfo }
           onToggleInfo={ this.handleToggleInfo }
         />
         <FilterInfo
           selectedFilter={ selectedFilter }
           filterLength={ markers.length }
-          showStaging={ showStaging }
         />
       </div>
     )
