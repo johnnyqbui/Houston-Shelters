@@ -49,7 +49,7 @@ class Lmap extends Component {
 		return (
 			<Map
 			    className='map'
-			    panTo={ bounds }
+			    center={ bounds }
 			    viewport={ viewport }
 			    zoomControl={false}
 			    onClick={ onClosePanel }
