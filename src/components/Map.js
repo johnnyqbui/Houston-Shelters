@@ -4,7 +4,6 @@ import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-
 import blueMarker from '../images/marker-icon-blue.png';
 import greyMarker from '../images/marker-icon-grey.png';
 import shadowMarker from '../images/marker-shadow.png'
-import InfoBox from './InfoBox'
 
 const blueMarkerIcon = new L.icon({
 	iconUrl: blueMarker,
@@ -29,18 +28,7 @@ const greyMarkerIcon = new L.icon({
 class Lmap extends Component {
 
 	state = {
-		viewport: {},
 		bounds: []
-	}
-
-	componentDidMount() {
-		this.setState({
-			viewport: this.props.viewport,
-		})
-	}
-
-	checkToggleInfo = () => {
-		window.innerWidth < 600 && ( this.props.onToggleInfo() )
 	}
 
   	centerToMarker = (location) => {
@@ -55,40 +43,33 @@ class Lmap extends Component {
   		})
   	}
 
-	openInfo = (marker) => {
-		let obj = document.getElementById('nodeinfo')
-		this.infobox.handleMarker(marker);
-		obj.classList.add("open");
-	}
-
-	closeInfo = (marker) => {
-		let obj = document.getElementById('nodeinfo')
-		obj.classList.remove("open");
-	}
-
 	render() {
-		const { viewport, bounds } = this.state;
-		const { markers, currentLocation, toggledInfo, onToggleInfo } = this.props;
+		const { bounds } = this.state;
+		const { markers, currentLocation, viewport, onToggleInfo, onTogglePanel, onClosePanel } = this.props;
 		return (
-		    <div className='map-container'>
-		    <InfoBox className='info-bar' id='nodeinfo' ref={ref => (this.infobox = ref)}/>
-		    <Map className='map' viewport={ viewport } center={ bounds } zoomControl={false} ref={ref => (this.map = ref)}>
+			<Map
+			    className='map'
+			    viewport={ viewport }
+			    center={ bounds }
+			    zoomControl={false}
+			>
 		      <TileLayer
 		        url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
 		        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 		      />
 
-		      <ZoomControl position={toggledInfo ? 'bottomright' : 'topright'} />
+		      <ZoomControl position= 'bottomright' />
 		      {currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
 		      {markers.map((marker, index) => {
 		        const {
 		          county,
-		          name,
+		          shelter,
 		          address,
 		          city,
 		          phone,
 		          accepting,
 		          location } = marker;
+		        const concatAddress = encodeURI(`${address} ${city}`)
 		        let icon;
 		        accepting ? icon = blueMarkerIcon : icon = greyMarkerIcon
 					return (
@@ -97,28 +78,29 @@ class Lmap extends Component {
 						key={index}
 						position={[location.lat, location.lng]}>
 						<Popup
-						onOpen={() => {
-							this.centerToMarker(location);
-							this.openInfo(marker);
-							this.checkToggleInfo();
-						}}
-						onClose={() => {
-							this.closeInfo(marker);
-							this.checkToggleInfo();
-						}}>
-						    <div style={{fontSize: '14px'}}>
-						      <p><span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
-						        <span style={{fontWeight: 'bold', fontSize: '16px'}}>{name}</span><br/>
+							onOpen={() => {
+								this.centerToMarker(location);
+								onToggleInfo(marker)
+								onClosePanel()
+							}}
+							onClose={() => {
+								onToggleInfo(marker)
+							}}>
+						    <div className='popupInfo' style={{fontSize: '14px'}}>
+						      	<span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
+						        <span style={{fontWeight: 'bold', fontSize: '16px'}}>{shelter}</span><br/>
 						        {address}<br/>
 						        {city}<br/>
-						        {phone ? <a className='popupPhone' href={`tel:${phone.replace(/\D/g,'')}`}>Tap to Call</a> : 'No Phone Number'}<br/></p>
+						        {phone && (
+						        	<a className='popupButton' href={`tel:${phone.replace(/\D/g,'')}`}>Tap to Call</a> : ''
+						        )}
+						        {<a className='popupButton' href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>}
 						    </div>
 						</Popup>
 					</Marker>
 				)
 		      })}
 		    </Map>
-		    </div>
 	  	)
 	}
 }

@@ -1,34 +1,51 @@
 import React, { Component } from 'react';
 import './App.css';
-import MainUi from './components/MainUi'
+import TopNavBar from './components/TopNavBar'
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
 import FilterPanel from './components/FilterPanel';
 import FilterInfo from './components/FilterInfo';
 import LoadingIcon from './components/LoadingIcon';
+import InfoBox from './components/InfoBox'
+
 import * as SheltersApi from './utils/SheltersApi';
 
 class App extends Component {
   state = {
+    isActive: false,
     isLoading: true,
-    OGMarkers: [],
     markers: [],
+    filteredMarkers: [],
     viewport: {
       center: [29.760427, -95.369803],
       zoom: 9
     },
     currentLocation: [],
     selectedFilter: 'Accepting People',
+    selectedMarker: {},
     toggledInfo: false
   }
 
   async componentDidMount() {
     const shelterData = await SheltersApi.getAll();
     const allMarkerData = shelterData.shelters.map((shelters) => {
-      const { county, shelter, address, city, phone, pets, accepting, latitude, longitude, last_updated, supply_needs, volunteer_needs, notes } = shelters;
+      const { county,
+        shelter,
+        address,
+        city,
+        phone,
+        cleanPhone,
+        pets,
+        accepting,
+        latitude,
+        longitude,
+        last_updated,
+        supply_needs,
+        volunteer_needs,
+        notes } = shelters;
       return {
         county: county,
-        name: shelter,
+        shelter: shelter,
         address: address,
         city: city,
         phone: phone,
@@ -48,16 +65,17 @@ class App extends Component {
 
     this.setState({
       isLoading: false,
-      OGMarkers: allMarkerData,
+      markers: allMarkerData,
       // Accepting shelters set to default
-      markers: allMarkerData.filter(marker => (marker.accepting)),
+      filteredMarkers: allMarkerData.filter(marker => (marker.accepting)),
     });
+  }
 
-    let update = {
-      filterText : "Accepting People",
-      filterCount : this.state.markers.length
-    }
-    this.updateFilterText(update)
+  handleFilteredList = (selectedFilter, filteredMarkers) => {
+    this.setState({
+      filteredMarkers: filteredMarkers,
+      selectedFilter: selectedFilter
+    })
   }
 
   handleLocate = (currentLocation) => {
@@ -70,59 +88,76 @@ class App extends Component {
     })
   }
 
-  handleFilteredList = (selectedFilter, filteredMarkers) => {
+  handleClosePanel = () => {
     this.setState({
-      markers: filteredMarkers,
-      selectedFilter: selectedFilter
+      isActive: false
     })
   }
 
-  handleToggleInfo = () => {
+  handleTogglePanel = () => {
     this.setState({
+      isActive: !this.state.isActive
+    })
+  }
+
+  handleToggleInfo = (marker) => {
+    this.setState({
+      selectedMarker: marker,
       toggledInfo: !this.state.toggledInfo
     })
   }
 
-  handleFilterToggle = () => {
-    this.filters.handleTogglePanel();
-  }
-
-  updateFilterText = (update) => {
-    update.filterCount = this.state.markers.length
-    this.mainUi.updateFilterText(update);
-  }
-
   render() {
-    const { isLoading, OGMarkers, markers, viewport, currentLocation, selectedFilter, toggledInfo } = this.state;
+    const {
+      isActive,
+      isLoading,
+      markers,
+      filteredMarkers,
+      viewport,
+      currentLocation,
+      selectedFilter,
+      selectedMarker,
+      toggledInfo } = this.state;
     return (
       <div className="App">
-        <MainUi filterToggle={this.handleFilterToggle.bind(this)} ref={(ref) => { this.mainUi = ref }}>
-        { isLoading ? <LoadingIcon /> : ''}
-        { isLoading ? '' :
-        <FilterPanel
-          OGMarkers={ OGMarkers }
-          toggledInfo={ toggledInfo }
-          onClickFilter={ this.handleFilteredList }
-          ref= {(ref) => { this.filters = ref }}
-          updateFilterText={this.updateFilterText.bind(this)}
-        /> }
 
-          <GeoLocate
-            currentLocation={ currentLocation }
-            onClickLocate={ this.handleLocate }
+        <TopNavBar />
+
+        { isLoading && (<LoadingIcon />)}
+        { !isLoading && (
+          <FilterPanel
+            isActive={ isActive }
+            origMarkers={ markers }
+            toggledInfo={ toggledInfo }
+            onTogglePanel={ this.handleTogglePanel }
+            onClickFilter={ this.handleFilteredList }
           />
+        )}
+
+        <GeoLocate
+          currentLocation={ currentLocation }
+          onClickLocate={ this.handleLocate }
+        />
+
         <Lmap
           currentLocation={ currentLocation }
-          markers={ markers }
+          markers={ filteredMarkers }
           viewport={ viewport }
-          toggledInfo={ toggledInfo }
           onToggleInfo={ this.handleToggleInfo }
+          onTogglePanel={ this.handleTogglePanel }
+          onClosePanel={ this.handleClosePanel }
         />
+
         <FilterInfo
           selectedFilter={ selectedFilter }
-          filterLength={ markers.length }
+          filterLength={ filteredMarkers.length }
         />
-        </MainUi>
+
+        <InfoBox
+          className='info-bar'
+          toggledInfo={ toggledInfo }
+          selectedMarker={ selectedMarker }
+        />
       </div>
     )
   }

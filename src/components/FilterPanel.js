@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import '../App.css';
-import ExternalLinks from './ExternalLinks';
 
 class FilterPanel extends Component {
   state = {
-    isActive: false,
     selectedFilter: {
+      value: 'Accepting People',
       allShelters: false,
       acceptingPeople: true,
       notAccepting: false,
@@ -18,14 +17,15 @@ class FilterPanel extends Component {
   }
 
   componentDidMount() {
+    const { onTogglePanel } = this.props;
     // Show Panel on page load if not on mobile
-    window.innerWidth > 600 && ( this.handleTogglePanel() )
+    window.innerWidth > 600 && ( onTogglePanel() )
   }
-
 
   handleFilter = (value, origMarkers) => {
 
     const { onClickFilter } = this.props;
+
     let allShelters = value === "All Shelters";
     let acceptingPeople = value === "Accepting People";
     let notAccepting = value === "Not Accepting People";
@@ -36,6 +36,7 @@ class FilterPanel extends Component {
 
     this.setState({
       selectedFilter: {
+        value: value,
         allShelters: allShelters,
         acceptingPeople: acceptingPeople,
         notAccepting: notAccepting,
@@ -68,28 +69,14 @@ class FilterPanel extends Component {
     })
 
     onClickFilter(value, filtered)
-
-    let update = {
-      filterText: value,
-      filterCount: 0 // todo: fix me later jn
-
-    }
-    this.props.updateFilterText(update);
-
-    // If on mobile, then close on filter click
-    window.innerWidth < 600 && ( this.handleTogglePanel() )
-  }
-
-  handleTogglePanel = () => {
-    this.setState({
-      isActive: !this.state.isActive
-    })
   }
 
   render() {
-    const { OGMarkers, toggledInfo, markers } = this.props;
-    const { isActive, selectedFilter } = this.state;
+    const { isActive, origMarkers, toggledInfo, onTogglePanel } = this.props;
+    const { selectedFilter } = this.state;
+
     const {
+      value,
       allShelters,
       acceptingPeople,
       notAccepting,
@@ -98,44 +85,52 @@ class FilterPanel extends Component {
       volunteerNeeds,
       updated } = selectedFilter;
       return (
-        <div className={ toggledInfo ? 'hideTopButtons filterComponent' : 'filterComponent' }>
+        <div className='filter-container'>
+
+          <div className='main-controls'>
+            <button
+              className="current-filter-button"
+              onClick={ onTogglePanel } >Filter: {value}
+            </button>
+          </div>
+
           <div className={ isActive ? 'filterPanel' : 'filterPanel closePanel' }>
-            <div className='title'>Filter Shelters</div>
+            <p>Filter Shelters</p>
             <input
               type='button'
               value='Accepting People'
               className={ acceptingPeople ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
             <input
               type='button'
               value='All Shelters'
               className={ allShelters ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
             <input
               type='button'
               value='Not Accepting People'
               className={ notAccepting ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
             <input
               type='button'
               value='Pets Allowed'
               className={ pets ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
             <input
               type='button'
               value='Updated within the last 12 hours'
               className={ updated ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
             <input
               type='button'
               value='Need Supplies'
               className={ supplyNeeds ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
             <input
               type='button'
               value='Need Volunteers'
               className={ volunteerNeeds ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
+              onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
           </div>
         </div>
       )
