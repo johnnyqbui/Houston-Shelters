@@ -34,19 +34,6 @@ class FilterPanel extends Component {
     let volunteerNeeds = value === "Need Volunteers";
     let updated = value.indexOf('Updated') > -1;
 
-    this.setState({
-      selectedFilter: {
-        value: value,
-        allShelters: allShelters,
-        acceptingPeople: acceptingPeople,
-        notAccepting: notAccepting,
-        pets: pets,
-        supplyNeeds: supplyNeeds,
-        volunteerNeeds: volunteerNeeds,
-        updated: updated
-      }
-    })
-
     let filtered = origMarkers.filter(marker => {
       if (allShelters) {return origMarkers}
 
@@ -68,11 +55,24 @@ class FilterPanel extends Component {
                   }}
     })
 
+    this.setState({
+      selectedFilter: {
+        value: value,
+        allShelters: allShelters,
+        acceptingPeople: acceptingPeople,
+        notAccepting: notAccepting,
+        pets: pets,
+        supplyNeeds: supplyNeeds,
+        volunteerNeeds: volunteerNeeds,
+        updated: updated
+      }
+    })
+
     onClickFilter(value, filtered)
   }
 
   render() {
-    const { isActive, origMarkers, toggledInfo, onTogglePanel } = this.props;
+    const { isActive, origMarkers, toggledInfo, onTogglePanel, filterLength } = this.props;
     const { selectedFilter } = this.state;
 
     const {
@@ -90,7 +90,8 @@ class FilterPanel extends Component {
           <div className='filter-controls'>
             <button
               className="current-filter-button"
-              onClick={ onTogglePanel } >Filter: {value}
+              onClick={ onTogglePanel }>
+                Filter: { value } ({ filterLength })
             </button>
           </div>
 

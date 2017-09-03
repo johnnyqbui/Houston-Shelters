@@ -4,7 +4,6 @@ import TopNavBar from './components/TopNavBar'
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
 import FilterPanel from './components/FilterPanel';
-import FilterInfo from './components/FilterInfo';
 import LoadingIcon from './components/LoadingIcon';
 import InfoBox from './components/InfoBox'
 
@@ -128,6 +127,7 @@ class App extends Component {
           <FilterPanel
             isActive={ isActive }
             origMarkers={ markers }
+            filterLength={ filteredMarkers.length }
             toggledInfo={ toggledInfo }
             onTogglePanel={ this.handleTogglePanel }
             onClickFilter={ this.handleFilteredList }
@@ -146,11 +146,6 @@ class App extends Component {
           onToggleInfo={ this.handleToggleInfo }
           onTogglePanel={ this.handleTogglePanel }
           onClosePanel={ this.handleClosePanel }
-        />
-
-        <FilterInfo
-          selectedFilter={ selectedFilter }
-          filterLength={ filteredMarkers.length }
         />
 
         <InfoBox

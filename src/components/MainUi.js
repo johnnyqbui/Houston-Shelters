@@ -1,6 +1,15 @@
 import React, {Component} from 'react';
 import '../App.css';
 
+
+
+
+
+
+
+/********** REMOVED COMPONENT (Let me know if you still want to keep the infoLinks,
+I'm sure that information will be irrelevant once we include everything else)*************
+
 class MainUi extends Component {
   state = {
     filterText: "Accepting People",

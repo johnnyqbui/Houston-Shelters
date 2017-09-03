@@ -25,11 +25,11 @@ const InfoBox = (props) => {
       <h2>{shelter}</h2>
       <div className='info-box-content'>
         <h4>
-          <FontAwesome fixedWidth="true"  size='lg' className="blueIcon" name="phone" />
+          <FontAwesome className="blueIcon" name="phone" />
           {phone ? <a href={`tel:${phone.replace(/\D/g,'')}`}>{phone}</a> : 'No Phone Number'}
         </h4>
         <h4>
-          <FontAwesome size='lg' fixedWidth="true" className="blueIcon" name="map-marker" />
+          <FontAwesome className="blueIcon" name="map-marker" />
           <a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>
         </h4>
         <br/>

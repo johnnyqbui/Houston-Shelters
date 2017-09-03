@@ -782,7 +782,7 @@ hr {
     background: rgb(90, 90, 90);
 }
 
-.geoLocateButton {
+.locate-me-button {
     position: absolute;
     z-index: 30;
     top: 54px;
@@ -794,7 +794,7 @@ hr {
     align-items: center;
 }
 
-.geoLocateButton input {
+.locate-me-button input {
     font-size: 14px;
     width: 100%;
     height: 100%;
@@ -881,7 +881,12 @@ h4 {
 }
 
 .info-box .info-box-content {
-    padding: 10px;
+    padding: 10px 32px;
+}
+
+.info-box .info-box-content h4 {
+    display: flex;
+    align-items: center;
 }
 
 .info-box h2 {
@@ -895,6 +900,8 @@ h4 {
 
 .blueIcon {
     color: rgb(20, 150, 250);
+    font-size: 25px;
+    width: 20px;
 }
 
 .info-box p {
@@ -938,12 +945,12 @@ h4 {
         height: 30%;
     }
     /*
-    .geoLocateButton {
+    .locate-me-button {
         right: 50px;
         left: auto;
     }
     */
-    .geoLocateButton input {
+    .locate-me-button input {
         font-size: 14px;
     }
     .togglePanelButton {
