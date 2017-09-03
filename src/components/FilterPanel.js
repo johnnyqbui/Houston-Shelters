@@ -100,7 +100,7 @@ class FilterPanel extends Component {
       return (
         <div className={ toggledInfo ? 'hideTopButtons filterComponent' : 'filterComponent' }>
           <div className={ isActive ? 'filterPanel' : 'filterPanel closePanel' }>
-            <div className='title'>Filter Shelters</div>
+            <div className='title'>Filter Shelters By...</div>
             <input
               type='button'
               value='Accepting People'

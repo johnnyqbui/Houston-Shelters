@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import '../App.css';
+import FontAwesome from 'react-fontawesome'
 
 class InfoBox extends Component {
   state = {
@@ -53,34 +54,40 @@ class InfoBox extends Component {
 
     let notes = null, supplyNeeds = null, volunteerNeeds = null, phone = null;
     if (m.phone) {
-      phone = <h4><a href={this.getPhoneLink(m.phone)}>{m.phone}</a></h4>;
+      phone = <p>
+        <FontAwesome fixedWidth="true"  size='lg' className="blueIcon" name="phone"/>
+        <a href={this.getPhoneLink(m.phone)}>{m.phone}</a>
+      </p>;
     }
     if (m.notes) {
-      notes = <p><span style={{fontWeight: 'bold'}}>Notes:</span> {m.notes}</p>;
+      notes = <p><span><strong>Notes:</strong></span> {m.notes}</p>;
     }
     if (m.supplyNeeds) {
-      supplyNeeds = <p><span style={{fontWeight: 'bold'}}>Supply Needs:</span> {m.supplyNeeds}</p>;
+      supplyNeeds = <p><span><strong>Supply Needs:</strong></span> {m.supplyNeeds}</p>;
     }
     if (m.volunteerNeeds) {
-      volunteerNeeds = <p><span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {m.volunteerNeeds}</p>
+      volunteerNeeds = <p><span><strong>Volunteer Needs:</strong></span> {m.volunteerNeeds}</p>
     }
-
     return (
       <div id="nodeinfo" className="info-bar">
         <div>
           <h2>{m.name}</h2>
+          <div className="content">
           {phone}
-          <h4><a href={this.getDirectionsLink(m.address)} target="_blank">Get Directions</a></h4>
-          <br/>
-          <p><span style={{fontWeight: 'bold'}}>Updated:</span> {m.lastUpdated}</p>
-            <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {m.accepting ? 'Yes' : 'No' }</p>
-            <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {m.pets ? m.pets : 'Unknown'}</p>
+          <p>
+            <FontAwesome size='lg' fixedWidth="true" className="blueIcon" name="map-marker"/>
+            <a href={this.getDirectionsLink(m.address)} target="_blank">{m.address}</a>
+          </p>
+          <p>
+            <FontAwesome size='lg' fixedWidth="true" className="blueIcon" name="clock-o"/>
+            Updated {m.lastUpdated}</p>
+
+            <p><span><strong>Accepting People?</strong></span> {m.accepting ? 'Yes' : 'No' }</p>
+            <p><span><strong>Pets Allowed?</strong></span> {m.pets ? m.pets : 'Unknown'}</p>
             {notes}
             {supplyNeeds}
             {volunteerNeeds}
-
-
-
+          </div>
         </div>
       </div>
     )
