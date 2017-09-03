@@ -89,7 +89,6 @@ class Lmap extends Component {
 								onToggleInfo(marker)
 							}}>
 						    <div className='popup-info' style={{fontSize: '14px'}}>
-						      	<span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
 						        <span style={{fontWeight: 'bold', fontSize: '16px'}}>{shelter}</span><br/>
 						        {address}<br/>
 						        {city}<br/>
