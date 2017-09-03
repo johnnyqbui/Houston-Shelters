@@ -6,6 +6,7 @@ class InfoBox extends Component {
   state = {
     currentMarker: {
       county: null,
+      city: null,
       name: null,
       address: null,
       phone: null,
@@ -23,6 +24,7 @@ class InfoBox extends Component {
     this.setState({
       currentMarker: {
         county: m.county,
+        city: m.city,
         name: m.name,
         address: m.address,
         phone: m.phone,
@@ -36,6 +38,7 @@ class InfoBox extends Component {
       }
     })
   }
+  
 
   handleTest = (e) => {
     this.setState(prevState => ({myFlag: prevState.myFlag + " * "}))
@@ -76,7 +79,7 @@ class InfoBox extends Component {
           {phone}
           <p>
             <FontAwesome size='lg' fixedWidth="true" className="blueIcon" name="map-marker"/>
-            <a href={this.getDirectionsLink(m.address)} target="_blank">{m.address}</a>
+            <a href={this.getDirectionsLink(m.address + "," + m.city)} target="_blank">{m.address}</a>
           </p>
           <p>
             <FontAwesome size='lg' fixedWidth="true" className="blueIcon" name="clock-o"/>

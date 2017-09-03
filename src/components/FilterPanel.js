@@ -61,7 +61,7 @@ class FilterPanel extends Component {
 
                   else if (updated) {
                     if (marker.lastUpdated.length > 0) {
-                    const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(12, 'hours').format()
+                    const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(24, 'hours').format()
                     const timeAfter = moment().format()
                     return replaceLastUpdated > timeAfter && (marker)
                   }}
@@ -108,6 +108,11 @@ class FilterPanel extends Component {
               onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
             <input
               type='button'
+              value='Pets Allowed'
+              className={ pets ? 'blueButton selected' : 'blueButton' }
+              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
+            <input
+              type='button'
               value='All Shelters'
               className={ allShelters ? 'blueButton selected' : 'blueButton' }
               onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
@@ -118,12 +123,7 @@ class FilterPanel extends Component {
               onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
             <input
               type='button'
-              value='Pets Allowed'
-              className={ pets ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
-            <input
-              type='button'
-              value='Updated within the last 12 hours'
+              value='Updated Within 24 Hours'
               className={ updated ? 'blueButton selected' : 'blueButton' }
               onClick={(e) => {this.handleFilter(e.target.value, OGMarkers)}}/>
             <input
