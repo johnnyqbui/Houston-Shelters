@@ -17,9 +17,8 @@ const InfoBox = (props) => {
     supplyNeeds,
     volunteerNeeds,
     lastUpdated } = selectedMarker;
-
+    console.log(location)
   const concatAddress = encodeURI(`${address} ${city}`)
-
   return (
     <div className={ toggledInfo ? 'info-box open' : 'info-box'}>
       <h2>{shelter}</h2>

@@ -10,7 +10,8 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-fontawesome": "^1.6.1",
-    "react-leaflet": "^1.6.4"
+    "react-leaflet": "^1.6.4",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "react-scripts": "1.0.12"

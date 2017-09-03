@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom'
 import './App.css';
 import TopNavBar from './components/TopNavBar'
 import Lmap from './components/Map';
@@ -28,6 +29,7 @@ class App extends Component {
   async componentDidMount() {
     const shelterData = await SheltersApi.getAll();
     const allMarkerData = shelterData.shelters.map((shelters) => {
+      console.log(shelters)
       const { county,
         shelter,
         address,
