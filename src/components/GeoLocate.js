@@ -22,10 +22,7 @@ const GeoLocate = (props) => {
 
     return (
         <div className={ toggledInfo ? 'hideTopButtons locate-me-button' : 'locate-me-button' }>
-            { currentLocation.length > 0 ?
-                <p style={{color: 'white'}}>Your current location: <br/>Lat: {currentLocation[0].toFixed(4)}, Lng: {currentLocation[1].toFixed(4)}</p> :
-                <input type="button" onClick={() => {locate(currentLocation)}} value='Locate Me'/>
-            }
+            <input type="button" onClick={() => {locate(currentLocation)}} value='Locate Me'/>
         </div>
     )
 }
