@@ -30,7 +30,7 @@ const InfoBox = (props) => {
         </h4>
         <h4>
           <FontAwesome className="blueIcon" name="map-marker" />
-          <a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>
+          <a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">{address}</a>
         </h4>
         <br/>
         <p><span style={{fontWeight: 'bold'}}>Updated:</span> {lastUpdated}</p>
