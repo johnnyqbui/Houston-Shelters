@@ -26,7 +26,8 @@ class MainUi extends Component {
           <button onClick={this.toggleInfoPanel} className="info-button">Update Shelter</button>
         </div>
         <div className='main-ui-controls'>
-          <button className="current-filter-button" onClick={this.props.filterToggle}>Filter: {this.state.filterText}</button>
+          <button className="current-filter-button"
+                  onClick={this.props.filterToggle}>Filter: <strong>{this.state.filterText}</strong></button>
         </div>
         <div id="infoLinks" className={this.state.linksOpen} >
           <h2>

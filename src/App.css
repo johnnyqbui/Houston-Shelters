@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto:700,400');
 
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 
@@ -450,8 +450,8 @@ template {
 
 
 /*******MAIN CSS*******/
-* {
-    font-family: 'Roboto', sans-serif !important;
+body, html, h1, h2, h3, h4, div, p, input, button {
+    font-family: 'Roboto', sans-serif;
 }
 
 .App {
@@ -474,18 +474,18 @@ template {
     top: 100px;
     left: 0px;
     width: 100%;
-    background: rgba(100, 100, 100, .7);
+    background: rgba(255,255,255, .85);
     transition:0.2s all;
-    padding:10px;
+    padding:0px 3% 5px;
     box-sizing:border-box;
 }
 
 .filterPanel input {
     font-size: 14px;
     height: 40px;
-    margin-right:10px;
-    margin-bottom:10px;
-    background-color:#666;
+    margin-right:7px;
+    margin-bottom:7px;
+    background-color:#999;
     cursor: pointer;
     transition: .3s;
     vertical-align: top;
@@ -504,6 +504,7 @@ template {
     height:36px;
     margin-top:6px;
     padding:0px 10px;
+    font-size:14px;
     cursor:pointer;
 }
 
@@ -517,19 +518,19 @@ template {
 }
 
 .title {
-    font-size: 1.1em;
-    margin: 20px auto 5px;
+    font-size: 18px;
+    margin: 10px auto 10px;
 
-    color: white;
 }
 
 .leaflet-container a.leaflet-popup-close-button {
+    display:none; /* eh, they can just click away from it - jn */
     font: 40px/30px Tahoma, Verdana, sans-serif;
     right: 12px;
 }
 
 .filterInfo {
-    font-size: 16px;
+    font-size: 14px;
     position: absolute;
     z-index: 3;
     bottom: 5px;
@@ -555,12 +556,21 @@ hr {
 
 /*****BUTTONS*****/
 
+a {
+    color:rgb(20, 150, 250);
+    font-weight:normal;
+}
+
 .leaflet-container .popupPhone {
     display: inline-block;
-    padding: 10px;
+    padding: 8px 15px;
     text-decoration: none;
     color: white;
     border-radius: .3rem;
+    background: rgb(20, 150, 250);
+}
+
+.bluetext {
     background: rgb(20, 150, 250);
 }
 
@@ -607,7 +617,7 @@ hr {
     position: absolute;
     z-index: 30;
     top:54px;
-    right: 10px;
+    right: 3%;
     height: 40px;
     background: rgb(90, 90, 90);
     justify-content: center;
@@ -641,7 +651,7 @@ input {
     height:50px;
     z-index:100;
     background-color: #203b49;
-    padding:0px 10px;
+    padding:0px 3%;
     position:absolute;
     width:100%;
     box-sizing:border-box;
@@ -649,9 +659,9 @@ input {
 
 .main-ui-controls {
     height:50px;
-    background-color:#EEE;
-    padding:0 10px;
-    border-bottom:1px solid #CCC;
+    background-color:#CCC;
+    padding:0 3%;
+    border-bottom:1px solid #EEE;
     z-index:25;
     position:absolute;
     width:100%;
@@ -666,6 +676,8 @@ h1, h2, h3, h4 {
 
 .main-ui-container h2 {
     color:#FFF;
+    font-size:22px;
+    margin-top:3px;
 }
 
 .map-container {
@@ -683,23 +695,43 @@ h1, h2, h3, h4 {
     background-color:#FFF;
     z-index:50;
     transition: 0.2s bottom;
-    padding:5px 10px;
-
-    overflow-y:auto;
+    font-size:14px;
     box-sizing:border-box;
+    overflow-y:auto;
+}
+
+
+
+.info-bar .content {
+    padding: 10px 3%;
+
+}
+
+.info-bar h2 {
+    padding: 10px 3%;
+    background-color:#EEE;
+}
+
+.info-bar .fa {
+    margin-right:10px;
+}
+
+.blueIcon {
+    color:rgb(20, 150, 250);
 }
 
 .info-bar p {
-    margin:5px 0;
+    margin:10px 0;
+    clear:both;
 }
 
 .info-bar.open {
     bottom:0px;
-    box-shadow: 0px 0px 20px #666;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
 }
 
 .info-button {
-    right:10px;
+    right:3%;
     top:10px;
     position:absolute;
 
@@ -714,7 +746,7 @@ h1, h2, h3, h4 {
     transition:0.2s all;
     height:100%;
     z-index:100;
-    padding:10px;
+    padding:10px 3%;
 }
 
 .info-links.open {
@@ -736,7 +768,7 @@ h1, h2, h3, h4 {
     }
     */
     .geoLocateButton input {
-        font-size: 16px;
+        font-size: 14px;
     }
     .togglePanelButton {
         top: 60px;
@@ -773,8 +805,9 @@ h1, h2, h3, h4 {
     }
 
     .title {
-        font-size: 1.3em;
-        margin: 20px auto 10px;
+        font-size: 18px;
+        margin: 10px auto;
+        color:#345;
     }
     .closePanel {
         left:-100%;

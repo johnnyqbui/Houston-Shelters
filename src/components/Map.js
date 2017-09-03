@@ -88,7 +88,9 @@ class Lmap extends Component {
 		          city,
 		          phone,
 		          accepting,
-		          location } = marker;
+		          location,
+							lastUpdated
+		        } = marker;
 		        let icon;
 		        accepting ? icon = blueMarkerIcon : icon = greyMarkerIcon
 					return (
@@ -97,6 +99,7 @@ class Lmap extends Component {
 						key={index}
 						position={[location.lat, location.lng]}>
 						<Popup
+							minWidth="250"
 						onOpen={() => {
 							this.centerToMarker(location);
 							this.openInfo(marker);
@@ -107,11 +110,14 @@ class Lmap extends Component {
 							this.checkToggleInfo();
 						}}>
 						    <div style={{fontSize: '14px'}}>
-						      <p><span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
+						      <p>
 						        <span style={{fontWeight: 'bold', fontSize: '16px'}}>{name}</span><br/>
 						        {address}<br/>
 						        {city}<br/>
-						        {phone ? <a className='popupPhone' href={`tel:${phone.replace(/\D/g,'')}`}>Tap to Call</a> : 'No Phone Number'}<br/></p>
+										Updated {lastUpdated}
+									</p>
+									<p>
+						        {phone ? <a className='popupPhone' href={`tel:${phone.replace(/\D/g,'')}`}>Call {phone}</a> : 'No Phone Number'}<br/></p>
 						    </div>
 						</Popup>
 					</Marker>
