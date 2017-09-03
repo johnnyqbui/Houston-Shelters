@@ -576,26 +576,27 @@ button {
 .top-navbar {
     position: absolute;
     z-index: 4;
-    display: block;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
     height: 50px;
     padding: 0 3%;
     color: #fff;
+    justify-content: space-between;
     background-color: #203b49;
 }
 
-.top-navbar h2 {
-    float: left;
-}
-
-.top-navbar p {
-    float: right;
-}
 
 .top-support {
-    margin-top:15px;
-    font-size:14px;
+    font-size: 16px;
+    width: 100px;
+}
+
+.top-navbar h2 {
+    padding: 0;
 }
 
 /* END Top Nav Bar */
@@ -626,6 +627,22 @@ button {
     background: rgba(240, 240, 240, .9);
 }
 
+.current-filter-button {
+    font-size: 14px;
+    height: 36px;
+    margin-top: 6px;
+    padding: 0 10px;
+    cursor: pointer;
+    color: #fff;
+    border: 0;
+    border-radius: .3rem;
+    background: rgb(20, 150, 250);
+}
+
+.current-filter-button span {
+    display: none;
+}
+
 .filter-panel {
     position: relative;
     top: 0;
@@ -634,7 +651,7 @@ button {
     width: 100%;
     padding: 10px 3%;
     transition: .2s all;
-    background: rgba(255,255,255, .85);
+    background: rgba(255, 255, 255, .85);
 }
 
 .filter-panel p {
@@ -663,18 +680,6 @@ button {
     background-color: #999;
 }
 
-.current-filter-button {
-    font-size: 14px;
-    height: 36px;
-    margin-top: 6px;
-    padding: 0 10px;
-    cursor: pointer;
-    color: #fff;
-    border: 0;
-    border-radius: .3rem;
-    background: rgb(20, 150, 250);
-}
-
 .filter-panel .selected {
     opacity: 1;
     background: rgb(20, 150, 250);
@@ -685,9 +690,8 @@ button {
 
 .filter-title {
     font-size: 16px;
-    margin: 0px auto 10px;
+    margin: 0 auto 10px;
     color: #345;
-
 }
 
 .leaflet-popup-content {
@@ -726,16 +730,17 @@ hr {
 }
 
 a {
+    font-weight: normal;
     color: rgb(20, 150, 250);
-    font-weight:normal;
 }
+
 
 /*****BUTTONS*****/
 
 .leaflet-container .popup-info-button {
     width: 50%;
+    margin-top: 5px;
     margin-right: 5px;
-    margin-top:5px;
     padding: 8px 15px;
     text-align: center;
     text-decoration: none;
@@ -792,26 +797,62 @@ a {
     background: rgb(90, 90, 90);
 }
 
-.locate-me-button {
+.controls-font-grey {
+    color: #8c8c8c;
+}
+
+.locate-me-container {
     position: absolute;
-    z-index: 30;
-    top: 54px;
-    right: 3%;
-    height: 40px;
+    right: 5px;
+    top: 50px;
+    z-index: 10;
+}
+
+.add-shelter-container {
+    position: absolute;
+    right: 5px;
+    top: 50px;
+    z-index: 10;
+}
+
+.controls-button {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    border: none;
     border-radius: .3rem;
     background: rgb(90, 90, 90);
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 
-.locate-me-button input {
-    font-size: 14px;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    color: white;
-    border: none;
-    background: rgb(90, 90, 90);
+.locate-me-container p {
+    display: none;
+}
+.locate-me-button {
+    right: 50px;
+    top: 5px;
+}
+
+.add-shelter-container p {
+    display: none;
+}
+.add-shelter-button {
+    right: 5px;
+    top: 5px;
+}
+
+.locate-me-icon {
+    font-size: 28px;
+    color: #fff;
+}
+
+.add-shelter-icon {
+    font-size: 25px;
+    color: #fff;
 }
 
 input {
@@ -909,9 +950,9 @@ h4 {
 }
 
 .blueIcon {
-    color: rgb(20, 150, 250);
     font-size: 25px;
     width: 20px;
+    color: rgb(20, 150, 250);
 }
 
 .info-box p {
@@ -954,21 +995,42 @@ h4 {
         bottom: -30%;
         height: 30%;
     }
+
+    .top-support {
+        width: auto;
+    }
     /*
     .locate-me-button {
         right: 50px;
         left: auto;
     }
     */
-    .locate-me-button input {
-        font-size: 14px;
+    .locate-me-container p {
+        position: relative;
+        right: 195px;
+        width: 75px;
+        display: block;
     }
-    .togglePanelButton {
-        top: 60px;
+    .locate-me-button {
+        right: 150px;
+        top: 5px;
     }
-    .externalLinkButton {
+
+    .add-shelter-container p {
+        position: relative;
+        right: 53px;
+        width: 83px;
+        display: block;
+    }
+    .add-shelter-button {
+        right: 10px;
+        top: 5px;
+    }
+
+    .current-filter-button span {
         display: inline;
     }
+
     /*
     .filter-panel {
         top: 65px;

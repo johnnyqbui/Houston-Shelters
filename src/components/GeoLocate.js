@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import FontAwesome from 'react-fontawesome'
 
 const GeoLocate = (props) => {
     const { currentLocation, onClickLocate, toggledInfo } = props;
@@ -21,8 +22,13 @@ const GeoLocate = (props) => {
     }
 
     return (
-        <div className={ toggledInfo ? 'hideTopButtons locate-me-button' : 'locate-me-button' }>
-            <input type="button" onClick={() => {locate(currentLocation)}} value='Locate Me'/>
+        <div className='locate-me-container'>
+            <p className='controls-font-grey'>Locate Me</p>
+            <button
+                className='controls-button locate-me-button'
+                onClick={() => {locate(currentLocation)}}>
+                <FontAwesome className="locate-me-icon" name="crosshairs" />
+            </button>
         </div>
     )
 }

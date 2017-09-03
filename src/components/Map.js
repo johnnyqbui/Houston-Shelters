@@ -25,6 +25,10 @@ const greyMarkerIcon = new L.icon({
     popupAnchor: [0, -28]
 })
 
+// const center = new L.panTo({
+
+// })
+
 class Lmap extends Component {
 
 	state = {
@@ -79,7 +83,7 @@ class Lmap extends Component {
 						icon={icon}
 						key={index}
 						position={[location.lat, location.lng]}>
-						<Popup minWidth="250"
+						<Popup minWidth="250" autoPan={false}
 							onOpen={() => {
 								this.centerToMarker(location);
 								onToggleInfo(marker)

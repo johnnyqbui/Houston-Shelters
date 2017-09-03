@@ -4,6 +4,7 @@ import './App.css';
 import TopNavBar from './components/TopNavBar'
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
+import AddShelter from './components/AddShelter'
 import FilterPanel from './components/FilterPanel';
 import LoadingIcon from './components/LoadingIcon';
 import InfoBox from './components/InfoBox'
@@ -29,7 +30,6 @@ class App extends Component {
   async componentDidMount() {
     const shelterData = await SheltersApi.getAll();
     const allMarkerData = shelterData.shelters.map((shelters) => {
-      console.log(shelters)
       const { county,
         shelter,
         address,
@@ -140,6 +140,8 @@ class App extends Component {
           currentLocation={ currentLocation }
           onClickLocate={ this.handleLocate }
         />
+
+        <AddShelter />
 
         <Lmap
           currentLocation={ currentLocation }
