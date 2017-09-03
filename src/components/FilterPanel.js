@@ -62,7 +62,7 @@ class FilterPanel extends Component {
 
                   else if (updated) {
                     if (marker.lastUpdated.length > 0) {
-                    const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(12, 'hours').format()
+                    const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(24, 'hours').format()
                     const timeAfter = moment().format()
                     return replaceLastUpdated > timeAfter && (marker)
                   }}
@@ -87,24 +87,19 @@ class FilterPanel extends Component {
       return (
         <div className='filter-container'>
 
-          <div className='main-controls'>
+          <div className='filter-controls'>
             <button
               className="current-filter-button"
               onClick={ onTogglePanel } >Filter: {value}
             </button>
           </div>
 
-          <div className={ isActive ? 'filterPanel' : 'filterPanel closePanel' }>
-            <p>Filter Shelters</p>
+          <div className={ isActive ? 'filter-panel' : 'filter-panel closePanel' }>
+            <div className='filter-title'>Filter Shelters By...</div>
             <input
               type='button'
               value='Accepting People'
               className={ acceptingPeople ? 'blueButton selected' : 'blueButton' }
-              onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
-            <input
-              type='button'
-              value='All Shelters'
-              className={ allShelters ? 'blueButton selected' : 'blueButton' }
               onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
             <input
               type='button'
@@ -118,7 +113,7 @@ class FilterPanel extends Component {
               onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
             <input
               type='button'
-              value='Updated within the last 12 hours'
+              value='Updated Within 24 Hours'
               className={ updated ? 'blueButton selected' : 'blueButton' }
               onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
             <input
@@ -130,6 +125,11 @@ class FilterPanel extends Component {
               type='button'
               value='Need Volunteers'
               className={ volunteerNeeds ? 'blueButton selected' : 'blueButton' }
+              onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
+            <input
+              type='button'
+              value='All Shelters'
+              className={ allShelters ? 'blueButton selected' : 'blueButton' }
               onClick={(e) => {this.handleFilter(e.target.value, origMarkers)}}/>
           </div>
         </div>

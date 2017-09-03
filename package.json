@@ -9,6 +9,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-fontawesome": "^1.6.1",
     "react-leaflet": "^1.6.4"
   },
   "devDependencies": {
@@ -19,8 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy:prod": "yarn build&&gh-pages -d build",
-    "deploy:stage":"yarn build&&heroku "
+    "deploy": "yarn build&&gh-pages -d build"
   },
-  "homepage": ""
+  "homepage": "http://github.com/Houston-Shelters/"
 }

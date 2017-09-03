@@ -52,6 +52,7 @@ class Lmap extends Component {
 			    viewport={ viewport }
 			    center={ bounds }
 			    zoomControl={false}
+			    onClick={ onClosePanel }
 			>
 		      <TileLayer
 		        url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -68,7 +69,8 @@ class Lmap extends Component {
 		          city,
 		          phone,
 		          accepting,
-		          location } = marker;
+		          location,
+		          lastUpdated } = marker;
 		        const concatAddress = encodeURI(`${address} ${city}`)
 		        let icon;
 		        accepting ? icon = blueMarkerIcon : icon = greyMarkerIcon
@@ -77,7 +79,7 @@ class Lmap extends Component {
 						icon={icon}
 						key={index}
 						position={[location.lat, location.lng]}>
-						<Popup
+						<Popup minWidth="250"
 							onOpen={() => {
 								this.centerToMarker(location);
 								onToggleInfo(marker)
@@ -86,16 +88,18 @@ class Lmap extends Component {
 							onClose={() => {
 								onToggleInfo(marker)
 							}}>
-						    <div className='popupInfo' style={{fontSize: '14px'}}>
+						    <div className='popup-info' style={{fontSize: '14px'}}>
 						      	<span style={{fontWeight: 'bold'}}>County:</span> {county}<br/><br/>
 						        <span style={{fontWeight: 'bold', fontSize: '16px'}}>{shelter}</span><br/>
 						        {address}<br/>
 						        {city}<br/>
-						        {phone && (
-						        	<a className='popupButton' href={`tel:${phone.replace(/\D/g,'')}`}>Tap to Call</a> : ''
-						        )}
-						        {<a className='popupButton' href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>}
-						    </div>
+						        <div className='popup-button-container'>
+							        {phone && (
+							        	<a className='popup-info-button' href={`tel:${phone.replace(/\D/g,'')}`}>Tap to Call</a> : ''
+							        )}
+							        <a className='popup-info-button' href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>
+								</div>
+				   			</div>
 						</Popup>
 					</Marker>
 				)

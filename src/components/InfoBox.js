@@ -1,5 +1,6 @@
 import React from 'react'
 import '../App.css';
+import FontAwesome from 'react-fontawesome'
 
 const InfoBox = (props) => {
 
@@ -20,20 +21,27 @@ const InfoBox = (props) => {
   const concatAddress = encodeURI(`${address} ${city}`)
 
   return (
-    <div id="nodeinfo" className={ toggledInfo ? 'info-bar open' : 'info-bar'}>
+    <div className={ toggledInfo ? 'info-box open' : 'info-box'}>
       <h2>{shelter}</h2>
-      <h4>{phone ? <a href={`tel:${phone.replace(/\D/g,'')}`}>{phone}</a> : 'No Phone Number'}</h4>
-      <h4><a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a></h4>
-      <br/>
-      <p><span style={{fontWeight: 'bold'}}>Updated:</span> {lastUpdated}</p>
-        <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
-        <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
-        <p><span style={{fontWeight: 'bold'}}>Notes:</span> {notes}</p>
-        <p><span style={{fontWeight: 'bold'}}>Supply Needs:</span> {supplyNeeds}</p>
-        <p><span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {volunteerNeeds}</p>
+      <div className='info-box-content'>
+        <h4>
+          <FontAwesome fixedWidth="true"  size='lg' className="blueIcon" name="phone" />
+          {phone ? <a href={`tel:${phone.replace(/\D/g,'')}`}>{phone}</a> : 'No Phone Number'}
+        </h4>
+        <h4>
+          <FontAwesome size='lg' fixedWidth="true" className="blueIcon" name="map-marker" />
+          <a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>
+        </h4>
+        <br/>
+        <p><span style={{fontWeight: 'bold'}}>Updated:</span> {lastUpdated}</p>
+          <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
+          <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
+          <p><span style={{fontWeight: 'bold'}}>Notes:</span> {notes}</p>
+          <p><span style={{fontWeight: 'bold'}}>Supply Needs:</span> {supplyNeeds}</p>
+          <p><span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {volunteerNeeds}</p>
+      </div>
     </div>
   )
-
 }
 
 export default InfoBox
