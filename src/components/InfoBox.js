@@ -16,6 +16,7 @@ const InfoBox = (props) => {
     notes,
     supplyNeeds,
     volunteerNeeds,
+    county,
     lastUpdated } = selectedMarker;
     console.log(location)
   const concatAddress = encodeURI(`${address} ${city}`)
@@ -23,14 +24,14 @@ const InfoBox = (props) => {
     <div className={ toggledInfo ? 'info-box open' : 'info-box'}>
       <h2>{shelter}</h2>
       <div className='info-box-content'>
-        <h4>
+        <p>
           <FontAwesome className="blueIcon" name="phone" />
           {phone ? <a href={`tel:${phone.replace(/\D/g,'')}`}>{phone}</a> : 'No Phone Number'}
-        </h4>
-        <h4>
+        </p>
+        <p>
           <FontAwesome className="blueIcon" name="map-marker" />
-          <a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">{address}</a>
-        </h4>
+          <a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">{address}, {city}</a> ({county} County)
+        </p>
         <br/>
         <p><span style={{fontWeight: 'bold'}}>Updated:</span> {lastUpdated}</p>
           <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>

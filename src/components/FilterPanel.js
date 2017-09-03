@@ -91,7 +91,7 @@ class FilterPanel extends Component {
             <button
               className="current-filter-button"
               onClick={ onTogglePanel }>
-                Filter: { value } ({ filterLength })
+              Filter: <strong>{ value } ({ filterLength })</strong>
             </button>
           </div>
 
