@@ -20,7 +20,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy:prod": "yarn build&&gh-pages -d build",
-    "deploy:stage":"yarn build&&surge"
+    "deploy:stage":"yarn build&&heroku "
   },
-  "homepage": "http://github.com/Houston-Shelters/"
+  "homepage": ""
 }
