@@ -542,14 +542,6 @@ template {
     display: none;
 }
 
-html {
-    overflow: hidden;
-}
-body {
-    overflow-y: scroll;
-    -webkit-overflow-scrolling:touch;
-}
-
 /*******MAIN CSS*******/
 
 body,
@@ -1245,6 +1237,19 @@ h4 {
     40% {
         opacity: 1;
     }
+}
+
+@media (max-device-aspect-ratio: 3/4) {
+  height: calc(100vw * 1.333 - 9%);
+}
+@media (max-device-aspect-ratio: 2/3) {
+  height: calc(100vw * 1.5 - 9%);
+}
+@media (max-device-aspect-ratio: 10/16) {
+  height: calc(100vw * 1.6 - 9%);
+}
+@media (max-device-aspect-ratio: 9/16) {
+  height: calc(100vw * 1.778 - 9%);
 }
 
 #google_translate_element {
