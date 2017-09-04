@@ -574,7 +574,7 @@ button {
 /* Top Nav Bar */
 
 .top-navbar {
-    position: absolute;
+    position: fixed;
     z-index: 4;
     display: flex;
     -webkit-box-sizing: border-box;
@@ -605,7 +605,7 @@ button {
 /* Filter Container */
 
 .filter-container {
-    position: absolute;
+    position: fixed;
     z-index: 3;
     top: 50px;
     width: 100%;
@@ -827,14 +827,14 @@ input {
 }
 
 .locate-me-container {
-    position: absolute;
+    position: fixed;
     z-index: 10;
     top: 50px;
     right: 5px;
 }
 
 .add-shelter-container {
-    position: absolute;
+    position: fixed;
     z-index: 10;
     top: 50px;
     right: 5px;
