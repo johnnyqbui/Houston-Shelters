@@ -3,7 +3,7 @@ import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
 import blueMarker from '../images/shelter-blue.png';
 import greyMarker from '../images/shelter-grey.png';
-import shadowMarker from '../images/marker-shadow.png'
+// import shadowMarker from '../images/marker-shadow.png'
 
 const blueMarkerIcon = new L.icon({
 	iconUrl: blueMarker,
@@ -59,15 +59,12 @@ class Lmap extends Component {
 	render() {
 		const { bounds } = this.state;
 		const {
-			markers,
-			origMarkers,
+			filteredMarkers,
 			currentLocation,
 			viewport,
-			queryMatched,
 			onOpenInfoBox,
 			onCloseInfoBox,
 			onClosePanel } = this.props;
-			console.log(viewport)
 		return (
 			<Map
 			    className='map'
@@ -77,7 +74,7 @@ class Lmap extends Component {
 			    doubleClickZoom={ true }
 			    zoomSnap={ false }
 			    trackResize={ true }
-			    zoomControl={false}
+			    zoomControl={ false }
 			>
 
 		      <TileLayer
@@ -87,7 +84,7 @@ class Lmap extends Component {
 
 		      <ZoomControl position= 'bottomright' />
 		      {currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
-		      {markers.map((marker, index) => {
+		      {filteredMarkers.map((marker, index) => {
 		        const {
 		          county,
 		          shelter,

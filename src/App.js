@@ -13,10 +13,11 @@ import * as SheltersApi from './utils/SheltersApi';
 
 class App extends Component {
   state = {
-    isActive: false,
+    toggledPanel: false,
     isLoading: true,
-    markers: [],
+    allMarkers: [],
     filteredMarkers: [],
+    tempFilteredMarkers: [],
     viewport: {
       center: [29.760427, -95.369803],
       zoom: 9
@@ -24,8 +25,7 @@ class App extends Component {
     currentLocation: [],
     selectedFilter: 'Accepting People',
     selectedMarker: {},
-    toggledInfo: false,
-    queryMatched: []
+    toggledInfo: false
   }
 
   async componentDidMount() {
@@ -65,18 +65,20 @@ class App extends Component {
         showInfo: false
       }
     });
-
+    // Set initial markers to be accepting
+    const initialMarkers = allMarkerData.filter(marker => (marker.accepting))
     this.setState({
       isLoading: false,
-      markers: allMarkerData,
-      // Accepting shelters set to default
-      filteredMarkers: allMarkerData.filter(marker => (marker.accepting)),
+      allMarkers: allMarkerData,
+      filteredMarkers: initialMarkers,
+      tempFilteredMarkers: initialMarkers
     });
   }
 
-  handleFilteredList = (selectedFilter, filteredMarkers) => {
+  handleFilteredMarkers = (selectedFilter, filteredMarkers) => {
     this.setState({
       filteredMarkers: filteredMarkers,
+      tempFilteredMarkers: filteredMarkers,
       selectedFilter: selectedFilter
     })
   }
@@ -93,13 +95,13 @@ class App extends Component {
 
   handleClosePanel = () => {
     this.setState({
-      isActive: false
+      toggledPanel: false
     })
   }
 
   handleTogglePanel = () => {
     this.setState({
-      isActive: !this.state.isActive
+      toggledPanel: !this.state.toggledPanel
     })
   }
 
@@ -117,9 +119,9 @@ class App extends Component {
   }
 
   handleInputSearch = (query) => {
-    this.setState({
-      filteredMarkers: query
-    })
+      this.setState({
+        filteredMarkers: query
+      })
   }
 
   handleClickSearch = (matched) => {
@@ -136,35 +138,39 @@ class App extends Component {
 
   render() {
     const {
-      isActive,
+      toggledPanel,
       isLoading,
-      markers,
+      allMarkers,
       filteredMarkers,
+      tempFilteredMarkers,
+      selectedFilter,
       viewport,
       currentLocation,
       selectedMarker,
-      toggledInfo,
-      queryMatched } = this.state;
+      toggledInfo } = this.state;
     return (
       <div className="App">
 
         <TopNavBar />
 
         <Search
-          markerData={ markers }
+          allMarkers={ allMarkers }
+          tempFilteredMarkers = { tempFilteredMarkers }
           onClickSearch={ this.handleClickSearch }
           onInputSearch={ this.handleInputSearch }
+          onCloseInfoBox={ this.handleCloseInfoBox }
         />
 
         { isLoading && (<LoadingIcon />)}
         { !isLoading && (
           <FilterPanel
-            isActive={ isActive }
-            origMarkers={ markers }
+            toggledPanel={ toggledPanel }
+            allMarkers={ allMarkers }
             filterLength={ filteredMarkers.length }
+            selectedFilter={ selectedFilter }
             toggledInfo={ toggledInfo }
             onTogglePanel={ this.handleTogglePanel }
-            onClickFilter={ this.handleFilteredList }
+            onClickFilter={ this.handleFilteredMarkers }
           />
         )}
 
@@ -177,11 +183,10 @@ class App extends Component {
 
         <Lmap
           currentLocation={ currentLocation }
-          markers={ filteredMarkers }
-          origMarkers={ markers }
+          filteredMarkers={ filteredMarkers }
+          allMarkers={ allMarkers }
           viewport={ viewport }
           selectedMarker={ selectedMarker }
-          queryMatched={ queryMatched }
 
           onOpenInfoBox={ this.handleOpenInfoBox }
           onCloseInfoBox={ this.handleCloseInfoBox }
@@ -194,7 +199,6 @@ class App extends Component {
           className='info-bar'
           toggledInfo={ toggledInfo }
           selectedMarker={ selectedMarker }
-          queryMatched= { queryMatched }
         />
       </div>
     )

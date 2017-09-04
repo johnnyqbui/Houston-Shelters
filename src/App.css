@@ -1260,20 +1260,20 @@ h4 {
 
 .search-data-container {
     position: absolute;
+    top: 13%;
+    left: 15px;
     z-index: 6;
 }
 
 .search-data-results {
     background: #fff;
     overflow: hidden;
-
 }
 
 .search-data-results ul {
     margin: 0;
     padding: 0;
     overflow-y: scroll;
-
 }
 
 .search-data-results ul li {

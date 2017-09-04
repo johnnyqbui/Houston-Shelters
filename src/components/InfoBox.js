@@ -11,7 +11,7 @@ const InfoBox = (props) => {
     city,
     phone,
     cleanPhone,
-    location, //May be needed for debugging issues related to coords
+    // location, //May be needed for debugging issues related to coords
     accepting,
     pets,
     notes,

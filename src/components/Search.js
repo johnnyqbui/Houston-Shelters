@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import * as SheltersApi from '../utils/SheltersApi';
 
 class Search extends Component {
 	state = {
 		query: '',
-		searched: [],
-		errorMessage: ''
+		searched: []
 	}
 
 	updateQuery = (query) => {
@@ -13,15 +11,15 @@ class Search extends Component {
 			query: query
 		})
 		this.searchData(query)
-
 	}
 
 	searchData = (query) => {
-		const { markerData, onInputSearch } = this.props;
+		const { allMarkers, tempFilteredMarkers, onInputSearch, onCloseInfoBox } = this.props;
+		const matched = allMarkers.filter(
+			data => data.shelter.toLowerCase().indexOf(query.toLowerCase()) > -1
+		)
 		if (query.length > 1) {
-			const matched = markerData.filter(
-				data => data.shelter.toLowerCase().indexOf(query.toLowerCase()) > -1
-			)
+
 			this.setState({
 				searched: matched
 			})
@@ -30,11 +28,12 @@ class Search extends Component {
 			this.setState({
 				searched: []
 			})
+			onCloseInfoBox()
+			onInputSearch(tempFilteredMarkers)
 		}
 	}
 
 	handleCloseSearch = (data) => {
-		const { onInputSearch } = this.props;
 		this.setState({
 			query: `${ data.shelter } at ${ data.address }, ${ data.city }`,
 			searched: []
@@ -42,8 +41,8 @@ class Search extends Component {
 	}
 
 	render() {
-		const { query, searched, errorMessage } = this.state;
-		const { onClickSearch, } = this.props;
+		const { query, searched } = this.state;
+		const { onClickSearch } = this.props;
 		return (
 		<div className="search-data-container">
 			<div className="search-data-bar">
