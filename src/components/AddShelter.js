@@ -8,7 +8,7 @@ const AddShelter = (props) => {
             <p className='controls-font-grey'>Add Shelter</p>
             <button className='controls-button add-shelter-button'>
             <a href='http://harveyneeds.org/' target='_blank' rel='noopener noreferrer' >
-                <FontAwesome className="add-shelter-icon" name="repeat" />
+                <FontAwesome className="add-shelter-icon" name="plus" />
 
             </a>
             </button>
