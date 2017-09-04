@@ -1,8 +1,9 @@
 import React from 'react';
 import '../App.css';
+import FontAwesome from 'react-fontawesome'
 
 const GeoLocate = (props) => {
-    const { currentLocation, onClickLocate, toggledInfo } = props;
+    const { currentLocation, onClickLocate } = props;
     const locate = () => {
         const success = (position) => {
             const currentLocation = [position.coords.latitude, position.coords.longitude]
@@ -21,11 +22,13 @@ const GeoLocate = (props) => {
     }
 
     return (
-        <div className={ toggledInfo ? 'hideTopButtons geoLocateButton' : 'geoLocateButton' }>
-            { currentLocation.length > 0 ?
-                <p style={{color: 'white'}}>Your current location: <br/>Lat: {currentLocation[0].toFixed(4)}, Lng: {currentLocation[1].toFixed(4)}</p> :
-                <input type="button" onClick={() => {locate()}} value='Find My Location'/>
-            }
+        <div className='locate-me-container'>
+            <p className='controls-font-grey'>Locate Me</p>
+            <button
+                className='controls-button locate-me-button'
+                onClick={() => {locate(currentLocation)}}>
+                <FontAwesome className="locate-me-icon" name="crosshairs" />
+            </button>
         </div>
     )
 }

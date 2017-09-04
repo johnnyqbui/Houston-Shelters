@@ -1,6 +1,15 @@
 import React, {Component} from 'react';
 import '../App.css';
 
+
+
+
+
+
+
+/********** REMOVED COMPONENT (Let me know if you still want to keep the infoLinks,
+I'm sure that information will be irrelevant once we include everything else)*************
+
 class MainUi extends Component {
   state = {
     filterText: "Accepting People",
@@ -26,7 +35,8 @@ class MainUi extends Component {
           <button onClick={this.toggleInfoPanel} className="info-button">Update Shelter</button>
         </div>
         <div className='main-ui-controls'>
-          <button className="current-filter-button" onClick={this.props.filterToggle}>Filter: {this.state.filterText}</button>
+          <button className="current-filter-button"
+                  onClick={this.props.filterToggle}>Filter: <strong>{this.state.filterText}</strong></button>
         </div>
         <div id="infoLinks" className={this.state.linksOpen} >
           <h2>
@@ -52,3 +62,5 @@ class MainUi extends Component {
 }
 
 export default MainUi
+
+ */
