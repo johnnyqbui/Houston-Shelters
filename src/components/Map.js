@@ -3,22 +3,31 @@ import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
 import blueMarker from '../images/shelter-blue.png';
 import greyMarker from '../images/shelter-grey.png';
+import shadowMarker from '../images/marker-shadow.png'
 
 const blueMarkerIcon = new L.icon({
 	iconUrl: blueMarker,
 	iconSize: [30, 41],
 	iconAnchor: [15, 41],
-	popupAnchor: [0, -35]
+  shadowUrl: shadowMarker,
+  shadowSize: [41, 41],
+  shadowAnchor: [12, 41],
+  popupAnchor: [0, -35]
+
 })
 
 const greyMarkerIcon = new L.icon({
 	iconUrl: greyMarker,
   iconSize: [18, 23],
   iconAnchor: [9, 23],
-  popupAnchor: [0, -18]
+  popupAnchor: [0, -18],
+  shadowUrl: shadowMarker,
+  shadowSize: [41, 41],
+  shadowAnchor: [12, 41]
 })
 
 class Lmap extends Component {
+
 		state = {
 			bounds: []
 		}
@@ -32,6 +41,7 @@ class Lmap extends Component {
   			bounds: []
   		})
   	}
+
 	render() {
 		const { bounds } = this.state;
 		const { markers, currentLocation, viewport, onToggleInfo, onClosePanel } = this.props;
