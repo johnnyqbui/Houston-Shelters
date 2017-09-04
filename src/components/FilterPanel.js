@@ -35,13 +35,14 @@ class FilterPanel extends Component {
     let updated = value.indexOf('Updated') > -1;
 
     let filtered = origMarkers.filter(marker => {
+      console.log(marker)
       if (allShelters) {return origMarkers}
 
       else if (acceptingPeople) {return marker.accepting}
 
       else if (notAccepting) {return !marker.accepting}
 
-      else if (pets) {return marker.pets.length > 0 && marker.pets.match(/yes/ig)}
+      else if (pets) {return marker.pets && marker.pets.match(/yes/ig)}
 
       else if (supplyNeeds) {return marker.supplyNeeds && !marker.supplyNeeds.match(/no\s/ig)}
 

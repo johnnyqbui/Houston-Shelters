@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import L from 'leaflet';
-import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl, Pane } from 'react-leaflet';
 import blueMarker from '../images/marker-icon-blue.png';
 import greyMarker from '../images/marker-icon-grey.png';
-import shadowMarker from '../images/marker-shadow.png'
 
 const blueMarkerIcon = new L.icon({
 	iconUrl: blueMarker,
 	iconSize: [25, 41],
 	iconAnchor: [12, 41],
-	shadowUrl: shadowMarker,
-	shadowSize: [41, 41],
-    shadowAnchor: [12, 41],
     popupAnchor: [0, -28]
 })
 
@@ -19,9 +15,6 @@ const greyMarkerIcon = new L.icon({
 	iconUrl: greyMarker,
 	iconSize: [25, 41],
 	iconAnchor: [12, 41],
-	shadowUrl: shadowMarker,
-	shadowSize: [41, 41],
-    shadowAnchor: [12, 41],
     popupAnchor: [0, -28]
 })
 
@@ -43,9 +36,22 @@ class Lmap extends Component {
   		})
   	}
 
+  	handleShowMarker = (ref) => {
+  		if (ref) {
+			ref.leafletElement._icon.style.display = ""
+  		}
+	}
+
+	handleHideMarker = (ref) => {
+		// if (ref) {
+		// 	ref.leafletElement._icon.style.display = 'none'
+		// }
+	}
+
+
 	render() {
 		const { bounds } = this.state;
-		const { markers, currentLocation, viewport, onToggleInfo, onClosePanel } = this.props;
+		const { markers, origMarkers, currentLocation, viewport, selectedMarker, onToggleInfo, onClosePanel } = this.props;
 		return (
 			<Map
 			    className='map'
@@ -55,7 +61,9 @@ class Lmap extends Component {
 			    doubleClickZoom={ true }
 			    zoomSnap={ false }
 			    trackResize={ true }
+			    zoomControl={false}
 			>
+
 		      <TileLayer
 		        url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
 		        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -73,14 +81,17 @@ class Lmap extends Component {
 		          cleanPhone,
 		          accepting,
 		          location } = marker;
+
 		        const concatAddress = encodeURI(`${address} ${city}`)
 		        let icon;
 		        accepting ? icon = blueMarkerIcon : icon = greyMarkerIcon
 					return (
 					<Marker
+						ref={marker === selectedMarker ? this.handleShowMarker : this.handleHideMarker}
 						icon={icon}
 						key={index}
-						position={[location.lat, location.lng]}>
+						position={[location.lat, location.lng]}
+						>
 						<Popup minWidth="250" autoPan={false}
 							onOpen={() => {
 								this.centerToMarker(location);

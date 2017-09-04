@@ -1244,3 +1244,34 @@ h4 {
         opacity: 1;
     }
 }
+
+.search-data-container {
+    position: absolute;
+    z-index: 6;
+}
+
+.search-data-results {
+    background: #fff;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.search-data-results ul {
+    margin: 0;
+    padding: 0;
+
+}
+
+
+.search-data-results ul li {
+    border-bottom: 1px solid #ccc;
+    list-style-type: none;
+    padding: 8px 20px;
+    margin: 0;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.search-data-results ul li:hover {
+    background: #a6c5ce;
+}

@@ -6,9 +6,9 @@ import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
 import AddShelter from './components/AddShelter'
 import FilterPanel from './components/FilterPanel';
+import Search from './components/Search';
 import LoadingIcon from './components/LoadingIcon';
 import InfoBox from './components/InfoBox'
-
 import * as SheltersApi from './utils/SheltersApi';
 
 class App extends Component {
@@ -24,7 +24,8 @@ class App extends Component {
     currentLocation: [],
     selectedFilter: 'Accepting People',
     selectedMarker: {},
-    toggledInfo: false
+    toggledInfo: false,
+    queryMatched: []
   }
 
   async componentDidMount() {
@@ -109,6 +110,12 @@ class App extends Component {
     })
   }
 
+  handleClickSearch = (matched) => {
+    this.setState({
+      selectedMarker: matched
+    })
+  }
+
   render() {
     const {
       isActive,
@@ -118,11 +125,13 @@ class App extends Component {
       viewport,
       currentLocation,
       selectedMarker,
-      toggledInfo } = this.state;
+      toggledInfo,
+      queryMatched } = this.state;
     return (
       <div className="App">
 
         <TopNavBar />
+
 
         { isLoading && (<LoadingIcon />)}
         { !isLoading && (
@@ -146,7 +155,9 @@ class App extends Component {
         <Lmap
           currentLocation={ currentLocation }
           markers={ filteredMarkers }
+          origMarkers={ markers }
           viewport={ viewport }
+          selectedMarker={ selectedMarker }
           onToggleInfo={ this.handleToggleInfo }
           onTogglePanel={ this.handleTogglePanel }
           onClosePanel={ this.handleClosePanel }
@@ -156,6 +167,7 @@ class App extends Component {
           className='info-bar'
           toggledInfo={ toggledInfo }
           selectedMarker={ selectedMarker }
+          queryMatched= { queryMatched }
         />
       </div>
     )
