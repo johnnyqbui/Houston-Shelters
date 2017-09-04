@@ -13,15 +13,19 @@ class Search extends Component {
 			query: query
 		})
 		this.searchData(query)
+
 	}
 
 	searchData = (query) => {
-		const { data } = this.props;
+		const { markerData, onInputSearch } = this.props;
 		if (query.length > 1) {
-			const matched = data.filter(data => data.shelter.toLowerCase().indexOf(query.toLowerCase()) > -1)
+			const matched = markerData.filter(
+				data => data.shelter.toLowerCase().indexOf(query.toLowerCase()) > -1
+			)
 			this.setState({
 				searched: matched
 			})
+			onInputSearch(matched)
 		} else {
 			this.setState({
 				searched: []
@@ -29,8 +33,10 @@ class Search extends Component {
 		}
 	}
 
-	handleCloseSearch = () => {
+	handleCloseSearch = (data) => {
+		const { onInputSearch } = this.props;
 		this.setState({
+			query: `${ data.shelter } at ${ data.address }, ${ data.city }`,
 			searched: []
 		})
 	}
@@ -54,7 +60,7 @@ class Search extends Component {
 				<ul>
 					{searched.map((data, index) => (
 						<li key={index} onClick={() => {
-							this.handleCloseSearch()
+							this.handleCloseSearch(data)
 							onClickSearch(data)
 						}}>
 							{`${ data.shelter } at ${ data.address }, ${ data.city }`}

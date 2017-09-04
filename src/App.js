@@ -103,16 +103,34 @@ class App extends Component {
     })
   }
 
-  handleToggleInfo = (marker) => {
+  handleOpenInfoBox = (marker) => {
     this.setState({
       selectedMarker: marker,
-      toggledInfo: !this.state.toggledInfo
+      toggledInfo: true
+    })
+  }
+
+  handleCloseInfoBox = () => {
+    this.setState({
+      toggledInfo: false
+    })
+  }
+
+  handleInputSearch = (query) => {
+    this.setState({
+      filteredMarkers: query
     })
   }
 
   handleClickSearch = (matched) => {
     this.setState({
-      selectedMarker: matched
+      viewport: {
+        center: [matched.location.lat, matched.location.lng],
+        zoom: 14
+      },
+      selectedMarker: matched,
+      filteredMarkers: [matched],
+      toggledInfo: true
     })
   }
 
@@ -132,6 +150,11 @@ class App extends Component {
 
         <TopNavBar />
 
+        <Search
+          markerData={ markers }
+          onClickSearch={ this.handleClickSearch }
+          onInputSearch={ this.handleInputSearch }
+        />
 
         { isLoading && (<LoadingIcon />)}
         { !isLoading && (
@@ -158,7 +181,11 @@ class App extends Component {
           origMarkers={ markers }
           viewport={ viewport }
           selectedMarker={ selectedMarker }
-          onToggleInfo={ this.handleToggleInfo }
+          queryMatched={ queryMatched }
+
+          onOpenInfoBox={ this.handleOpenInfoBox }
+          onCloseInfoBox={ this.handleCloseInfoBox }
+
           onTogglePanel={ this.handleTogglePanel }
           onClosePanel={ this.handleClosePanel }
         />

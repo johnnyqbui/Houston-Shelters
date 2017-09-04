@@ -1266,15 +1266,15 @@ h4 {
 .search-data-results {
     background: #fff;
     overflow: hidden;
-    overflow-y: scroll;
+
 }
 
 .search-data-results ul {
     margin: 0;
     padding: 0;
+    overflow-y: scroll;
 
 }
-
 
 .search-data-results ul li {
     border-bottom: 1px solid #ccc;

@@ -35,7 +35,6 @@ class FilterPanel extends Component {
     let updated = value.indexOf('Updated') > -1;
 
     let filtered = origMarkers.filter(marker => {
-      console.log(marker)
       if (allShelters) {return origMarkers}
 
       else if (acceptingPeople) {return marker.accepting}

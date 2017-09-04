@@ -56,23 +56,18 @@ class Lmap extends Component {
   			bounds: []
   		})
   	}
-
-  	handleShowMarker = (ref) => {
-  		if (ref) {
-			ref.leafletElement._icon.style.display = ""
-  		}
-	}
-
-	handleHideMarker = (ref) => {
-		// if (ref) {
-		// 	ref.leafletElement._icon.style.display = 'none'
-		// }
-	}
-
-
 	render() {
 		const { bounds } = this.state;
-		const { markers, origMarkers, currentLocation, viewport, selectedMarker, onToggleInfo, onClosePanel } = this.props;
+		const {
+			markers,
+			origMarkers,
+			currentLocation,
+			viewport,
+			queryMatched,
+			onOpenInfoBox,
+			onCloseInfoBox,
+			onClosePanel } = this.props;
+			console.log(viewport)
 		return (
 			<Map
 			    className='map'
@@ -108,7 +103,6 @@ class Lmap extends Component {
 		        accepting ? icon = blueMarkerIcon : icon = greyMarkerIcon
 					return (
 					<Marker
-						ref={marker === selectedMarker ? this.handleShowMarker : this.handleHideMarker}
 						icon={icon}
 						key={index}
 						position={[location.lat, location.lng]}
@@ -116,11 +110,11 @@ class Lmap extends Component {
 						<Popup minWidth="250" autoPan={false}
 							onOpen={() => {
 								this.centerToMarker(location);
-								onToggleInfo(marker)
+								onOpenInfoBox(marker)
 								onClosePanel()
 							}}
 							onClose={() => {
-								onToggleInfo(marker)
+								onCloseInfoBox()
 							}}>
 						    <div className='popup-info' style={{fontSize: '14px'}}>
 						        <span style={{fontWeight: 'bold', fontSize: '16px'}}>{shelter}</span><br/>
