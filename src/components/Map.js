@@ -49,7 +49,7 @@ class Lmap extends Component {
 
 	render() {
 		const { bounds } = this.state;
-		const { markers, currentLocation, viewport, onToggleInfo, onTogglePanel, onClosePanel } = this.props;
+		const { markers, currentLocation, viewport, onToggleInfo, onClosePanel } = this.props;
 		return (
 			<Map
 			    className='map'
@@ -72,9 +72,9 @@ class Lmap extends Component {
 		          address,
 		          city,
 		          phone,
+		          cleanPhone,
 		          accepting,
-		          location,
-		          lastUpdated } = marker;
+		          location } = marker;
 		        const concatAddress = encodeURI(`${address} ${city}`)
 		        let icon;
 		        accepting ? icon = blueMarkerIcon : icon = greyMarkerIcon
@@ -98,7 +98,7 @@ class Lmap extends Component {
 						        {city}<br/>
 						        <div className='popup-button-container'>
 							        {phone && (
-							        	<a className='popup-info-button' href={`tel:${phone.replace(/\D/g,'')}`}>Tap to Call</a> : ''
+							        	<a className='popup-info-button' href={`tel:${cleanPhone}`}>Tap to Call</a>
 							        )}
 							        <a className='popup-info-button' href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>
 								</div>

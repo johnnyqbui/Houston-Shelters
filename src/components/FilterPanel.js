@@ -37,23 +37,23 @@ class FilterPanel extends Component {
     let filtered = origMarkers.filter(marker => {
       if (allShelters) {return origMarkers}
 
-        else if (acceptingPeople) {return marker.accepting}
+      else if (acceptingPeople) {return marker.accepting}
 
-          else if (notAccepting) {return !marker.accepting}
+      else if (notAccepting) {return !marker.accepting}
 
-            else if (pets) {return marker.pets.length > 0 && marker.pets.match(/yes/ig)}
+      else if (pets) {return marker.pets.length > 0 && marker.pets.match(/yes/ig)}
 
-              else if (supplyNeeds) {return marker.supplyNeeds && !marker.supplyNeeds.match(/no\s/ig)}
+      else if (supplyNeeds) {return marker.supplyNeeds && !marker.supplyNeeds.match(/no\s/ig)}
 
-                else if (volunteerNeeds) {return marker.volunteerNeeds && !marker.volunteerNeeds.match(/no\s/ig)}
+      else if (volunteerNeeds) {return marker.volunteerNeeds && !marker.volunteerNeeds.match(/no\s/ig)}
 
-                  else if (updated) {
-                    if (marker.lastUpdated.length > 0) {
-                    const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(24, 'hours').format()
-                    const timeAfter = moment().format()
-                    return replaceLastUpdated > timeAfter && (marker)
-                  }}
-    })
+      else if (updated) {
+        if (marker.lastUpdated.length > 0) {
+        const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(24, 'hours').format()
+        const timeAfter = moment().format()
+        return replaceLastUpdated > timeAfter && (marker)
+      }}
+  });
 
     this.setState({
       selectedFilter: {
@@ -72,7 +72,7 @@ class FilterPanel extends Component {
   }
 
   render() {
-    const { isActive, origMarkers, toggledInfo, onTogglePanel, filterLength } = this.props;
+    const { isActive, origMarkers, onTogglePanel, filterLength } = this.props;
     const { selectedFilter } = this.state;
 
     const {

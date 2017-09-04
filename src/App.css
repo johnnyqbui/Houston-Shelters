@@ -577,18 +577,17 @@ button {
     position: absolute;
     z-index: 4;
     display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
     height: 50px;
     padding: 0 3%;
     color: #fff;
-    justify-content: space-between;
     background-color: #203b49;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
 }
-
 
 .top-support {
     font-size: 16px;
@@ -598,6 +597,7 @@ button {
 .top-navbar h2 {
     padding: 0;
 }
+
 
 /* END Top Nav Bar */
 
@@ -739,8 +739,7 @@ a {
 
 .leaflet-container .popup-info-button {
     width: 50%;
-    margin-top: 5px;
-    margin-right: 5px;
+    margin: 5px 3px 0;
     padding: 8px 15px;
     text-align: center;
     text-decoration: none;
@@ -752,6 +751,7 @@ a {
 .leaflet-container .popup-button-container {
     display: flex;
     flex-wrap: nowrap;
+    justify-content: center;
 }
 
 .bluetext {
@@ -798,21 +798,21 @@ a {
 }
 
 .controls-font-grey {
-    color: #8c8c8c;
+    color: #656565;
 }
 
 .locate-me-container {
     position: absolute;
-    right: 5px;
-    top: 50px;
     z-index: 10;
+    top: 50px;
+    right: 5px;
 }
 
 .add-shelter-container {
     position: absolute;
-    right: 5px;
-    top: 50px;
     z-index: 10;
+    top: 50px;
+    right: 5px;
 }
 
 .controls-button {
@@ -832,17 +832,19 @@ a {
 .locate-me-container p {
     display: none;
 }
+
 .locate-me-button {
-    right: 50px;
     top: 5px;
+    right: 50px;
 }
 
 .add-shelter-container p {
     display: none;
 }
+
 .add-shelter-button {
-    right: 5px;
     top: 5px;
+    right: 5px;
 }
 
 .locate-me-icon {
@@ -995,7 +997,6 @@ h4 {
         bottom: -30%;
         height: 30%;
     }
-
     .top-support {
         width: auto;
     }
@@ -1008,29 +1009,26 @@ h4 {
     .locate-me-container p {
         position: relative;
         right: 195px;
-        width: 75px;
         display: block;
+        width: 75px;
     }
     .locate-me-button {
-        right: 150px;
         top: 5px;
+        right: 150px;
     }
-
     .add-shelter-container p {
         position: relative;
         right: 53px;
-        width: 83px;
         display: block;
+        width: 83px;
     }
     .add-shelter-button {
-        right: 10px;
         top: 5px;
+        right: 10px;
     }
-
     .current-filter-button span {
         display: inline;
     }
-
     /*
     .filter-panel {
         top: 65px;

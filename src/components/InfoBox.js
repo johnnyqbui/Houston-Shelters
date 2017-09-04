@@ -10,6 +10,7 @@ const InfoBox = (props) => {
     address,
     city,
     phone,
+    cleanPhone,
     location, //May be needed for debugging issues related to coords
     accepting,
     pets,
@@ -25,7 +26,7 @@ const InfoBox = (props) => {
       <div className='info-box-content'>
         <p>
           <FontAwesome className="blueIcon" name="phone" />
-          {phone ? <a href={`tel:${phone.replace(/\D/g,'')}`}>{phone}</a> : 'No Phone Number'}
+          {phone ? <a href={`tel:${cleanPhone}`}>{phone}</a> : 'No Phone Number'}
         </p>
         <p>
           <FontAwesome className="blueIcon" name="map-marker" />

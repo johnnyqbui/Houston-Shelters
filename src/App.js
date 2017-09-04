@@ -50,6 +50,7 @@ class App extends Component {
         address: address,
         city: city,
         phone: phone,
+        cleanPhone: cleanPhone,
         accepting: accepting,
         pets: pets,
         location: {
@@ -116,7 +117,6 @@ class App extends Component {
       filteredMarkers,
       viewport,
       currentLocation,
-      selectedFilter,
       selectedMarker,
       toggledInfo } = this.state;
     return (

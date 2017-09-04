@@ -3,7 +3,7 @@ import '../App.css';
 import FontAwesome from 'react-fontawesome'
 
 const GeoLocate = (props) => {
-    const { currentLocation, onClickLocate, toggledInfo } = props;
+    const { currentLocation, onClickLocate } = props;
     const locate = () => {
         const success = (position) => {
             const currentLocation = [position.coords.latitude, position.coords.longitude]
