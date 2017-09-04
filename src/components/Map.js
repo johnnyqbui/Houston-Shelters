@@ -25,10 +25,6 @@ const greyMarkerIcon = new L.icon({
     popupAnchor: [0, -28]
 })
 
-// const center = new L.panTo({
-
-// })
-
 class Lmap extends Component {
 
 	state = {
@@ -55,8 +51,10 @@ class Lmap extends Component {
 			    className='map'
 			    center={ bounds }
 			    viewport={ viewport }
-			    zoomControl={false}
 			    onClick={ onClosePanel }
+			    doubleClickZoom={ true }
+			    zoomSnap={ false }
+			    trackResize={ true }
 			>
 		      <TileLayer
 		        url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
