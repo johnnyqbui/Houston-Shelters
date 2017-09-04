@@ -905,7 +905,7 @@ h4 {
 
 .info-box {
     font-size: 14px;
-    position: absolute;
+    position: fixed;
     z-index: 50;
     bottom: -40%;
     overflow-y: auto;
