@@ -19,7 +19,7 @@ class FilterPanel extends Component {
   componentDidMount() {
     const { onTogglePanel } = this.props;
     // Show Panel on page load if not on mobile
-    window.innerWidth > 600 && ( onTogglePanel() )
+    window.innerWidth > 960 && ( onTogglePanel() )
   }
 
   handleFilter = (value, origMarkers) => {

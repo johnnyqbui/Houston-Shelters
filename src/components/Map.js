@@ -1,35 +1,56 @@
 import React, { Component } from 'react';
 import L from 'leaflet';
-import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl, Pane } from 'react-leaflet';
-import blueMarker from '../images/marker-icon-blue.png';
-import greyMarker from '../images/marker-icon-grey.png';
+import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
+import blueMarker from '../images/shelter-blue.png';
+import greyMarker from '../images/shelter-grey.png';
+import shadowMarker from '../images/marker-shadow.png'
 
 const blueMarkerIcon = new L.icon({
 	iconUrl: blueMarker,
-	iconSize: [25, 41],
-	iconAnchor: [12, 41],
-    popupAnchor: [0, -28]
+	iconSize: [30, 41],
+	iconAnchor: [15, 41],
+	popupAnchor: [0, -35]
+	// shadowUrl: shadowMarker,
+	// shadowSize: [41, 41],
+	// shadowAnchor: [12, 41],
+
+
+	// iconSize: [25, 41],
+	// iconAnchor: [12, 41],
+	// shadowUrl: shadowMarker,
+	// shadowSize: [41, 41],
+	// shadowAnchor: [12, 41],
+	// popupAnchor: [0, -28]
+
 })
 
 const greyMarkerIcon = new L.icon({
 	iconUrl: greyMarker,
-	iconSize: [25, 41],
-	iconAnchor: [12, 41],
-    popupAnchor: [0, -28]
+	iconSize: [18, 23],
+	iconAnchor: [9, 23],
+	popupAnchor: [0, -18],
+	// shadowUrl: shadowMarker,
+	// shadowSize: [41, 41],
+	// shadowAnchor: [12, 41]
+
+	// iconSize: [25, 41],
+	// iconAnchor: [12, 41],
+	// shadowUrl: shadowMarker,
+	// shadowSize: [41, 41],
+	//  shadowAnchor: [12, 41],
+	//  popupAnchor: [0, -28]
 })
 
 class Lmap extends Component {
 
-	state = {
-		bounds: []
-	}
-
+		state = {
+			bounds: []
+		}
   	centerToMarker = (location) => {
   		this.setState({
   			bounds: location
   		})
   	}
-
   	resetBounds = () => {
   		this.setState({
   			bounds: []
@@ -65,7 +86,7 @@ class Lmap extends Component {
 			>
 
 		      <TileLayer
-		        url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
+		        url='https://api.mapbox.com/styles/v1/jnolasco/cj75zemih4wc02srs353jlu05/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam5vbGFzY28iLCJhIjoiY2oyYmVwNXViMDB1NjJxbXB2aHFlZnAzZyJ9.dY4H7Hzre0GJOeHBrkzIpg'
 		        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 		      />
 
