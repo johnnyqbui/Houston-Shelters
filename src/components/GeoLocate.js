@@ -10,7 +10,7 @@ const GeoLocate = (props) => {
             const currentLocation = [position.coords.latitude, position.coords.longitude]
             onClickLocate(currentLocation)
         }
-        const error = (err) => { console.log('Could not obtain locaiton', err)}
+        const error = (err) => { console.log('Could not obtain location', err)}
 
         // High accuracy on false to consume energy on mobile
         const options = {maximumAge: 60000, timeout: 5000, enableHighAccuracy: false}

@@ -28,11 +28,12 @@ class App extends Component {
         currentLocation: [],
         selectedFilter: 'Accepting People',
         selectedMarker: {},
-        toggledInfo: false
+        toggledInfo: false,
+        query: ''
     }
 
     async componentDidMount() {
-        console.log('Component Mounted')
+        // console.log('Component Mounted')
         const shelterData = await SheltersApi.getAll();
         const allMarkerData = shelterData.shelters.map((shelters) => {
             const {
@@ -83,30 +84,30 @@ class App extends Component {
 
     // For debugging purposes
     componentWillMount() {
-        console.log('Component is about to mount')
+        // console.log('Component is about to mount')
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('Component is about to receive props', nextProps)
+        // console.log('Component is about to receive props', nextProps)
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('Should component update?')
-        console.log('Next Props', nextProps)
-        console.log('Next State', nextState)
+        // console.log('Should component update?')
+        // console.log('Next Props', nextProps)
+        // console.log('Next State', nextState)
         return true
     }
 
     componentWillUpdate() {
-        console.log('Component is about to update')
+        // console.log('Component is about to update')
     }
 
     componentDidUpdate() {
-        console.log('Component has updated')
+        // console.log('Component has updated')
     }
 
     componentWillUnmount() {
-        console.log('Component is about to unmount')
+        // console.log('Component is about to unmount')
     }
 
 
@@ -159,7 +160,7 @@ class App extends Component {
         })
     }
 
-    handleClickSearch = (matched) => {
+    handleClickSearch = (matched, query) => {
         this.setState({
             viewport: {
                 center: [matched.location.lat, matched.location.lng],
@@ -167,10 +168,10 @@ class App extends Component {
             },
             selectedMarker: matched,
             filteredMarkers: [matched],
-            toggledInfo: true
+            toggledInfo: true,
+            query: query
         })
     }
-
 
     render() {
         const {
@@ -183,13 +184,15 @@ class App extends Component {
             viewport,
             currentLocation,
             selectedMarker,
-            toggledInfo } = this.state;
+            toggledInfo,
+            query } = this.state;
         return (
             <div className="App">
 
-                <Route exact path='/' render={() => (
-                    <div>
-                        <TopNavBar />
+                    <TopNavBar />
+
+                    <Route exact path='/' render={() => (
+                        <div>
 
                         <Search
                             allMarkers={ allMarkers }
@@ -232,9 +235,9 @@ class App extends Component {
                         />
 
                         <InfoBox
-                            className='info-bar'
                             toggledInfo={ toggledInfo }
                             selectedMarker={ selectedMarker }
+                            query={ query }
                         />
                     </div>
                 )} />

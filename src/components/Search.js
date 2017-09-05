@@ -16,10 +16,13 @@ class Search extends Component {
 	searchData = (query) => {
 		const { allMarkers, tempFilteredMarkers, onInputSearch, onCloseInfoBox } = this.props;
 		const matched = allMarkers.filter(
-			data => data.shelter.toLowerCase().indexOf(query.toLowerCase()) > -1
+			data => {
+				const { shelter, address, city, county, supplyNeeds, volunteerNeeds, pets } = data;
+				const concat = `${shelter} ${address} ${city} ${county} ${supplyNeeds} ${volunteerNeeds}`.toLowerCase();
+				return concat.indexOf(query.toLowerCase()) > -1
+			}
 		)
 		if (query.length > 1) {
-
 			this.setState({
 				searched: matched
 			})
@@ -31,10 +34,6 @@ class Search extends Component {
 			onCloseInfoBox()
 			onInputSearch(tempFilteredMarkers)
 		}
-	}
-
-	handleKeyDown() {
-
 	}
 
 	handleCloseSearch = (data) => {
@@ -53,7 +52,7 @@ class Search extends Component {
 				  <div className="search-data-input-wrapper">
 				    <input
 					    type="text"
-					    placeholder="Search by Shelter"
+					    placeholder="Search by Address, Shelter or Needs (eg: 'baby formula')"
 					    value={query}
 					    onChange={(e) => this.updateQuery(e.target.value)}
 				    />
@@ -65,7 +64,7 @@ class Search extends Component {
 							<li key={index}
 								onClick={() => {
 									this.handleCloseSearch(data)
-									onClickSearch(data)
+									onClickSearch(data, query)
 								}}
 							>
 								{`${ data.shelter } at ${ data.address }, ${ data.city }`}

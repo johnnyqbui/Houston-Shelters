@@ -1,12 +1,14 @@
 import React from 'react';
+import moment from 'moment';
 import '../App.css';
 import FaPhone from 'react-icons/lib/fa/phone';
 import FaMapMarker from 'react-icons/lib/fa/map-marker';
+import Highlighter from 'react-highlight-words';
 
 const InfoBox = (props) => {
 
-  const { selectedMarker, toggledInfo } = props;
-  const {
+  const { selectedMarker, toggledInfo, query } = props;
+  let {
     shelter,
     address,
     city,
@@ -20,10 +22,32 @@ const InfoBox = (props) => {
     volunteerNeeds,
     county,
     lastUpdated } = selectedMarker;
+
+  // Validate info
+  shelter = shelter ? shelter : ''
+  address = address ? address : ''
+  city = city ? city : ''
+  county = county ? county : ''
+  notes = notes ? notes : ''
+  supplyNeeds = supplyNeeds ? supplyNeeds : ''
+  volunteerNeeds = volunteerNeeds ? volunteerNeeds : ''
+
   const concatAddress = encodeURI(`${address} ${city}`)
+
+  const arrQuery = query.indexOf(' ') > -1 ? query.split(' ') : [query]
+
+  // Highlight found text
+  const highlightText = (info) => {
+    return (
+      <Highlighter
+        searchWords={arrQuery}
+        textToHighlight={info}
+      />
+    )
+  }
   return (
     <div className={ toggledInfo ? 'info-box open' : 'info-box'}>
-      <h2>{shelter}</h2>
+      <h2>{highlightText(shelter)}</h2>
       <div className='info-box-content'>
         <p>
           <FaPhone className="blueIcon" />
@@ -31,15 +55,17 @@ const InfoBox = (props) => {
         </p>
         <p>
           <FaMapMarker className="blueIcon" />
-          <a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">{address}, {city}</a> ({county} County)
+          <a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">
+            {highlightText(address)}, {highlightText(city)}
+          </a> ({highlightText(county)} County)
         </p>
         <br/>
-        <p><span style={{fontWeight: 'bold'}}>Updated:</span> {lastUpdated}</p>
+          <p><span style={{fontWeight: 'bold'}}>Updated:</span> {moment(lastUpdated).format('L LT')}</p>
           <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
           <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
-          <p><span style={{fontWeight: 'bold'}}>Notes:</span> {notes}</p>
-          <p><span style={{fontWeight: 'bold'}}>Supply Needs:</span> {supplyNeeds}</p>
-          <p><span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {volunteerNeeds}</p>
+          <p><span style={{fontWeight: 'bold'}}>Notes:</span> {highlightText(notes)}</p>
+          <p><span style={{fontWeight: 'bold'}}>Supply Needs:</span> {highlightText(supplyNeeds)}</p>
+          <p><span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {highlightText(volunteerNeeds)}</p>
       </div>
     </div>
   )

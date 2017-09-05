@@ -15,23 +15,14 @@ const FilterPanel = (props) => {
     // Show Panel on page load if not on mobile
     // window.innerWidth > 960 && (onTogglePanel())
 
-    let allShelters = selectedFilter === "All Shelters";
-    let acceptingPeople = selectedFilter === "Accepting People";
-    let notAccepting = selectedFilter === "Not Accepting People";
-    let pets = selectedFilter === "Pets Allowed";
-    let supplyNeeds = selectedFilter === "Need Supplies";
-    let volunteerNeeds = selectedFilter === "Need Volunteers";
-    let updated = selectedFilter.indexOf('Updated') > -1;
-
     const handleFilter = (value) => {
-
-      const allShelters = value === "All Shelters";
-      const acceptingPeople = value === "Accepting People";
-      const notAccepting = value === "Not Accepting People";
-      const pets = value === "Pets Allowed";
-      const supplyNeeds = value === "Need Supplies";
-      const volunteerNeeds = value === "Need Volunteers";
-      const updated = value.indexOf('Updated') > -1;
+      let allShelters = value === "All Shelters";
+      let acceptingPeople = value === "Accepting People";
+      let notAccepting = value === "Not Accepting People";
+      let pets = value === "Pets Allowed";
+      let supplyNeeds = value === "Need Supplies";
+      let volunteerNeeds = value === "Need Volunteers";
+      let updated = value.indexOf('Updated') > -1;
 
         const filtered = allMarkers.filter(marker => {
             if (allShelters) {
@@ -58,6 +49,15 @@ const FilterPanel = (props) => {
 
         onClickFilter(value, filtered)
     }
+
+    let allShelters = selectedFilter === "All Shelters";
+    let acceptingPeople = selectedFilter === "Accepting People";
+    let notAccepting = selectedFilter === "Not Accepting People";
+    let pets = selectedFilter === "Pets Allowed";
+    let supplyNeeds = selectedFilter === "Need Supplies";
+    let volunteerNeeds = selectedFilter === "Need Volunteers";
+    let updated = selectedFilter.indexOf('Updated') > -1;
+
 
     return (
     <div className='filter-container'>
