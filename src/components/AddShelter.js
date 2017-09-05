@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
-import FontAwesome from 'react-fontawesome'
+import GoPlus from 'react-icons/lib/go/plus'
+
 
 const AddShelter = (props) => {
     return (
@@ -8,7 +9,7 @@ const AddShelter = (props) => {
             <p className='controls-font-grey'>Add Shelter</p>
             <button className='controls-button add-shelter-button'>
             <a href='http://harveyneeds.org/' target='_blank' rel='noopener noreferrer' >
-                <FontAwesome className="add-shelter-icon" name="plus" />
+                <GoPlus className="add-shelter-icon" />
 
             </a>
             </button>

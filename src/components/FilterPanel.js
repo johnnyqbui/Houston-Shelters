@@ -49,9 +49,9 @@ const FilterPanel = (props) => {
             } else if (updated) {
 
             if (marker.lastUpdated.length > 0) {
-                const replaceLastUpdated = moment(marker.lastUpdated, 'YYYY-MM-DD hh:mm A').add(24, 'hours').format()
-                const timeAfter = moment().format()
-                return replaceLastUpdated > timeAfter && (marker)
+                const lastUpdatedPlus = moment(marker.lastUpdated).add(24, 'hours').format()
+                const current = moment().format()
+                return lastUpdatedPlus > current && (marker)
             }
           }
         })

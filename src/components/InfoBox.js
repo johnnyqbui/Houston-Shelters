@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 import '../App.css';
-import FontAwesome from 'react-fontawesome'
+import FaPhone from 'react-icons/lib/fa/phone';
+import FaMapMarker from 'react-icons/lib/fa/map-marker';
 
 const InfoBox = (props) => {
 
@@ -25,11 +26,11 @@ const InfoBox = (props) => {
       <h2>{shelter}</h2>
       <div className='info-box-content'>
         <p>
-          <FontAwesome className="blueIcon" name="phone" />
+          <FaPhone className="blueIcon" />
           {phone ? <a href={`tel:${cleanPhone}`}>{phone}</a> : 'No Phone Number'}
         </p>
         <p>
-          <FontAwesome className="blueIcon" name="map-marker" />
+          <FaMapMarker className="blueIcon" />
           <a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">{address}, {city}</a> ({county} County)
         </p>
         <br/>

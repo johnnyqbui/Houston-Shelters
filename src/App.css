@@ -793,6 +793,7 @@ a {
 
 .controls-button {
     position: absolute;
+    padding: 0;
     width: 38px;
     height: 38px;
     cursor: pointer;
@@ -851,15 +852,17 @@ input {
 }
 
 .locate-me-icon {
-    font-size: 28px;
+    font-size: 30px;
     color: #fff;
     position: relative;
+    right: 0;
 }
 
 .add-shelter-icon {
-    font-size: 25px;
+    font-size: 32px;
     color: #fff;
     position: relative;
+    right: 0;
 }
 
 /* nolasco patch */
@@ -1260,8 +1263,8 @@ h4 {
 
 .search-data-container {
     position: absolute;
-    top: 13%;
-    left: 15px;
+    top: 60px;
+    left: 17%;
     z-index: 6;
 }
 
@@ -1287,4 +1290,23 @@ h4 {
 
 .search-data-results ul li:hover {
     background: #a6c5ce;
+}
+
+.top-navbar-dropdown {
+}
+
+.top-navbar-dropdown ul {
+    margin: 0;
+    padding: 0;
+}
+
+.top-navbar-dropdown ul li {
+    list-style-type: none;
+    float: left;
+    margin: 15px;
+}
+
+.top-navbar-dropdown ul li a {
+    text-decoration: none;
+    color: white;
 }

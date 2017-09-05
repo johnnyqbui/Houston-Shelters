@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class Search extends Component {
 	state = {
@@ -33,41 +33,47 @@ class Search extends Component {
 		}
 	}
 
+	handleKeyDown() {
+
+	}
+
 	handleCloseSearch = (data) => {
 		this.setState({
 			query: `${ data.shelter } at ${ data.address }, ${ data.city }`,
 			searched: []
 		})
 	}
-
 	render() {
 		const { query, searched } = this.state;
 		const { onClickSearch } = this.props;
 		return (
-		<div className="search-data-container">
-			<div className="search-data-bar">
-			  <div className="search-data-input-wrapper">
-			    <input
-				    type="text"
-				    placeholder="Search by Shelter"
-				    value={query}
-				    onChange={(e) => this.updateQuery(e.target.value)}
-			    />
-			  </div>
+
+			<div className="search-data-container">
+				<div className="search-data-bar">
+				  <div className="search-data-input-wrapper">
+				    <input
+					    type="text"
+					    placeholder="Search by Shelter"
+					    value={query}
+					    onChange={(e) => this.updateQuery(e.target.value)}
+				    />
+				  </div>
+				</div>
+				<div className="search-data-results">
+					<ul>
+						{searched.map((data, index) => (
+							<li key={index}
+								onClick={() => {
+									this.handleCloseSearch(data)
+									onClickSearch(data)
+								}}
+							>
+								{`${ data.shelter } at ${ data.address }, ${ data.city }`}
+							</li>
+						))}
+					</ul>
+				</div>
 			</div>
-			<div className="search-data-results">
-				<ul>
-					{searched.map((data, index) => (
-						<li key={index} onClick={() => {
-							this.handleCloseSearch(data)
-							onClickSearch(data)
-						}}>
-							{`${ data.shelter } at ${ data.address }, ${ data.city }`}
-						</li>
-					))}
-				</ul>
-			</div>
-		</div>
 		)
 	}
 }

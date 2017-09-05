@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
-import FontAwesome from 'react-fontawesome'
+import MdGpsFixed from 'react-icons/lib/md/gps-fixed';
+
 
 const GeoLocate = (props) => {
     const { currentLocation, onClickLocate } = props;
@@ -27,7 +28,7 @@ const GeoLocate = (props) => {
             <button
                 className='controls-button locate-me-button'
                 onClick={() => {locate(currentLocation)}}>
-                <FontAwesome className="locate-me-icon" name="crosshairs" />
+                <MdGpsFixed className="locate-me-icon" />
             </button>
         </div>
     )
