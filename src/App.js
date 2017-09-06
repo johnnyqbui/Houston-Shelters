@@ -6,7 +6,7 @@ import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
 import AddShelter from './components/AddShelter';
 import FilterPanel from './components/FilterPanel';
-import Search from './components/Search';
+// import Search from './components/Search';
 import LoadingIcon from './components/LoadingIcon';
 import InfoBox from './components/InfoBox'
 
@@ -219,25 +219,6 @@ class App extends Component {
                     <Route exact path='/' render={() => (
                         <div>
 
-                        <Search
-                            allMarkers={ allMarkers }
-                            tempFilteredMarkers = { tempFilteredMarkers }
-
-                            selectedFilter={ selectedFilter }
-                            tempSelectedFilter={ tempSelectedFilter }
-
-                            toggledSearchBox={ toggledSearchBox }
-
-                            onSelectedFilter={ this.handleSelectedFilters }
-
-                            onClickSearch={ this.handleClickSearch }
-                            onInputSearch={ this.handleInputSearch }
-
-                            onCloseSearchBox={ this.handleCloseSearchBox }
-                            onOpenSearchBox={ this.handleOpenSearchBox }
-
-                            onCloseInfoBox={ this.handleCloseInfoBox }
-                        />
                         { isLoading ? <LoadingIcon /> :
                             <FilterPanel
                                 toggledPanel={ toggledPanel }
@@ -283,9 +264,7 @@ class App extends Component {
                     </div>
                 )} />
 
-                <Route path='/credits' render={( history ) => (
-                    <Credits />
-                )} />
+
 
             </div>
         )
