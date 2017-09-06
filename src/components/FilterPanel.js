@@ -5,9 +5,9 @@ import '../App.css';
 class FilterPanel extends Component {
   state = {
     selectedFilter: {
-      value: 'Accepting People',
-      allShelters: false,
-      acceptingPeople: true,
+      value: 'All Shelters',
+      allShelters: true,
+      acceptingPeople: false,
       notAccepting: false,
       pets: false,
       supplyNeeds: false,
