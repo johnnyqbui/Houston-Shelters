@@ -47,9 +47,19 @@ class Lmap extends Component {
 			bounds: []
 		}
   	centerToMarker = (location) => {
-  		this.setState({
-  			bounds: location
-  		})
+  		if (window.innerWidth > 960) {
+  			this.setState({
+	  			bounds: {
+	  				lat: location.lat,
+	  				lng: location.lng-.6
+	  			}
+	  		})
+  		} else {
+  			this.setState({
+	  			bounds: location
+	  		})
+  		}
+
   	}
   	resetBounds = () => {
   		this.setState({
@@ -71,7 +81,7 @@ class Lmap extends Component {
 			    className='map'
 			    center={ bounds }
 			    viewport={ viewport }
-			    onClick={ onClosePanel, onCloseSearchBox }
+			    onClick={ onClosePanel, onCloseSearchBox, onCloseInfoBox }
 			    doubleClickZoom={ true }
 			    zoomSnap={ false }
 			    trackResize={ true }

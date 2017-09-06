@@ -176,7 +176,6 @@ class App extends Component {
     }
 
     handleInputSearch = (query, selectedFilter) => {
-        console.log(selectedFilter)
         this.setState({
             filteredMarkers: query,
             selectedFilter: selectedFilter
