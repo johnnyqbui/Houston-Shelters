@@ -16,7 +16,6 @@ import * as SheltersApi from './utils/SheltersApi';
 
 class App extends Component {
     state = {
-        toggledPanel: true,
         isLoading: true,
         allMarkers: [],
         filteredMarkers: [],
@@ -27,8 +26,11 @@ class App extends Component {
         },
         currentLocation: [],
         selectedFilter: 'Accepting People',
+        tempSelectedFilter: 'Accepting People',
         selectedMarker: {},
         toggledInfo: false,
+        toggledPanel: true,
+        toggledSearchBox: false,
         query: ''
     }
 
@@ -82,39 +84,46 @@ class App extends Component {
         });
     }
 
-    // For debugging purposes
-    componentWillMount() {
-        // console.log('Component is about to mount')
-    }
+    // // For debugging purposes
+    // componentWillMount() {
+    //     console.log('Component is about to mount')
+    // }
 
-    componentWillReceiveProps(nextProps) {
-        // console.log('Component is about to receive props', nextProps)
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     console.log('Component is about to receive props', nextProps)
+    // }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        // console.log('Should component update?')
-        // console.log('Next Props', nextProps)
-        // console.log('Next State', nextState)
-        return true
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('Should component update?')
+    //     console.log('Next Props', nextProps)
+    //     console.log('Next State', nextState)
+    //     return true
+    // }
 
-    componentWillUpdate() {
-        // console.log('Component is about to update')
-    }
+    // componentWillUpdate() {
+    //     console.log('Component is about to update')
+    // }
 
-    componentDidUpdate() {
-        // console.log('Component has updated')
-    }
+    // componentDidUpdate() {
+    //     console.log('Component has updated')
+    // }
 
-    componentWillUnmount() {
-        // console.log('Component is about to unmount')
-    }
+    // componentWillUnmount() {
+    //     console.log('Component is about to unmount')
+    // }
 
 
     handleFilteredMarkers = (selectedFilter, filteredMarkers) => {
         this.setState({
             filteredMarkers: filteredMarkers,
             tempFilteredMarkers: filteredMarkers,
+            selectedFilter: selectedFilter,
+            tempSelectedFilter: selectedFilter
+        })
+    }
+
+    handleSelectedFilters = (selectedFilter) => {
+        this.setState({
             selectedFilter: selectedFilter
         })
     }
@@ -154,9 +163,23 @@ class App extends Component {
         })
     }
 
-    handleInputSearch = (query) => {
+    handleOpenSearchBox = () => {
         this.setState({
-            filteredMarkers: query
+            toggledSearchBox: true
+        })
+    }
+
+    handleCloseSearchBox = () => {
+        this.setState({
+            toggledSearchBox: false
+        })
+    }
+
+    handleInputSearch = (query, selectedFilter) => {
+        console.log(selectedFilter)
+        this.setState({
+            filteredMarkers: query,
+            selectedFilter: selectedFilter
         })
     }
 
@@ -175,16 +198,18 @@ class App extends Component {
 
     render() {
         const {
-            toggledPanel,
             isLoading,
             allMarkers,
             filteredMarkers,
             tempFilteredMarkers,
             selectedFilter,
+            tempSelectedFilter,
             viewport,
             currentLocation,
             selectedMarker,
             toggledInfo,
+            toggledPanel,
+            toggledSearchBox,
             query } = this.state;
         return (
             <div className="App">
@@ -197,8 +222,20 @@ class App extends Component {
                         <Search
                             allMarkers={ allMarkers }
                             tempFilteredMarkers = { tempFilteredMarkers }
+
+                            selectedFilter={ selectedFilter }
+                            tempSelectedFilter={ tempSelectedFilter }
+
+                            toggledSearchBox={ toggledSearchBox }
+
+                            onSelectedFilter={ this.handleSelectedFilters }
+
                             onClickSearch={ this.handleClickSearch }
                             onInputSearch={ this.handleInputSearch }
+
+                            onCloseSearchBox={ this.handleCloseSearchBox }
+                            onOpenSearchBox={ this.handleOpenSearchBox }
+
                             onCloseInfoBox={ this.handleCloseInfoBox }
                         />
                         { isLoading ? <LoadingIcon /> :
@@ -210,6 +247,7 @@ class App extends Component {
                                 toggledInfo={ toggledInfo }
                                 onTogglePanel={ this.handleTogglePanel }
                                 onClickFilter={ this.handleFilteredMarkers }
+                                onCloseSearchBox={ this.handleCloseSearchBox }
                             />
                         }
 
@@ -232,6 +270,8 @@ class App extends Component {
 
                             onTogglePanel={ this.handleTogglePanel }
                             onClosePanel={ this.handleClosePanel }
+
+                            onCloseSearchBox={ this.handleCloseSearchBox }
                         />
 
                         <InfoBox

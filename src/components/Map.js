@@ -64,13 +64,14 @@ class Lmap extends Component {
 			viewport,
 			onOpenInfoBox,
 			onCloseInfoBox,
-			onClosePanel } = this.props;
+			onClosePanel,
+			onCloseSearchBox } = this.props;
 		return (
 			<Map
 			    className='map'
 			    center={ bounds }
 			    viewport={ viewport }
-			    onClick={ onClosePanel }
+			    onClick={ onClosePanel, onCloseSearchBox }
 			    doubleClickZoom={ true }
 			    zoomSnap={ false }
 			    trackResize={ true }

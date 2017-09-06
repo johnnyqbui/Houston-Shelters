@@ -1279,7 +1279,12 @@ h4 {
 
 .search-data-results {
     background: #fff;
+    height: 300px;
     overflow-y: scroll;
+}
+
+.hide {
+    display: none;
 }
 
 .search-data-results ul {

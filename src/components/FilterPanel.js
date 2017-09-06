@@ -9,6 +9,7 @@ const FilterPanel = (props) => {
         onClickFilter,
         toggledPanel,
         onTogglePanel,
+        onCloseSearchBox,
         filterLength
     } = props;
 
@@ -48,6 +49,7 @@ const FilterPanel = (props) => {
         })
 
         onClickFilter(value, filtered)
+        onCloseSearchBox()
     }
 
     let allShelters = selectedFilter === "All Shelters";

@@ -14,7 +14,17 @@ class Search extends Component {
 	}
 
 	searchData = (query) => {
-		const { allMarkers, tempFilteredMarkers, onInputSearch, onCloseInfoBox } = this.props;
+		const {
+			allMarkers,
+			tempFilteredMarkers,
+			selectedFilter,
+			tempSelectedFilter,
+			onSelectedFilter,
+			onInputSearch,
+			onCloseInfoBox,
+			onOpenSearchBox,
+			onCloseSearchBox } = this.props;
+
 		const matched = allMarkers.filter(
 			data => {
 				const { shelter, address, city, county, supplyNeeds, volunteerNeeds, pets } = data;
@@ -26,25 +36,45 @@ class Search extends Component {
 			this.setState({
 				searched: matched
 			})
-			onInputSearch(matched)
+			if (matched.length > 1) {
+				onInputSearch(matched, 'All Shelters')
+				onOpenSearchBox()
+			} else {
+				onCloseSearchBox()
+			}
+
 		} else {
 			this.setState({
 				searched: []
 			})
 			onCloseInfoBox()
-			onInputSearch(tempFilteredMarkers)
+			onCloseSearchBox()
+			onInputSearch(tempFilteredMarkers, tempSelectedFilter)
 		}
 	}
 
-	handleCloseSearch = (data) => {
+	handleCloseSearchBox = (data) => {
+		const { selectedFilter, onSelectedFilter, onCloseSearchBox } = this.props;
 		this.setState({
 			query: `${ data.shelter } at ${ data.address }, ${ data.city }`,
 			searched: []
 		})
+		onCloseSearchBox()
+		onSelectedFilter('All Shelters')
 	}
+
+	handleOpenSearchBox = () => {
+		const { onOpenSearchBox } = this.props;
+		const { searched } = this.state;
+		if (searched.length > 1) {
+			onOpenSearchBox()
+		}
+	}
+
 	render() {
 		const { query, searched } = this.state;
-		const { onClickSearch } = this.props;
+		const { onClickSearch, toggledSearchBox } = this.props;
+
 		return (
 
 			<div className="search-data-container">
@@ -55,15 +85,16 @@ class Search extends Component {
 					    placeholder="Search by Address, Shelter or Needs (eg: 'baby formula')"
 					    value={query}
 					    onChange={(e) => this.updateQuery(e.target.value)}
+					    onClick={() => this.handleOpenSearchBox() }
 				    />
 				  </div>
 				</div>
-				<div className="search-data-results">
+				<div className={ toggledSearchBox ? 'search-data-results' : 'search-data-results hide'}>
 					<ul>
 						{searched.map((data, index) => (
 							<li key={index}
 								onClick={() => {
-									this.handleCloseSearch(data)
+									this.handleCloseSearchBox(data)
 									onClickSearch(data, query)
 								}}
 							>
