@@ -17,7 +17,6 @@
     "react-scripts": "1.0.12"
   },
   "scripts": {
-    "react-scripts": "1.0.12",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
