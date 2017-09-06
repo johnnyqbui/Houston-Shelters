@@ -2,7 +2,6 @@ import React from 'react';
 import '../App.css';
 import GoPlus from 'react-icons/lib/go/plus'
 
-
 const AddShelter = (props) => {
     return (
         <div className='add-shelter-container'>
