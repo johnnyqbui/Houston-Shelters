@@ -10,6 +10,7 @@ const FilterPanel = (props) => {
         toggledPanel,
         onTogglePanel,
         onCloseSearchBox,
+        onCloseInfoBox,
         filterLength
     } = props;
 
@@ -67,7 +68,10 @@ const FilterPanel = (props) => {
       <div className='filter-controls'>
         <button
           className="current-filter-button"
-          onClick={ onTogglePanel }>
+          onClick={() => {
+            onTogglePanel()
+            onCloseInfoBox()
+          }}>
           <span>Filter:</span> <strong>{ selectedFilter } ({ filterLength })</strong>
         </button>
       </div>

@@ -54,7 +54,7 @@ class Search extends Component {
 	}
 
 	handleCloseSearchBox = (data) => {
-		const { selectedFilter, onSelectedFilter, onCloseSearchBox } = this.props;
+		const { onSelectedFilter, onCloseSearchBox } = this.props;
 		this.setState({
 			query: `${ data.shelter } at ${ data.address }, ${ data.city }`,
 			searched: []

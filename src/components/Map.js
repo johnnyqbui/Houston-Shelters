@@ -42,15 +42,17 @@ const greyMarkerIcon = new L.icon({
 })
 
 class Lmap extends Component {
-
 		state = {
 			bounds: []
 		}
   	centerToMarker = (location) => {
-  		if (window.innerWidth > 960) {
+  		const { toggledInfo } = this.props
+  		console.log(toggledInfo)
+  		if (window.innerWidth > 960 && this.state.toggledInfo === false) {
   			this.setState({
 	  			bounds: {
 	  				lat: location.lat,
+	  				// Dirty
 	  				lng: location.lng-.6
 	  			}
 	  		})
