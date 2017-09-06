@@ -14,9 +14,10 @@
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
-    "react-scripts": "1.0.12"
+
   },
   "scripts": {
+    "react-scripts": "1.0.12",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
