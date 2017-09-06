@@ -245,6 +245,7 @@ class App extends Component {
                                 filterLength={ filteredMarkers.length }
                                 selectedFilter={ selectedFilter }
                                 toggledInfo={ toggledInfo }
+
                                 onTogglePanel={ this.handleTogglePanel }
                                 onClickFilter={ this.handleFilteredMarkers }
                                 onCloseSearchBox={ this.handleCloseSearchBox }
