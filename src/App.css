@@ -1165,7 +1165,7 @@ h4 {
     position: absolute;
     top: 50px;
     left: 0;
-    z-index: 20;
+    z-index: 6;
     width: 100%;
     box-sizing:border-box;
     transition:0.2s all;
@@ -1234,6 +1234,18 @@ h4 {
 .top-navbar-dropdown ul li a {
     text-decoration: none;
     color: white;
+}
+
+.clear-icon {
+    color: #bbb;
+    font-size: 2em;
+    right: 20px;
+    position: absolute;
+    top: 14px;
+    background: #fff;
+    width: 50px;
+    border-left: 1px solid #bbb;
+    cursor: pointer;
 }
 
 

@@ -151,7 +151,6 @@ class App extends Component {
     }
 
     handleOpenInfoBox = (marker) => {
-        this.search.setInfoOpen(true);
         this.setState({
             selectedMarker: marker,
             toggledInfo: true
@@ -159,9 +158,6 @@ class App extends Component {
     }
 
     handleCloseInfoBox = () => {
-        if (this.search) { // kludge b/c somtimes this.search returns null - jn
-            this.search.setInfoOpen(false);
-        }
         this.setState({
             toggledInfo: false
         })
@@ -180,7 +176,6 @@ class App extends Component {
     }
 
     handleInputSearch = (query, selectedFilter) => {
-
         this.setState({
             filteredMarkers: query,
             selectedFilter: selectedFilter
@@ -188,14 +183,13 @@ class App extends Component {
     }
 
     handleClickSearch = (matched, query) => {
-        this.search.setInfoOpen(true);
-        // let nextLng = (window.innerWidth > 960) ?
-        //   matched.location.lng-.03 : matched.location.lng;
-
+        const latLng = window.innerWidth > 960 ?
+        [matched.location.lat, matched.location.lng-.02] :
+        [matched.location.lat, matched.location.lng]
         this.setState({
             viewport: {
               // Dirty fixed with zoom
-                center: [matched.location.lat, matched.location.lng-.02],
+                center: latLng,
                 zoom: 14
             },
             selectedMarker: matched,
@@ -227,44 +221,43 @@ class App extends Component {
 
                     <Route exact path='/' render={() => (
                         <div>
-
-                        <Search
-                            ref = {(com) => { this.search = com;}}
-                            allMarkers={ allMarkers }
-                            tempFilteredMarkers = { tempFilteredMarkers }
-
-                            selectedFilter={ selectedFilter }
-                            tempSelectedFilter={ tempSelectedFilter }
-
-                            toggledSearchBox={ toggledSearchBox }
-
-                            onSelectedFilter={ this.handleSelectedFilters }
-
-                            onClickSearch={ this.handleClickSearch }
-                            onInputSearch={ this.handleInputSearch }
-
-                            onCloseSearchBox={ this.handleCloseSearchBox }
-                            onOpenSearchBox={ this.handleOpenSearchBox }
-
-                            onCloseInfoBox={ this.handleCloseInfoBox }
-                        >
-
                         { isLoading ? <LoadingIcon /> :
-                            <FilterPanel
-                                toggledPanel={ toggledPanel }
+                            <Search
+                                ref = {(com) => { this.search = com;}}
                                 allMarkers={ allMarkers }
-                                filterLength={ filteredMarkers.length }
+                                tempFilteredMarkers = { tempFilteredMarkers }
+
                                 selectedFilter={ selectedFilter }
+                                tempSelectedFilter={ tempSelectedFilter }
+
+                                toggledSearchBox={ toggledSearchBox }
                                 toggledInfo={ toggledInfo }
 
-                                onTogglePanel={ this.handleTogglePanel }
-                                onClickFilter={ this.handleFilteredMarkers }
+                                onSelectedFilter={ this.handleSelectedFilters }
+
+                                onClickSearch={ this.handleClickSearch }
+                                onInputSearch={ this.handleInputSearch }
+
                                 onCloseSearchBox={ this.handleCloseSearchBox }
-                                onCloseInfoBox={ this.handleCloseInfoBox }
-                            />
+                                onOpenSearchBox={ this.handleOpenSearchBox }
+
+                                onCloseInfoBox={ this.handleCloseInfoBox } >
+
+                                <FilterPanel
+                                    toggledPanel={ toggledPanel }
+                                    allMarkers={ allMarkers }
+                                    filterLength={ filteredMarkers.length }
+                                    selectedFilter={ selectedFilter }
+                                    toggledInfo={ toggledInfo }
+
+                                    onTogglePanel={ this.handleTogglePanel }
+                                    onClickFilter={ this.handleFilteredMarkers }
+                                    onCloseSearchBox={ this.handleCloseSearchBox }
+                                    onCloseInfoBox={ this.handleCloseInfoBox }
+                                />
+                            </Search>
                         }
 
-                        </Search>
                         <GeoLocate
                             currentLocation={ currentLocation }
                             onClickLocate={ this.handleLocate }

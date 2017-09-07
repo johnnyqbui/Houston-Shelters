@@ -26,9 +26,9 @@ const blueMarkerIcon = new L.icon({
 
 const greyMarkerIcon = new L.icon({
 	iconUrl: greyMarker,
-  iconSize: [30, 41],
-  iconAnchor: [15, 41],
-  popupAnchor: [0, -35]
+	iconSize: [30, 41],
+	iconAnchor: [15, 41],
+	popupAnchor: [0, -35]
 	// shadowUrl: shadowMarker,
 	// shadowSize: [41, 41],
 	// shadowAnchor: [12, 41]
@@ -46,13 +46,19 @@ class Lmap extends Component {
 		bounds: []
 	}
   	centerToMarker = (location, filteredMarkers) => {
-  		const mapApi = this.refs.map.leafletElement
-  		const point = mapApi.latLngToContainerPoint(location)
-  		const newPoint = L.point([point.x-250, point.y])
-  		const newLatLng = mapApi.containerPointToLatLng(newPoint)
-		this.setState({
-  			bounds: newLatLng
-  		})
+  		if (window.innerWidth > 960) {
+  			const mapApi = this.refs.map.leafletElement
+	  		const point = mapApi.latLngToContainerPoint(location)
+	  		const newPoint = L.point([point.x-250, point.y])
+	  		const newLatLng = mapApi.containerPointToLatLng(newPoint)
+			this.setState({
+	  			bounds: newLatLng
+	  		})
+  		} else {
+  			this.setState({
+  				bounds: location
+  			})
+  		}
 
   	}
   	resetBounds = () => {
