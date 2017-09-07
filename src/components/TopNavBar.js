@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import '../App.css';
+import Logo from '../images/hurricane.png'
 
 // will add for later
 
@@ -20,7 +21,7 @@ const TopNavBar = (props) => {
 
   return (
     <div className='top-navbar'>
-        <h2>Irma Response</h2>
+        <h2><img src={Logo} /> Irma Response</h2>
         <p className="top-support">Call for help: <a href="tel:311">3-1-1</a></p>
     </div>
   )

@@ -134,18 +134,21 @@ class Lmap extends Component {
 							}}
 							ref='popup'
 							position={location}
-							>
-						    <div className='popup-info' style={{fontSize: '14px'}}>
-						        <span style={{fontWeight: 'bold', fontSize: '16px'}}>{shelter}</span><br/>
-						        {address}<br/>
-						        {city}<br/>
+						>
+							<div className='popup-info' style={{fontSize: '14px'}}>
+								<div style={{fontWeight: 'bold', fontSize: '16px'}}>{shelter}</div>
+								<span className="mobile-hidden">
+                  {address}<br/>
+                  {city}<br/>
+									</span>
 						        <div className='popup-button-container'>
 							        {phone && (
-							        	<a className='popup-info-button' href={`tel:${cleanPhone}`}>Tap to Call</a>
-							        )}
-							        <a className='popup-info-button' href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>
-								</div>
-				   			</div>
+												<a className='popup-info-button' href={`tel:${cleanPhone}`}>Call</a>
+                      )}
+											<a className='popup-info-button' href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>
+									</div>
+
+							</div>
 						</Popup>
 					</Marker>
 				)
