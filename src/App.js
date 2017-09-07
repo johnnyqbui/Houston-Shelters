@@ -221,8 +221,6 @@ class App extends Component {
 
                     <TopNavBar />
 
-                    <Route exact path='/' render={() => (
-                        <div>
                         { isLoading ? <LoadingIcon /> :
                             <Search
                                 ref = {(com) => { this.search = com;}}
@@ -285,8 +283,6 @@ class App extends Component {
                             selectedMarker={ selectedMarker }
                             query={ query }
                         />
-                    </div>
-                )} />
 
                 <Route path='/credits' render={( history ) => (
                     <Credits />
