@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import '../App.css';
+import IoFunnel from 'react-icons/lib/io/android-funnel';
+
 
 const FilterPanel = (props) => {
     const {
@@ -72,7 +74,8 @@ const FilterPanel = (props) => {
             onTogglePanel()
             onCloseInfoBox()
           }}>
-          <span>Filter:</span> <strong>{ selectedFilter } ({ filterLength })</strong>
+          <IoFunnel className='filter-icon'/>
+          <span>Filter: </span><strong>{ selectedFilter } ({ filterLength })</strong>
         </button>
       </div>
 

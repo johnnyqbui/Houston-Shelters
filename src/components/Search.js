@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
+
 import MdClear from 'react-icons/lib/md/clear';
 
 class Search extends Component {
 	state = {
 		query: '',
 		searched: [],
-		infoOpen: false
-	}
-
-	setInfoOpen = (isOpen) => {
-		this.setState({infoOpen: isOpen})
+		cursor: 0,
 	}
 
 	updateQuery = (query) => {
@@ -49,7 +46,8 @@ class Search extends Component {
 			}
 		} else {
 			this.setState({
-				searched: []
+				searched: [],
+				cursor: 0
 			})
 			onCloseInfoBox()
 			onCloseSearchBox()
@@ -68,7 +66,8 @@ class Search extends Component {
 		if (data) {
 			this.setState({
 				query: `${ data.shelter } at ${ data.address }, ${ data.city }`,
-				searched: []
+				searched: [],
+				cursor: 0
 			})
 		} else {
 			onInputSearch(tempFilteredMarkers, tempSelectedFilter)
@@ -86,13 +85,53 @@ class Search extends Component {
 
 	handleClearSearch = () => {
         this.setState({
-            query: ''
+            query: '',
+            cursor: 0
         })
     }
 
+    handleKeyDown = (e, data) => {
+	    const { cursor, searched } = this.state;
+	    const { onCompleteSearch, onCloseSearchBox } = this.props;
+	    // up
+	    if (e.keyCode === 38) {
+			if (cursor > 0) {
+				this.setState( prevState => ({
+					cursor: prevState.cursor - 1
+				}))
+			}
+			if (cursor <= 0) {
+				this.setState({
+					cursor: searched.length -1
+				})
+			}
+			// down
+	    } else if (e.keyCode === 40) {
+    		this.setState( prevState => ({
+				cursor: prevState.cursor + 1
+			}))
+
+			if (cursor >= searched.length - 1) {
+				this.setState({
+					cursor: 0
+				})
+			}
+	    }
+
+	    // Enter
+	    if (e.keyCode === 13) {
+	    	const query = `${ data.shelter } at ${ data.address }, ${ data.city }`
+	    	this.setState({
+	    		query: query
+	    	})
+	    	onCompleteSearch(data, query)
+	    	onCloseSearchBox()
+	    }
+	}
+
 	render() {
-		const { query, searched } = this.state;
-		const { onClickSearch, toggledSearchBox, toggledInfo } = this.props;
+		const { query, searched, cursor } = this.state;
+		const { onCompleteSearch, toggledSearchBox, toggledInfo } = this.props;
 	  	return (
 				<div className={toggledInfo ? 'search-data-container open' : 'search-data-container'}>
 					<div className="search-data-bar">
@@ -103,6 +142,7 @@ class Search extends Component {
 						    value={query}
 						    onChange={(e) => this.updateQuery(e.target.value)}
 						    onClick={() => this.handleOpenSearchBox()}
+						    onKeyDown={(e) => this.handleKeyDown(e, searched[cursor])}
 					    />
 					    <MdClear
 						    className='clear-icon'
@@ -117,17 +157,16 @@ class Search extends Component {
 						<ul>
 							{searched.map((data, index) => (
 								<li key={index}
+									className={cursor === index? 'searchSelected' : ''}
 									onClick={() => {
 										this.handleCloseSearchBox(data)
-										onClickSearch(data, query)
-									}}
-								>
+										onCompleteSearch(data, query)
+									}}>
 									{`${ data.shelter } at ${ data.address }, ${ data.city }`}
 								</li>
 							))}
 						</ul>
 					</div>
-
 					{this.props.children}
 				</div>
 			)

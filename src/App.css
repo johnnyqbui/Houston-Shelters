@@ -542,10 +542,11 @@ template {
     display: none;
 }
 
+
 /*******MAIN CSS*******/
 
 * {
-    box-sizing:border-box !important;
+    box-sizing: border-box !important;
 }
 
 body,
@@ -568,10 +569,10 @@ button {
 }
 
 .map {
+    position: fixed;
     z-index: 2;
     width: 100vw;
     height: 100vh;
-    position: fixed;
 }
 
 
@@ -597,9 +598,9 @@ button {
 }
 
 .top-navbar h2 {
+    font-size: 18px;
+    font-weight: normal;
     padding: 0;
-    font-size:18px;
-    font-weight:normal;
 }
 
 
@@ -609,7 +610,7 @@ button {
 /* Filter Container */
 
 .filter-container {
-    margin-top:5px;
+    margin-top: 5px;
     /*position: fixed;
     z-index: 3;
     top: 50px;
@@ -625,9 +626,7 @@ button {
     position: relative;
     z-index: 4;
     width: 100%;
-
     padding: 0 20px;
-
 }
 
 .current-filter-button {
@@ -638,10 +637,10 @@ button {
     cursor: pointer;
     color: #fff;
     border: 0;
+    border: 1px solid #6aadcb;
     border-radius: .3rem;
-    border:1px solid #6aadcb;
-    box-shadow:1px 1px 1px rgba(0,0,0,0.1);
     background: rgb(20, 150, 250);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .1);
 }
 
 .current-filter-button span {
@@ -650,14 +649,13 @@ button {
 
 .filter-panel {
     position: relative;
-
-    margin:0 20px;
-    border-radius:.3rem;
+    margin: 0 20px;
     padding: 10px;
     transition: .2s all;
-    border:1px solid #CCC;
-    box-shadow:1px 1px 1px rgba(0,0,0,0.1);
+    border: 1px solid #ccc;
+    border-radius: .3rem;
     background: rgba(255, 255, 255, .85);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .1);
 }
 
 .filter-panel p {
@@ -795,16 +793,15 @@ a {
 
 .controls-button {
     position: absolute;
-    padding: 0;
     width: 38px;
     height: 38px;
+    padding: 0;
     cursor: pointer;
     border: none;
+    border: 1px solid#ccc;
     border-radius: 50px;
-    background-color:#FFF;
-    border:1px solid#CCC;
-    box-shadow:1px 1px 1px rgba(0,0,0,0.1);
-
+    background-color: #fff;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .1);
     -ms-flex-pack: center;
     justify-content: center;
     -ms-flex-align: center;
@@ -825,32 +822,32 @@ input {
     border-radius: .3rem;
 }
 
+
 /*END BUTTONS*/
 
 
 /* Control Container */
 
 .controls-font-grey {
+    margin-right: 5px;
+    text-align: right;
     color: #656565;
-    text-align:right;
-    margin-right:5px;
 }
 
 .locate-me-container {
+    font-size: 14px;
+    font-weight: bold;
     position: fixed;
     z-index: 10;
-    font-size:14px;
-    font-weight:bold;
     top: 100px;
     right: 5px;
 }
 
-
 .add-shelter-container {
+    font-size: 14px;
+    font-weight: bold;
     position: fixed;
     z-index: 10;
-    font-size:14px;
-    font-weight:bold;
     top: 100px;
     right: 10px;
 }
@@ -867,7 +864,7 @@ input {
     font-size: 24px;
     position: relative;
     right: 0;
-    color:#1496FA;
+    color: #1496fa;
 }
 
 .add-shelter-icon {
@@ -875,6 +872,7 @@ input {
     position: relative;
     right: 0;
 }
+
 
 /* nolasco patch */
 
@@ -899,16 +897,14 @@ h4 {
     height: 100%;
 }
 
-
 .info-box {
     font-size: 13px;
     position: fixed;
     z-index: 50;
     bottom: -30%;
-    height: 30%;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
     width: 100%;
+    height: 30%;
     transition: .2s all;
     /* Internet Explorer 5.5+ */
     white-space: pre-wrap;
@@ -920,8 +916,9 @@ h4 {
     white-space: -o-pre-wrap;
     /* Opera 7 */
     word-wrap: break-word;
-    background-color: #fff;
     opacity: 0;
+    background-color: #fff;
+    -webkit-overflow-scrolling: touch;
 }
 
 .info-box .info-box-content {
@@ -934,9 +931,9 @@ h4 {
 }
 
 .info-box h2 {
+    font-size: 18px;
     padding: 10px 20px;
-    border-bottom:1px solid #EEE;
-    font-size:18px;
+    border-bottom: 1px solid #eee;
 }
 
 .info-box .fa {
@@ -950,8 +947,8 @@ h4 {
 
 .info-box.open {
     bottom: 0;
-    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
     opacity: 1;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
 }
 
 .info-button {
@@ -981,7 +978,6 @@ h4 {
     width: 20px;
     color: rgb(20, 150, 250);
 }
-
 
 
 /*Loading*/
@@ -1159,16 +1155,17 @@ h4 {
     }
 }
 
+
 /*  SEARCH STYLES PLACED HERE FOR NOW*/
 
 .search-data-container {
     position: absolute;
+    z-index: 6;
     top: 50px;
     left: 0;
-    z-index: 6;
+    box-sizing: border-box;
     width: 100%;
-    box-sizing:border-box;
-    transition:0.2s all;
+    transition: .2s all;
 }
 
 .search-data-container.open {
@@ -1177,22 +1174,22 @@ h4 {
 }
 
 .search-data-input-wrapper input {
+    display: block;
     width: calc(100% - 40px);
-    padding: 10px;
     margin: 10px 20px 0;
-    box-shadow:1px 1px 1px rgba(0,0,0,0.1);
-    display:block;
-    border:1px solid #CCC;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .1);
 }
 
 .search-data-results {
-    background: #fff;
-    height: 300px;
-    width:calc(100% - 40px);
+    position: absolute;
+    z-index: 10;
     overflow-y: hidden;
-    margin:0px 20px;
-    position:absolute;
-    z-index:10;
+    width: calc(100% - 40px);
+    height: 300px;
+    margin: 0 20px;
+    background: #fff;
 }
 
 .hide {
@@ -1202,13 +1199,12 @@ h4 {
 .search-data-results ul {
     margin: 0;
     padding: 0;
-
 }
 
 .search-data-results ul li {
-    list-style-type: none;
-    padding: 8px 20px;
     margin: 0;
+    padding: 8px 20px;
+    list-style-type: none;
     cursor: pointer;
     transition: .2s;
 }
@@ -1217,18 +1213,15 @@ h4 {
     background: #a6c5ce;
 }
 
-.top-navbar-dropdown {
-}
-
 .top-navbar-dropdown ul {
     margin: 0;
     padding: 0;
 }
 
 .top-navbar-dropdown ul li {
-    list-style-type: none;
     float: left;
     margin: 15px;
+    list-style-type: none;
 }
 
 .top-navbar-dropdown ul li a {
@@ -1236,32 +1229,16 @@ h4 {
     color: white;
 }
 
-.clear-icon {
-    color: #bbb;
-    font-size: 2em;
-    right: 20px;
-    position: absolute;
-    top: 14px;
-    background: #fff;
-    width: 50px;
-    border-left: 1px solid #bbb;
-    cursor: pointer;
-}
-
-
 /******Responsiveness*****/
 
 @media (min-width: 960px) {
-
-
     .info-box {
         font-size: 13px;
         position: fixed;
         z-index: 50;
+        top: 50px;
         left: -40%;
-        top:50px;
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
         width: 40%;
         height: 100%;
         transition: .2s all;
@@ -1275,16 +1252,15 @@ h4 {
         white-space: -o-pre-wrap;
         /* Opera 7 */
         word-wrap: break-word;
-        background-color: #fff;
         opacity: 0;
+        background-color: #fff;
+        -webkit-overflow-scrolling: touch;
     }
-
     .info-box.open {
-        left:0;
-        box-shadow: 0 5px 5px rgba(0, 0, 0, .3);
+        left: 0;
         opacity: 1;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, .3);
     }
-
     .top-support {
         width: auto;
     }
@@ -1299,7 +1275,7 @@ h4 {
         right: 195px;
         display: block;
         width: 75px;
-        margin-top:14px;
+        margin-top: 14px;
     }
     .locate-me-button {
         top: 5px;
@@ -1309,8 +1285,8 @@ h4 {
         position: relative;
         right: 53px;
         display: block;
-        margin-top:14px;
         width: 83px;
+        margin-top: 14px;
     }
     .add-shelter-button {
         top: 5px;
@@ -1348,7 +1324,7 @@ h4 {
     }
     .filter-title {
         font-size: 16px;
-        color:#999;
+        color: #999;
     }
     /*    .closePanel {
         top: -100%;
@@ -1361,13 +1337,30 @@ h4 {
     .filter-panel .greyButton.selected {
         margin-left: 25px;
     }*/
-
-
-
     .search-data-container.open {
-        width:calc(100%);
-        padding-left:40%;
-
+        width: calc(100%);
+        padding-left: 40%;
     }
+}
 
+.clear-icon {
+    font-size: 2em;
+    position: absolute;
+    top: 14px;
+    right: 20px;
+    width: 50px;
+    cursor: pointer;
+    color: #aaa;
+    border-left: 1px solid #bbb;
+    background: #fff;
+}
+
+
+.filter-icon {
+    font-size: 1.5em;
+    margin: 0 8px 3px 2px;
+}
+
+.searchSelected {
+    background: rgb(200, 200, 200);
 }

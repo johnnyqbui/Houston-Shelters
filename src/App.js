@@ -37,7 +37,9 @@ class App extends Component {
     async componentDidMount() {
         // console.log('Component Mounted')
         const shelterData = await SheltersApi.getAll();
-        const allMarkerData = shelterData.shelters.map((shelters) => {
+        const allMarkerData = shelterData.shelters
+        .filter(shelters => shelters.latitude)
+        .map((shelters) => {
             const {
                 county,
                 shelter,
@@ -64,8 +66,8 @@ class App extends Component {
                 accepting: accepting,
                 pets: pets,
                 location: {
-                    lat: latitude ? parseFloat(latitude) : 0,
-                    lng: longitude ? parseFloat(longitude) : 0
+                    lat: latitude,
+                    lng: longitude
                 },
                 lastUpdated: updatedAt,
                 supplyNeeds: supply_needs,
@@ -235,7 +237,7 @@ class App extends Component {
 
                                 onSelectedFilter={ this.handleSelectedFilters }
 
-                                onClickSearch={ this.handleClickSearch }
+                                onCompleteSearch={ this.handleClickSearch }
                                 onInputSearch={ this.handleInputSearch }
 
                                 onCloseSearchBox={ this.handleCloseSearchBox }
