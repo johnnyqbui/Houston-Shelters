@@ -596,6 +596,13 @@ button {
     width: 100px;
 }
 
+.top-navbar img {
+    vertical-align:middle;
+    padding-bottom:3px;
+    padding-right:10px;
+    display:inline-block;
+}
+
 .top-navbar h2 {
     padding: 0;
     font-size:18px;
@@ -604,6 +611,10 @@ button {
 
 
 /* END Top Nav Bar */
+
+a:focus, input:focus{
+    outline: none;
+}
 
 
 /* Filter Container */
@@ -632,8 +643,7 @@ button {
 
 .current-filter-button {
     font-size: 13px;
-    height: 36px;
-    margin-top: 6px;
+    height: 40px;
     padding: 0 10px;
     cursor: pointer;
     color: #fff;
@@ -646,6 +656,11 @@ button {
 
 .current-filter-button span {
     display: none;
+}
+
+.fa-filter {
+    font-size:14px;
+    margin-right:5px;
 }
 
 .filter-panel {
@@ -796,8 +811,8 @@ a {
 .controls-button {
     position: absolute;
     padding: 0;
-    width: 38px;
-    height: 38px;
+    width:35px;
+    height: 35px;
     cursor: pointer;
     border: none;
     border-radius: 50px;
@@ -813,7 +828,7 @@ a {
 
 .locate-me-button {
     top: 5px;
-    right: 50px;
+    right: 100px;
 }
 
 .add-shelter-button {
@@ -842,7 +857,8 @@ input {
     font-size:14px;
     font-weight:bold;
     top: 100px;
-    right: 5px;
+    right: -30px;
+
 }
 
 
@@ -852,7 +868,7 @@ input {
     font-size:14px;
     font-weight:bold;
     top: 100px;
-    right: 10px;
+    right: 15px;
 }
 
 .locate-me-container p {
@@ -874,6 +890,7 @@ input {
     font-size: 24px;
     position: relative;
     right: 0;
+    color:#1496FA;
 }
 
 /* nolasco patch */
@@ -904,8 +921,8 @@ h4 {
     font-size: 13px;
     position: fixed;
     z-index: 50;
-    bottom: -30%;
-    height: 30%;
+    bottom: -40%;
+    height: 40%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     width: 100%;
@@ -1238,22 +1255,27 @@ h4 {
 
 .clear-icon {
     color: #bbb;
-    font-size: 2em;
-    right: 20px;
+    font-size: 24px;
+    right: 23px;
     position: absolute;
-    top: 14px;
+    top: 18px;
     background: #fff;
-    width: 50px;
-    border-left: 1px solid #bbb;
+    width: 40px;
+    border-left: 1px solid #EEE;
     cursor: pointer;
 }
 
+.mobile-hidden {
+    display:none;
+}
+
+.leaflet-popup-content {
+    margin-top:10px;
+}
 
 /******Responsiveness*****/
 
 @media (min-width: 960px) {
-
-
     .info-box {
         font-size: 13px;
         position: fixed;
@@ -1285,6 +1307,14 @@ h4 {
         opacity: 1;
     }
 
+    .mobile-hidden {
+        display:block;
+    }
+
+    .leaflet-popup-content {
+        margin-top:20px;
+    }
+
     .top-support {
         width: auto;
     }
@@ -1294,6 +1324,11 @@ h4 {
         left: auto;
     }
     */
+
+    .locate-me-container {
+        right:10px;
+    }
+
     .locate-me-container p {
         position: relative;
         right: 195px;
@@ -1305,6 +1340,11 @@ h4 {
         top: 5px;
         right: 150px;
     }
+
+    .add-shelter-container {
+        right:10px;
+    }
+
     .add-shelter-container p {
         position: relative;
         right: 53px;

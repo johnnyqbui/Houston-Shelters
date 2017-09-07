@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import '../App.css';
+import FaFilter from 'react-icons/lib/fa/filter';
 
 const FilterPanel = (props) => {
     const {
@@ -72,6 +73,8 @@ const FilterPanel = (props) => {
             onTogglePanel()
             onCloseInfoBox()
           }}>
+          <FaFilter
+            className='fa-filter'/>
           <span>Filter:</span> <strong>{ selectedFilter } ({ filterLength })</strong>
         </button>
       </div>

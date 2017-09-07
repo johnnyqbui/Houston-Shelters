@@ -47,6 +47,8 @@ const InfoBox = (props) => {
         )
     }
 
+    let countyTxt = (county === "") ? "" : `(${highlightText(county)} County)`;
+
     return (
         <div className={ toggledInfo ? 'info-box open' : 'info-box'}>
             <h2>{highlightText(shelter)}</h2>
@@ -59,7 +61,7 @@ const InfoBox = (props) => {
                     <FaMapMarker className="blueIcon" />
                     <a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">
                         {highlightText(address)}, {highlightText(city)}
-                    </a> ({highlightText(county)} County)
+                    </a> {countyTxt}
                 </p>
                 <br/>
                 <p><span style={{fontWeight: 'bold'}}>Updated:</span> {moment(lastUpdated).format('L LT')}</p>

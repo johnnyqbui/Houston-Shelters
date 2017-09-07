@@ -29,7 +29,7 @@ class App extends Component {
         tempSelectedFilter: 'All Shelters',
         selectedMarker: {},
         toggledInfo: false,
-        toggledPanel: true,
+        toggledPanel: false,
         toggledSearchBox: false,
         query: ''
     }
