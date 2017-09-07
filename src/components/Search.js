@@ -6,7 +6,7 @@ class Search extends Component {
 	state = {
 		query: '',
 		searched: [],
-		cursor: 0,
+		cursor: 0
 	}
 
 	updateQuery = (query) => {
@@ -57,7 +57,6 @@ class Search extends Component {
 
 	handleCloseSearchBox = (data) => {
 		const {
-			onSelectedFilter,
 			onCloseSearchBox,
 			tempFilteredMarkers,
 			tempSelectedFilter,
@@ -129,6 +128,12 @@ class Search extends Component {
 	    }
 	}
 
+	handleMouseOver = (index) => {
+		this.setState({
+			cursor: index
+		})
+	}
+
 	render() {
 		const { query, searched, cursor } = this.state;
 		const { onCompleteSearch, toggledSearchBox, toggledInfo } = this.props;
@@ -157,7 +162,8 @@ class Search extends Component {
 						<ul>
 							{searched.map((data, index) => (
 								<li key={index}
-									className={cursor === index? 'searchSelected' : ''}
+									className={cursor === index ? 'searchSelected' : ''}
+									onMouseOver={() => {this.handleMouseOver(index)}}
 									onClick={() => {
 										this.handleCloseSearchBox(data)
 										onCompleteSearch(data, query)

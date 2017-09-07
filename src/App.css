@@ -1209,9 +1209,9 @@ h4 {
     transition: .2s;
 }
 
-.search-data-results ul li:hover {
+/*.search-data-results ul li:hover {
     background: #a6c5ce;
-}
+}*/
 
 .top-navbar-dropdown ul {
     margin: 0;
@@ -1358,7 +1358,7 @@ h4 {
 
 .filter-icon {
     font-size: 1.5em;
-    margin: 0 8px 3px 2px;
+    margin: 0 8px 2px 2px;
 }
 
 .searchSelected {
