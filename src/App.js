@@ -21,8 +21,8 @@ class App extends Component {
         filteredMarkers: [],
         tempFilteredMarkers: [],
         viewport: {
-          center: [28.139816, -81.600952],
-            zoom: 7
+            center: [30.0604, -95.0898],
+            zoom: 9
         },
         currentLocation: [],
         selectedFilter: 'Accepting People',
