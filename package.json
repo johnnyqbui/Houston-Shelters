@@ -1,10 +1,10 @@
 {
   "name": "harveysosshelters",
   "version": "0.1.0",
+  "private": true,
   "engines": {
     "npm": "5.3.0"
   },
-  "private": true,
   "dependencies": {
     "gh-pages": "^1.0.0",
     "leaflet": "^1.2.0",
