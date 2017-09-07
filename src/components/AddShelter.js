@@ -7,7 +7,7 @@ const AddShelter = (props) => {
         <div className='add-shelter-container'>
             <p className='controls-font-grey'>Add Shelter</p>
             <button className='controls-button add-shelter-button'>
-            <a href='http://harveyneeds.org/' target='_blank' rel='noopener noreferrer' >
+            <a href='https://irma-api.herokuapp.com/' target='_blank' rel='noopener noreferrer' >
                 <GoPlus className="add-shelter-icon" />
             </a>
             </button>

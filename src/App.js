@@ -21,12 +21,12 @@ class App extends Component {
         filteredMarkers: [],
         tempFilteredMarkers: [],
         viewport: {
-            center: [29.760427, -95.369803],
-            zoom: 9
+          center: [28.139816, -81.600952],
+            zoom: 8
         },
         currentLocation: [],
-        selectedFilter: 'Accepting People',
-        tempSelectedFilter: 'Accepting People',
+        selectedFilter: 'All Shelters',
+        tempSelectedFilter: 'All Shelters',
         selectedMarker: {},
         toggledInfo: false,
         toggledPanel: true,
@@ -75,12 +75,12 @@ class App extends Component {
             }
         });
         // Set initial markers to be accepting
-        const initialMarkers = allMarkerData.filter(marker => (marker.accepting))
+        // const initialMarkers = allMarkerData.filter(marker => (marker.accepting))
         this.setState({
             isLoading: false,
             allMarkers: allMarkerData,
-            filteredMarkers: initialMarkers,
-            tempFilteredMarkers: initialMarkers
+            filteredMarkers: allMarkerData,
+            tempFilteredMarkers: allMarkerData
         });
     }
 
@@ -195,12 +195,8 @@ class App extends Component {
 
         this.setState({
             viewport: {
-                center: [
-                  matched.location.lat,
-                  // Dirty
-                  nextLng
-                  ]
-                ,
+              // Dirty fixed with zoom
+                center: [matched.location.lat, matched.location.lng-.02],
                 zoom: 14
             },
             selectedMarker: matched,
@@ -280,18 +276,13 @@ class App extends Component {
                         <Lmap
                             currentLocation={ currentLocation }
                             filteredMarkers={ filteredMarkers }
-                            allMarkers={ allMarkers }
                             viewport={ viewport }
                             selectedMarker={ selectedMarker }
-                            query={ query }
-                            toggledInfo={ toggledInfo }
 
                             onOpenInfoBox={ this.handleOpenInfoBox }
+
                             onCloseInfoBox={ this.handleCloseInfoBox }
-
-                            onTogglePanel={ this.handleTogglePanel }
                             onClosePanel={ this.handleClosePanel }
-
                             onCloseSearchBox={ this.handleCloseSearchBox }
                         />
 

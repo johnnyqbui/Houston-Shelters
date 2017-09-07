@@ -42,25 +42,17 @@ const greyMarkerIcon = new L.icon({
 })
 
 class Lmap extends Component {
-		state = {
-			bounds: []
-		}
-  	centerToMarker = (location) => {
-  		const { toggledInfo } = this.props
-  		console.log(toggledInfo)
-  		if (window.innerWidth > 960 && this.state.toggledInfo === false) {
-  			this.setState({
-	  			bounds: {
-	  				lat: location.lat,
-	  				// Dirty
-	  				lng: location.lng-.6
-	  			}
-	  		})
-  		} else {
-  			this.setState({
-	  			bounds: location
-	  		})
-  		}
+	state = {
+		bounds: []
+	}
+  	centerToMarker = (location, filteredMarkers) => {
+  		const mapApi = this.refs.map.leafletElement
+  		const point = mapApi.latLngToContainerPoint(location)
+  		const newPoint = L.point([point.x-250, point.y])
+  		const newLatLng = mapApi.containerPointToLatLng(newPoint)
+		this.setState({
+  			bounds: newLatLng
+  		})
 
   	}
   	resetBounds = () => {
@@ -83,11 +75,16 @@ class Lmap extends Component {
 			    className='map'
 			    center={ bounds }
 			    viewport={ viewport }
-			    onClick={ onClosePanel, onCloseSearchBox, onCloseInfoBox }
+			    onClick={() => {
+			    	onClosePanel()
+			    	onCloseSearchBox()
+			    	onCloseInfoBox()
+			    }}
 			    doubleClickZoom={ true }
 			    zoomSnap={ false }
 			    trackResize={ true }
 			    zoomControl={ false }
+			    ref='map'
 			>
 
 		      <TileLayer
@@ -116,16 +113,22 @@ class Lmap extends Component {
 						icon={icon}
 						key={index}
 						position={[location.lat, location.lng]}
+						keyboard={true}
+						ref='marker'
 						>
 						<Popup minWidth="250" autoPan={false}
 							onOpen={() => {
-								this.centerToMarker(location);
+								this.centerToMarker(location, filteredMarkers);
 								onOpenInfoBox(marker)
 								onClosePanel()
+
 							}}
 							onClose={() => {
 								onCloseInfoBox()
-							}}>
+							}}
+							ref='popup'
+							position={location}
+							>
 						    <div className='popup-info' style={{fontSize: '14px'}}>
 						        <span style={{fontWeight: 'bold', fontSize: '16px'}}>{shelter}</span><br/>
 						        {address}<br/>
