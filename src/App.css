@@ -597,13 +597,6 @@ button {
     width: 100px;
 }
 
-.top-navbar img {
-    vertical-align:middle;
-    padding-bottom:3px;
-    padding-right:10px;
-    display:inline-block;
-}
-
 .top-navbar h2 {
     font-size: 18px;
     font-weight: normal;
@@ -612,10 +605,6 @@ button {
 
 
 /* END Top Nav Bar */
-
-a:focus, input:focus{
-    outline: none;
-}
 
 
 /* Filter Container */
@@ -642,7 +631,8 @@ a:focus, input:focus{
 
 .current-filter-button {
     font-size: 13px;
-    height: 40px;
+    height: 36px;
+    margin-top: 6px;
     padding: 0 10px;
     cursor: pointer;
     color: #fff;
@@ -655,11 +645,6 @@ a:focus, input:focus{
 
 .current-filter-button span {
     display: none;
-}
-
-.fa-filter {
-    font-size:14px;
-    margin-right:5px;
 }
 
 .filter-panel {
@@ -808,19 +793,9 @@ a {
 
 .controls-button {
     position: absolute;
-<<<<<<< HEAD
     width: 38px;
     height: 38px;
     padding: 0;
-||||||| merged common ancestors
-    padding: 0;
-    width: 38px;
-    height: 38px;
-=======
-    padding: 0;
-    width:35px;
-    height: 35px;
->>>>>>> eae226ba0333bf756c402cac871cf9abfbd50c65
     cursor: pointer;
     border: none;
     border: 1px solid#ccc;
@@ -835,7 +810,7 @@ a {
 
 .locate-me-button {
     top: 5px;
-    right: 100px;
+    right: 50px;
 }
 
 .add-shelter-button {
@@ -863,19 +838,18 @@ input {
     font-size: 14px;
     font-weight: bold;
     position: fixed;
-    z-index: 10;
+    z-index: 6;
     top: 100px;
-    right: -30px;
-
+    right: 5px;
 }
 
 .add-shelter-container {
     font-size: 14px;
     font-weight: bold;
     position: fixed;
-    z-index: 10;
+    z-index: 6;
     top: 100px;
-    right: 15px;
+    right: 10px;
 }
 
 .locate-me-container p {
@@ -897,7 +871,6 @@ input {
     font-size: 24px;
     position: relative;
     right: 0;
-    color:#1496FA;
 }
 
 
@@ -928,15 +901,7 @@ h4 {
     font-size: 13px;
     position: fixed;
     z-index: 50;
-<<<<<<< HEAD
     bottom: -30%;
-||||||| merged common ancestors
-    bottom: -30%;
-    height: 30%;
-=======
-    bottom: -40%;
-    height: 40%;
->>>>>>> eae226ba0333bf756c402cac871cf9abfbd50c65
     overflow-y: auto;
     width: 100%;
     height: 30%;
@@ -1264,27 +1229,6 @@ h4 {
     color: white;
 }
 
-
-.clear-icon {
-    color: #bbb;
-    font-size: 24px;
-    right: 23px;
-    position: absolute;
-    top: 18px;
-    background: #fff;
-    width: 40px;
-    border-left: 1px solid #EEE;
-    cursor: pointer;
-}
-
-.mobile-hidden {
-    display:none;
-}
-
-.leaflet-popup-content {
-    margin-top:10px;
-}
-
 /******Responsiveness*****/
 
 @media (min-width: 960px) {
@@ -1317,15 +1261,6 @@ h4 {
         opacity: 1;
         box-shadow: 0 5px 5px rgba(0, 0, 0, .3);
     }
-
-    .mobile-hidden {
-        display:block;
-    }
-
-    .leaflet-popup-content {
-        margin-top:20px;
-    }
-
     .top-support {
         width: auto;
     }
@@ -1335,11 +1270,6 @@ h4 {
         left: auto;
     }
     */
-
-    .locate-me-container {
-        right:10px;
-    }
-
     .locate-me-container p {
         position: relative;
         right: 195px;
@@ -1351,11 +1281,6 @@ h4 {
         top: 5px;
         right: 150px;
     }
-
-    .add-shelter-container {
-        right:10px;
-    }
-
     .add-shelter-container p {
         position: relative;
         right: 53px;
