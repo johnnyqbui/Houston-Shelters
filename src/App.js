@@ -22,7 +22,7 @@ class App extends Component {
         tempFilteredMarkers: [],
         viewport: {
           center: [28.139816, -81.600952],
-            zoom: 8
+            zoom: 7
         },
         currentLocation: [],
         selectedFilter: 'All Shelters',

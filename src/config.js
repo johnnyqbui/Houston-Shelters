@@ -9,7 +9,8 @@ export const config = () => {
 					lng: -95.3698
 					zoom: 12
 				},
-			}
+			},
+			gaKey: 'UA-105727042-1'
 		}
 		'irma': {
 			apiBaseURL: 'https://irma-api.herokuapp.com/api/v1/shelters',
@@ -18,9 +19,10 @@ export const config = () => {
 				center: {
 					lat: 28.139816,
 					lng: -81.600952
-					zoom: 8
+					zoom: 7
 				},
-			}
+			},
+			gaKey: 'UA-106081403-1'
 		}
 	}
 }
