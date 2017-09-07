@@ -3,7 +3,17 @@ import React, { Component } from 'react';
 class Search extends Component {
 	state = {
 		query: '',
-		searched: []
+		searched: [],
+		infoOpen: false
+	}
+
+	setInfoOpen = (isOpen) => {
+		this.setState({infoOpen: isOpen})
+	}
+
+	getSearchContainerClass = () => {
+		let openClass = (this.state.infoOpen) ? "open" : "";
+		return "search-data-container " + openClass;
 	}
 
 	updateQuery = (query) => {
@@ -72,15 +82,15 @@ class Search extends Component {
 	render() {
 		const { query, searched } = this.state;
 		const { onClickSearch, toggledSearchBox } = this.props;
+  	let containerClass = this.getSearchContainerClass();
 
-		return (
-
-			<div className="search-data-container">
+  	return (
+			<div className={containerClass}>
 				<div className="search-data-bar">
 				  <div className="search-data-input-wrapper">
 				    <input
 					    type="text"
-					    placeholder="Search by Address, Shelter or Needs (eg: 'baby formula')"
+					    placeholder="Search by Shelter, Address, or Needs (e.g. baby formula)"
 					    value={query}
 					    onChange={(e) => this.updateQuery(e.target.value)}
 					    onClick={() => this.handleOpenSearchBox() }
@@ -101,6 +111,8 @@ class Search extends Component {
 						))}
 					</ul>
 				</div>
+
+				{this.props.children}
 			</div>
 		)
 	}

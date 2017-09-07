@@ -151,6 +151,8 @@ class App extends Component {
     }
 
     handleOpenInfoBox = (marker) => {
+        console.log("open info box");
+        this.search.setInfoOpen(true);
         this.setState({
             selectedMarker: marker,
             toggledInfo: true
@@ -158,6 +160,9 @@ class App extends Component {
     }
 
     handleCloseInfoBox = () => {
+        if (this.search) { // kludge b/c somtimes this.search returns null - jn
+            this.search.setInfoOpen(false);
+        }
         this.setState({
             toggledInfo: false
         })
@@ -176,6 +181,7 @@ class App extends Component {
     }
 
     handleInputSearch = (query, selectedFilter) => {
+
         this.setState({
             filteredMarkers: query,
             selectedFilter: selectedFilter
@@ -183,6 +189,10 @@ class App extends Component {
     }
 
     handleClickSearch = (matched, query) => {
+        this.search.setInfoOpen(true);
+        let nextLng = (window.innerWidth > 960) ?
+          matched.location.lng-.03 : matched.location.lng;
+
         this.setState({
             viewport: {
               // Dirty fixed with zoom
@@ -220,6 +230,7 @@ class App extends Component {
                         <div>
 
                         <Search
+                            ref = {(com) => { this.search = com;}}
                             allMarkers={ allMarkers }
                             tempFilteredMarkers = { tempFilteredMarkers }
 
@@ -237,7 +248,8 @@ class App extends Component {
                             onOpenSearchBox={ this.handleOpenSearchBox }
 
                             onCloseInfoBox={ this.handleCloseInfoBox }
-                        />
+                        >
+
                         { isLoading ? <LoadingIcon /> :
                             <FilterPanel
                                 toggledPanel={ toggledPanel }
@@ -253,6 +265,7 @@ class App extends Component {
                             />
                         }
 
+                        </Search>
                         <GeoLocate
                             currentLocation={ currentLocation }
                             onClickLocate={ this.handleLocate }
