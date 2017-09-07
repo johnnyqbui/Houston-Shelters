@@ -952,7 +952,8 @@ h4 {
 
 .info-box h2 {
     padding: 10px 20px;
-    border-bottom:1px solid #EEE;
+    background-color:#f90;
+    color:#FFF;
     font-size:18px;
 }
 
