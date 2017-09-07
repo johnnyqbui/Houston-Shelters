@@ -25,8 +25,8 @@ class App extends Component {
             zoom: 7
         },
         currentLocation: [],
-        selectedFilter: 'All Shelters',
-        tempSelectedFilter: 'All Shelters',
+        selectedFilter: 'Accepting People',
+        tempSelectedFilter: 'Accepting People',
         selectedMarker: {},
         toggledInfo: false,
         toggledPanel: false,
@@ -77,12 +77,12 @@ class App extends Component {
             }
         });
         // Set initial markers to be accepting
-        // const initialMarkers = allMarkerData.filter(marker => (marker.accepting))
+        const initialMarkers = allMarkerData.filter(marker => (marker.accepting))
         this.setState({
             isLoading: false,
             allMarkers: allMarkerData,
-            filteredMarkers: allMarkerData,
-            tempFilteredMarkers: allMarkerData
+            filteredMarkers: initialMarkers,
+            tempFilteredMarkers: initialMarkers
         });
     }
 
