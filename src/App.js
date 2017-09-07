@@ -151,7 +151,6 @@ class App extends Component {
     }
 
     handleOpenInfoBox = (marker) => {
-        console.log("open info box");
         this.search.setInfoOpen(true);
         this.setState({
             selectedMarker: marker,
@@ -190,8 +189,8 @@ class App extends Component {
 
     handleClickSearch = (matched, query) => {
         this.search.setInfoOpen(true);
-        let nextLng = (window.innerWidth > 960) ?
-          matched.location.lng-.03 : matched.location.lng;
+        // let nextLng = (window.innerWidth > 960) ?
+        //   matched.location.lng-.03 : matched.location.lng;
 
         this.setState({
             viewport: {
