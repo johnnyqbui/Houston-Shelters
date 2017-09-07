@@ -17,9 +17,7 @@ class Search extends Component {
 		const {
 			allMarkers,
 			tempFilteredMarkers,
-			selectedFilter,
 			tempSelectedFilter,
-			onSelectedFilter,
 			onInputSearch,
 			onCloseInfoBox,
 			onOpenSearchBox,
@@ -27,7 +25,7 @@ class Search extends Component {
 
 		const matched = allMarkers.filter(
 			data => {
-				const { shelter, address, city, county, supplyNeeds, volunteerNeeds, pets } = data;
+				const { shelter, address, city, county, supplyNeeds, volunteerNeeds } = data;
 				const concat = `${shelter} ${address} ${city} ${county} ${supplyNeeds} ${volunteerNeeds}`.toLowerCase();
 				return concat.indexOf(query.toLowerCase()) > -1
 			}

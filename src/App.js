@@ -185,12 +185,8 @@ class App extends Component {
     handleClickSearch = (matched, query) => {
         this.setState({
             viewport: {
-                center: [
-                  matched.location.lat,
-                  // Dirty
-                  matched.location.lng-.02
-                  ]
-                ,
+              // Dirty fixed with zoom
+                center: [matched.location.lat, matched.location.lng-.02],
                 zoom: 14
             },
             selectedMarker: matched,
@@ -267,18 +263,13 @@ class App extends Component {
                         <Lmap
                             currentLocation={ currentLocation }
                             filteredMarkers={ filteredMarkers }
-                            allMarkers={ allMarkers }
                             viewport={ viewport }
                             selectedMarker={ selectedMarker }
-                            query={ query }
-                            toggledInfo={ toggledInfo }
 
                             onOpenInfoBox={ this.handleOpenInfoBox }
+
                             onCloseInfoBox={ this.handleCloseInfoBox }
-
-                            onTogglePanel={ this.handleTogglePanel }
                             onClosePanel={ this.handleClosePanel }
-
                             onCloseSearchBox={ this.handleCloseSearchBox }
                         />
 
