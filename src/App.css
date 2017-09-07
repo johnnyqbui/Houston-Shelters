@@ -544,6 +544,10 @@ template {
 
 /*******MAIN CSS*******/
 
+* {
+    box-sizing:border-box !important;
+}
+
 body,
 html,
 h1,
@@ -577,8 +581,6 @@ button {
     position: fixed;
     z-index: 4;
     display: flex;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     width: 100%;
     height: 50px;
     padding: 0 20px;
@@ -607,10 +609,11 @@ button {
 /* Filter Container */
 
 .filter-container {
-    position: fixed;
+    margin-top:5px;
+    /*position: fixed;
     z-index: 3;
     top: 50px;
-    width: 100%;
+    width: 100%;*/
 }
 
 .filter-panel.closePanel {
@@ -621,12 +624,10 @@ button {
 .filter-controls {
     position: relative;
     z-index: 4;
-    box-sizing: border-box;
     width: 100%;
-    height: 50px;
+
     padding: 0 20px;
-    border-bottom: 1px solid #eee;
-    background: #EEE;
+
 }
 
 .current-filter-button {
@@ -638,6 +639,8 @@ button {
     color: #fff;
     border: 0;
     border-radius: .3rem;
+    border:1px solid #6aadcb;
+    box-shadow:1px 1px 1px rgba(0,0,0,0.1);
     background: rgb(20, 150, 250);
 }
 
@@ -647,18 +650,18 @@ button {
 
 .filter-panel {
     position: relative;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 10px 20px;
+
+    margin:0 20px;
+    border-radius:.3rem;
+    padding: 10px;
     transition: .2s all;
+    border:1px solid #CCC;
+    box-shadow:1px 1px 1px rgba(0,0,0,0.1);
     background: rgba(255, 255, 255, .85);
 }
 
 .filter-panel p {
     font-size: 1.3em;
-    box-sizing: border-box;
     margin: 20px auto;
     padding: 0 20px 5px;
     transition: .2s all;
@@ -668,8 +671,7 @@ button {
 
 .filter-panel input {
     font-size: 13px;
-    box-sizing: border-box;
-    height: 40px;
+    height: 30px;
     margin-right: 7px;
     margin-bottom: 7px;
     padding: 0 10px;
@@ -798,8 +800,11 @@ a {
     height: 38px;
     cursor: pointer;
     border: none;
-    border-radius: .3rem;
-    background: rgb(90, 90, 90);
+    border-radius: 50px;
+    background-color:#FFF;
+    border:1px solid#CCC;
+    box-shadow:1px 1px 1px rgba(0,0,0,0.1);
+
     -ms-flex-pack: center;
     justify-content: center;
     -ms-flex-align: center;
@@ -827,20 +832,27 @@ input {
 
 .controls-font-grey {
     color: #656565;
+    text-align:right;
+    margin-right:5px;
 }
 
 .locate-me-container {
     position: fixed;
     z-index: 10;
-    top: 50px;
+    font-size:14px;
+    font-weight:bold;
+    top: 100px;
     right: 5px;
 }
+
 
 .add-shelter-container {
     position: fixed;
     z-index: 10;
-    top: 50px;
-    right: 5px;
+    font-size:14px;
+    font-weight:bold;
+    top: 100px;
+    right: 10px;
 }
 
 .locate-me-container p {
@@ -852,15 +864,14 @@ input {
 }
 
 .locate-me-icon {
-    font-size: 30px;
-    color: #fff;
+    font-size: 24px;
     position: relative;
     right: 0;
+    color:#1496FA;
 }
 
 .add-shelter-icon {
-    font-size: 32px;
-    color: #fff;
+    font-size: 24px;
     position: relative;
     right: 0;
 }
@@ -897,7 +908,6 @@ h4 {
     height: 30%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    box-sizing: border-box;
     width: 100%;
     transition: .2s all;
     /* Internet Explorer 5.5+ */
@@ -972,118 +982,6 @@ h4 {
     color: rgb(20, 150, 250);
 }
 
-/******Responsiveness*****/
-
-@media (min-width: 960px) {
-
-
-    .info-box {
-        font-size: 13px;
-        position: fixed;
-        z-index: 50;
-        left: -40%;
-        top:100px;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        box-sizing: border-box;
-        width: 40%;
-        max-width:600px;
-        height: 100%;
-        transition: .2s all;
-        /* Internet Explorer 5.5+ */
-        white-space: pre-wrap;
-        /* css-3 */
-        white-space: -moz-pre-wrap;
-        /* Mozilla, since 1999 */
-        white-space: -pre-wrap;
-        /* Opera 4-6 */
-        white-space: -o-pre-wrap;
-        /* Opera 7 */
-        word-wrap: break-word;
-        background-color: #fff;
-        opacity: 0;
-    }
-
-    .info-box.open {
-        left:0;
-        box-shadow: 0 5px 5px rgba(0, 0, 0, .3);
-        opacity: 1;
-    }
-
-    .top-support {
-        width: auto;
-    }
-    /*
-    .locate-me-button {
-        right: 50px;
-        left: auto;
-    }
-    */
-    .locate-me-container p {
-        position: relative;
-        right: 195px;
-        display: block;
-        width: 75px;
-    }
-    .locate-me-button {
-        top: 5px;
-        right: 150px;
-    }
-    .add-shelter-container p {
-        position: relative;
-        right: 53px;
-        display: block;
-        width: 83px;
-    }
-    .add-shelter-button {
-        top: 5px;
-        right: 10px;
-    }
-    .current-filter-button span {
-        display: inline;
-    }
-    /*
-    .filter-panel {
-        top: 65px;
-        bottom: auto;
-        transition: .15s;
-        height: calc(100% - 150px);
-    }
-    .filter-panel .externalLinkButton input {
-        display: inline;
-        width: 41%;
-        height: 75px;
-        padding: 10px;
-        vertical-align: top;
-        white-space: normal;
-    }
-    .filter-panel input {
-        font-size: 16px;
-        font-size: 15px;
-        display: block;
-        width: 250px;
-        height: 50px;
-    }
-    */
-    .numberOfShelters {
-        font-size: 1.3em;
-        margin: 20px 0;
-    }
-    .filter-title {
-        font-size: 18px;
-    }
-    /*    .closePanel {
-        top: -100%;
-    }*/
-    /*
-    .filter-panel .blueButton.selected {
-        margin-left: 25px;
-    }
-
-    .filter-panel .greyButton.selected {
-        margin-left: 25px;
-    }*/
-}
 
 
 /*Loading*/
@@ -1265,22 +1163,36 @@ h4 {
 
 .search-data-container {
     position: absolute;
-    top: 60px;
-    left: 26%;
-    z-index: 6;
-    width: 40%;
+    top: 50px;
+    left: 0;
+    z-index: 20;
+    width: 100%;
+    box-sizing:border-box;
+    transition:0.2s all;
+}
+
+.search-data-container.open {
+    /* margin-left:40%; */
+    /* do nothing in mobile */
 }
 
 .search-data-input-wrapper input {
-    width: 100%;
-    padding: 5px;
-    border: none;
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin: 10px 20px 0;
+    box-shadow:1px 1px 1px rgba(0,0,0,0.1);
+    display:block;
+    border:1px solid #CCC;
 }
 
 .search-data-results {
     background: #fff;
     height: 300px;
-    overflow-y: scroll;
+    width:calc(100% - 40px);
+    overflow-y: hidden;
+    margin:0px 20px;
+    position:absolute;
+    z-index:10;
 }
 
 .hide {
@@ -1294,7 +1206,6 @@ h4 {
 }
 
 .search-data-results ul li {
-    border-bottom: 1px solid #ccc;
     list-style-type: none;
     padding: 8px 20px;
     margin: 0;
@@ -1323,4 +1234,128 @@ h4 {
 .top-navbar-dropdown ul li a {
     text-decoration: none;
     color: white;
+}
+
+
+/******Responsiveness*****/
+
+@media (min-width: 960px) {
+
+
+    .info-box {
+        font-size: 13px;
+        position: fixed;
+        z-index: 50;
+        left: -40%;
+        top:50px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 40%;
+        height: 100%;
+        transition: .2s all;
+        /* Internet Explorer 5.5+ */
+        white-space: pre-wrap;
+        /* css-3 */
+        white-space: -moz-pre-wrap;
+        /* Mozilla, since 1999 */
+        white-space: -pre-wrap;
+        /* Opera 4-6 */
+        white-space: -o-pre-wrap;
+        /* Opera 7 */
+        word-wrap: break-word;
+        background-color: #fff;
+        opacity: 0;
+    }
+
+    .info-box.open {
+        left:0;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, .3);
+        opacity: 1;
+    }
+
+    .top-support {
+        width: auto;
+    }
+    /*
+    .locate-me-button {
+        right: 50px;
+        left: auto;
+    }
+    */
+    .locate-me-container p {
+        position: relative;
+        right: 195px;
+        display: block;
+        width: 75px;
+        margin-top:14px;
+    }
+    .locate-me-button {
+        top: 5px;
+        right: 150px;
+    }
+    .add-shelter-container p {
+        position: relative;
+        right: 53px;
+        display: block;
+        margin-top:14px;
+        width: 83px;
+    }
+    .add-shelter-button {
+        top: 5px;
+        right: 10px;
+    }
+    .current-filter-button span {
+        display: inline;
+    }
+    /*
+    .filter-panel {
+        top: 65px;
+        bottom: auto;
+        transition: .15s;
+        height: calc(100% - 150px);
+    }
+    .filter-panel .externalLinkButton input {
+        display: inline;
+        width: 41%;
+        height: 75px;
+        padding: 10px;
+        vertical-align: top;
+        white-space: normal;
+    }
+    .filter-panel input {
+        font-size: 16px;
+        font-size: 15px;
+        display: block;
+        width: 250px;
+        height: 50px;
+    }
+    */
+    .numberOfShelters {
+        font-size: 1.3em;
+        margin: 20px 0;
+    }
+    .filter-title {
+        font-size: 16px;
+        color:#999;
+    }
+    /*    .closePanel {
+        top: -100%;
+    }*/
+    /*
+    .filter-panel .blueButton.selected {
+        margin-left: 25px;
+    }
+
+    .filter-panel .greyButton.selected {
+        margin-left: 25px;
+    }*/
+
+
+
+    .search-data-container.open {
+        width:calc(100%);
+        padding-left:40%;
+
+    }
+
 }

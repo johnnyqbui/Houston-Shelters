@@ -9,7 +9,6 @@ const AddShelter = (props) => {
             <button className='controls-button add-shelter-button'>
             <a href='http://harveyneeds.org/' target='_blank' rel='noopener noreferrer' >
                 <GoPlus className="add-shelter-icon" />
-
             </a>
             </button>
         </div>
