@@ -1,9 +1,9 @@
-const api = "https://api.harveyneeds.org/api/v1/shelters"
+import config from '../config';
 
 export const getAll = () =>
-  fetch(api)
+  fetch(config.api.baseURL)
     .then(res => res.json())
 
 export const search = (query) =>
-  fetch(`${api}/?${query}`)
+  fetch(`${config.api.baseURL}/?${query}`)
     .then(res => res.json())

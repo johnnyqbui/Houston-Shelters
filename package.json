@@ -12,6 +12,8 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-ga": "^2.2.0",
+    "react-helmet": "^5.2.0",
     "react-highlight-words": "^0.8.1",
     "react-icons": "^2.2.5",
     "react-key-handler": "^1.0.0",
