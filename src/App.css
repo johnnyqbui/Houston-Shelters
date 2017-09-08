@@ -611,7 +611,7 @@ button {
 
 .filter-container {
     position: absolute;
-    top: 100px;
+    top: 106px;
     z-index: 5;
     width: 100%;
     transition: .2s all;
