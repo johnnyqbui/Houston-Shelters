@@ -34,6 +34,15 @@ const config = {
     description: (process.env.REACT_APP_OG_DESCRIPTION || process.env.REACT_APP_META_DESCRIPTION),
     image: process.env.REACT_APP_OG_IMAGE
   },
+  twitter: {
+    card: process.env.REACT_APP_TWITTER_CARD,
+    site: process.env.REACT_APP_TWITTER_SITE,
+    creator: process.env.REACT_APP_TWITTER_CREATOR,
+    // the following twitter variables are also optional
+    title: (process.env.REACT_APP_TWITTER_TITLE || process.env.REACT_APP_META_TITLE),
+    description: (process.env.REACT_APP_TWITTER_DESCRIPTION || process.env.REACT_APP_META_DESCRIPTION),
+    image: process.env.REACT_APP_TWITTER_IMAGE
+  },
   about: {
     title: process.env.REACT_APP_SITE_TITLE,
     eventName: process.env.REACT_APP_EVENT_NAME
