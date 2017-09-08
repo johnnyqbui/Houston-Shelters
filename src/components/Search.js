@@ -77,17 +77,43 @@ class Search extends Component {
 
     handleClickSearch = (data) => {
 		const { onCloseSearchBox } = this.props;
+	}
+
+	handleCloseSearchBox = (data) => {
+		const {
+			onCloseSearchBox,
+			tempFilteredMarkers,
+			tempSelectedFilter,
+			onInputSearch } = this.props;
 
 		if (data) {
 			this.setState({
 				query: `${ data.shelter } at ${ data.address }, ${ data.city }`,
+				searched: [],
 				cursor: 0
 			})
+		} else {
+			onInputSearch(tempFilteredMarkers, tempSelectedFilter)
 		}
 		onCloseSearchBox()
 	}
 
-    handleKeyDown = (e, data, query) => {
+	handleOpenSearchBox = () => {
+		const { onOpenSearchBox } = this.props;
+		const { searched } = this.state;
+		if (searched.length > 1) {
+			onOpenSearchBox()
+		}
+	}
+
+	handleClearSearch = () => {
+        this.setState({
+            query: '',
+            cursor: 0
+        })
+    }
+
+    handleKeyDown = (e, data) => {
 	    const { cursor, searched } = this.state;
 	    const { onCompleteSearch, onCloseSearchBox } = this.props;
 	    // up
@@ -117,10 +143,9 @@ class Search extends Component {
 
 	    // Enter
 	    if (e.keyCode === 13) {
-	    	if (!data) {return}
-	    	const fullLocation = `${ data.shelter } at ${ data.address }, ${ data.city }`
+	    	const query = `${ data.shelter } at ${ data.address }, ${ data.city }`
 	    	this.setState({
-	    		query: fullLocation
+	    		query: query
 	    	})
 	    	onCompleteSearch(data, query)
 	    	onCloseSearchBox()
@@ -154,7 +179,7 @@ class Search extends Component {
 						    className='clear-icon'
 						    onClick={() => {
 						    	this.handleClearSearch()
-						    	this.handleClickSearch()
+						    	this.handleCloseSearchBox()
 						    }}
 						/>
 					  </div>
@@ -166,7 +191,7 @@ class Search extends Component {
 									className={cursor === index ? 'searchSelected' : ''}
 									onMouseOver={() => {this.handleMouseOver(index)}}
 									onClick={() => {
-										this.handleClickSearch(data)
+										this.handleCloseSearchBox(data)
 										onCompleteSearch(data, query)
 									}}>
 									{`${ data.shelter } at ${ data.address }, ${ data.city }`}
