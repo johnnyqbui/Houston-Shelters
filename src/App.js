@@ -11,7 +11,8 @@ import AddShelter from './components/AddShelter';
 import FilterPanel from './components/FilterPanel';
 import Search from './components/Search';
 import LoadingIcon from './components/LoadingIcon';
-import InfoBox from './components/InfoBox'
+import InfoBox from './components/InfoBox';
+import Meta from './components/Meta';
 
 import Credits from './pages/Credits';
 
@@ -218,6 +219,7 @@ class App extends Component {
             query } = this.state;
         return (
             <div className="App">
+                    <Meta />
 
                     <TopNavBar />
 
