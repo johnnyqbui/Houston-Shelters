@@ -78,6 +78,7 @@ class Search extends Component {
     handleClickSearch = (data) => {
 		const { onCloseSearchBox } = this.props;
 
+
 		if (data) {
 			this.setState({
 				query: `${ data.shelter } at ${ data.address }, ${ data.city }`,
@@ -145,9 +146,7 @@ class Search extends Component {
 						    placeholder="Search by Shelter, Address, or Needs (e.g. baby formula)"
 						    value={query}
 						    onChange={(e) => this.updateQuery(e.target.value)}
-						    onClick={() => {
-						    	this.handleOpenSearchBox()
-						    }}
+						    onClick={() => {this.handleOpenSearchBox()}}
 						    onKeyDown={(e) => this.handleKeyDown(e, searched[cursor], query)}
 					    />
 					    <MdClear
