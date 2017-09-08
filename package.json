@@ -32,7 +32,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build&&gh-pages -d build",
-    "heroku-prebuild": "./bin/setup",
+    "setup-vars": "./bin/setup",
+    "heroku-prebuild": "npm run setup-vars",
     "heroku-postbuild": "npm run build",
     "start-static": "http-server ./build -p ${PORT} --cors"
   },

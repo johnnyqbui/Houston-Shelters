@@ -26,10 +26,13 @@ const config = {
     title: process.env.REACT_APP_META_TITLE,
     description: process.env.REACT_APP_META_DESCRIPTION,
     favicon: process.env.REACT_APP_META_FAVICON_URL, // optional environment variable
-    ogURL: process.env.REACT_APP_META_OGURL,
-    ogTitle: process.env.REACT_APP_META_OGTITLE,
-    ogDescription: process.env.REACT_APP_META_OGDESCRIPTION,
-    ogImage: process.env.REACT_APP_META_OGIMAGE,
+    url: process.env.REACT_APP_META_CANONICAL // optional
+  },
+  openGraph: { // the following open-graph variables are also optional
+    url: (process.env.REACT_APP_META_CANONICAL || process.env.REACT_APP_OG_URL),
+    title: (process.env.REACT_APP_OG_TITLE || process.env.REACT_APP_META_TITLE),
+    description: (process.env.REACT_APP_OG_DESCRIPTION || process.env.REACT_APP_META_DESCRIPTION),
+    image: process.env.REACT_APP_OG_IMAGE
   },
   about: {
     title: process.env.REACT_APP_SITE_TITLE,

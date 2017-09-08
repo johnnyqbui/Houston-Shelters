@@ -10,14 +10,20 @@ const Meta = () => {
       <meta
         name='description'
         content={config.meta.description}/>
-        <meta property="og:url" content={config.meta.ogURL}/>
-        <meta property="og:title" content={config.meta.ogTitle}/>
-        <meta property="og:description" content={config.meta.ogDescription}/>
-        <meta property="og:image" content={config.meta.ogImage}/>
       <link
         rel='shortcut icon'
         href={config.meta.favicon}
         type='image/x-icon'/>
+      {Object.entries(config.openGraph).map((entry, index) => {
+        if (entry[1]) {
+          return (<meta
+            property={`og:${entry[0]}`}
+            content={entry[1]}
+            key={`meta-og-${index}`}/>);
+        } else {
+          return null;
+        }
+      })}
     </Helmet>
   );
 }
