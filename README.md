@@ -21,15 +21,15 @@ Thanks to everyone working to keep this sheet constantly updated
 * For your heroku app, you will need to set an `EVENT_NAME` config variable like so:
 
   ```
-  heroku --app ${app-name} config:set EVENT_NAME=${event-name}
+  heroku config:set EVENT_NAME=${event-name} --app ${app-name}
   ```
 
   For example:
 
   ```
-  heroku --app irma-staging config:set EVENT_NAME=irma
-  heroku --app irma-shelters config:set EVENT_NAME=irma
-  heroku --app harvey-shelters-staging config:set EVENT_NAME=harvey
+  heroku config:set EVENT_NAME=irma --app irma-staging
+  heroku config:set EVENT_NAME=irma --app irma-shelters
+  heroku config:set EVENT_NAME=harvey --app harvey-shelters-staging
   ```
 * Now, you can deploy by pushing to the heroku remotes as usual.
 
