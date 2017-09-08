@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
+
+import config from './config';
+
 import TopNavBar from './components/TopNavBar';
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
@@ -8,7 +11,8 @@ import AddShelter from './components/AddShelter';
 import FilterPanel from './components/FilterPanel';
 import Search from './components/Search';
 import LoadingIcon from './components/LoadingIcon';
-import InfoBox from './components/InfoBox'
+import InfoBox from './components/InfoBox';
+import Meta from './components/Meta';
 
 import Credits from './pages/Credits';
 
@@ -20,10 +24,7 @@ class App extends Component {
         allMarkers: [],
         filteredMarkers: [],
         tempFilteredMarkers: [],
-        viewport: {
-            center: [30.0604, -95.0898],
-            zoom: 9
-        },
+        viewport: config.map,
         currentLocation: [],
         selectedFilter: 'Accepting People',
         tempSelectedFilter: 'Accepting People',
@@ -218,6 +219,7 @@ class App extends Component {
             query } = this.state;
         return (
             <div className="App">
+                    <Meta />
 
                     <TopNavBar />
 
