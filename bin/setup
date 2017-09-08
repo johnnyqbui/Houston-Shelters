@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# This runs before react-script build, setting up the appropriate environment
+# variables beforehand for the build script to use.
+
+# Remove previous environment variables.
+if [ -f .env.local ]; then
+  rm .env.local
+fi
+
+# Symlink the matching environment variables file for the event.
+ln -s .env.${EVENT_NAME} .env.local
