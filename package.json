@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "gh-pages": "^1.0.0",
-    "http-server": "^0.10.0",
     "leaflet": "^1.2.0",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
@@ -28,10 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "npm run build&&gh-pages -d build",
-    "heroku-prebuild": "./bin/setup",
-    "heroku-postbuild": "npm run build",
-    "start-static": "http-server ./build -p ${PORT} --cors"
+    "deploy": "npm run build&&gh-pages -d build"
   },
   "homepage": "."
 }
