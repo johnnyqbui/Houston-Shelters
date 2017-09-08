@@ -647,6 +647,12 @@ button {
     display: none;
 }
 
+.fa-filter {
+    margin-right:5px;
+    margin-bottom:3px;
+    font-size:16px;
+}
+
 .filter-panel {
     position: relative;
     margin: 0 20px;
@@ -694,6 +700,10 @@ button {
     font-size: 16px;
     margin: 0 auto 10px;
     color: #345;
+}
+
+.mobile-hidden {
+    display:none;
 }
 
 .leaflet-popup-content {
@@ -901,10 +911,10 @@ h4 {
     font-size: 13px;
     position: fixed;
     z-index: 50;
-    bottom: -30%;
+    bottom: -40%;
     overflow-y: auto;
     width: 100%;
-    height: 30%;
+    height: 40%;
     transition: .2s all;
     /* Internet Explorer 5.5+ */
     white-space: pre-wrap;
@@ -933,7 +943,8 @@ h4 {
 .info-box h2 {
     font-size: 18px;
     padding: 10px 20px;
-    border-bottom: 1px solid #eee;
+    color:#FFF;
+    background-color:#F90;
 }
 
 .info-box .fa {
@@ -1213,6 +1224,12 @@ h4 {
     background: #a6c5ce;
 }*/
 
+.top-navbar img {
+    vertical-align:middle;
+    display:inline-block;
+    margin-bottom:5px;
+}
+
 .top-navbar-dropdown ul {
     margin: 0;
     padding: 0;
@@ -1232,6 +1249,10 @@ h4 {
 /******Responsiveness*****/
 
 @media (min-width: 960px) {
+    .mobile-hidden {
+        display:inherit;
+    }
+
     .info-box {
         font-size: 13px;
         position: fixed;
@@ -1292,6 +1313,8 @@ h4 {
         top: 5px;
         right: 10px;
     }
+
+
     .current-filter-button span {
         display: inline;
     }
@@ -1333,7 +1356,6 @@ h4 {
     .filter-panel .blueButton.selected {
         margin-left: 25px;
     }
-
     .filter-panel .greyButton.selected {
         margin-left: 25px;
     }*/
