@@ -1392,7 +1392,7 @@ h4 {
 
 .overlay {
     z-index: 7;
-    background: rgba( 80, 80, 80, .8);
+    background: rgba( 0, 0, 0, .2);
     position: fixed;
     top: 0px;
     left: 0px;
@@ -1402,37 +1402,54 @@ h4 {
 
 .overlay-content {
     position: absolute;
-    width: 50%;
+    width: 80%;
+    max-width:400px;
+    min-width:300px;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background: rgb( 50, 50, 50);
+    background: #FFFFFF;
+    border-radius:0.3rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.3);
+    border:1px solid #EEE;
 }
 
 .overlay-content h2 {
     margin: 10px;
-    color: white;
+    font-size:22px;
+}
+
+.locate-button-container {
+    clear:both;
+    width:100%;
+    padding:10px;
 }
 
 .overlay-content button {
-    margin: 20px;
-    background: rgb(100,100,100);
     border: none;
     padding: 15px;
     color: white;
+    display:inline-block;
     border-radius: .3rem;
     background: rgb(20, 150, 250);
     cursor: pointer;
+    float:left;
+    font-size:16px;
+
 }
 
 .locate-modal {
-    width: 100%;
+    width:100%;
+    margin-bottom:10px;
+
 }
 
 .skip-modal {
-    width: 50%;
+    width:100%;
+
+    background:#999 !important;
 }
