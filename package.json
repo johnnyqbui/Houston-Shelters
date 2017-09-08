@@ -23,7 +23,7 @@
     "react-scripts": "1.0.12"
   },
   "scripts": {
-    "start": "node -r dotenv/config src/config.js react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
