@@ -31,7 +31,7 @@
     "deploy": "npm run build&&gh-pages -d build",
     "heroku-prebuild": "./bin/setup",
     "heroku-postbuild": "npm run build",
-    "start-static": "http-server ./build -p ${PORT} --cors -s"
+    "start-static": "http-server ./build -p ${PORT} --cors"
   },
   "homepage": "."
 }
