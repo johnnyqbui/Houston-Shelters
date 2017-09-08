@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import MdClear from 'react-icons/lib/md/clear';
 
@@ -63,6 +64,10 @@ class Search extends Component {
 		}
 	}
 
+	// handleRoute = (selectedFilter, query) => {
+	// 	window.history.pushState('search', selectedFilter, query)
+	// }
+
 	handleClearSearch = () => {
         this.setState({
             query: '',
@@ -71,11 +76,7 @@ class Search extends Component {
     }
 
     handleClickSearch = (data) => {
-		const {
-			onCloseSearchBox,
-			tempFilteredMarkers,
-			tempSelectedFilter,
-			onInputSearch } = this.props;
+		const { onCloseSearchBox } = this.props;
 
 		if (data) {
 			this.setState({
@@ -134,7 +135,7 @@ class Search extends Component {
 
 	render() {
 		const { query, searched, cursor } = this.state;
-		const { onCompleteSearch, toggledSearchBox, toggledInfo } = this.props;
+		const { selectedFilter, onCompleteSearch, toggledSearchBox, toggledInfo } = this.props;
 	  	return (
 				<div className={toggledInfo ? 'search-data-container open' : 'search-data-container'}>
 					<div className="search-data-bar">
@@ -144,7 +145,9 @@ class Search extends Component {
 						    placeholder="Search by Shelter, Address, or Needs (e.g. baby formula)"
 						    value={query}
 						    onChange={(e) => this.updateQuery(e.target.value)}
-						    onClick={() => {this.handleOpenSearchBox()}}
+						    onClick={() => {
+						    	this.handleOpenSearchBox()
+						    }}
 						    onKeyDown={(e) => this.handleKeyDown(e, searched[cursor], query)}
 					    />
 					    <MdClear

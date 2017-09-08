@@ -1,8 +1,6 @@
 import React from 'react';
-import MdGpsFixed from 'react-icons/lib/md/gps-fixed';
 
-
-const GeoLocate = (props) => {
+const LocateModal = (props) => {
     const { showModal, currentLocation, onClickLocate } = props;
     const locate = () => {
         const success = (position) => {
@@ -18,19 +16,15 @@ const GeoLocate = (props) => {
         console.log('Browser does not support Geolocation') :
         navigator.geolocation.getCurrentPosition(success, error, options)
         // navigator.geolocation.watchPosition(success, error, options)
-
     }
 
     return (
-        <div className='locate-me-container'>
-            <p className='controls-font-grey'>Locate Me</p>
-            <button
-                className='controls-button locate-me-button'
-                onClick={() => {locate(currentLocation)}}>
-                <MdGpsFixed className="locate-me-icon" />
-            </button>
-        </div>
+        <button
+            className='locate-modal'
+            onClick={() => {locate(currentLocation)}}>
+            Locate My Position
+        </button>
     )
 }
 
-export default GeoLocate
+export default LocateModal

@@ -610,11 +610,11 @@ button {
 /* Filter Container */
 
 .filter-container {
-    margin-top: 5px;
-    /*position: fixed;
-    z-index: 3;
-    top: 50px;
-    width: 100%;*/
+    position: absolute;
+    top: 100px;
+    z-index: 5;
+    width: 100%;
+    ransition: .2s all;
 }
 
 .filter-panel.closePanel {
@@ -623,9 +623,6 @@ button {
 }
 
 .filter-controls {
-    position: relative;
-    z-index: 4;
-    width: 100%;
     padding: 0 20px;
 }
 
@@ -848,7 +845,7 @@ input {
     font-size: 14px;
     font-weight: bold;
     position: fixed;
-    z-index: 6;
+    z-index: 5;
     top: 100px;
     right: 5px;
 }
@@ -857,7 +854,7 @@ input {
     font-size: 14px;
     font-weight: bold;
     position: fixed;
-    z-index: 6;
+    z-index: 5;
     top: 100px;
     right: 10px;
 }
@@ -1176,6 +1173,7 @@ h4 {
     left: 0;
     box-sizing: border-box;
     width: 100%;
+    height: 50px;
     transition: .2s all;
 }
 
@@ -1196,7 +1194,7 @@ h4 {
 .search-data-results {
     position: absolute;
     z-index: 10;
-    overflow-y: hidden;
+    overflow-y: scroll;
     width: calc(100% - 40px);
     height: 300px;
     margin: 0 20px;
@@ -1364,6 +1362,11 @@ h4 {
         width: calc(100%);
         padding-left: 40%;
     }
+
+    .filter-container.open {
+        width: calc(100%);
+        padding-left: 40%;
+    }
 }
 
 .clear-icon {
@@ -1386,4 +1389,51 @@ h4 {
 
 .searchSelected {
     background: rgb(200, 200, 200);
+}
+
+.overlay {
+    z-index: 7;
+    background: rgba( 80, 80, 80, .8);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.overlay-content {
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: rgb( 50, 50, 50);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-content h2 {
+    margin: 10px;
+    color: white;
+}
+
+.overlay-content button {
+    margin: 20px;
+    background: rgb(100,100,100);
+    border: none;
+    padding: 15px;
+    color: white;
+    border-radius: .3rem;
+    background: rgb(20, 150, 250);
+    cursor: pointer;
+}
+
+.locate-modal {
+    width: 100%;
+}
+
+.skip-modal {
+    width: 50%;
 }

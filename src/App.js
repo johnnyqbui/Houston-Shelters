@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import ReactModal from 'react-modal';
+
 import './App.css';
 
 import config from './config';
 
+import Meta from './components/Meta';
+
+import LocateModal from './components/LocateModal';
 import TopNavBar from './components/TopNavBar';
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
@@ -12,7 +17,6 @@ import FilterPanel from './components/FilterPanel';
 import Search from './components/Search';
 import LoadingIcon from './components/LoadingIcon';
 import InfoBox from './components/InfoBox';
-import Meta from './components/Meta';
 
 import Credits from './pages/Credits';
 
@@ -20,6 +24,7 @@ import * as SheltersApi from './utils/SheltersApi';
 
 class App extends Component {
     state = {
+        showModal: true,
         isLoading: true,
         allMarkers: [],
         filteredMarkers: [],
@@ -135,9 +140,10 @@ class App extends Component {
         this.setState({
             viewport: {
                 center: currentLocation,
-                zoom: 13
+                zoom: 15
             },
-            currentLocation: currentLocation
+            currentLocation: currentLocation,
+            showModal: false
         })
     }
 
@@ -202,8 +208,17 @@ class App extends Component {
         })
     }
 
+    handleOpenModal = () => {
+        this.setState({ showModal: true });
+    }
+
+    handleCloseModal = () => {
+     this.setState({ showModal: false });
+    }
+
     render() {
         const {
+            showModal,
             isLoading,
             allMarkers,
             filteredMarkers,
@@ -219,13 +234,31 @@ class App extends Component {
             query } = this.state;
         return (
             <div className="App">
-                    <Meta />
-
+                <Meta />
                     <TopNavBar />
+                    <ReactModal
+                        isOpen={this.state.showModal}
+                        contentLabel="Modal"
+                        onRequestClose={this.handleCloseModal}
+                        className="overlay-content"
+                        overlayClassName="overlay"
+                    >
+                        <h2>Find Nearest Shelter</h2>
+                        <LocateModal
+                            showModal={ showModal }
+                            currentLocation={ currentLocation }
+                            onClickLocate={ this.handleLocate }
+                        />
+                        <button
+                            className='skip-modal'
+                            onClick={this.handleCloseModal}>
+                            Skip
+                        </button>
+                    </ReactModal>
 
-                        { isLoading ? <LoadingIcon /> :
+                    { isLoading ? <LoadingIcon /> :
+                        <div>
                             <Search
-                                ref = {(com) => { this.search = com;}}
                                 allMarkers={ allMarkers }
                                 tempFilteredMarkers = { tempFilteredMarkers }
 
@@ -244,47 +277,49 @@ class App extends Component {
                                 onOpenSearchBox={ this.handleOpenSearchBox }
 
                                 onCloseInfoBox={ this.handleCloseInfoBox } >
-
-                                <FilterPanel
-                                    toggledPanel={ toggledPanel }
-                                    allMarkers={ allMarkers }
-                                    filterLength={ filteredMarkers.length }
-                                    selectedFilter={ selectedFilter }
-                                    toggledInfo={ toggledInfo }
-
-                                    onTogglePanel={ this.handleTogglePanel }
-                                    onClickFilter={ this.handleFilteredMarkers }
-                                    onCloseSearchBox={ this.handleCloseSearchBox }
-                                    onCloseInfoBox={ this.handleCloseInfoBox }
-                                />
                             </Search>
-                        }
 
-                        <GeoLocate
-                            currentLocation={ currentLocation }
-                            onClickLocate={ this.handleLocate }
-                        />
+                            <FilterPanel
+                                toggledPanel={ toggledPanel }
+                                allMarkers={ allMarkers }
+                                filterLength={ filteredMarkers.length }
+                                selectedFilter={ selectedFilter }
+                                toggledInfo={ toggledInfo }
 
-                        <AddShelter />
+                                onTogglePanel={ this.handleTogglePanel }
+                                onClickFilter={ this.handleFilteredMarkers }
+                                onCloseSearchBox={ this.handleCloseSearchBox }
+                                onCloseInfoBox={ this.handleCloseInfoBox }
+                            />
+                        </div>
+                    }
 
-                        <Lmap
-                            currentLocation={ currentLocation }
-                            filteredMarkers={ filteredMarkers }
-                            viewport={ viewport }
-                            selectedMarker={ selectedMarker }
+                    <GeoLocate
+                        showModal={ showModal }
+                        currentLocation={ currentLocation }
+                        onClickLocate={ this.handleLocate }
+                    />
 
-                            onOpenInfoBox={ this.handleOpenInfoBox }
+                    <AddShelter />
 
-                            onCloseInfoBox={ this.handleCloseInfoBox }
-                            onClosePanel={ this.handleClosePanel }
-                            onCloseSearchBox={ this.handleCloseSearchBox }
-                        />
+                    <Lmap
+                        currentLocation={ currentLocation }
+                        filteredMarkers={ filteredMarkers }
+                        viewport={ viewport }
+                        selectedMarker={ selectedMarker }
 
-                        <InfoBox
-                            toggledInfo={ toggledInfo }
-                            selectedMarker={ selectedMarker }
-                            query={ query }
-                        />
+                        onOpenInfoBox={ this.handleOpenInfoBox }
+
+                        onCloseInfoBox={ this.handleCloseInfoBox }
+                        onClosePanel={ this.handleClosePanel }
+                        onCloseSearchBox={ this.handleCloseSearchBox }
+                    />
+
+                    <InfoBox
+                        toggledInfo={ toggledInfo }
+                        selectedMarker={ selectedMarker }
+                        query={ query }
+                    />
 
                 <Route path='/credits' render={( history ) => (
                     <Credits />
