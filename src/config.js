@@ -1,7 +1,7 @@
 // Config for being able to deploy different versions.
 // These variables should already be defined in a .env file for the environment
 // or set on the environment.
-// 
+//
 // Re-mapping those values here may seem a little redundant but makes these variables
 // easier to access consistently -- and in a more JavaScript-y format -- throughout
 // the app and allows for setting default values for undefined environments
@@ -13,7 +13,7 @@ const config = {
       parseFloat(process.env.REACT_APP_MAP_DEFAULT_CENTER_LAT),
       parseFloat(process.env.REACT_APP_MAP_DEFAULT_CENTER_LNG)
     ],
-    zoom: parseInt(process.env.REACT_APP_MAP_DEFAULT_ZOOM)
+    zoom: parseInt(process.env.REACT_APP_MAP_DEFAULT_ZOOM, 10)
   },
   api: {
     baseURL: process.env.REACT_APP_API_BASE_URL,
