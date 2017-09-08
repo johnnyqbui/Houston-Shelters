@@ -12,6 +12,9 @@ if (config.analytics.id) {
   ReactGA.initialize(config.analytics.id);
 }
 
+ReactGA.set({ page: window.location.pathname });
+ReactGA.pageview(window.location.pathname);
+
 ReactDOM.render(
 	<BrowserRouter><App /></BrowserRouter>,
 	document.getElementById('root'));
