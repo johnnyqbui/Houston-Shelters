@@ -1,7 +1,7 @@
 // Config for being able to deploy different versions.
 // These variables should already be defined in a .env file for the environment
 // or set on the environment.
-// 
+//
 // Re-mapping those values here may seem a little redundant but makes these variables
 // easier to access consistently -- and in a more JavaScript-y format -- throughout
 // the app and allows for setting default values for undefined environments
@@ -25,7 +25,11 @@ const config = {
   meta: {
     title: process.env.REACT_APP_META_TITLE,
     description: process.env.REACT_APP_META_DESCRIPTION,
-    favicon: process.env.REACT_APP_META_FAVICON_URL // optional environment variable
+    favicon: process.env.REACT_APP_META_FAVICON_URL, // optional environment variable
+    ogURL: process.env.REACT_APP_META_OGURL,
+    ogTitle: process.env.REACT_APP_META_OGTITLE,
+    ogDescription: process.env.REACT_APP_META_OGDESCRIPTION,
+    ogImage: process.env.REACT_APP_META_OGIMAGE,
   },
   about: {
     title: process.env.REACT_APP_SITE_TITLE,

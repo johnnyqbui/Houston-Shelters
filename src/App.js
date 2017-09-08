@@ -191,7 +191,7 @@ class App extends Component {
         })
     }
 
-    handleClickSearch = (matched, query) => {
+    handleCompleteSearch = (matched, query) => {
         const latLng = window.innerWidth > 960 ?
         [matched.location.lat, matched.location.lng-.02] :
         [matched.location.lat, matched.location.lng]
@@ -262,15 +262,15 @@ class App extends Component {
                                 allMarkers={ allMarkers }
                                 tempFilteredMarkers = { tempFilteredMarkers }
 
+                                toggledInfo={ toggledInfo }
                                 selectedFilter={ selectedFilter }
                                 tempSelectedFilter={ tempSelectedFilter }
 
                                 toggledSearchBox={ toggledSearchBox }
-                                toggledInfo={ toggledInfo }
 
                                 onSelectedFilter={ this.handleSelectedFilters }
 
-                                onCompleteSearch={ this.handleClickSearch }
+                                onCompleteSearch={ this.handleCompleteSearch }
                                 onInputSearch={ this.handleInputSearch }
 
                                 onCloseSearchBox={ this.handleCloseSearchBox }

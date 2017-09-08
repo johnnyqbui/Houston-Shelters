@@ -614,7 +614,7 @@ button {
     top: 100px;
     z-index: 5;
     width: 100%;
-    ransition: .2s all;
+    transition: .2s all;
 }
 
 .filter-panel.closePanel {

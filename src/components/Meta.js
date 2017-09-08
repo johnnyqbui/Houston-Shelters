@@ -10,6 +10,10 @@ const Meta = () => {
       <meta
         name='description'
         content={config.meta.description}/>
+        <meta property="og:url" content={config.meta.ogURL}/>
+        <meta property="og:title" content={config.meta.ogTitle}/>
+        <meta property="og:description" content={config.meta.ogDescription}/>
+        <meta property="og:image" content={config.meta.ogImage}/>
       <link
         rel='shortcut icon'
         href={config.meta.favicon}

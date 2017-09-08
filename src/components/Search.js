@@ -68,17 +68,6 @@ class Search extends Component {
 	// 	window.history.pushState('search', selectedFilter, query)
 	// }
 
-	handleClearSearch = () => {
-        this.setState({
-            query: '',
-            cursor: 0
-        })
-    }
-
-    handleClickSearch = (data) => {
-		const { onCloseSearchBox } = this.props;
-	}
-
 	handleCloseSearchBox = (data) => {
 		const {
 			onCloseSearchBox,
@@ -96,14 +85,6 @@ class Search extends Component {
 			onInputSearch(tempFilteredMarkers, tempSelectedFilter)
 		}
 		onCloseSearchBox()
-	}
-
-	handleOpenSearchBox = () => {
-		const { onOpenSearchBox } = this.props;
-		const { searched } = this.state;
-		if (searched.length > 1) {
-			onOpenSearchBox()
-		}
 	}
 
 	handleClearSearch = () => {
@@ -170,9 +151,7 @@ class Search extends Component {
 						    placeholder="Search by Shelter, Address, or Needs (e.g. baby formula)"
 						    value={query}
 						    onChange={(e) => this.updateQuery(e.target.value)}
-						    onClick={() => {
-						    	this.handleOpenSearchBox()
-						    }}
+						    onClick={() => {this.handleOpenSearchBox()}}
 						    onKeyDown={(e) => this.handleKeyDown(e, searched[cursor], query)}
 					    />
 					    <MdClear
