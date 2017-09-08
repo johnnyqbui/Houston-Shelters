@@ -16,6 +16,9 @@ import config from '../config';
 //     </ul>
 // </div>
 
+// Text support to find neartes shelter
+// <p className="top-support">Text for help: <a href="sms:3462140739">346-214-0739</a></p>
+
 const typeToInstruction = {
   sms: 'Text',
   tel: 'Call'
@@ -35,7 +38,7 @@ const NumberNotice = (props) => {
 const TopNavBar = (props) => {
   return (
     <div className='top-navbar'>
-        <h2><img src={Logo} alt={Logo}/> {config.about.title}</h2>
+        <h2><img src={Logo} /> {config.about.title}</h2>
         {Object.entries(config.helpNumber).map((entry, index) => {
           return (<NumberNotice type={entry[0]} number={entry[1]} key={`number-notice-${index}`}/>);
         })}
