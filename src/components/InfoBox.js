@@ -48,7 +48,7 @@ const InfoBox = (props) => {
         )
     }
 
-    let countyTxt = county ? `${county}` : '';
+    let countyTxt = county ? highlightText(county) : '';
 
       const notesTag = (notes) => {
         if (notes) {
