@@ -1,13 +1,13 @@
 import Marker from './Marker';
 
-import Rescue from './Rescue';
+import Rescuee from './Rescuee';
 import Rescuer from './Rescuer';
 import PointOfInterest from './PointOfInterest';
 
 const Models = {
-  rescues: Rescue,
-  rescuers: Rescuer,
-  pois: PointOfInterest
+  'rescuees': Rescuee,
+  'rescuers': Rescuer,
+  'point-of-interest': PointOfInterest
 };
 
 export default Models;

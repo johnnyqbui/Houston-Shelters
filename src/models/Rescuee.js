@@ -2,7 +2,7 @@ import Marker from './Marker';
 
 import find from 'lodash/find';
 
-class Rescue extends Marker {
+class Rescuee extends Marker {
   type = 'rescue'
 
   get shouldHighlight() {
@@ -10,4 +10,4 @@ class Rescue extends Marker {
   }
 }
 
-export default Rescue;
+export default Rescuee;

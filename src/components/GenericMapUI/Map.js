@@ -121,6 +121,7 @@ class Lmap extends Component {
                 key={index}
                 position={location.position}
                 keyboard={true}
+                zIndexOffset={(selectedMarker === marker && 1000)}
                 >
                 <Popup minWidth="250" autoPan={false}
                   ref='popup'
