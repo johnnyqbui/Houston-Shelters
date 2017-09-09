@@ -1,7 +1,7 @@
 import Marker from './Marker';
 
 class PointOfInterest extends Marker {
-  type = 'poi'
+  type = 'point-of-interest'
 }
 
 export default PointOfInterest;
