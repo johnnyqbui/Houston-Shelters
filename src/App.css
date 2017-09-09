@@ -817,7 +817,7 @@ a {
 
 .locate-me-button {
     top: 5px;
-    right: 50px;
+    right: 20px;
 }
 
 .add-shelter-button {
@@ -1291,14 +1291,14 @@ h4 {
     */
     .locate-me-container p {
         position: relative;
-        right: 195px;
+        right: 70px;
         display: block;
         width: 75px;
         margin-top: 14px;
     }
     .locate-me-button {
         top: 5px;
-        right: 150px;
+        right: 20px;
     }
     .add-shelter-container p {
         position: relative;

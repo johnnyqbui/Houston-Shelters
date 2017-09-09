@@ -302,8 +302,6 @@ class App extends Component {
                         onClickLocate={ this.handleLocate }
                     />
 
-                    <AddShelter />
-
                     <Lmap
                         currentLocation={ currentLocation }
                         filteredMarkers={ filteredMarkers }
