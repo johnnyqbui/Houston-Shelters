@@ -12,7 +12,6 @@ import LocateModal from './components/LocateModal';
 import TopNavBar from './components/TopNavBar';
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
-import AddShelter from './components/AddShelter';
 import FilterPanel from './components/FilterPanel';
 import Search from './components/Search';
 import LoadingIcon from './components/LoadingIcon';

@@ -9,7 +9,7 @@ const LocateModal = (props) => {
         }
         const error = (err) => { console.log('Could not obtain location', err)}
 
-        // High accuracy on false to consume energy on mobile
+        // High accuracy on false to consume less energy on mobile
         const options = {maximumAge: 60000, timeout: 5000, enableHighAccuracy: false}
 
         !navigator.geolocation ?
