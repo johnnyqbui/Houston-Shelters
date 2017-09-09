@@ -1,10 +1,8 @@
 import React from 'react';
-import '../App.css';
 import MdGpsFixed from 'react-icons/lib/md/gps-fixed';
 
-
 const GeoLocate = (props) => {
-    const { currentLocation, onClickLocate } = props;
+    const { showModal, currentLocation, onClickLocate } = props;
     const locate = () => {
         const success = (position) => {
             const currentLocation = [position.coords.latitude, position.coords.longitude]
@@ -12,7 +10,7 @@ const GeoLocate = (props) => {
         }
         const error = (err) => { console.log('Could not obtain location', err)}
 
-        // High accuracy on false to consume energy on mobile
+        // High accuracy on false to consume less energy on mobile
         const options = {maximumAge: 60000, timeout: 5000, enableHighAccuracy: false}
 
         !navigator.geolocation ?
@@ -24,7 +22,7 @@ const GeoLocate = (props) => {
 
     return (
         <div className='locate-me-container'>
-            <p className='controls-font-grey'>Locate Me</p>
+            <p className='controls-font-grey'>Find My Location</p>
             <button
                 className='controls-button locate-me-button'
                 onClick={() => {locate(currentLocation)}}>

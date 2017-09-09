@@ -43,7 +43,8 @@ const greyMarkerIcon = new L.icon({
 
 class Lmap extends Component {
 	state = {
-		bounds: []
+		bounds: [],
+		mapApi: {}
 	}
   	centerToMarker = (location, filteredMarkers) => {
   		if (window.innerWidth > 960) {
@@ -52,7 +53,8 @@ class Lmap extends Component {
 	  		const newPoint = L.point([point.x-250, point.y])
 	  		const newLatLng = mapApi.containerPointToLatLng(newPoint)
 			this.setState({
-	  			bounds: newLatLng
+	  			bounds: newLatLng,
+	  			mapApi: mapApi
 	  		})
   		} else {
   			this.setState({
@@ -66,12 +68,15 @@ class Lmap extends Component {
   			bounds: []
   		})
   	}
+
 	render() {
-		const { bounds } = this.state;
+		const { bounds, mapApi } = this.state;
 		const {
 			filteredMarkers,
 			currentLocation,
 			viewport,
+			selectedMarker,
+			onSelectMarker,
 			onOpenInfoBox,
 			onCloseInfoBox,
 			onClosePanel,
@@ -121,18 +126,23 @@ class Lmap extends Component {
 						position={[location.lat, location.lng]}
 						keyboard={true}
 						ref='marker'
+						onClick={()=> {
+							console.log('run')
+						}}
 						>
 						<Popup minWidth="250" autoPan={false}
+							ref='popup'
 							onOpen={() => {
 								this.centerToMarker(location, filteredMarkers);
-								onOpenInfoBox(marker)
+								onSelectMarker(marker)
+								onOpenInfoBox()
 								onClosePanel()
-
+								onCloseSearchBox()
 							}}
 							onClose={() => {
 								onCloseInfoBox()
 							}}
-							ref='popup'
+
 							position={location}
 						>
 							<div className='popup-info' style={{fontSize: '14px'}}>

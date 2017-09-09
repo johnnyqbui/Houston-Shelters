@@ -10,6 +10,7 @@ const FilterPanel = (props) => {
         onClickFilter,
         toggledPanel,
         onTogglePanel,
+        toggledInfo,
         onCloseSearchBox,
         onCloseInfoBox,
         filterLength
@@ -64,7 +65,7 @@ const FilterPanel = (props) => {
 
 
     return (
-    <div className='filter-container'>
+    <div className={toggledInfo ? 'filter-container open' : 'filter-container'}>
 
       <div className='filter-controls'>
         <button

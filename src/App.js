@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import ReactModal from 'react-modal';
+
 import './App.css';
 
 import config from './config';
 
+import Meta from './components/Meta';
+
+import LocateModal from './components/LocateModal';
 import TopNavBar from './components/TopNavBar';
 import Lmap from './components/Map';
 import GeoLocate from './components/GeoLocate';
-import AddShelter from './components/AddShelter';
 import FilterPanel from './components/FilterPanel';
 import Search from './components/Search';
 import LoadingIcon from './components/LoadingIcon';
 import InfoBox from './components/InfoBox';
-import Meta from './components/Meta';
 
 import Credits from './pages/Credits';
 
@@ -20,6 +23,7 @@ import * as SheltersApi from './utils/SheltersApi';
 
 class App extends Component {
     state = {
+        showModal: true,
         isLoading: true,
         allMarkers: [],
         filteredMarkers: [],
@@ -135,9 +139,10 @@ class App extends Component {
         this.setState({
             viewport: {
                 center: currentLocation,
-                zoom: 13
+                zoom: 15
             },
-            currentLocation: currentLocation
+            currentLocation: currentLocation,
+            showModal: false
         })
     }
 
@@ -153,9 +158,8 @@ class App extends Component {
         })
     }
 
-    handleOpenInfoBox = (marker) => {
+    handleOpenInfoBox = () => {
         this.setState({
-            selectedMarker: marker,
             toggledInfo: true
         })
     }
@@ -178,6 +182,12 @@ class App extends Component {
         })
     }
 
+    handleSelectMarker = (marker) => {
+        this.setState({
+            selectedMarker: marker
+        })
+    }
+
     handleInputSearch = (query, selectedFilter) => {
         this.setState({
             filteredMarkers: query,
@@ -185,7 +195,7 @@ class App extends Component {
         })
     }
 
-    handleClickSearch = (matched, query) => {
+    handleCompleteSearch = (matched, query) => {
         const latLng = window.innerWidth > 960 ?
         [matched.location.lat, matched.location.lng-.02] :
         [matched.location.lat, matched.location.lng]
@@ -197,13 +207,22 @@ class App extends Component {
             },
             selectedMarker: matched,
             filteredMarkers: [matched],
-            toggledInfo: true,
-            query: query
+            query: query,
+            toggledInfo: true
         })
+    }
+
+    handleOpenModal = () => {
+        this.setState({ showModal: true });
+    }
+
+    handleCloseModal = () => {
+     this.setState({ showModal: false });
     }
 
     render() {
         const {
+            showModal,
             isLoading,
             allMarkers,
             filteredMarkers,
@@ -219,72 +238,94 @@ class App extends Component {
             query } = this.state;
         return (
             <div className="App">
-                    <Meta />
-
+                <Meta />
                     <TopNavBar />
+                    <ReactModal
+                        isOpen={this.state.showModal}
+                        contentLabel="Modal"
+                        onRequestClose={this.handleCloseModal}
+                        className="overlay-content"
+                        overlayClassName="overlay"
+                    >
+                        <h2>Find Your Nearest Shelter</h2>
+                        <div className="locate-button-container">
+                        <LocateModal
+                            showModal={ showModal }
+                            currentLocation={ currentLocation }
+                            onClickLocate={ this.handleLocate }
+                        />
+                        <button
+                            className='skip-modal'
+                            onClick={this.handleCloseModal}>
+                            Skip for Now
+                        </button>
+                        </div>
+                    </ReactModal>
 
-                        { isLoading ? <LoadingIcon /> :
+                    { isLoading ? <LoadingIcon /> :
+                        <div>
                             <Search
-                                ref = {(com) => { this.search = com;}}
                                 allMarkers={ allMarkers }
                                 tempFilteredMarkers = { tempFilteredMarkers }
 
+                                toggledInfo={ toggledInfo }
                                 selectedFilter={ selectedFilter }
                                 tempSelectedFilter={ tempSelectedFilter }
 
                                 toggledSearchBox={ toggledSearchBox }
-                                toggledInfo={ toggledInfo }
 
                                 onSelectedFilter={ this.handleSelectedFilters }
 
-                                onCompleteSearch={ this.handleClickSearch }
+                                onCompleteSearch={ this.handleCompleteSearch }
                                 onInputSearch={ this.handleInputSearch }
 
                                 onCloseSearchBox={ this.handleCloseSearchBox }
                                 onOpenSearchBox={ this.handleOpenSearchBox }
 
-                                onCloseInfoBox={ this.handleCloseInfoBox } >
-
-                                <FilterPanel
-                                    toggledPanel={ toggledPanel }
-                                    allMarkers={ allMarkers }
-                                    filterLength={ filteredMarkers.length }
-                                    selectedFilter={ selectedFilter }
-                                    toggledInfo={ toggledInfo }
-
-                                    onTogglePanel={ this.handleTogglePanel }
-                                    onClickFilter={ this.handleFilteredMarkers }
-                                    onCloseSearchBox={ this.handleCloseSearchBox }
-                                    onCloseInfoBox={ this.handleCloseInfoBox }
-                                />
+                                onCloseInfoBox={ this.handleCloseInfoBox }
+                                onOpenInfoBox={ this.handleOpenInfoBox }
+                                >
                             </Search>
-                        }
 
-                        <GeoLocate
-                            currentLocation={ currentLocation }
-                            onClickLocate={ this.handleLocate }
-                        />
+                            <FilterPanel
+                                toggledPanel={ toggledPanel }
+                                allMarkers={ allMarkers }
+                                filterLength={ filteredMarkers.length }
+                                selectedFilter={ selectedFilter }
+                                toggledInfo={ toggledInfo }
 
-                        <AddShelter />
+                                onTogglePanel={ this.handleTogglePanel }
+                                onClickFilter={ this.handleFilteredMarkers }
+                                onCloseSearchBox={ this.handleCloseSearchBox }
+                                onCloseInfoBox={ this.handleCloseInfoBox }
+                            />
+                        </div>
+                    }
 
-                        <Lmap
-                            currentLocation={ currentLocation }
-                            filteredMarkers={ filteredMarkers }
-                            viewport={ viewport }
-                            selectedMarker={ selectedMarker }
+                    <GeoLocate
+                        showModal={ showModal }
+                        currentLocation={ currentLocation }
+                        onClickLocate={ this.handleLocate }
+                    />
 
-                            onOpenInfoBox={ this.handleOpenInfoBox }
+                    <Lmap
+                        currentLocation={ currentLocation }
+                        filteredMarkers={ filteredMarkers }
+                        viewport={ viewport }
+                        selectedMarker={ selectedMarker }
+                        toggledInfo={ toggledInfo }
+                        onSelectMarker={ this.handleSelectMarker }
+                        onOpenInfoBox={ this.handleOpenInfoBox }
+                        onCloseInfoBox={ this.handleCloseInfoBox }
+                        onClosePanel={ this.handleClosePanel }
+                        onCloseSearchBox={ this.handleCloseSearchBox }
+                    />
 
-                            onCloseInfoBox={ this.handleCloseInfoBox }
-                            onClosePanel={ this.handleClosePanel }
-                            onCloseSearchBox={ this.handleCloseSearchBox }
-                        />
-
-                        <InfoBox
-                            toggledInfo={ toggledInfo }
-                            selectedMarker={ selectedMarker }
-                            query={ query }
-                        />
+                    <InfoBox
+                        toggledInfo={ toggledInfo }
+                        selectedMarker={ selectedMarker }
+                        query={ query }
+                    />
 
                 <Route path='/credits' render={( history ) => (
                     <Credits />

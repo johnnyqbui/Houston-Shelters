@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import MdClear from 'react-icons/lib/md/clear';
 
@@ -21,6 +22,7 @@ class Search extends Component {
 			allMarkers,
 			tempFilteredMarkers,
 			tempSelectedFilter,
+			onOpenInfoBox,
 			onInputSearch,
 			onCloseInfoBox,
 			onOpenSearchBox,
@@ -44,34 +46,15 @@ class Search extends Component {
 			} else {
 				onCloseSearchBox()
 			}
+			onCloseInfoBox()
 		} else {
 			this.setState({
 				searched: [],
 				cursor: 0
 			})
-			onCloseInfoBox()
 			onCloseSearchBox()
 			onInputSearch(tempFilteredMarkers, tempSelectedFilter)
 		}
-	}
-
-	handleCloseSearchBox = (data) => {
-		const {
-			onCloseSearchBox,
-			tempFilteredMarkers,
-			tempSelectedFilter,
-			onInputSearch } = this.props;
-
-		if (data) {
-			this.setState({
-				query: `${ data.shelter } at ${ data.address }, ${ data.city }`,
-				searched: [],
-				cursor: 0
-			})
-		} else {
-			onInputSearch(tempFilteredMarkers, tempSelectedFilter)
-		}
-		onCloseSearchBox()
 	}
 
 	handleOpenSearchBox = () => {
@@ -82,16 +65,34 @@ class Search extends Component {
 		}
 	}
 
+	// handleRoute = (selectedFilter, query) => {
+	// 	window.history.pushState('search', selectedFilter, query)
+	// }
+
 	handleClearSearch = () => {
+		const { onInputSearch, tempFilteredMarkers, tempSelectedFilter } = this.props;
         this.setState({
             query: '',
             cursor: 0
         })
+        onInputSearch(tempFilteredMarkers, tempSelectedFilter)
     }
 
-    handleKeyDown = (e, data) => {
+    handleClickSearch = (data) => {
+		const { onCloseSearchBox, onOpenInfoBox } = this.props;
+
+		if (data) {
+			this.setState({
+				query: `${ data.shelter } at ${ data.address }, ${ data.city }`,
+				cursor: 0
+			})
+		}
+		onCloseSearchBox()
+	}
+
+    handleKeyDown = (e, data, query) => {
 	    const { cursor, searched } = this.state;
-	    const { onCompleteSearch, onCloseSearchBox } = this.props;
+	    const { onCompleteSearch, onInputSearch, onCloseSearchBox, onOpenInfoBox } = this.props;
 	    // up
 	    if (e.keyCode === 38) {
 			if (cursor > 0) {
@@ -119,9 +120,10 @@ class Search extends Component {
 
 	    // Enter
 	    if (e.keyCode === 13) {
-	    	const query = `${ data.shelter } at ${ data.address }, ${ data.city }`
+	    	if (!data) {return}
+	    	const fullLocation = `${ data.shelter } at ${ data.address }, ${ data.city }`
 	    	this.setState({
-	    		query: query
+	    		query: fullLocation
 	    	})
 	    	onCompleteSearch(data, query)
 	    	onCloseSearchBox()
@@ -136,7 +138,7 @@ class Search extends Component {
 
 	render() {
 		const { query, searched, cursor } = this.state;
-		const { onCompleteSearch, toggledSearchBox, toggledInfo } = this.props;
+		const { selectedFilter, onCompleteSearch, toggledSearchBox, toggledInfo, onOpenInfoBox } = this.props;
 	  	return (
 				<div className={toggledInfo ? 'search-data-container open' : 'search-data-container'}>
 					<div className="search-data-bar">
@@ -146,14 +148,16 @@ class Search extends Component {
 						    placeholder="Search by Shelter, Address, or Needs (e.g. baby formula)"
 						    value={query}
 						    onChange={(e) => this.updateQuery(e.target.value)}
-						    onClick={() => this.handleOpenSearchBox()}
-						    onKeyDown={(e) => this.handleKeyDown(e, searched[cursor])}
+						    onClick={() => {
+						    	this.handleOpenSearchBox()
+						    }}
+						    onKeyDown={(e) => this.handleKeyDown(e, searched[cursor], query)}
 					    />
 					    <MdClear
 						    className='clear-icon'
 						    onClick={() => {
 						    	this.handleClearSearch()
-						    	this.handleCloseSearchBox()
+						    	this.handleClickSearch()
 						    }}
 						/>
 					  </div>
@@ -165,8 +169,9 @@ class Search extends Component {
 									className={cursor === index ? 'searchSelected' : ''}
 									onMouseOver={() => {this.handleMouseOver(index)}}
 									onClick={() => {
-										this.handleCloseSearchBox(data)
+										this.handleClickSearch(data)
 										onCompleteSearch(data, query)
+
 									}}>
 									{`${ data.shelter } at ${ data.address }, ${ data.city }`}
 								</li>
