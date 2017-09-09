@@ -10,7 +10,8 @@ Thanks to everyone working to keep this sheet constantly updated
 * Clone this repository
 * Make sure your node environment is 8.2+ and NPM is 5.3.0
 * Navigate to root folder and run ```npm install```
-* Choose to copy either `.env.harvey` or `.env.irma` to `.env.local`
+* Run `EVENT_NAME=harvey npm run setup-vars` or `EVENT_NAME=irma npm run setup-vars`
+  * You will only need to run this once, and whenever you want to switch events while developing locally.
 * Then run ```npm run start``` or ```yarn start```
 
 
@@ -21,15 +22,15 @@ Thanks to everyone working to keep this sheet constantly updated
 * For your heroku app, you will need to set an `EVENT_NAME` config variable like so:
 
   ```
-  heroku --app ${app-name} config:set EVENT_NAME=${event-name}
+  heroku config:set EVENT_NAME=${event-name} --app ${app-name}
   ```
 
   For example:
 
   ```
-  heroku --app irma-staging config:set EVENT_NAME=irma
-  heroku --app irma-shelters config:set EVENT_NAME=irma
-  heroku --app harvey-shelters-staging config:set EVENT_NAME=harvey
+  heroku config:set EVENT_NAME=irma --app irma-staging
+  heroku config:set EVENT_NAME=irma --app irma-shelters
+  heroku config:set EVENT_NAME=harvey --app harvey-shelters-staging
   ```
 * Now, you can deploy by pushing to the heroku remotes as usual.
 
