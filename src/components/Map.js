@@ -100,7 +100,7 @@ class Lmap extends Component {
 
 		      <TileLayer
 		        url='https://api.mapbox.com/styles/v1/jnolasco/cj75zemih4wc02srs353jlu05/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam5vbGFzY28iLCJhIjoiY2oyYmVwNXViMDB1NjJxbXB2aHFlZnAzZyJ9.dY4H7Hzre0GJOeHBrkzIpg'
-						attribution='IrmaShelters.org is Johnny Bui, <a target="_blank" href="http://twitter.com/plaintext">Jason Nolasco</a>, and Angela Shih supported by <a href="http://irmaresponse.org">IrmaResponse</a>, Sketch City, and Station Houston.'
+						attribution='Built by Johnny Bui, <a target="_blank" href="http://twitter.com/plaintext">Jason Nolasco</a>, and Angela Shih'
 		      />
 
 
