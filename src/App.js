@@ -91,6 +91,9 @@ class App extends Component {
             filteredMarkers: initialMarkers,
             tempFilteredMarkers: initialMarkers
         });
+
+        window.scrollTo(0,1); // attempt to autoscroll a mobile window
+
     }
 
     // // For debugging purposes
