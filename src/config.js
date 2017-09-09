@@ -17,7 +17,9 @@ const config = {
   },
   api: {
     baseURL: process.env.REACT_APP_API_BASE_URL,
-    dataEntryPortal: process.env.REACT_APP_DATA_ENTRY_PORTAL
+    dataEntryPortal: process.env.REACT_APP_DATA_ENTRY_PORTAL,
+    baseURLGeneric: process.env.REACT_APP_API_BASE_URL_VERSION_2,
+    organizations: (process.env.REACT_APP_API_ORGANIZATIONS || '').split(',')
   },
   analytics: {
     id: process.env.REACT_APP_GOOGLE_ANALYTICS_KEY
