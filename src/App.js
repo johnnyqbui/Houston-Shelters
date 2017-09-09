@@ -59,7 +59,8 @@ class App extends Component {
                 updatedAt,
                 supply_needs,
                 volunteer_needs,
-                notes
+                notes,
+                special_needs
             } = shelters;
             return {
                 county: county,
@@ -78,6 +79,7 @@ class App extends Component {
                 supplyNeeds: supply_needs,
                 volunteerNeeds: volunteer_needs,
                 notes: notes,
+                specialNeeds: special_needs,
                 showInfo: false
             }
         });

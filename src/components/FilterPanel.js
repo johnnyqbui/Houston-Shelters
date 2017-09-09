@@ -22,7 +22,7 @@ const FilterPanel = (props) => {
     const handleFilter = (value) => {
       let allShelters = value === "All Shelters";
       let acceptingPeople = value === "Accepting People";
-      let notAccepting = value === "Not Accepting People";
+      let specialNeeds = value === "Special Needs";
       let pets = value === "Pets Allowed";
       let supplyNeeds = value === "Need Supplies";
       let volunteerNeeds = value === "Need Volunteers";
@@ -33,8 +33,8 @@ const FilterPanel = (props) => {
               return allMarkers
             } else if (acceptingPeople) {
                 return marker.accepting
-            } else if (notAccepting) {
-                return !marker.accepting
+            } else if (specialNeeds) {
+                return marker.specialNeeds
             } else if (pets) {
                 return marker.pets && marker.pets.match(/yes/ig)
             } else if (supplyNeeds) {
@@ -57,7 +57,7 @@ const FilterPanel = (props) => {
 
     let allShelters = selectedFilter === "All Shelters";
     let acceptingPeople = selectedFilter === "Accepting People";
-    let notAccepting = selectedFilter === "Not Accepting People";
+    let specialNeeds = selectedFilter === "Special Needs";
     let pets = selectedFilter === "Pets Allowed";
     let supplyNeeds = selectedFilter === "Need Supplies";
     let volunteerNeeds = selectedFilter === "Need Volunteers";
@@ -90,8 +90,8 @@ const FilterPanel = (props) => {
           onClick={(e) => {handleFilter(e.target.value)}}/>
         <input
           type='button'
-          value='Not Accepting People'
-          className={ notAccepting ? 'blueButton selected' : 'blueButton' }
+          value='Special Needs'
+          className={ specialNeeds ? 'blueButton selected' : 'blueButton' }
           onClick={(e) => {handleFilter(e.target.value)}}/>
         <input
           type='button'
