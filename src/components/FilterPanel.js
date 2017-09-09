@@ -34,7 +34,7 @@ const FilterPanel = (props) => {
             } else if (acceptingPeople) {
                 return marker.accepting
             } else if (specialNeeds) {
-                return marker.specialNeeds
+                return marker.specialNeeds && marker.accepting
             } else if (pets) {
                 return marker.pets && marker.pets.match(/yes/ig)
             } else if (supplyNeeds) {
