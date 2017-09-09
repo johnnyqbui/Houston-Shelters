@@ -843,7 +843,6 @@ input {
 
 .locate-me-container {
     font-size: 14px;
-    font-weight: bold;
     position: fixed;
     z-index: 5;
     top: 100px;
@@ -1290,11 +1289,17 @@ h4 {
     }
     */
     .locate-me-container p {
-        position: relative;
-        right: 70px;
-        display: block;
-        width: 75px;
-        margin-top: 14px;
+        position: absolute;
+        right: 15px;
+        display: inline-block;
+        top:-4px;
+        width:180px;
+        font-weight:bold;
+        background:rgba(0,0,0,0.5);
+        color:#FFF;
+        padding:6px 50px 6px 00px;
+        border-radius:35px;
+
     }
     .locate-me-button {
         top: 5px;

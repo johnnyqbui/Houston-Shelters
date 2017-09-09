@@ -23,7 +23,7 @@ const GeoLocate = (props) => {
 
     return (
         <div className='locate-me-container'>
-            <p className='controls-font-grey'>Locate Me</p>
+            <p className='controls-font-grey'>Find My Location</p>
             <button
                 className='controls-button locate-me-button'
                 onClick={() => {locate(currentLocation)}}>
