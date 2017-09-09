@@ -5,7 +5,7 @@ import reduce from 'lodash/reduce';
 import concat from 'lodash/concat';
 import forEach from 'lodash/forEach';
 
-import Models from '../models/index';
+import { getModel } from '../models';
 
 // note that this fetch is memoized, thus only going to
 // grab routes once unless cache is explicitly cleared.
@@ -69,7 +69,8 @@ const getAndInitialize = () => {
           return Promise.all(map(collections, (collection, index) => {
             return collection.then((collectionResponse) => {
               return models[index].then((modelConfig) => {
-                  return map(collectionResponse.locations, (item) => new Models[response.routes[index].legacy_table_name](modelConfig.fields, modelConfig.filters, item));
+                  const Model = getModel(response.routes[index].legacy_table_name);
+                  return map(collectionResponse.locations, (item) => new Model(modelConfig.fields, modelConfig.filters, item));
                 });
             })
           }));

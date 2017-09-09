@@ -11,3 +11,6 @@ const Models = {
 };
 
 export default Models;
+export const getModel = (type) => {
+  return (Models[type] || Marker);
+};

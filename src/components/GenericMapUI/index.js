@@ -13,11 +13,6 @@ import LocateModal from '../LocateModal';
 
 import pick from 'lodash/pick';
 
-window.genericApi = api;
-// window.Location = Location;
-
-
-
 class GenericMapUI extends Component {
   constructor(props) {
     super(props);
