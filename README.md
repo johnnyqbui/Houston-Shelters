@@ -31,6 +31,7 @@ Thanks to everyone working to keep this sheet constantly updated
   heroku config:set EVENT_NAME=irma --app irma-staging
   heroku config:set EVENT_NAME=irma --app irma-shelters
   heroku config:set EVENT_NAME=harvey --app harvey-shelters-staging
+  heroku config:set EVENT_NAME=harvey --app harvey-shelters
   ```
 * Now, you can deploy by pushing to the heroku remotes as usual.
 
