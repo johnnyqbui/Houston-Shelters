@@ -1,6 +1,6 @@
 {
-  "name": "harveysosshelters",
-  "version": "0.1.0",
+  "name": "hurricaneshelters",
+  "version": "2.1.0",
   "private": true,
   "engines": {
     "npm": "5.3.0"
