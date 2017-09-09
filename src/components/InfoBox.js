@@ -21,7 +21,8 @@ const InfoBox = (props) => {
         supplyNeeds,
         volunteerNeeds,
         county,
-        lastUpdated
+        lastUpdated,
+        specialNeeds
     } = selectedMarker;
 
     // Validate info
@@ -67,9 +68,11 @@ const InfoBox = (props) => {
                 <p><span style={{fontWeight: 'bold'}}>Updated:</span> {moment(lastUpdated).format('L LT')}</p>
                 <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
                 <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
+                <p><span style={{fontWeight: 'bold'}}>Special Needs:</span> {specialNeeds ? 'Available': 'Unavailable'}</p>
                 <p><span style={{fontWeight: 'bold'}}>Notes:</span> {highlightText(notes)}</p>
                 <p><span style={{fontWeight: 'bold'}}>Supply Needs:</span> {highlightText(supplyNeeds)}</p>
                 <p><span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {highlightText(volunteerNeeds)}</p>
+
             </div>
         </div>
     )
