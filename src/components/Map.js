@@ -150,13 +150,14 @@ class Lmap extends Component {
 								<span className="mobile-hidden">
                   {address}<br/>
                   {city}<br/>
-									</span>
+
 						        <div className='popup-button-container'>
 							        {phone && (
 												<a className='popup-info-button' href={`tel:${cleanPhone}`}>Call</a>
                       )}
 											<a className='popup-info-button' href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>
 									</div>
+									</span>
 
 							</div>
 						</Popup>

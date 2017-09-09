@@ -638,6 +638,7 @@ button {
     border-radius: .3rem;
     background: rgb(20, 150, 250);
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .1);
+    transition:0.3s;
 }
 
 .current-filter-button span {
@@ -1245,6 +1246,10 @@ h4 {
 
 /******Responsiveness*****/
 
+:focus, button:focus {
+    outline: 0 !important;
+}
+
 @media (min-width: 960px) {
     .mobile-hidden {
         display:inherit;
@@ -1316,6 +1321,11 @@ h4 {
         top: 5px;
         right: 10px;
     }
+
+    .current-filter-button:active, .blueButton:active, .popup-info-button:active {
+        background-color: #38b1fa;
+    }
+
 
 
     .current-filter-button span {

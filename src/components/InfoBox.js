@@ -48,7 +48,36 @@ const InfoBox = (props) => {
         )
     }
 
-    let countyTxt = county ? `${county} County` : '';
+    let countyTxt = county ? `${county}` : '';
+
+      const notesTag = (notes) => {
+        if (notes) {
+          return (<p><span style={{fontWeight: 'bold'}}>Notes:</span> {highlightText(notes)}</p>)
+        }
+        else {
+          return (<div></div>)
+        }
+      }
+
+      const supplyTag = (supplyNeeds) => {
+        if (supplyNeeds) {
+          return (<p><span style={{fontWeight: 'bold'}}>Supply Needs:</span> {highlightText(supplyNeeds)}</p>)
+        }
+        else {
+          return (<div></div>)
+        }
+      }
+
+      const volunteerTag = (volunteerNeeds) => {
+        if (volunteerNeeds) {
+          return (
+            <p><span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {highlightText(volunteerNeeds)}</p>
+          )
+        }
+        else {
+          return (<div></div>)
+        }
+      }
 
     return (
         <div className={ toggledInfo ? 'info-box open' : 'info-box'}>
@@ -69,9 +98,9 @@ const InfoBox = (props) => {
                 <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
                 <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
                 <p><span style={{fontWeight: 'bold'}}>Special Needs:</span> {specialNeeds ? 'Available': 'Unavailable'}</p>
-                <p><span style={{fontWeight: 'bold'}}>Notes:</span> {highlightText(notes)}</p>
-                <p><span style={{fontWeight: 'bold'}}>Supply Needs:</span> {highlightText(supplyNeeds)}</p>
-                <p><span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {highlightText(volunteerNeeds)}</p>
+              {notesTag(notes)}
+              {supplyTag(supplyNeeds)}
+              {volunteerTag(volunteerNeeds)}
 
             </div>
         </div>
