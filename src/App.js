@@ -139,7 +139,7 @@ class App extends Component {
         this.setState({
             viewport: {
                 center: currentLocation,
-                zoom: 15
+                zoom: 11
             },
             currentLocation: currentLocation,
             showModal: false
