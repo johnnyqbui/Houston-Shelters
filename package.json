@@ -3,7 +3,8 @@
   "version": "2.1.0",
   "private": true,
   "engines": {
-    "npm": "5.3.0"
+    "npm": "5.3.0",
+    "node": "8.4.0"
   },
   "dependencies": {
     "gh-pages": "^1.0.0",
@@ -34,7 +35,7 @@
     "deploy": "npm run build&&gh-pages -d build",
     "setup-vars": "./bin/setup",
     "heroku-prebuild": "npm run setup-vars",
-    "heroku-postbuild": "npm run build",
+    "heroku-postbuild": "npm install --only=dev && npm run build",
     "start-static": "http-server ./build -p ${PORT} --cors"
   },
   "homepage": "."
