@@ -47,7 +47,7 @@ const InfoBox = (props) => {
         )
     }
 
-    let countyTxt = (county === "") ? "" : `(${highlightText(county)} County)`;
+    let countyTxt = county ? `${county} County` : '';
 
     return (
         <div className={ toggledInfo ? 'info-box open' : 'info-box'}>

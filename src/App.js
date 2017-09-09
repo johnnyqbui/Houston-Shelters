@@ -159,9 +159,8 @@ class App extends Component {
         })
     }
 
-    handleOpenInfoBox = (marker) => {
+    handleOpenInfoBox = () => {
         this.setState({
-            selectedMarker: marker,
             toggledInfo: true
         })
     }
@@ -184,6 +183,12 @@ class App extends Component {
         })
     }
 
+    handleSelectMarker = (marker) => {
+        this.setState({
+            selectedMarker: marker
+        })
+    }
+
     handleInputSearch = (query, selectedFilter) => {
         this.setState({
             filteredMarkers: query,
@@ -203,8 +208,8 @@ class App extends Component {
             },
             selectedMarker: matched,
             filteredMarkers: [matched],
-            toggledInfo: true,
-            query: query
+            query: query,
+            toggledInfo: true
         })
     }
 
@@ -276,7 +281,9 @@ class App extends Component {
                                 onCloseSearchBox={ this.handleCloseSearchBox }
                                 onOpenSearchBox={ this.handleOpenSearchBox }
 
-                                onCloseInfoBox={ this.handleCloseInfoBox } >
+                                onCloseInfoBox={ this.handleCloseInfoBox }
+                                onOpenInfoBox={ this.handleOpenInfoBox }
+                                >
                             </Search>
 
                             <FilterPanel
@@ -307,9 +314,9 @@ class App extends Component {
                         filteredMarkers={ filteredMarkers }
                         viewport={ viewport }
                         selectedMarker={ selectedMarker }
-
+                        toggledInfo={ toggledInfo }
+                        onSelectMarker={ this.handleSelectMarker }
                         onOpenInfoBox={ this.handleOpenInfoBox }
-
                         onCloseInfoBox={ this.handleCloseInfoBox }
                         onClosePanel={ this.handleClosePanel }
                         onCloseSearchBox={ this.handleCloseSearchBox }
