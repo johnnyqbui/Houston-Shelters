@@ -22,7 +22,7 @@ const LocateModal = (props) => {
         <button
             className='locate-modal'
             onClick={() => {locate(currentLocation)}}>
-            Locate My Position
+            Find My Location
         </button>
     )
 }

@@ -248,7 +248,8 @@ class App extends Component {
                         className="overlay-content"
                         overlayClassName="overlay"
                     >
-                        <h2>Find Nearest Shelter</h2>
+                        <h2>Find Your Nearest Shelter</h2>
+                        <div className="locate-button-container">
                         <LocateModal
                             showModal={ showModal }
                             currentLocation={ currentLocation }
@@ -257,8 +258,9 @@ class App extends Component {
                         <button
                             className='skip-modal'
                             onClick={this.handleCloseModal}>
-                            Skip
+                            Skip for Now
                         </button>
+                        </div>
                     </ReactModal>
 
                     { isLoading ? <LoadingIcon /> :
@@ -306,8 +308,6 @@ class App extends Component {
                         currentLocation={ currentLocation }
                         onClickLocate={ this.handleLocate }
                     />
-
-                    <AddShelter />
 
                     <Lmap
                         currentLocation={ currentLocation }
