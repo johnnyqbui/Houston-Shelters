@@ -17,6 +17,7 @@ const InfoBox = (props) => {
         // location, //May be needed for debugging issues related to coords
         accepting,
         pets,
+        pets_notes,
         notes,
         supplyNeeds,
         volunteerNeeds,
@@ -96,7 +97,7 @@ const InfoBox = (props) => {
                 <br/>
                 <p><span style={{fontWeight: 'bold'}}>Updated:</span> {moment(lastUpdated).format('L LT')}</p>
                 <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
-                <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
+                <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'} {pets_notes ? pets_notes : ''}</p>
                 <p><span style={{fontWeight: 'bold'}}>Special Needs:</span> {specialNeeds ? 'Available': 'Unavailable'}</p>
               {notesTag(notes)}
               {supplyTag(supplyNeeds)}
