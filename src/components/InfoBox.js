@@ -3,12 +3,14 @@ import moment from 'moment';
 import '../App.css';
 import FaPhone from 'react-icons/lib/fa/phone';
 import FaMapMarker from 'react-icons/lib/fa/map-marker';
+import FaRefresh from 'react-icons/lib/fa/refresh';
 import Highlighter from 'react-highlight-words';
 
 const InfoBox = (props) => {
 
     const { selectedMarker, toggledInfo, query } = props;
     let {
+        id,
         shelter,
         address,
         city,
@@ -79,6 +81,17 @@ const InfoBox = (props) => {
         }
     }
 
+    const petsNotesTag = (pets_notes) => {
+      if (pets_notes) {
+        return (
+          <p><span style={{fontWeight: 'bold'}}>Notes about Pets:</span> {highlightText(pets_notes)}</p>
+        )
+      }
+      else {
+        return (<div></div>)
+      }
+    }
+
     return (
         <div className={ toggledInfo ? 'info-box open' : 'info-box'}>
             <h2>{highlightText(shelter)}</h2>
@@ -91,12 +104,16 @@ const InfoBox = (props) => {
                     <FaMapMarker className="blueIcon" />
                     <a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">
                         {highlightText(address)}, {highlightText(city)}
-                    </a> {county ? highlightText(county) : ''}
+                    </a> {county ? highlightText(county) : ``}
                 </p>
+                <p><FaRefresh className="blueIcon" />
+                    <a className="update-shelter-button" target="_blank"
+                       href={`https://irma-api.herokuapp.com/shelters/${id}/edit`} style={{fontWeight: 'bold'}}>Submit a Status Update</a></p>
                 <br/>
                 <p><span style={{fontWeight: 'bold'}}>Updated:</span> {moment(lastUpdated).format('L LT')}</p>
                 <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
-                <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'} {pets_notes ? pets_notes : ''}</p>
+                <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
+              {petsNotesTag(pets_notes)}
                 <p><span style={{fontWeight: 'bold'}}>Special Needs:</span> {specialNeeds ? 'Available': 'Unavailable'}</p>
               {notesTag(notes)}
               {supplyTag(supplyNeeds)}

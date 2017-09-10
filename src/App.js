@@ -46,6 +46,7 @@ class App extends Component {
         .filter(shelters => shelters.latitude)
         .map((shelters) => {
             const {
+                id,
                 county,
                 shelter,
                 address,
@@ -53,6 +54,7 @@ class App extends Component {
                 phone,
                 cleanPhone,
                 pets,
+                pets_notes,
                 accepting,
                 latitude,
                 longitude,
@@ -63,6 +65,7 @@ class App extends Component {
                 special_needs
             } = shelters;
             return {
+                id: id,
                 county: county,
                 shelter: shelter,
                 address: address,
@@ -71,6 +74,7 @@ class App extends Component {
                 cleanPhone: cleanPhone,
                 accepting: accepting,
                 pets: pets,
+                pets_notes: pets_notes,
                 location: {
                     lat: latitude,
                     lng: longitude

@@ -38,7 +38,7 @@ const NumberNotice = (props) => {
 const TopNavBar = (props) => {
   return (
     <div className='top-navbar'>
-        <a href={config.meta.url}><h2><img src={Logo} /> {config.about.title}</h2></a>
+        <a target="_blank" href={config.meta.url}><h2><img src={Logo} /> {config.about.title}</h2></a>
         {Object.entries(config.helpNumber).map((entry, index) => {
           return (<NumberNotice type={entry[0]} number={entry[1]} key={`number-notice-${index}`}/>);
         })}
