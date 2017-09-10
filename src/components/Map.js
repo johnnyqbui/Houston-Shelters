@@ -38,7 +38,6 @@ class Lmap extends Component {
   				center: location
   			})
   		}
-
   	}
   	resetBounds = () => {
   		this.setState({
@@ -66,7 +65,7 @@ class Lmap extends Component {
 			    className='map'
 			    center={ center }
 			    bounds={ countyBounds.length > 0 ? countyBounds : undefined }
-			    boundsOptions={{ padding: [280,280] }}
+			    boundsOptions={{ padding: [120, 120] }}
 			    viewport={ viewport }
 			    onClick={() => {
 			    	onClosePanel()
