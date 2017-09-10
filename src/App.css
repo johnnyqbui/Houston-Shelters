@@ -597,7 +597,7 @@ button {
     width: 100px;
 }
 
-.top-navbar a {
+.top-navbar > a {
     color: white;
     text-decoration: none;
 }
