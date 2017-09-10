@@ -36,7 +36,8 @@ class App extends Component {
         toggledInfo: false,
         toggledPanel: false,
         toggledSearchBox: false,
-        query: ''
+        query: '',
+        countyBounds: []
     }
 
     async componentDidMount() {
@@ -213,7 +214,8 @@ class App extends Component {
             selectedMarker: matched,
             filteredMarkers: [matched],
             query: query,
-            toggledInfo: true
+            toggledInfo: true,
+            countyBounds: []
         })
     }
 
@@ -222,7 +224,17 @@ class App extends Component {
     }
 
     handleCloseModal = () => {
-     this.setState({ showModal: false });
+        this.setState({ showModal: false });
+    }
+
+    handleSetBounds = (counties) => {
+        const countyLatLng = counties.map((county) => {
+            const countyLatLngArr = [county.location.lat, county.location.lng]
+            return [countyLatLngArr];
+        })
+        this.setState({
+            countyBounds: countyLatLng
+        })
     }
 
     render() {
@@ -240,7 +252,8 @@ class App extends Component {
             toggledInfo,
             toggledPanel,
             toggledSearchBox,
-            query } = this.state;
+            query,
+            countyBounds } = this.state;
         return (
             <div className="App">
                 <Meta />
@@ -271,14 +284,14 @@ class App extends Component {
                         <div>
                             <Search
                                 allMarkers={ allMarkers }
-                                tempFilteredMarkers = { tempFilteredMarkers }
+                                tempFilteredMarkers={ tempFilteredMarkers }
+                                filteredMarkers={ filteredMarkers }
 
                                 toggledInfo={ toggledInfo }
                                 selectedFilter={ selectedFilter }
                                 tempSelectedFilter={ tempSelectedFilter }
 
                                 toggledSearchBox={ toggledSearchBox }
-
                                 onSelectedFilter={ this.handleSelectedFilters }
 
                                 onCompleteSearch={ this.handleCompleteSearch }
@@ -289,6 +302,8 @@ class App extends Component {
 
                                 onCloseInfoBox={ this.handleCloseInfoBox }
                                 onOpenInfoBox={ this.handleOpenInfoBox }
+
+                                onSetBounds={ this.handleSetBounds }
                                 >
                             </Search>
 
@@ -324,6 +339,8 @@ class App extends Component {
                         onCloseInfoBox={ this.handleCloseInfoBox }
                         onClosePanel={ this.handleClosePanel }
                         onCloseSearchBox={ this.handleCloseSearchBox }
+
+                        countyBounds={ countyBounds }
                     />
 
                     <InfoBox

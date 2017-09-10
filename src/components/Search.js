@@ -7,6 +7,7 @@ class Search extends Component {
 	state = {
 		query: '',
 		searched: [],
+		counties: [],
 		cursor: 0
 	}
 
@@ -20,6 +21,7 @@ class Search extends Component {
 	searchData = (query) => {
 		const {
 			allMarkers,
+			filteredMarkers,
 			tempFilteredMarkers,
 			tempSelectedFilter,
 			onOpenInfoBox,
@@ -28,7 +30,7 @@ class Search extends Component {
 			onOpenSearchBox,
 			onCloseSearchBox } = this.props;
 
-		const matched = allMarkers.filter(
+		const matchedAny = filteredMarkers.filter(
 			data => {
 				const { shelter, address, city, county, supplyNeeds, volunteerNeeds } = data;
 				const concat = `${shelter} ${address} ${city} ${county} ${supplyNeeds} ${volunteerNeeds}`.toLowerCase();
@@ -36,12 +38,19 @@ class Search extends Component {
 			}
 		)
 
+		const matchedCounty = filteredMarkers.filter( data => {
+			const { county } = data;
+			return `${county}`.toLowerCase().indexOf(query.toLowerCase()) > -1
+		})
+
 		if (query.length > 1) {
 			this.setState({
-				searched: matched
+				searched: matchedAny,
+				counties: matchedCounty
 			})
-			if (matched.length > 0) {
-				onInputSearch(matched, 'All Shelters')
+
+			if (matchedAny.length > 0) {
+				onInputSearch(matchedAny, 'All Shelters')
 				onOpenSearchBox()
 			} else {
 				onCloseSearchBox()
@@ -91,8 +100,8 @@ class Search extends Component {
 	}
 
     handleKeyDown = (e, data, query) => {
-	    const { cursor, searched } = this.state;
-	    const { onCompleteSearch, onInputSearch, onCloseSearchBox, onOpenInfoBox } = this.props;
+	    const { cursor, searched, counties } = this.state;
+	    const { onCompleteSearch, onInputSearch, onCloseSearchBox, onOpenInfoBox, onSetBounds } = this.props;
 	    // up
 	    if (e.keyCode === 38) {
 			if (cursor > 0) {
@@ -120,7 +129,15 @@ class Search extends Component {
 
 	    // Enter
 	    if (e.keyCode === 13) {
-	    	if (!data) {return}
+	    	if (!data){return}
+	    	else if ( counties.length > 0) {
+	    		this.setState({
+		    		query: data.county
+		    	})
+		    	onSetBounds(counties)
+	    		onCloseSearchBox()
+	    		return
+	    	}
 	    	const fullLocation = `${ data.shelter } at ${ data.address }, ${ data.city }`
 	    	this.setState({
 	    		query: fullLocation
@@ -145,7 +162,7 @@ class Search extends Component {
 					  <div className="search-data-input-wrapper">
 					    <input
 						    type="text"
-						    placeholder="Search by Shelter, Address, or Needs (e.g. baby formula)"
+						    placeholder="Search by Shelter, Address, County, or Needs (e.g. baby formula)"
 						    value={query}
 						    onChange={(e) => this.updateQuery(e.target.value)}
 						    onClick={() => {
