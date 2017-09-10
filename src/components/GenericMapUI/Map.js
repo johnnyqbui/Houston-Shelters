@@ -1,0 +1,163 @@
+// a more generic version of the other Map
+// TODO replace with one version that can accomodate all use-cases.
+
+import React, { Component } from 'react';
+import L from 'leaflet';
+import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
+import blueMarker from '../../images/shelter-blue.png';
+import greyMarker from '../../images/generic-grey.png';
+// import shadowMarker from '../images/marker-shadow.png'
+
+const blueMarkerIcon = new L.icon({
+  iconUrl: blueMarker,
+  iconSize: [30, 41],
+  iconAnchor: [15, 41],
+  popupAnchor: [0, -35]
+  // shadowUrl: shadowMarker,
+  // shadowSize: [41, 41],
+  // shadowAnchor: [12, 41],
+
+
+  // iconSize: [25, 41],
+  // iconAnchor: [12, 41],
+  // shadowUrl: shadowMarker,
+  // shadowSize: [41, 41],
+  // shadowAnchor: [12, 41],
+  // popupAnchor: [0, -28]
+
+})
+
+const greyMarkerIcon = new L.icon({
+  iconUrl: greyMarker,
+  iconSize: [30, 41],
+  iconAnchor: [15, 41],
+  popupAnchor: [0, -35]
+  // shadowUrl: shadowMarker,
+  // shadowSize: [41, 41],
+  // shadowAnchor: [12, 41]
+
+  // iconSize: [25, 41],
+  // iconAnchor: [12, 41],
+  // shadowUrl: shadowMarker,
+  // shadowSize: [41, 41],
+  //  shadowAnchor: [12, 41],
+  //  popupAnchor: [0, -28]
+})
+
+class Lmap extends Component {
+  state = {
+    bounds: [],
+    mapApi: {}
+  }
+
+  centerToMarker = (location, filteredMarkers) => {
+    if (window.innerWidth > 960) {
+      const mapApi = this.refs.map.leafletElement
+      const point = mapApi.latLngToContainerPoint(location)
+      const newPoint = L.point([point.x-250, point.y])
+      const newLatLng = mapApi.containerPointToLatLng(newPoint)
+    this.setState({
+        bounds: newLatLng,
+        mapApi: mapApi
+      })
+    } else {
+      this.setState({
+        bounds: location
+      })
+    }
+
+  }
+
+  resetBounds = () => {
+    this.setState({
+      bounds: []
+    })
+  }
+
+  render() {
+    const { bounds, mapApi } = this.state;
+    const {
+      filteredMarkers,
+      currentLocation,
+      viewport,
+      selectedMarker,
+      onSelectMarker,
+      onOpenInfoBox,
+      onCloseInfoBox,
+      onClosePanel,
+      onCloseSearchBox } = this.props;
+
+    return (
+      <Map
+          className='map'
+          center={ bounds }
+          viewport={ viewport }
+          onClick={() => {
+            onClosePanel()
+            onCloseSearchBox()
+            onCloseInfoBox()
+          }}
+          doubleClickZoom={ true }
+          zoomSnap={ false }
+          trackResize={ true }
+          zoomControl={ false }
+          ref='map'
+      >
+
+          <TileLayer
+            url='https://api.mapbox.com/styles/v1/jnolasco/cj75zemih4wc02srs353jlu05/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam5vbGFzY28iLCJhIjoiY2oyYmVwNXViMDB1NjJxbXB2aHFlZnAzZyJ9.dY4H7Hzre0GJOeHBrkzIpg'
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          />
+
+          <ZoomControl position= 'bottomright' />
+          {currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
+          {filteredMarkers.map((marker, index) => {
+            const { meta, location } = marker;
+            let icon = marker.shouldHighlight? blueMarkerIcon : greyMarkerIcon;
+
+            return (
+              <Marker
+                icon={icon}
+                key={index}
+                position={location.position}
+                keyboard={true}
+                zIndexOffset={(selectedMarker === marker && 1000)}
+                >
+                <Popup minWidth="250" autoPan={false}
+                  ref='popup'
+                  onOpen={() => {
+                    this.centerToMarker(location.latLng, filteredMarkers);
+                    onSelectMarker(marker)
+                    onOpenInfoBox()
+                    onClosePanel()
+                    onCloseSearchBox()
+                  }}
+                  onClose={() => {
+                    onCloseInfoBox()
+                  }}
+
+                  position={location.latLng}
+                >
+                  <div className='popup-info' style={{fontSize: '14px'}}>
+                    <div style={{fontWeight: 'bold', fontSize: '16px'}}>{location.name}</div>
+                    <span className="mobile-hidden">
+                      {location.fullAddressDisplay[0]}<br/>
+                      {location.fullAddressDisplay[1]}
+                    </span>
+                      <div className='popup-button-container'>
+                        {location.phone && (
+                          <a className='popup-info-button' href={`tel:${location.phone}`}>Call</a>
+                        )}
+                        <a className='popup-info-button' href={`https://www.google.com/maps/dir/current+location/${location.fullAddressEncoded}`} target="_blank">Get Directions</a>
+                    </div>
+                  </div>
+                </Popup>
+              </Marker>
+            );
+          })}
+        </Map>
+      )
+  }
+}
+
+export default Lmap
