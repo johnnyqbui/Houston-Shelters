@@ -10,18 +10,6 @@ const blueMarkerIcon = new L.icon({
 	iconSize: [30, 41],
 	iconAnchor: [15, 41],
 	popupAnchor: [0, -35]
-	// shadowUrl: shadowMarker,
-	// shadowSize: [41, 41],
-	// shadowAnchor: [12, 41],
-
-
-	// iconSize: [25, 41],
-	// iconAnchor: [12, 41],
-	// shadowUrl: shadowMarker,
-	// shadowSize: [41, 41],
-	// shadowAnchor: [12, 41],
-	// popupAnchor: [0, -28]
-
 })
 
 const greyMarkerIcon = new L.icon({
@@ -29,22 +17,11 @@ const greyMarkerIcon = new L.icon({
 	iconSize: [30, 41],
 	iconAnchor: [15, 41],
 	popupAnchor: [0, -35]
-	// shadowUrl: shadowMarker,
-	// shadowSize: [41, 41],
-	// shadowAnchor: [12, 41]
-
-	// iconSize: [25, 41],
-	// iconAnchor: [12, 41],
-	// shadowUrl: shadowMarker,
-	// shadowSize: [41, 41],
-	//  shadowAnchor: [12, 41],
-	//  popupAnchor: [0, -28]
 })
 
 class Lmap extends Component {
 	state = {
-		bounds: [],
-		mapApi: {}
+		center: []
 	}
 
   	centerToMarker = (location, filteredMarkers) => {
@@ -54,52 +31,42 @@ class Lmap extends Component {
 	  		const newPoint = L.point([point.x-250, point.y])
 	  		const newLatLng = mapApi.containerPointToLatLng(newPoint)
 			this.setState({
-	  			bounds: newLatLng,
-	  			mapApi: mapApi
+	  			center: newLatLng
 	  		})
   		} else {
   			this.setState({
-  				bounds: location
+  				center: location
   			})
   		}
 
   	}
   	resetBounds = () => {
   		this.setState({
-  			bounds: []
+  			center: []
   		})
   	}
 
-  	checkBounds = (countyBounds) => {
-  		const mapApi = this.refs.map
-  		if (countyBounds.length > 0) {
-  			return countyBounds
-  		} else {
-	   		return [[28.539816, -85.600952],[28.539816, -77.600952]]
-	   	}
-  	}
-
 	render() {
-		const { bounds, mapApi } = this.state;
+		const { center, defaultBounds, bounds } = this.state;
 		const {
 			filteredMarkers,
 			currentLocation,
 			viewport,
 			selectedMarker,
 			onSelectMarker,
+			countyBounds,
 			onOpenInfoBox,
 			onCloseInfoBox,
 			onClosePanel,
 			onCloseSearchBox,
-			countyBounds,
 			onClearCounties } = this.props;
 		return (
 			<Map
 				ref='map'
 			    className='map'
-			    center={ bounds }
-			    bounds={ this.checkBounds(countyBounds) }
-			    boundOptions={{ padding: [280,280] }}
+			    center={ center }
+			    bounds={ countyBounds.length > 0 ? countyBounds : undefined }
+			    boundsOptions={{ padding: [280,280] }}
 			    viewport={ viewport }
 			    onClick={() => {
 			    	onClosePanel()
@@ -145,11 +112,12 @@ class Lmap extends Component {
 						<Popup minWidth="250" autoPan={false}
 							ref='popup'
 							onOpen={() => {
-								this.centerToMarker(location, filteredMarkers);
 								onSelectMarker(marker)
 								onOpenInfoBox()
 								onClosePanel()
 								onCloseSearchBox()
+								onClearCounties()
+								this.centerToMarker(location, filteredMarkers);
 							}}
 							onClose={() => {
 								onCloseInfoBox()

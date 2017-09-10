@@ -597,6 +597,11 @@ button {
     width: 100px;
 }
 
+.top-navbar a {
+    color: white;
+    text-decoration: none;
+}
+
 .top-navbar h2 {
     font-size: 18px;
     font-weight: normal;

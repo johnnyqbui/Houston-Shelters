@@ -26,7 +26,6 @@ class Search extends Component {
 			tempSelectedFilter,
 			onOpenInfoBox,
 			onInputSearch,
-			onCloseInfoBox,
 			onOpenSearchBox,
 			onCloseSearchBox } = this.props;
 
@@ -52,10 +51,10 @@ class Search extends Component {
 			if (matchedAny.length > 0) {
 				onInputSearch(matchedAny, 'All Shelters')
 				onOpenSearchBox()
+
 			} else {
 				onCloseSearchBox()
 			}
-			onCloseInfoBox()
 		} else {
 			this.setState({
 				searched: [],
@@ -66,17 +65,15 @@ class Search extends Component {
 		}
 	}
 
-	handleOpenSearchBox = () => {
-		const { onOpenSearchBox } = this.props;
+	handleInputSearch = () => {
+		const { onOpenSearchBox, onCloseInfoBox, onClearCounties } = this.props;
 		const { searched } = this.state;
 		if (searched.length > 1) {
 			onOpenSearchBox()
 		}
+		onCloseInfoBox()
+		onClearCounties()
 	}
-
-	// handleRoute = (selectedFilter, query) => {
-	// 	window.history.pushState('search', selectedFilter, query)
-	// }
 
 	handleClearSearch = () => {
 		const { onInputSearch, tempFilteredMarkers, tempSelectedFilter } = this.props;
@@ -88,21 +85,33 @@ class Search extends Component {
     }
 
     handleClickSearch = (data) => {
-		const { onCloseSearchBox, onOpenInfoBox } = this.props;
+		const { onCloseSearchBox, onOpenInfoBox, onHandleUpdateQuery } = this.props;
 
 		if (data) {
 			this.setState({
 				query: `${ data.shelter } at ${ data.address }, ${ data.city }`,
-				cursor: 0
+				cursor: 0,
+				counties: []
 			})
 		}
+		const query = '';
+		onHandleUpdateQuery(query)
 		onCloseSearchBox()
 	}
 
     handleKeyDown = (e, data, query) => {
 	    const { cursor, searched, counties } = this.state;
-	    const { onCompleteSearch, onInputSearch, onCloseSearchBox, onOpenInfoBox, onSetBounds } = this.props;
+	    const {
+	    	onCompleteSearch,
+	    	onInputSearch,
+	    	onCloseSearchBox,
+	    	onOpenInfoBox,
+	    	onSetBounds,
+	    	onClearCounties,
+	    	onHandleUpdateQuery } = this.props;
 	    // up
+
+	    onClearCounties()
 	    if (e.keyCode === 38) {
 			if (cursor > 0) {
 				this.setState( prevState => ({
@@ -130,11 +139,12 @@ class Search extends Component {
 	    // Enter
 	    if (e.keyCode === 13) {
 	    	if (!data){return}
-	    	else if ( counties.length > 0) {
+	    	else if ( counties.length === searched.length) {
 	    		this.setState({
 		    		query: data.county
 		    	})
 		    	onSetBounds(counties)
+		    	onHandleUpdateQuery(query)
 	    		onCloseSearchBox()
 	    		return
 	    	}
@@ -142,7 +152,8 @@ class Search extends Component {
 	    	this.setState({
 	    		query: fullLocation
 	    	})
-	    	onCompleteSearch(data, query)
+	    	onHandleUpdateQuery(query)
+	    	onCompleteSearch(data)
 	    	onCloseSearchBox()
 	    }
 	}
@@ -155,7 +166,7 @@ class Search extends Component {
 
 	render() {
 		const { query, searched, cursor } = this.state;
-		const { selectedFilter, onCompleteSearch, toggledSearchBox, toggledInfo, onOpenInfoBox } = this.props;
+		const { selectedFilter, onCompleteSearch, toggledSearchBox, toggledInfo, onOpenInfoBox, onCloseInfoBox, onClearCounties} = this.props;
 	  	return (
 				<div className={toggledInfo ? 'search-data-container open' : 'search-data-container'}>
 					<div className="search-data-bar">
@@ -165,9 +176,7 @@ class Search extends Component {
 						    placeholder="Search by Shelter, Address, County, or Needs (e.g. baby formula)"
 						    value={query}
 						    onChange={(e) => this.updateQuery(e.target.value)}
-						    onClick={() => {
-						    	this.handleOpenSearchBox()
-						    }}
+						    onClick={() => this.handleInputSearch()}
 						    onKeyDown={(e) => this.handleKeyDown(e, searched[cursor], query)}
 					    />
 					    <MdClear
@@ -187,8 +196,7 @@ class Search extends Component {
 									onMouseOver={() => {this.handleMouseOver(index)}}
 									onClick={() => {
 										this.handleClickSearch(data)
-										onCompleteSearch(data, query)
-
+										onCompleteSearch(data)
 									}}>
 									{`${ data.shelter } at ${ data.address }, ${ data.city }`}
 								</li>

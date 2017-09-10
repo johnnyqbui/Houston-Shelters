@@ -41,7 +41,6 @@ class App extends Component {
     }
 
     async componentDidMount() {
-        // console.log('Component Mounted')
         const shelterData = await SheltersApi.getAll();
         const allMarkerData = shelterData.shelters
         .filter(shelters => shelters.latitude)
@@ -96,35 +95,6 @@ class App extends Component {
         window.scrollTo(0,1); // attempt to autoscroll a mobile window
 
     }
-
-    // // For debugging purposes
-    // componentWillMount() {
-    //     console.log('Component is about to mount')
-    // }
-
-    // componentWillReceiveProps(nextProps) {
-    //     console.log('Component is about to receive props', nextProps)
-    // }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log('Should component update?')
-    //     console.log('Next Props', nextProps)
-    //     console.log('Next State', nextState)
-    //     return true
-    // }
-
-    // componentWillUpdate() {
-    //     console.log('Component is about to update')
-    // }
-
-    // componentDidUpdate() {
-    //     console.log('Component has updated')
-    // }
-
-    // componentWillUnmount() {
-    //     console.log('Component is about to unmount')
-    // }
-
 
     handleFilteredMarkers = (selectedFilter, filteredMarkers) => {
         this.setState({
@@ -194,10 +164,16 @@ class App extends Component {
         })
     }
 
-    handleInputSearch = (query, selectedFilter) => {
+    handleInputSearch = (filteredMarkers, selectedFilter) => {
         this.setState({
-            filteredMarkers: query,
+            filteredMarkers: filteredMarkers,
             selectedFilter: selectedFilter
+        })
+    }
+
+    handleUpdateQuery = (query) => {
+        this.setState({
+            query: query
         })
     }
 
@@ -213,7 +189,6 @@ class App extends Component {
             },
             selectedMarker: matched,
             filteredMarkers: [matched],
-            query: query,
             toggledInfo: true,
             countyBounds: []
         })
@@ -232,8 +207,15 @@ class App extends Component {
             const countyLatLngArr = [county.location.lat, county.location.lng]
             return [countyLatLngArr];
         })
+
         this.setState({
             countyBounds: countyLatLng
+        })
+    }
+
+    clearCounties = () => {
+        this.setState({
+            countyBounds: []
         })
     }
 
@@ -304,6 +286,9 @@ class App extends Component {
                                 onOpenInfoBox={ this.handleOpenInfoBox }
 
                                 onSetBounds={ this.handleSetBounds }
+                                onClearCounties={ this.clearCounties}
+
+                                onHandleUpdateQuery={ this.handleUpdateQuery }
                                 >
                             </Search>
 
@@ -341,6 +326,7 @@ class App extends Component {
                         onCloseSearchBox={ this.handleCloseSearchBox }
 
                         countyBounds={ countyBounds }
+                        onClearCounties={ this.clearCounties }
                     />
 
                     <InfoBox

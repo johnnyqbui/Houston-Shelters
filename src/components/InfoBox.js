@@ -51,8 +51,6 @@ const InfoBox = (props) => {
 
 
     const notesTag = (notes) => {
-
-
         if (notes) {
           return (<p><span style={{fontWeight: 'bold'}}>Notes:</span> {highlightText(notes)}</p>)
         }
