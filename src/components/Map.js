@@ -46,6 +46,7 @@ class Lmap extends Component {
 		bounds: [],
 		mapApi: {}
 	}
+
   	centerToMarker = (location, filteredMarkers) => {
   		if (window.innerWidth > 960) {
   			const mapApi = this.refs.map.leafletElement
@@ -69,6 +70,15 @@ class Lmap extends Component {
   		})
   	}
 
+  	checkBounds = (countyBounds) => {
+  		const mapApi = this.refs.map
+  		if (countyBounds.length > 0) {
+  			return countyBounds
+  		} else {
+	   		return [[28.539816, -85.600952],[28.539816, -77.600952]]
+	   	}
+  	}
+
 	render() {
 		const { bounds, mapApi } = this.state;
 		const {
@@ -80,11 +90,16 @@ class Lmap extends Component {
 			onOpenInfoBox,
 			onCloseInfoBox,
 			onClosePanel,
-			onCloseSearchBox } = this.props;
+			onCloseSearchBox,
+			countyBounds,
+			onClearCounties } = this.props;
 		return (
 			<Map
+				ref='map'
 			    className='map'
 			    center={ bounds }
+			    bounds={ this.checkBounds(countyBounds) }
+			    boundOptions={{ padding: [280,280] }}
 			    viewport={ viewport }
 			    onClick={() => {
 			    	onClosePanel()
@@ -95,7 +110,6 @@ class Lmap extends Component {
 			    zoomSnap={ false }
 			    trackResize={ true }
 			    zoomControl={ false }
-			    ref='map'
 			>
 
 		      <TileLayer
@@ -127,9 +141,6 @@ class Lmap extends Component {
 						position={[location.lat, location.lng]}
 						keyboard={true}
 						ref='marker'
-						onClick={()=> {
-							console.log('run')
-						}}
 						>
 						<Popup minWidth="250" autoPan={false}
 							ref='popup'

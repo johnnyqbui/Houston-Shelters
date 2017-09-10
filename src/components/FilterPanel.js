@@ -57,6 +57,7 @@ const FilterPanel = (props) => {
 
     const handleFilter = (value) => {
         const filtered = allMarkers.filter(matchFunctionsByName[value]);
+
         onClickFilter(value, filtered)
         onCloseSearchBox()
     }
