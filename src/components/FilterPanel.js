@@ -16,53 +16,53 @@ const FilterPanel = (props) => {
         filterLength
     } = props;
 
+    const filters = [
+        {
+            name: 'Accepting People',
+            match: (m) => m.accepting,
+        }, {
+            name: 'Special Needs',
+            match: (m) => m.specialNeeds && m.accepting,
+        }, {
+            name: 'Pets Allowed',
+            match: (m) => m.pets && m.pets.match(/yes/ig),
+        }, {
+            name: 'Need Supplies',
+            match: (m) => m.supplyNeeds && !m.supplyNeeds.match(/no\s/ig),
+        }, {
+            name: 'Need Volunteers',
+            match: (m) => m.volunteerNeeds && !m.volunteerNeeds.match(/no\s/ig),
+        }, {
+            name: 'Updated Within 24 Hours',
+            match: (m) => {
+                if (m.lastUpdated.length > 0) {
+                    const lastUpdatedPlus = moment(m.lastUpdated).add(24, 'hours').format();
+                    const current = moment().format();
+                    return lastUpdatedPlus > current;
+                }
+            },
+        }, {
+            name: 'All Shelters',
+            match: (m) => true,
+        }
+    ];
+
+    let matchFunctionsByName = {}
+    filters.forEach((filter) => {
+        matchFunctionsByName[filter.name] = filter.match;
+    })
+
     // Show Panel on page load if not on mobile
     // window.innerWidth > 960 && (onTogglePanel())
 
     const handleFilter = (value) => {
-      let allShelters = value === "All Shelters";
-      let acceptingPeople = value === "Accepting People";
-      let specialNeeds = value === "Special Needs";
-      let pets = value === "Pets Allowed";
-      let supplyNeeds = value === "Need Supplies";
-      let volunteerNeeds = value === "Need Volunteers";
-      let updated = value.indexOf('Updated') > -1;
-
-        const filtered = allMarkers.filter(marker => {
-            if (allShelters) {
-              return allMarkers
-            } else if (acceptingPeople) {
-                return marker.accepting
-            } else if (specialNeeds) {
-                return marker.specialNeeds && marker.accepting
-            } else if (pets) {
-                return marker.pets && marker.pets.match(/yes/ig)
-            } else if (supplyNeeds) {
-                return marker.supplyNeeds && !marker.supplyNeeds.match(/no\s/ig)
-            } else if (volunteerNeeds) {
-                return marker.volunteerNeeds && !marker.volunteerNeeds.match(/no\s/ig)
-            } else if (updated) {
-
-            if (marker.lastUpdated.length > 0) {
-                const lastUpdatedPlus = moment(marker.lastUpdated).add(24, 'hours').format()
-                const current = moment().format()
-                return lastUpdatedPlus > current && (marker)
-            }
-          }
-        })
+        const filtered = allMarkers.filter(matchFunctionsByName[value]);
 
         onClickFilter(value, filtered)
         onCloseSearchBox()
     }
 
-    let allShelters = selectedFilter === "All Shelters";
-    let acceptingPeople = selectedFilter === "Accepting People";
-    let specialNeeds = selectedFilter === "Special Needs";
-    let pets = selectedFilter === "Pets Allowed";
-    let supplyNeeds = selectedFilter === "Need Supplies";
-    let volunteerNeeds = selectedFilter === "Need Volunteers";
-    let updated = selectedFilter.indexOf('Updated') > -1;
-
+    const isSelected = (name) => selectedFilter === name;
 
     return (
     <div className={toggledInfo ? 'filter-container open' : 'filter-container'}>
@@ -83,41 +83,15 @@ const FilterPanel = (props) => {
 
       <div className={ toggledPanel ? 'filter-panel' : 'filter-panel closePanel' }>
         <div className='filter-title'>Filter Shelters By...</div>
-        <input
-          type='button'
-          value='Accepting People'
-          className={ acceptingPeople ? 'blueButton selected' : 'blueButton' }
-          onClick={(e) => {handleFilter(e.target.value)}}/>
-        <input
-          type='button'
-          value='Special Needs'
-          className={ specialNeeds ? 'blueButton selected' : 'blueButton' }
-          onClick={(e) => {handleFilter(e.target.value)}}/>
-        <input
-          type='button'
-          value='Pets Allowed'
-          className={ pets ? 'blueButton selected' : 'blueButton' }
-          onClick={(e) => {handleFilter(e.target.value)}}/>
-        <input
-          type='button'
-          value='Updated Within 24 Hours'
-          className={ updated ? 'blueButton selected' : 'blueButton' }
-          onClick={(e) => {handleFilter(e.target.value)}}/>
-        <input
-          type='button'
-          value='Need Supplies'
-          className={ supplyNeeds ? 'blueButton selected' : 'blueButton' }
-          onClick={(e) => {handleFilter(e.target.value)}}/>
-        <input
-          type='button'
-          value='Need Volunteers'
-          className={ volunteerNeeds ? 'blueButton selected' : 'blueButton' }
-          onClick={(e) => {handleFilter(e.target.value)}}/>
-        <input
-          type='button'
-          value='All Shelters'
-          className={ allShelters ? 'blueButton selected' : 'blueButton' }
-          onClick={(e) => {handleFilter(e.target.value)}}/>
+        {filters.map((filter) => (
+            <input
+                key={filter.name}
+                type='button'
+                value={filter.name}
+                className={`blueButton${isSelected(filter.name)?' selected':''}`}
+                onClick={(e) => {handleFilter(e.target.value)}}
+            />
+        ))}
       </div>
     </div>
     )

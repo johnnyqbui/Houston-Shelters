@@ -17,6 +17,7 @@ const InfoBox = (props) => {
         // location, //May be needed for debugging issues related to coords
         accepting,
         pets,
+        pets_notes,
         notes,
         supplyNeeds,
         volunteerNeeds,
@@ -48,27 +49,28 @@ const InfoBox = (props) => {
         )
     }
 
-    let countyTxt = county ? highlightText(county) : '';
 
-      const notesTag = (notes) => {
+    const notesTag = (notes) => {
+
+
         if (notes) {
           return (<p><span style={{fontWeight: 'bold'}}>Notes:</span> {highlightText(notes)}</p>)
         }
         else {
           return (<div></div>)
         }
-      }
+    }
 
-      const supplyTag = (supplyNeeds) => {
+    const supplyTag = (supplyNeeds) => {
         if (supplyNeeds) {
           return (<p><span style={{fontWeight: 'bold'}}>Supply Needs:</span> {highlightText(supplyNeeds)}</p>)
         }
         else {
           return (<div></div>)
         }
-      }
+    }
 
-      const volunteerTag = (volunteerNeeds) => {
+    const volunteerTag = (volunteerNeeds) => {
         if (volunteerNeeds) {
           return (
             <p><span style={{fontWeight: 'bold'}}>Volunteer Needs:</span> {highlightText(volunteerNeeds)}</p>
@@ -77,7 +79,7 @@ const InfoBox = (props) => {
         else {
           return (<div></div>)
         }
-      }
+    }
 
     return (
         <div className={ toggledInfo ? 'info-box open' : 'info-box'}>
@@ -91,12 +93,12 @@ const InfoBox = (props) => {
                     <FaMapMarker className="blueIcon" />
                     <a href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">
                         {highlightText(address)}, {highlightText(city)}
-                    </a> {countyTxt}
+                    </a> {county ? highlightText(county) : ''}
                 </p>
                 <br/>
                 <p><span style={{fontWeight: 'bold'}}>Updated:</span> {moment(lastUpdated).format('L LT')}</p>
                 <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
-                <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
+                <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'} {pets_notes ? pets_notes : ''}</p>
                 <p><span style={{fontWeight: 'bold'}}>Special Needs:</span> {specialNeeds ? 'Available': 'Unavailable'}</p>
               {notesTag(notes)}
               {supplyTag(supplyNeeds)}
