@@ -22,7 +22,7 @@ const FilterPanel = (props) => {
             match: (m) => m.accepting,
         }, {
             name: 'Special Needs',
-            match: (m) => m.specialNeeds,
+            match: (m) => m.specialNeeds && m.accepting,
         }, {
             name: 'Pets Allowed',
             match: (m) => m.pets && m.pets.match(/yes/ig),
