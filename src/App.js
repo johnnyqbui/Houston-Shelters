@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import ReactModal from 'react-modal';
 
-import './App.css';
+import './styles/App.css';
 
 import config from './config';
 

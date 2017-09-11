@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import '../App.css';
 import Logo from '../images/hurricane.png'
 
 import config from '../config';

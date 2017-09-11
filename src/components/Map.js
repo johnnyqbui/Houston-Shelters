@@ -3,7 +3,6 @@ import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
 import blueMarker from '../images/shelter-blue.png';
 import greyMarker from '../images/generic-grey.png';
-// import shadowMarker from '../images/marker-shadow.png'
 
 const blueMarkerIcon = new L.icon({
 	iconUrl: blueMarker,

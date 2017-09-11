@@ -139,7 +139,7 @@ class Search extends Component {
 	    	if (!data){return}
 	    	else if ((counties.length - searched.length) <= 0 && counties.length > 0) {
 	    		this.setState({
-		    		query: data.county
+		    		query: counties[0].county
 		    	})
 		    	onSetBounds(counties)
 		    	onHandleUpdateQuery(query)

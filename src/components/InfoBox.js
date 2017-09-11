@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import '../App.css';
 import FaPhone from 'react-icons/lib/fa/phone';
 import FaMapMarker from 'react-icons/lib/fa/map-marker';
 import FaRefresh from 'react-icons/lib/fa/refresh';

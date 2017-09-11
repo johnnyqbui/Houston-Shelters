@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import '../App.css';
 import FaFilter from 'react-icons/lib/fa/filter';
 
 const FilterPanel = (props) => {
