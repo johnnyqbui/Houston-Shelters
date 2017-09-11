@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import ReactModal from 'react-modal';
-
 import './styles/App.css';
-
 import config from './config';
-
 import Meta from './components/Meta';
-
 import LocateModal from './components/LocateModal';
 import TopNavBar from './components/TopNavBar';
 import Lmap from './components/Map';
@@ -16,9 +12,7 @@ import FilterPanel from './components/FilterPanel';
 import Search from './components/Search';
 import LoadingIcon from './components/LoadingIcon';
 import InfoBox from './components/InfoBox';
-
 import Credits from './pages/Credits';
-
 import * as SheltersApi from './utils/SheltersApi';
 
 class App extends Component {
