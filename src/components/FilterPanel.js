@@ -13,6 +13,7 @@ const FilterPanel = (props) => {
         toggledInfo,
         onCloseSearchBox,
         onCloseInfoBox,
+        onClearCounties,
         filterLength
     } = props;
 
@@ -73,6 +74,7 @@ const FilterPanel = (props) => {
           onClick={() => {
             onTogglePanel()
             onCloseInfoBox()
+            onClearCounties()
           }}>
 
           <FaFilter

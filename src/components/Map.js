@@ -46,12 +46,11 @@ class Lmap extends Component {
   	}
 
 	render() {
-		const { center, defaultBounds, bounds } = this.state;
+		const { center } = this.state;
 		const {
 			filteredMarkers,
 			currentLocation,
 			viewport,
-			selectedMarker,
 			onSelectMarker,
 			countyBounds,
 			onOpenInfoBox,

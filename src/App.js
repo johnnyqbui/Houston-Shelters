@@ -253,16 +253,16 @@ class App extends Component {
                     >
                         <h2>Find Your Nearest Shelter</h2>
                         <div className="locate-button-container">
-                        <LocateModal
-                            showModal={ showModal }
-                            currentLocation={ currentLocation }
-                            onClickLocate={ this.handleLocate }
-                        />
-                        <button
-                            className='skip-modal'
-                            onClick={this.handleCloseModal}>
-                            Skip for Now
-                        </button>
+                            <LocateModal
+                                showModal={ showModal }
+                                currentLocation={ currentLocation }
+                                onClickLocate={ this.handleLocate }
+                            />
+                            <button
+                                className='skip-modal'
+                                onClick={this.handleCloseModal}>
+                                Skip for Now
+                            </button>
                         </div>
                     </ReactModal>
 
@@ -307,6 +307,7 @@ class App extends Component {
                                 onClickFilter={ this.handleFilteredMarkers }
                                 onCloseSearchBox={ this.handleCloseSearchBox }
                                 onCloseInfoBox={ this.handleCloseInfoBox }
+                                onClearCounties={ this.clearCounties }
                             />
                         </div>
                     }

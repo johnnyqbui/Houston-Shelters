@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import MdClear from 'react-icons/lib/md/clear';
 
@@ -20,11 +19,9 @@ class Search extends Component {
 
 	searchData = (query) => {
 		const {
-			allMarkers,
 			filteredMarkers,
 			tempFilteredMarkers,
 			tempSelectedFilter,
-			onOpenInfoBox,
 			onInputSearch,
 			onOpenSearchBox,
 			onCloseSearchBox } = this.props;
@@ -49,7 +46,7 @@ class Search extends Component {
 			})
 
 			if (matchedAny.length > 0) {
-				onInputSearch(matchedAny, 'All Shelters')
+				onInputSearch(matchedAny, 'Accepting People')
 				onOpenSearchBox()
 
 			} else {
@@ -76,16 +73,14 @@ class Search extends Component {
 	}
 
 	handleClearSearch = () => {
-		const { onInputSearch, tempFilteredMarkers, tempSelectedFilter } = this.props;
         this.setState({
             query: '',
             cursor: 0
         })
-        onInputSearch(tempFilteredMarkers, tempSelectedFilter)
     }
 
     handleClickSearch = (data) => {
-		const { onCloseSearchBox, onOpenInfoBox, onHandleUpdateQuery } = this.props;
+		const { onCloseSearchBox, onHandleUpdateQuery } = this.props;
 
 		if (data) {
 			this.setState({
@@ -103,9 +98,7 @@ class Search extends Component {
 	    const { cursor, searched, counties } = this.state;
 	    const {
 	    	onCompleteSearch,
-	    	onInputSearch,
 	    	onCloseSearchBox,
-	    	onOpenInfoBox,
 	    	onSetBounds,
 	    	onClearCounties,
 	    	onHandleUpdateQuery } = this.props;
@@ -115,7 +108,8 @@ class Search extends Component {
 	    if (e.keyCode === 38) {
 			if (cursor > 0) {
 				this.setState( prevState => ({
-					cursor: prevState.cursor - 1
+					cursor: prevState.cursor - 1,
+
 				}))
 			}
 			if (cursor <= 0) {
@@ -139,7 +133,7 @@ class Search extends Component {
 	    // Enter
 	    if (e.keyCode === 13) {
 	    	if (!data){return}
-	    	else if ( counties.length === searched.length) {
+	    	else if ((counties.length - searched.length) <= 0 && counties.length > 0) {
 	    		this.setState({
 		    		query: data.county
 		    	})
@@ -166,7 +160,7 @@ class Search extends Component {
 
 	render() {
 		const { query, searched, cursor } = this.state;
-		const { selectedFilter, onCompleteSearch, toggledSearchBox, toggledInfo, onOpenInfoBox, onCloseInfoBox, onClearCounties} = this.props;
+		const { onCompleteSearch, toggledSearchBox, toggledInfo } = this.props;
 	  	return (
 				<div className={toggledInfo ? 'search-data-container open' : 'search-data-container'}>
 					<div className="search-data-bar">

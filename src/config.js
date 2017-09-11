@@ -13,7 +13,7 @@ const config = {
       parseFloat(process.env.REACT_APP_MAP_DEFAULT_CENTER_LAT),
       parseFloat(process.env.REACT_APP_MAP_DEFAULT_CENTER_LNG)
     ],
-    zoom: parseInt(process.env.REACT_APP_MAP_DEFAULT_ZOOM)
+    zoom: parseInt(process.env.REACT_APP_MAP_DEFAULT_ZOOM, 10)
   },
   api: {
     baseURL: process.env.REACT_APP_API_BASE_URL,
