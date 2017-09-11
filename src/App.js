@@ -170,7 +170,6 @@ class App extends Component {
     }
 
     handleUpdateQuery = (query) => {
-        console.log(query)
         this.setState({
             query: query
         })
