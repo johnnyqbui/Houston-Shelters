@@ -26,9 +26,11 @@ const typeToInstruction = {
 
 const NumberNotice = (props) => {
   if (props.number && props.type) {
-    return (<p className="top-support">
-      {typeToInstruction[props.type]} for help: <a href={`${props.type}:${props.number.replace(/\D/g,'')}`}>{props.number}</a>
-    </p>);
+    return (
+        <p className="top-support">
+          {typeToInstruction[props.type]} for help: <a href={`${props.type}:${props.number.replace(/\D/g,'')}`}>{props.number}</a>
+        </p>
+    );
   } else {
     return null;
   }
@@ -38,10 +40,14 @@ const NumberNotice = (props) => {
 const TopNavBar = (props) => {
   return (
     <div className='top-navbar'>
-        <a target="_blank" href={config.meta.url}><h2><img src={Logo} /> {config.about.title}</h2></a>
+        <a target="_blank" href={config.meta.url}><img src={Logo} /><h2>{config.about.title}</h2></a>
+        <div className='top-support-wrapper'>
         {Object.entries(config.helpNumber).map((entry, index) => {
-          return (<NumberNotice type={entry[0]} number={entry[1]} key={`number-notice-${index}`}/>);
+          return (
+            <NumberNotice type={entry[0]} number={entry[1]} key={`number-notice-${index}`}/>
+          );
         })}
+        </div>
     </div>
   )
 }
