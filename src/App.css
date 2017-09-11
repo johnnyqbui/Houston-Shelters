@@ -1209,7 +1209,7 @@ h4 {
     z-index: 10;
     overflow-y: scroll;
     width: calc(100% - 40px);
-    height: 300px;
+    max-height: 300px;
     margin: 0 20px;
     background: #fff;
 }

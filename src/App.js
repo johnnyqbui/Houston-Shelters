@@ -280,6 +280,8 @@ class App extends Component {
                                 toggledSearchBox={ toggledSearchBox }
                                 onSelectedFilter={ this.handleSelectedFilters }
 
+                                onClosePanel={ this.handleClosePanel }
+
                                 onCompleteSearch={ this.handleCompleteSearch }
                                 onInputSearch={ this.handleInputSearch }
 

@@ -26,7 +26,7 @@ class Search extends Component {
 			onOpenSearchBox,
 			onCloseSearchBox } = this.props;
 
-		const matchedAny = filteredMarkers.filter(
+		const matchedAny = tempFilteredMarkers.filter(
 			data => {
 				const { shelter, address, city, county, supplyNeeds, volunteerNeeds } = data;
 				const concat = `${shelter} ${address} ${city} ${county} ${supplyNeeds} ${volunteerNeeds}`.toLowerCase();
@@ -34,7 +34,7 @@ class Search extends Component {
 			}
 		)
 
-		const matchedCounty = filteredMarkers.filter( data => {
+		const matchedCounty = tempFilteredMarkers.filter( data => {
 			const { county } = data;
 			return `${county}`.toLowerCase().indexOf(query.toLowerCase()) > -1
 		})
@@ -46,7 +46,7 @@ class Search extends Component {
 			})
 
 			if (matchedAny.length > 0) {
-				onInputSearch(matchedAny, 'Accepting People')
+				onInputSearch(matchedAny, tempSelectedFilter)
 				onOpenSearchBox()
 
 			} else {
@@ -62,14 +62,15 @@ class Search extends Component {
 		}
 	}
 
-	handleInputSearch = () => {
-		const { onOpenSearchBox, onCloseInfoBox, onClearCounties } = this.props;
+	handleInputClickSearch = () => {
+		const { onOpenSearchBox, onCloseInfoBox, onClosePanel, onClearCounties } = this.props;
 		const { searched } = this.state;
 		if (searched.length > 1) {
 			onOpenSearchBox()
 		}
 		onCloseInfoBox()
 		onClearCounties()
+		onClosePanel()
 	}
 
 	handleClearSearch = () => {
@@ -80,7 +81,7 @@ class Search extends Component {
     }
 
     handleClickSearch = (data) => {
-		const { onCloseSearchBox, onHandleUpdateQuery } = this.props;
+		const { onCloseSearchBox, onHandleUpdateQuery, onClosePanel } = this.props;
 
 		if (data) {
 			this.setState({
@@ -92,6 +93,7 @@ class Search extends Component {
 		const query = '';
 		onHandleUpdateQuery(query)
 		onCloseSearchBox()
+		onClosePanel()
 	}
 
     handleKeyDown = (e, data, query) => {
@@ -99,6 +101,7 @@ class Search extends Component {
 	    const {
 	    	onCompleteSearch,
 	    	onCloseSearchBox,
+	    	onClosePanel,
 	    	onSetBounds,
 	    	onClearCounties,
 	    	onHandleUpdateQuery } = this.props;
@@ -132,6 +135,7 @@ class Search extends Component {
 
 	    // Enter
 	    if (e.keyCode === 13) {
+	    	this.searchData(query)
 	    	if (!data){return}
 	    	else if ((counties.length - searched.length) <= 0 && counties.length > 0) {
 	    		this.setState({
@@ -146,9 +150,11 @@ class Search extends Component {
 	    	this.setState({
 	    		query: fullLocation
 	    	})
+
 	    	onHandleUpdateQuery(query)
 	    	onCompleteSearch(data)
 	    	onCloseSearchBox()
+	    	onClosePanel()
 	    }
 	}
 
@@ -170,7 +176,7 @@ class Search extends Component {
 						    placeholder="Search by Shelter, Address, County, or Needs (e.g. baby formula)"
 						    value={query}
 						    onChange={(e) => this.updateQuery(e.target.value)}
-						    onClick={() => this.handleInputSearch()}
+						    onClick={() => this.handleInputClickSearch()}
 						    onKeyDown={(e) => this.handleKeyDown(e, searched[cursor], query)}
 					    />
 					    <MdClear

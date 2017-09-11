@@ -70,6 +70,7 @@ class Lmap extends Component {
 			    	onClosePanel()
 			    	onCloseSearchBox()
 			    	onCloseInfoBox()
+			    	onClearCounties()
 			    }}
 			    doubleClickZoom={ true }
 			    zoomSnap={ false }
