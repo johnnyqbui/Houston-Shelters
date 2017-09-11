@@ -131,7 +131,7 @@ const InfoBox = (props) => {
               {volunteerTag(volunteerNeeds)}
 
                 <FacebookProvider appId={config.facebook.app_id}>
-                    <Comments href={facebookUrl(id)} />
+                    <Comments href={facebookUrl(id)} width="100%"/>
                 </FacebookProvider>
 
                 <br/>
