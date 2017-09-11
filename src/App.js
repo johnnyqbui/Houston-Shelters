@@ -90,7 +90,6 @@ class App extends Component {
             tempFilteredMarkers: initialMarkers
         });
 
-        window.scrollTo(0,1); // attempt to autoscroll a mobile window
 
     }
 
@@ -136,6 +135,7 @@ class App extends Component {
         this.setState({
             toggledInfo: true
         })
+
     }
 
     handleCloseInfoBox = () => {
@@ -237,6 +237,7 @@ class App extends Component {
             countyBounds } = this.state;
         return (
             <div className="App">
+                <div id="fb-root"></div>
                 <Meta />
                     <TopNavBar />
                     <ReactModal

@@ -34,6 +34,9 @@ const config = {
     description: (process.env.REACT_APP_OG_DESCRIPTION || process.env.REACT_APP_META_DESCRIPTION),
     image: process.env.REACT_APP_OG_IMAGE
   },
+  facebook: {
+    app_id: (process.env.REACT_APP_FACEBOOK_APPID)
+  },
   twitter: {
     card: process.env.REACT_APP_TWITTER_CARD,
     site: process.env.REACT_APP_TWITTER_SITE,
