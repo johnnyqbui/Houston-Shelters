@@ -2,7 +2,7 @@ import React from 'react';
 import MdGpsFixed from 'react-icons/lib/md/gps-fixed';
 
 const GeoLocate = (props) => {
-    const { showModal, currentLocation, onClickLocate } = props;
+    const { currentLocation, onClickLocate } = props;
     const locate = () => {
         const success = (position) => {
             const currentLocation = [position.coords.latitude, position.coords.longitude]

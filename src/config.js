@@ -13,7 +13,7 @@ const config = {
       parseFloat(process.env.REACT_APP_MAP_DEFAULT_CENTER_LAT),
       parseFloat(process.env.REACT_APP_MAP_DEFAULT_CENTER_LNG)
     ],
-    zoom: parseInt(process.env.REACT_APP_MAP_DEFAULT_ZOOM)
+    zoom: parseInt(process.env.REACT_APP_MAP_DEFAULT_ZOOM, 10)
   },
   api: {
     baseURL: process.env.REACT_APP_API_BASE_URL,
@@ -33,6 +33,9 @@ const config = {
     title: (process.env.REACT_APP_OG_TITLE || process.env.REACT_APP_META_TITLE),
     description: (process.env.REACT_APP_OG_DESCRIPTION || process.env.REACT_APP_META_DESCRIPTION),
     image: process.env.REACT_APP_OG_IMAGE
+  },
+  facebook: {
+    app_id: (process.env.REACT_APP_FACEBOOK_APPID)
   },
   twitter: {
     card: process.env.REACT_APP_TWITTER_CARD,

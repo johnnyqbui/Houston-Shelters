@@ -3,8 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no user-scalable=no">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-    integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+       integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+       crossorigin=""/>
+
+    <meta name="google-site-verification" content="vzm09Ga91FNpoEf-1BZptb-rQS9gkA_TbzHsryuLjYU" />
     <meta property="og:url" content="%REACT_APP_META_CANONICAL%"/>
     <meta property="og:title" content="%REACT_APP_OG_TITLE%"/>
     <meta property="og:description" content="%REACT_APP_OG_DESCRIPTION%"/>
@@ -15,13 +18,19 @@
     <meta name="twitter:title" content="%REACT_APP_TWITTER_TITLE%">
     <meta name="twitter:description" content="%REACT_APP_TWITTER_DESCRIPTION%">
     <meta name="twitter:image" content="%REACT_APP_TWITTER_IMAGE%">
+    <meta property="fb:app_id" content="%REACT_APP_FACEBOOK_APPID%" />
   </head>
   <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
     <script type="text/javascript">
       if(document.location.href.indexOf('github.io') > -1) {
         // indexOf will return the position of the first occurence of this string in the url
         // or -1 it it's not there.
         document.location.href = 'https://www.houstonshelters.org';
+      }
+      if (location.protocol != 'https:' && document.location.href.indexOf('www') > -1)
+      {
+        location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
       }
     </script>
     <noscript>

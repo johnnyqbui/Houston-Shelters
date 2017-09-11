@@ -1,8 +1,7 @@
-
 import React from 'react';
 
 const LocateModal = (props) => {
-    const { showModal, currentLocation, onClickLocate } = props;
+    const { currentLocation, onClickLocate } = props;
     const locate = () => {
         const success = (position) => {
             const currentLocation = [position.coords.latitude, position.coords.longitude]

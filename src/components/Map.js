@@ -3,25 +3,12 @@ import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
 import blueMarker from '../images/shelter-blue.png';
 import greyMarker from '../images/generic-grey.png';
-// import shadowMarker from '../images/marker-shadow.png'
 
 const blueMarkerIcon = new L.icon({
 	iconUrl: blueMarker,
 	iconSize: [30, 41],
 	iconAnchor: [15, 41],
 	popupAnchor: [0, -35]
-	// shadowUrl: shadowMarker,
-	// shadowSize: [41, 41],
-	// shadowAnchor: [12, 41],
-
-
-	// iconSize: [25, 41],
-	// iconAnchor: [12, 41],
-	// shadowUrl: shadowMarker,
-	// shadowSize: [41, 41],
-	// shadowAnchor: [12, 41],
-	// popupAnchor: [0, -28]
-
 })
 
 const greyMarkerIcon = new L.icon({
@@ -29,23 +16,13 @@ const greyMarkerIcon = new L.icon({
 	iconSize: [30, 41],
 	iconAnchor: [15, 41],
 	popupAnchor: [0, -35]
-	// shadowUrl: shadowMarker,
-	// shadowSize: [41, 41],
-	// shadowAnchor: [12, 41]
-
-	// iconSize: [25, 41],
-	// iconAnchor: [12, 41],
-	// shadowUrl: shadowMarker,
-	// shadowSize: [41, 41],
-	//  shadowAnchor: [12, 41],
-	//  popupAnchor: [0, -28]
 })
 
 class Lmap extends Component {
 	state = {
-		bounds: [],
-		mapApi: {}
+		center: []
 	}
+
   	centerToMarker = (location, filteredMarkers) => {
   		if (window.innerWidth > 960) {
   			const mapApi = this.refs.map.leafletElement
@@ -53,49 +30,51 @@ class Lmap extends Component {
 	  		const newPoint = L.point([point.x-250, point.y])
 	  		const newLatLng = mapApi.containerPointToLatLng(newPoint)
 			this.setState({
-	  			bounds: newLatLng,
-	  			mapApi: mapApi
+	  			center: newLatLng
 	  		})
   		} else {
   			this.setState({
-  				bounds: location
+  				center: location
   			})
   		}
-
   	}
   	resetBounds = () => {
   		this.setState({
-  			bounds: []
+  			center: []
   		})
   	}
 
 	render() {
-		const { bounds, mapApi } = this.state;
+		const { center } = this.state;
 		const {
 			filteredMarkers,
 			currentLocation,
 			viewport,
-			selectedMarker,
 			onSelectMarker,
+			countyBounds,
 			onOpenInfoBox,
 			onCloseInfoBox,
 			onClosePanel,
-			onCloseSearchBox } = this.props;
+			onCloseSearchBox,
+			onClearCounties } = this.props;
 		return (
 			<Map
+				ref='map'
 			    className='map'
-			    center={ bounds }
+			    center={ center }
+			    bounds={ countyBounds.length > 0 ? countyBounds : undefined }
+			    boundsOptions={{ padding: [120, 120] }}
 			    viewport={ viewport }
 			    onClick={() => {
 			    	onClosePanel()
 			    	onCloseSearchBox()
 			    	onCloseInfoBox()
+			    	onClearCounties()
 			    }}
 			    doubleClickZoom={ true }
 			    zoomSnap={ false }
 			    trackResize={ true }
 			    zoomControl={ false }
-			    ref='map'
 			>
 
 		      <TileLayer
@@ -127,18 +106,16 @@ class Lmap extends Component {
 						position={[location.lat, location.lng]}
 						keyboard={true}
 						ref='marker'
-						onClick={()=> {
-							console.log('run')
-						}}
 						>
 						<Popup minWidth="250" autoPan={false}
 							ref='popup'
 							onOpen={() => {
-								this.centerToMarker(location, filteredMarkers);
 								onSelectMarker(marker)
 								onOpenInfoBox()
 								onClosePanel()
 								onCloseSearchBox()
+								onClearCounties()
+								this.centerToMarker(location, filteredMarkers);
 							}}
 							onClose={() => {
 								onCloseInfoBox()

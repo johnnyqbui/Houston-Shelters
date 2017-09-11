@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import ReactModal from 'react-modal';
-
-import './App.css';
-
+import './styles/App.css';
 import config from './config';
-
 import Meta from './components/Meta';
-
 import LocateModal from './components/LocateModal';
 import TopNavBar from './components/TopNavBar';
 import Lmap from './components/Map';
@@ -16,9 +12,7 @@ import FilterPanel from './components/FilterPanel';
 import Search from './components/Search';
 import LoadingIcon from './components/LoadingIcon';
 import InfoBox from './components/InfoBox';
-
 import Credits from './pages/Credits';
-
 import * as SheltersApi from './utils/SheltersApi';
 
 class App extends Component {
@@ -36,16 +30,17 @@ class App extends Component {
         toggledInfo: false,
         toggledPanel: false,
         toggledSearchBox: false,
-        query: ''
+        query: '',
+        countyBounds: []
     }
 
     async componentDidMount() {
-        // console.log('Component Mounted')
         const shelterData = await SheltersApi.getAll();
         const allMarkerData = shelterData.shelters
         .filter(shelters => shelters.latitude)
         .map((shelters) => {
             const {
+                id,
                 county,
                 shelter,
                 address,
@@ -53,6 +48,7 @@ class App extends Component {
                 phone,
                 cleanPhone,
                 pets,
+                pets_notes,
                 accepting,
                 latitude,
                 longitude,
@@ -63,6 +59,7 @@ class App extends Component {
                 special_needs
             } = shelters;
             return {
+                id: id,
                 county: county,
                 shelter: shelter,
                 address: address,
@@ -71,6 +68,7 @@ class App extends Component {
                 cleanPhone: cleanPhone,
                 accepting: accepting,
                 pets: pets,
+                pets_notes: pets_notes,
                 location: {
                     lat: latitude,
                     lng: longitude
@@ -92,38 +90,8 @@ class App extends Component {
             tempFilteredMarkers: initialMarkers
         });
 
-        window.scrollTo(0,1); // attempt to autoscroll a mobile window
 
     }
-
-    // // For debugging purposes
-    // componentWillMount() {
-    //     console.log('Component is about to mount')
-    // }
-
-    // componentWillReceiveProps(nextProps) {
-    //     console.log('Component is about to receive props', nextProps)
-    // }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log('Should component update?')
-    //     console.log('Next Props', nextProps)
-    //     console.log('Next State', nextState)
-    //     return true
-    // }
-
-    // componentWillUpdate() {
-    //     console.log('Component is about to update')
-    // }
-
-    // componentDidUpdate() {
-    //     console.log('Component has updated')
-    // }
-
-    // componentWillUnmount() {
-    //     console.log('Component is about to unmount')
-    // }
-
 
     handleFilteredMarkers = (selectedFilter, filteredMarkers) => {
         this.setState({
@@ -167,6 +135,7 @@ class App extends Component {
         this.setState({
             toggledInfo: true
         })
+
     }
 
     handleCloseInfoBox = () => {
@@ -193,14 +162,20 @@ class App extends Component {
         })
     }
 
-    handleInputSearch = (query, selectedFilter) => {
+    handleInputSearch = (filteredMarkers, selectedFilter) => {
         this.setState({
-            filteredMarkers: query,
+            filteredMarkers: filteredMarkers,
             selectedFilter: selectedFilter
         })
     }
 
-    handleCompleteSearch = (matched, query) => {
+    handleUpdateQuery = (query) => {
+        this.setState({
+            query: query
+        })
+    }
+
+    handleCompleteSearch = (matched) => {
         const latLng = window.innerWidth > 960 ?
         [matched.location.lat, matched.location.lng-.02] :
         [matched.location.lat, matched.location.lng]
@@ -212,8 +187,8 @@ class App extends Component {
             },
             selectedMarker: matched,
             filteredMarkers: [matched],
-            query: query,
-            toggledInfo: true
+            toggledInfo: true,
+            countyBounds: []
         })
     }
 
@@ -222,7 +197,24 @@ class App extends Component {
     }
 
     handleCloseModal = () => {
-     this.setState({ showModal: false });
+        this.setState({ showModal: false });
+    }
+
+    handleSetBounds = (counties) => {
+        const countyLatLng = counties.map((county) => {
+            const countyLatLngArr = [county.location.lat, county.location.lng]
+            return [countyLatLngArr];
+        })
+
+        this.setState({
+            countyBounds: countyLatLng
+        })
+    }
+
+    clearCounties = () => {
+        this.setState({
+            countyBounds: []
+        })
     }
 
     render() {
@@ -240,9 +232,12 @@ class App extends Component {
             toggledInfo,
             toggledPanel,
             toggledSearchBox,
-            query } = this.state;
+            query,
+            countyBounds } = this.state;
+
         return (
             <div className="App">
+                <div id="fb-root"></div>
                 <Meta />
                     <TopNavBar />
                     <ReactModal
@@ -254,16 +249,16 @@ class App extends Component {
                     >
                         <h2>Find Your Nearest Shelter</h2>
                         <div className="locate-button-container">
-                        <LocateModal
-                            showModal={ showModal }
-                            currentLocation={ currentLocation }
-                            onClickLocate={ this.handleLocate }
-                        />
-                        <button
-                            className='skip-modal'
-                            onClick={this.handleCloseModal}>
-                            Skip for Now
-                        </button>
+                            <LocateModal
+                                showModal={ showModal }
+                                currentLocation={ currentLocation }
+                                onClickLocate={ this.handleLocate }
+                            />
+                            <button
+                                className='skip-modal'
+                                onClick={this.handleCloseModal}>
+                                Skip for Now
+                            </button>
                         </div>
                     </ReactModal>
 
@@ -271,15 +266,17 @@ class App extends Component {
                         <div>
                             <Search
                                 allMarkers={ allMarkers }
-                                tempFilteredMarkers = { tempFilteredMarkers }
+                                tempFilteredMarkers={ tempFilteredMarkers }
+                                filteredMarkers={ filteredMarkers }
 
                                 toggledInfo={ toggledInfo }
                                 selectedFilter={ selectedFilter }
                                 tempSelectedFilter={ tempSelectedFilter }
 
                                 toggledSearchBox={ toggledSearchBox }
-
                                 onSelectedFilter={ this.handleSelectedFilters }
+
+                                onClosePanel={ this.handleClosePanel }
 
                                 onCompleteSearch={ this.handleCompleteSearch }
                                 onInputSearch={ this.handleInputSearch }
@@ -289,6 +286,11 @@ class App extends Component {
 
                                 onCloseInfoBox={ this.handleCloseInfoBox }
                                 onOpenInfoBox={ this.handleOpenInfoBox }
+
+                                onSetBounds={ this.handleSetBounds }
+                                onClearCounties={ this.clearCounties}
+
+                                onHandleUpdateQuery={ this.handleUpdateQuery }
                                 >
                             </Search>
 
@@ -303,6 +305,7 @@ class App extends Component {
                                 onClickFilter={ this.handleFilteredMarkers }
                                 onCloseSearchBox={ this.handleCloseSearchBox }
                                 onCloseInfoBox={ this.handleCloseInfoBox }
+                                onClearCounties={ this.clearCounties }
                             />
                         </div>
                     }
@@ -324,6 +327,9 @@ class App extends Component {
                         onCloseInfoBox={ this.handleCloseInfoBox }
                         onClosePanel={ this.handleClosePanel }
                         onCloseSearchBox={ this.handleCloseSearchBox }
+
+                        countyBounds={ countyBounds }
+                        onClearCounties={ this.clearCounties }
                     />
 
                     <InfoBox
