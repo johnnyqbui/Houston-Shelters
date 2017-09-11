@@ -239,104 +239,104 @@ class App extends Component {
             <div className="App">
                 <div id="fb-root"></div>
                 <Meta />
-                    <TopNavBar />
-                    <ReactModal
-                        isOpen={this.state.showModal}
-                        contentLabel="Modal"
-                        onRequestClose={this.handleCloseModal}
-                        className="overlay-content"
-                        overlayClassName="overlay"
-                    >
-                        <h2>Find Your Nearest Shelter</h2>
-                        <div className="locate-button-container">
-                            <LocateModal
-                                showModal={ showModal }
-                                currentLocation={ currentLocation }
-                                onClickLocate={ this.handleLocate }
-                            />
-                            <button
-                                className='skip-modal'
-                                onClick={this.handleCloseModal}>
-                                Skip for Now
-                            </button>
-                        </div>
-                    </ReactModal>
+                <TopNavBar />
+                <ReactModal
+                    isOpen={this.state.showModal}
+                    contentLabel="Modal"
+                    onRequestClose={this.handleCloseModal}
+                    className="overlay-content"
+                    overlayClassName="overlay"
+                >
+                    <h2>Find Your Nearest Shelter</h2>
+                    <div className="locate-button-container">
+                        <LocateModal
+                            showModal={ showModal }
+                            currentLocation={ currentLocation }
+                            onClickLocate={ this.handleLocate }
+                        />
+                        <button
+                            className='skip-modal'
+                            onClick={this.handleCloseModal}>
+                            Skip for Now
+                        </button>
+                    </div>
+                </ReactModal>
 
-                    { isLoading ? <LoadingIcon /> :
-                        <div>
-                            <Search
-                                allMarkers={ allMarkers }
-                                tempFilteredMarkers={ tempFilteredMarkers }
-                                filteredMarkers={ filteredMarkers }
+                { isLoading ? <LoadingIcon /> :
+                    <div>
+                        <Search
+                            allMarkers={ allMarkers }
+                            tempFilteredMarkers={ tempFilteredMarkers }
+                            filteredMarkers={ filteredMarkers }
 
-                                toggledInfo={ toggledInfo }
-                                selectedFilter={ selectedFilter }
-                                tempSelectedFilter={ tempSelectedFilter }
+                            toggledInfo={ toggledInfo }
+                            selectedFilter={ selectedFilter }
+                            tempSelectedFilter={ tempSelectedFilter }
 
-                                toggledSearchBox={ toggledSearchBox }
-                                onSelectedFilter={ this.handleSelectedFilters }
+                            toggledSearchBox={ toggledSearchBox }
+                            onSelectedFilter={ this.handleSelectedFilters }
 
-                                onClosePanel={ this.handleClosePanel }
+                            onClosePanel={ this.handleClosePanel }
 
-                                onCompleteSearch={ this.handleCompleteSearch }
-                                onInputSearch={ this.handleInputSearch }
+                            onCompleteSearch={ this.handleCompleteSearch }
+                            onInputSearch={ this.handleInputSearch }
 
-                                onCloseSearchBox={ this.handleCloseSearchBox }
-                                onOpenSearchBox={ this.handleOpenSearchBox }
+                            onCloseSearchBox={ this.handleCloseSearchBox }
+                            onOpenSearchBox={ this.handleOpenSearchBox }
 
-                                onCloseInfoBox={ this.handleCloseInfoBox }
-                                onOpenInfoBox={ this.handleOpenInfoBox }
+                            onCloseInfoBox={ this.handleCloseInfoBox }
+                            onOpenInfoBox={ this.handleOpenInfoBox }
 
-                                onSetBounds={ this.handleSetBounds }
-                                onClearCounties={ this.clearCounties}
+                            onSetBounds={ this.handleSetBounds }
+                            onClearCounties={ this.clearCounties}
 
-                                onHandleUpdateQuery={ this.handleUpdateQuery }
-                                >
-                            </Search>
+                            onHandleUpdateQuery={ this.handleUpdateQuery }
+                            >
+                        </Search>
 
-                            <FilterPanel
-                                toggledPanel={ toggledPanel }
-                                allMarkers={ allMarkers }
-                                filterLength={ filteredMarkers.length }
-                                selectedFilter={ selectedFilter }
-                                toggledInfo={ toggledInfo }
+                        <FilterPanel
+                            toggledPanel={ toggledPanel }
+                            allMarkers={ allMarkers }
+                            filterLength={ filteredMarkers.length }
+                            selectedFilter={ selectedFilter }
+                            toggledInfo={ toggledInfo }
 
-                                onTogglePanel={ this.handleTogglePanel }
-                                onClickFilter={ this.handleFilteredMarkers }
-                                onCloseSearchBox={ this.handleCloseSearchBox }
-                                onCloseInfoBox={ this.handleCloseInfoBox }
-                                onClearCounties={ this.clearCounties }
-                            />
-                        </div>
-                    }
+                            onTogglePanel={ this.handleTogglePanel }
+                            onClickFilter={ this.handleFilteredMarkers }
+                            onCloseSearchBox={ this.handleCloseSearchBox }
+                            onCloseInfoBox={ this.handleCloseInfoBox }
+                            onClearCounties={ this.clearCounties }
+                        />
+                    </div>
+                }
 
-                    <GeoLocate
-                        showModal={ showModal }
-                        currentLocation={ currentLocation }
-                        onClickLocate={ this.handleLocate }
-                    />
+                <GeoLocate
+                    showModal={ showModal }
+                    currentLocation={ currentLocation }
+                    onClickLocate={ this.handleLocate }
+                />
 
-                    <Lmap
-                        currentLocation={ currentLocation }
-                        filteredMarkers={ filteredMarkers }
-                        viewport={ viewport }
-                        selectedMarker={ selectedMarker }
-                        toggledInfo={ toggledInfo }
-                        onSelectMarker={ this.handleSelectMarker }
-                        onOpenInfoBox={ this.handleOpenInfoBox }
-                        onCloseInfoBox={ this.handleCloseInfoBox }
-                        onClosePanel={ this.handleClosePanel }
-                        onCloseSearchBox={ this.handleCloseSearchBox }
+                <Lmap
+                    currentLocation={ currentLocation }
+                    filteredMarkers={ filteredMarkers }
+                    viewport={ viewport }
+                    selectedMarker={ selectedMarker }
+                    toggledInfo={ toggledInfo }
+                    onSelectMarker={ this.handleSelectMarker }
+                    onOpenInfoBox={ this.handleOpenInfoBox }
+                    onCloseInfoBox={ this.handleCloseInfoBox }
+                    onClosePanel={ this.handleClosePanel }
+                    onCloseSearchBox={ this.handleCloseSearchBox }
 
-                        countyBounds={ countyBounds }
-                        onClearCounties={ this.clearCounties }
-                    />
+                    countyBounds={ countyBounds }
+                    onClearCounties={ this.clearCounties }
+                />
 
-                    <InfoBox
-                        toggledInfo={ toggledInfo }
-                        selectedMarker={ selectedMarker }
-                        query={ query }
-                    />
+                <InfoBox
+                    toggledInfo={ toggledInfo }
+                    selectedMarker={ selectedMarker }
+                    query={ query }
+                />
 
                 <Route path='/credits' render={( history ) => (
                     <Credits />
