@@ -170,12 +170,13 @@ class App extends Component {
     }
 
     handleUpdateQuery = (query) => {
+        console.log(query)
         this.setState({
             query: query
         })
     }
 
-    handleCompleteSearch = (matched, query) => {
+    handleCompleteSearch = (matched) => {
         const latLng = window.innerWidth > 960 ?
         [matched.location.lat, matched.location.lng-.02] :
         [matched.location.lat, matched.location.lng]

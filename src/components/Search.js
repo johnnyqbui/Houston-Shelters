@@ -19,7 +19,9 @@ class Search extends Component {
 
 	searchData = (query) => {
 		const {
+			allMarkers,
 			filteredMarkers,
+			selectedFilter,
 			tempFilteredMarkers,
 			tempSelectedFilter,
 			onInputSearch,
@@ -80,7 +82,7 @@ class Search extends Component {
         })
     }
 
-    handleClickSearch = (data) => {
+    handleClickSearch = (data, query) => {
 		const { onCloseSearchBox, onHandleUpdateQuery, onClosePanel } = this.props;
 
 		if (data) {
@@ -90,8 +92,6 @@ class Search extends Component {
 				counties: []
 			})
 		}
-		const query = '';
-		onHandleUpdateQuery(query)
 		onCloseSearchBox()
 		onClosePanel()
 	}
@@ -195,7 +195,7 @@ class Search extends Component {
 									className={cursor === index ? 'searchSelected' : ''}
 									onMouseOver={() => {this.handleMouseOver(index)}}
 									onClick={() => {
-										this.handleClickSearch(data)
+										this.handleClickSearch(data, query)
 										onCompleteSearch(data)
 									}}>
 									{`${ data.shelter } at ${ data.address }, ${ data.city }`}

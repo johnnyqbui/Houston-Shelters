@@ -40,6 +40,9 @@ const InfoBox = (props) => {
 
     const arrQuery = query.indexOf(' ') > -1 ? query.split(' ') : [query]
 
+    console.log(query)
+    console.log(arrQuery)
+
     // Highlight found text
     const highlightText = (info) => {
         return (
