@@ -96,7 +96,7 @@ const InfoBox = (props) => {
 
     const facebookUrl = (id) => {
         return(
-          `${config.meta.url}/shelters/${id}`
+          `${config.meta.url}shelters/${id}`
         )
     }
 
