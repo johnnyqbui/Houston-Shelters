@@ -27,6 +27,10 @@
         // or -1 it it's not there.
         document.location.href = 'https://www.houstonshelters.org';
       }
+      if (location.protocol != 'https:' && document.location.href.indexOf('www') > -1)
+      {
+        location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+      }
     </script>
     <noscript>
       You need to enable JavaScript to run this app.
