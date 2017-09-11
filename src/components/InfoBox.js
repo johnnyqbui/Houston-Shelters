@@ -4,6 +4,9 @@ import FaPhone from 'react-icons/lib/fa/phone';
 import FaMapMarker from 'react-icons/lib/fa/map-marker';
 import FaRefresh from 'react-icons/lib/fa/refresh';
 import Highlighter from 'react-highlight-words';
+import FacebookProvider, { Comments} from 'react-facebook';
+
+import config from '../config';
 
 const InfoBox = (props) => {
 
@@ -91,6 +94,12 @@ const InfoBox = (props) => {
       }
     }
 
+    const facebookUrl = (id) => {
+        return(
+          `${config.meta.url}/shelters/${id}`
+        )
+    }
+
     return (
         <div className={ toggledInfo ? 'info-box open' : 'info-box'}>
             <h2>{highlightText(shelter)}</h2>
@@ -118,6 +127,11 @@ const InfoBox = (props) => {
               {supplyTag(supplyNeeds)}
               {volunteerTag(volunteerNeeds)}
 
+                <FacebookProvider appId="1574287542634533">
+                    <Comments href={facebookUrl(id)} />
+                </FacebookProvider>
+
+                <br/>
             </div>
         </div>
     )
