@@ -234,6 +234,7 @@ class App extends Component {
             toggledSearchBox,
             query,
             countyBounds } = this.state;
+
         return (
             <div className="App">
                 <div id="fb-root"></div>

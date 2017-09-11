@@ -4,8 +4,7 @@ import FaPhone from 'react-icons/lib/fa/phone';
 import FaMapMarker from 'react-icons/lib/fa/map-marker';
 import FaRefresh from 'react-icons/lib/fa/refresh';
 import Highlighter from 'react-highlight-words';
-import FacebookProvider, { Comments} from 'react-facebook';
-
+import FacebookProvider, { Comments } from 'react-facebook';
 import config from '../config';
 
 const InfoBox = (props) => {
@@ -42,9 +41,6 @@ const InfoBox = (props) => {
     const concatAddress = encodeURI(`${address} ${city}`)
 
     const arrQuery = query.indexOf(' ') > -1 ? query.split(' ') : [query]
-
-    console.log(query)
-    console.log(arrQuery)
 
     // Highlight found text
     const highlightText = (info) => {
@@ -119,7 +115,7 @@ const InfoBox = (props) => {
                 </p>
                 <p><FaRefresh className="blueIcon" />
                     <a className="update-shelter-button" target="_blank"
-                       href={`https://irma-api.herokuapp.com/shelters/${id}/edit`} style={{fontWeight: 'bold'}}>Submit a Status Update</a></p>
+                       href={`${config.api.baseURL}/${id}/edit`} style={{fontWeight: 'bold'}}>Submit a Status Update</a></p>
                 <br/>
                 <p><span style={{fontWeight: 'bold'}}>Updated:</span> {moment(lastUpdated).format('L LT')}</p>
                 <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
