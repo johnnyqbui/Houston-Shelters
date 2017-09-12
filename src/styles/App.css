@@ -755,6 +755,14 @@ a {
     color: rgb(20, 150, 250);
 }
 
+.popup-info span:first-child {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.popup-info .mobile-hidden {
+    font-size: 14px;
+}
 
 /*****BUTTONS*****/
 

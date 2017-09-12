@@ -52,9 +52,6 @@ const FilterPanel = (props) => {
         matchFunctionsByName[filter.name] = filter.match;
     })
 
-    // Show Panel on page load if not on mobile
-    // window.innerWidth > 960 && (onTogglePanel())
-
     const handleFilter = (value) => {
         const filtered = allMarkers.filter(matchFunctionsByName[value]);
 
@@ -65,36 +62,36 @@ const FilterPanel = (props) => {
     const isSelected = (name) => selectedFilter === name;
 
     return (
-    <div className={toggledInfo ? 'filter-container open' : 'filter-container'}>
+        <div className={toggledInfo ? 'filter-container open' : 'filter-container'}>
 
-      <div className='filter-controls'>
-        <button
-          className="current-filter-button"
-          onClick={() => {
-            onTogglePanel()
-            onCloseInfoBox()
-            onClearCounties()
-          }}>
+          <div className='filter-controls'>
+            <button
+              className="current-filter-button"
+              onClick={() => {
+                onTogglePanel()
+                onCloseInfoBox()
+                onClearCounties()
+              }}>
 
-          <FaFilter
-            className='fa-filter'/>
-          <span>Filter:</span> <strong>{ selectedFilter } ({ filterLength })</strong>
-        </button>
-      </div>
+              <FaFilter
+                className='fa-filter'/>
+              <span>Filter:</span> <strong>{ selectedFilter } ({ filterLength })</strong>
+            </button>
+          </div>
 
-      <div className={ toggledPanel ? 'filter-panel' : 'filter-panel closePanel' }>
-        <div className='filter-title'>Filter Shelters By...</div>
-        {filters.map((filter) => (
-            <input
-                key={filter.name}
-                type='button'
-                value={filter.name}
-                className={`blueButton${isSelected(filter.name)?' selected':''}`}
-                onClick={(e) => {handleFilter(e.target.value)}}
-            />
-        ))}
-      </div>
-    </div>
+          <div className={ toggledPanel ? 'filter-panel' : 'filter-panel closePanel' }>
+            <div className='filter-title'>Filter Shelters By...</div>
+            {filters.map((filter) => (
+                <input
+                    key={filter.name}
+                    type='button'
+                    value={filter.name}
+                    className={`blueButton${isSelected(filter.name)?' selected':''}`}
+                    onClick={(e) => {handleFilter(e.target.value)}}
+                />
+            ))}
+          </div>
+        </div>
     )
 
 }
