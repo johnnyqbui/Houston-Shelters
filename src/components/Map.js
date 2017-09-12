@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 import blueMarker from '../images/shelter-blue.png';
 import greyMarker from '../images/generic-grey.png';
@@ -58,7 +59,67 @@ class Lmap extends Component {
 			onClosePanel,
 			onCloseSearchBox,
 			onClearCounties } = this.props;
+
+		const markers = filteredMarkers.map((marker, index) => {
+			const {
+			  county,
+			  shelter,
+			  address,
+			  city,
+			  phone,
+			  cleanPhone,
+			  accepting,
+			  location } = marker;
+
+			const concatAddress = encodeURI(`${address} ${city}`)
+			let icon;
+			accepting ? icon = blueMarkerIcon : icon = greyMarkerIcon
+			return (
+				{
+					lat: location.lat,
+					lng: location.lng
+				}
+			)
+      	})
+
+		console.log(markers)
+
+		const getLeafletPopup = (marker, location, shelter, address, city, phone, cleanPhone, concatAddress) => {
+			<Popup minWidth="250" autoPan={false}
+				ref='popup'
+				onOpen={() => {
+					console.log('run')
+					onSelectMarker(marker)
+					onOpenInfoBox()
+					onClosePanel()
+					onCloseSearchBox()
+					onClearCounties()
+					this.centerToMarker(location, filteredMarkers);
+				}}
+				onClose={() => {
+					onCloseInfoBox()
+				}}
+
+				position={location}>
+				<div className='popup-info' style={{fontSize: '14px'}}>
+					<div style={{fontWeight: 'bold', fontSize: '16px'}}>{shelter}</div>
+					<span className="mobile-hidden">
+						{address}<br/>
+						{city}<br/>
+
+						<div className='popup-button-container'>
+							{phone && (
+								<a className='popup-info-button' href={`tel:${cleanPhone}`}>Call</a>
+							)}
+
+							<a className='popup-info-button' href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>
+						</div>
+					</span>
+				</div>
+			</Popup>
+		}
 		return (
+
 			<Map
 				ref='map'
 			    className='map'
@@ -84,63 +145,11 @@ class Lmap extends Component {
 
 				<ZoomControl position= 'bottomright' />
 				{currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
-				{filteredMarkers.map((marker, index) => {
-					const {
-					  county,
-					  shelter,
-					  address,
-					  city,
-					  phone,
-					  cleanPhone,
-					  accepting,
-					  location } = marker;
 
-					const concatAddress = encodeURI(`${address} ${city}`)
-					let icon;
-					accepting ? icon = blueMarkerIcon : icon = greyMarkerIcon
-						return (
-						<Marker
-							icon={icon}
-							key={index}
-							position={[location.lat, location.lng]}
-							keyboard={true}
-							ref='marker'
-							>
-							<Popup minWidth="250" autoPan={false}
-								ref='popup'
-								onOpen={() => {
-									onSelectMarker(marker)
-									onOpenInfoBox()
-									onClosePanel()
-									onCloseSearchBox()
-									onClearCounties()
-									this.centerToMarker(location, filteredMarkers);
-								}}
-								onClose={() => {
-									onCloseInfoBox()
-								}}
-
-								position={location}
-							>
-							<div className='popup-info' style={{fontSize: '14px'}}>
-								<div style={{fontWeight: 'bold', fontSize: '16px'}}>{shelter}</div>
-								<span className="mobile-hidden">
-									{address}<br/>
-									{city}<br/>
-
-									<div className='popup-button-container'>
-										{phone && (
-											<a className='popup-info-button' href={`tel:${cleanPhone}`}>Call</a>
-										)}
-
-										<a className='popup-info-button' href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>
-									</div>
-								</span>
-							</div>
-						</Popup>
-					</Marker>
-				)
-		      })}
+				<MarkerClusterGroup
+					markers={markers}
+					wrapperOptions={{enableDefaultStyle: true}}
+				/>
 		    </Map>
 	  	)
 	}
