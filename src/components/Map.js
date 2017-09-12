@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
+
 import blueMarker from '../images/shelter-blue.png';
 import greyMarker from '../images/generic-grey.png';
 
@@ -20,10 +22,59 @@ const greyMarkerIcon = new L.icon({
 
 class Lmap extends Component {
 	state = {
-		center: []
+		center: [],
+		markers: []
 	}
 
-  	centerToMarker = (location, filteredMarkers) => {
+	getLeafletPopup = (marker, location, shelter, address, city, phone, cleanPhone, concatAddress) => {
+		return (`
+			<div class='popup-info'>
+				<span>${shelter}</span>
+				<span class="mobile-hidden">
+					${address}<br/>
+					${city}<br/>
+
+					<div class='popup-button-container'>
+						<a class='popup-info-button' href='tel:${cleanPhone}''>Call</a>
+						<a class='popup-info-button' href='https://www.google.com/maps/dir/current+location/${concatAddress}'' target="_blank">Get Directions</a>
+					</div>
+				</span>
+			</div>`
+		)
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const markers = nextProps.filteredMarkers.map((marker, index) => {
+			const {
+			  county,
+			  shelter,
+			  address,
+			  city,
+			  phone,
+			  cleanPhone,
+			  accepting,
+			  location } = marker;
+
+			const concatAddress = encodeURI(`${address} ${city}`)
+			const icon = accepting ? blueMarkerIcon : greyMarkerIcon
+			return ({
+				id: index,
+				lat: location.lat,
+				lng: location.lng,
+				popup: this.getLeafletPopup(marker, location, shelter, address, city, phone, cleanPhone, concatAddress),
+				options: {
+					icon: icon,
+					keyboard: true,
+					id: index
+				}
+			})
+	  	})
+		this.setState({
+			markers: markers
+		})
+	}
+
+  	centerToMarker = (location) => {
   		if (window.innerWidth > 960) {
   			const mapApi = this.refs.map.leafletElement
 	  		const point = mapApi.latLngToContainerPoint(location)
@@ -38,14 +89,9 @@ class Lmap extends Component {
   			})
   		}
   	}
-  	resetBounds = () => {
-  		this.setState({
-  			center: []
-  		})
-  	}
 
 	render() {
-		const { center } = this.state;
+		const { center, markers } = this.state;
 		const {
 			filteredMarkers,
 			currentLocation,
@@ -57,6 +103,13 @@ class Lmap extends Component {
 			onClosePanel,
 			onCloseSearchBox,
 			onClearCounties } = this.props;
+
+		const markerClusterOptions = {
+			showCoverageOnHover: false,
+			disableClusteringAtZoom:11,
+			maxClusterRadius:150
+		}
+
 		return (
 			<Map
 				ref='map'
@@ -75,73 +128,31 @@ class Lmap extends Component {
 			    zoomSnap={ false }
 			    trackResize={ true }
 			    zoomControl={ false }
-			>
+			    animate={ true }>
 
-		      <TileLayer
-		        url='https://api.mapbox.com/styles/v1/jnolasco/cj75zemih4wc02srs353jlu05/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam5vbGFzY28iLCJhIjoiY2oyYmVwNXViMDB1NjJxbXB2aHFlZnAzZyJ9.dY4H7Hzre0GJOeHBrkzIpg'
-						attribution='Built by Johnny Bui, <a target="_blank" href="http://twitter.com/plaintext">Jason Nolasco</a>, and Angela Shih'
-		      />
+				<TileLayer
+					url='https://api.mapbox.com/styles/v1/jnolasco/cj75zemih4wc02srs353jlu05/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam5vbGFzY28iLCJhIjoiY2oyYmVwNXViMDB1NjJxbXB2aHFlZnAzZyJ9.dY4H7Hzre0GJOeHBrkzIpg'
+					attribution='Built by Johnny Bui, <a target="_blank" href="http://twitter.com/plaintext">Jason Nolasco</a>, and Angela Shih'
+				/>
 
+				<ZoomControl position= 'bottomright' />
+				{currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
 
-		      <ZoomControl position= 'bottomright' />
-		      {currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
-		      {filteredMarkers.map((marker, index) => {
-		        const {
-		          county,
-		          shelter,
-		          address,
-		          city,
-		          phone,
-		          cleanPhone,
-		          accepting,
-		          location } = marker;
-
-		        const concatAddress = encodeURI(`${address} ${city}`)
-		        let icon;
-		        accepting ? icon = blueMarkerIcon : icon = greyMarkerIcon
-					return (
-					<Marker
-						icon={icon}
-						key={index}
-						position={[location.lat, location.lng]}
-						keyboard={true}
-						ref='marker'
-						>
-						<Popup minWidth="250" autoPan={false}
-							ref='popup'
-							onOpen={() => {
-								onSelectMarker(marker)
-								onOpenInfoBox()
-								onClosePanel()
-								onCloseSearchBox()
-								onClearCounties()
-								this.centerToMarker(location, filteredMarkers);
-							}}
-							onClose={() => {
-								onCloseInfoBox()
-							}}
-
-							position={location}
-						>
-							<div className='popup-info' style={{fontSize: '14px'}}>
-								<div style={{fontWeight: 'bold', fontSize: '16px'}}>{shelter}</div>
-								<span className="mobile-hidden">
-                  {address}<br/>
-                  {city}<br/>
-
-						        <div className='popup-button-container'>
-							        {phone && (
-												<a className='popup-info-button' href={`tel:${cleanPhone}`}>Call</a>
-                      )}
-											<a className='popup-info-button' href={`https://www.google.com/maps/dir/current+location/${concatAddress}`} target="_blank">Get Directions</a>
-									</div>
-									</span>
-
-							</div>
-						</Popup>
-					</Marker>
-				)
-		      })}
+				<MarkerClusterGroup
+					markers={markers}
+					options={markerClusterOptions}
+					wrapperOptions={{enableDefaultStyle: true}}
+					markers={markers}
+					onMarkerClick={(marker) => {
+						this.centerToMarker(marker.getLatLng());
+						onOpenInfoBox()
+						onClosePanel()
+						onCloseSearchBox()
+						onClearCounties()
+						onSelectMarker(filteredMarkers[marker.options.id])
+					}}
+					onPopupClose={() => onCloseInfoBox()}
+				/>
 		    </Map>
 	  	)
 	}
