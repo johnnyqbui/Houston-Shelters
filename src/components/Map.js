@@ -57,19 +57,17 @@ class Lmap extends Component {
 
 			const concatAddress = encodeURI(`${address} ${city}`)
 			const icon = accepting ? blueMarkerIcon : greyMarkerIcon
-			return (
-				{
-					id: index,
-					lat: location.lat,
-					lng: location.lng,
-					popup: this.getLeafletPopup(marker, location, shelter, address, city, phone, cleanPhone, concatAddress),
-					options: {
-						icon: icon,
-						keyboard: true,
-						id: index
-					}
+			return ({
+				id: index,
+				lat: location.lat,
+				lng: location.lng,
+				popup: this.getLeafletPopup(marker, location, shelter, address, city, phone, cleanPhone, concatAddress),
+				options: {
+					icon: icon,
+					keyboard: true,
+					id: index
 				}
-			)
+			})
 	  	})
 		this.setState({
 			markers: markers
@@ -129,7 +127,8 @@ class Lmap extends Component {
 			    doubleClickZoom={ true }
 			    zoomSnap={ false }
 			    trackResize={ true }
-			    zoomControl={ false }>
+			    zoomControl={ false }
+			    animate={ true }>
 
 				<TileLayer
 					url='https://api.mapbox.com/styles/v1/jnolasco/cj75zemih4wc02srs353jlu05/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam5vbGFzY28iLCJhIjoiY2oyYmVwNXViMDB1NjJxbXB2aHFlZnAzZyJ9.dY4H7Hzre0GJOeHBrkzIpg'
@@ -146,11 +145,11 @@ class Lmap extends Component {
 					markers={markers}
 					onMarkerClick={(marker) => {
 						this.centerToMarker(marker.getLatLng());
-						onSelectMarker(filteredMarkers[marker.options.id])
 						onOpenInfoBox()
 						onClosePanel()
 						onCloseSearchBox()
 						onClearCounties()
+						onSelectMarker(filteredMarkers[marker.options.id])
 					}}
 					onPopupClose={() => onCloseInfoBox()}
 				/>
