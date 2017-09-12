@@ -106,6 +106,12 @@ class Lmap extends Component {
 			onCloseSearchBox,
 			onClearCounties } = this.props;
 
+		const markerClusterOptions = {
+			showCoverageOnHover: false,
+			disableClusteringAtZoom:11,
+			maxClusterRadius:150
+		}
+
 		return (
 			<Map
 				ref='map'
@@ -134,6 +140,8 @@ class Lmap extends Component {
 				{currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
 
 				<MarkerClusterGroup
+					markers={markers}
+					options={markerClusterOptions}
 					wrapperOptions={{enableDefaultStyle: true}}
 					markers={markers}
 					onMarkerClick={(marker) => {
