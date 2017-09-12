@@ -84,6 +84,12 @@ class Lmap extends Component {
 
 		console.log(markers)
 
+		const markerClusterOptions = {
+      showCoverageOnHover: false,
+      disableClusteringAtZoom:11,
+      maxClusterRadius:150
+		}
+
 		const getLeafletPopup = (marker, location, shelter, address, city, phone, cleanPhone, concatAddress) => {
 			<Popup minWidth="250" autoPan={false}
 				ref='popup'
@@ -148,6 +154,7 @@ class Lmap extends Component {
 
 				<MarkerClusterGroup
 					markers={markers}
+					options={markerClusterOptions}
 					wrapperOptions={{enableDefaultStyle: true}}
 				/>
 		    </Map>
