@@ -99,6 +99,12 @@ const InfoBox = (props) => {
         )
     }
 
+    const updateUrl = (id) => {
+        return(
+          `${config.api.dataEntryPortal}/shelters/${id}/edit`
+        )
+    }
+
     return (
         <div className={ toggledInfo ? 'info-box open' : 'info-box'}>
             <h2>{highlightText(shelter)}</h2>
@@ -115,7 +121,7 @@ const InfoBox = (props) => {
                 </p>
                 <p><FaRefresh className="blueIcon" />
                     <a className="update-shelter-button" target="_blank"
-                       href={`${config.api.baseURL}/${id}/edit`} style={{fontWeight: 'bold'}}>Submit a Status Update</a></p>
+                       href={updateUrl(id)} style={{fontWeight: 'bold'}}>Submit a Status Update</a></p>
                 <br/>
                 <p><span style={{fontWeight: 'bold'}}>Updated:</span> {moment(lastUpdated).format('L LT')}</p>
                 <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
