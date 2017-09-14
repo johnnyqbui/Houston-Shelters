@@ -136,14 +136,13 @@ class Lmap extends Component {
 
 				<TileLayer
 					url='https://api.mapbox.com/styles/v1/jnolasco/cj75zemih4wc02srs353jlu05/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam5vbGFzY28iLCJhIjoiY2oyYmVwNXViMDB1NjJxbXB2aHFlZnAzZyJ9.dY4H7Hzre0GJOeHBrkzIpg'
-					attribution='Built by Johnny Bui, <a target="_blank" href="http://twitter.com/plaintext">Jason Nolasco</a>, and Angela Shih'
+					attribution='Supported by <a target="_blank" href="https://www.mapbox.com/humanitarian/">Mapbox</a> and <a href="https://www.openstreetmap.org/" target="_blank">OSM</a> | <a href="mailto:jason@irmashelters.org">Contact Us</a>'
 				/>
 
 				<ZoomControl position= 'bottomright' />
 				{currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
 
 				<MarkerClusterGroup
-					markers={markers}
 					options={markerClusterOptions}
 					wrapperOptions={{enableDefaultStyle: true}}
 					onMarkerClick={(marker) => {
