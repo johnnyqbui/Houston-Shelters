@@ -37,6 +37,7 @@ const InfoBox = (props) => {
     notes = notes ? notes : ''
     supplyNeeds = supplyNeeds ? supplyNeeds : ''
     volunteerNeeds = volunteerNeeds ? volunteerNeeds : ''
+    lastUpdated = lastUpdated ? lastUpdated : ''
 
     const concatAddress = encodeURI(`${address} ${city}`)
 
@@ -52,6 +53,14 @@ const InfoBox = (props) => {
         )
     }
 
+    const lastUpdatedTag = (notes) => {
+        if (notes) {
+          return (<p><span style={{fontWeight: 'bold'}}>Updated:</span> {moment(lastUpdated).format('L LT')}</p>)
+        }
+        else {
+          return (<div></div>)
+        }
+    }
 
     const notesTag = (notes) => {
         if (notes) {
@@ -123,14 +132,14 @@ const InfoBox = (props) => {
                     <a className="update-shelter-button" target="_blank"
                        href={updateUrl(id)} style={{fontWeight: 'bold'}}>Submit a Status Update</a></p>
                 <br/>
-                <p><span style={{fontWeight: 'bold'}}>Updated:</span> {moment(lastUpdated).format('L LT')}</p>
+                {lastUpdatedTag(lastUpdated)}
                 <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
                 <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
-              {petsNotesTag(pets_notes)}
+                {petsNotesTag(pets_notes)}
                 <p><span style={{fontWeight: 'bold'}}>Special Needs:</span> {specialNeeds ? 'Available': 'Unavailable'}</p>
-              {notesTag(notes)}
-              {supplyTag(supplyNeeds)}
-              {volunteerTag(volunteerNeeds)}
+                {notesTag(notes)}
+                {supplyTag(supplyNeeds)}
+                {volunteerTag(volunteerNeeds)}
 
                 <FacebookProvider appId={config.facebook.app_id}>
                     <Comments href={facebookUrl(id)} width="100%"/>

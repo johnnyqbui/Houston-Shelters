@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import MdClear from 'react-icons/lib/md/clear';
 
 class Search extends Component {
@@ -83,7 +82,11 @@ class Search extends Component {
     }
 
     handleClickSearch = (data, query) => {
-		const { onCloseSearchBox, onHandleUpdateQuery, onClosePanel } = this.props;
+		const {
+			onCloseSearchBox,
+			onHandleUpdateQuery,
+			onClosePanel,
+			onUrlQuery, } = this.props;
 
 		if (data) {
 			this.setState({
@@ -91,6 +94,8 @@ class Search extends Component {
 				cursor: 0,
 				counties: []
 			})
+
+			onUrlQuery(data.id, data.shelter)
 		}
 		onCloseSearchBox()
 		onClosePanel()
@@ -135,6 +140,7 @@ class Search extends Component {
 
 	    // Enter
 	    if (e.keyCode === 13) {
+
 	    	this.searchData(query)
 	    	if (!data){return}
 	    	else if ((counties.length - searched.length) <= 0 && counties.length > 0) {

@@ -35,7 +35,7 @@ const FilterPanel = (props) => {
         }, {
             name: 'Updated Within 24 Hours',
             match: (m) => {
-                if (m.lastUpdated.length > 0) {
+                if (m.lastUpdated) {
                     const lastUpdatedPlus = moment(m.lastUpdated).add(24, 'hours').format();
                     const current = moment().format();
                     return lastUpdatedPlus > current;
@@ -54,7 +54,6 @@ const FilterPanel = (props) => {
 
     const handleFilter = (value) => {
         const filtered = allMarkers.filter(matchFunctionsByName[value]);
-
         onClickFilter(value, filtered)
         onCloseSearchBox()
     }

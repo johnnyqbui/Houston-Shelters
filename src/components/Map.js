@@ -69,8 +69,12 @@ class Lmap extends Component {
 				}
 			})
 	  	})
+
+	  	// Temp fix
+	  	const newMarkers = markers.length > 0 ? markers : [null]
+
 		this.setState({
-			markers: markers
+			markers: newMarkers
 		})
 	}
 
@@ -142,7 +146,6 @@ class Lmap extends Component {
 					markers={markers}
 					options={markerClusterOptions}
 					wrapperOptions={{enableDefaultStyle: true}}
-					markers={markers}
 					onMarkerClick={(marker) => {
 						this.centerToMarker(marker.getLatLng());
 						onOpenInfoBox()
