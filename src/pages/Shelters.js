@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import { stringify, parse } from 'qs';
+import moment from 'moment';
+
 import config from '../config';
 
 import LocateModal from '../components/LocateModal';
@@ -81,8 +83,15 @@ class Shelters extends Component {
         });
         // Set initial markers to be accepting
         const initialMarkers = allMarkerData.filter(
-        	marker => (marker.supplyNeeds || marker.volunteerNeeds)
+        	m => {
+        		if (m.supplyNeeds || m.volunteerNeeds && m.lastUpdated) {
+                    const lastUpdatedPlus = moment(m.lastUpdated).add(24, 'hours').format();
+			        const current = moment().format();
+			        return lastUpdatedPlus > current;
+                }
+        	}
         )
+
         this.setState({
             isLoading: false,
             allMarkers: allMarkerData,

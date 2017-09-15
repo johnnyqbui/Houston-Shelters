@@ -1,6 +1,7 @@
 import React from 'react';
-import moment from 'moment';
 import FaFilter from 'react-icons/lib/fa/filter';
+import moment from 'moment';
+
 
 const FilterPanel = (props) => {
     const {
@@ -19,13 +20,24 @@ const FilterPanel = (props) => {
     const filters = [
         {
             name: 'Need Supplies/Volunteers',
-            match: (m) => m.supplyNeeds || m.volunteerNeeds,
+            match: (m) => {
+                if (m.supplyNeeds || m.volunteerNeeds && m.lastUpdated) {
+                    return getUpdated(m.lastUpdated)
+                }
+            }
         }, {
             name: 'Need Supplies',
             match: (m) => m.supplyNeeds && !m.supplyNeeds.match(/no\s/ig),
         }, {
             name: 'Need Volunteers',
             match: (m) => m.volunteerNeeds && !m.volunteerNeeds.match(/no\s/ig),
+        }, {
+            name: 'Updated Within 24 Hours',
+            match: (m) => {
+                if (m.lastUpdated) {
+                    return getUpdated(m.lastUpdated)
+                }
+            },
         }, {
             name: 'Accepting People',
             match: (m) => m.accepting,
@@ -36,19 +48,16 @@ const FilterPanel = (props) => {
             name: 'Pets Allowed',
             match: (m) => m.pets && m.pets.match(/yes/ig),
         }, {
-            name: 'Updated Within 24 Hours',
-            match: (m) => {
-                if (m.lastUpdated) {
-                    const lastUpdatedPlus = moment(m.lastUpdated).add(24, 'hours').format();
-                    const current = moment().format();
-                    return lastUpdatedPlus > current;
-                }
-            },
-        }, {
             name: 'All Shelters',
             match: (m) => true,
         }
     ];
+
+    const getUpdated = (lastUpdated) => {
+        const lastUpdatedPlus = moment(lastUpdated).add(24, 'hours').format();
+        const current = moment().format();
+        return lastUpdatedPlus > current;
+    }
 
     let matchFunctionsByName = {}
     filters.forEach((filter) => {
