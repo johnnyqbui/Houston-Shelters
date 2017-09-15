@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import './styles/App.css';
 import Meta from './components/Meta';
@@ -16,14 +16,15 @@ class App extends Component {
             <div className="App">
                 <Meta />
                 <TopNavBar />
-
-                <Route
-                    path='/shelters/:id'
-                    render={({match}) =>
-                        <Shelters match={match} />
-                }/>
-
-                <Route path='/credits' component={Credits} />
+                <Switch>
+                    <Route path='/shelters' component={Shelters}/>
+                    <Route
+                        path='/shelters/:id'
+                        render={({match}) =>
+                            <Shelters match={match} />
+                    }/>
+                    <Route path='/credits' component={Credits} />
+                </Switch>
 
             </div>
         )

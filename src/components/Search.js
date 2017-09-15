@@ -86,8 +86,7 @@ class Search extends Component {
 		const {
 			onCloseSearchBox,
 			onHandleUpdateQuery,
-			onClosePanel,
-			onUrlQuery, } = this.props;
+			onClosePanel } = this.props;
 
 		if (data) {
 			this.setState({
@@ -95,8 +94,6 @@ class Search extends Component {
 				cursor: 0,
 				counties: []
 			})
-
-			onUrlQuery(data.id, data.shelter)
 		}
 		onCloseSearchBox()
 		onClosePanel()

@@ -133,14 +133,9 @@ const InfoBox = (props) => {
                        href={updateUrl(id)} style={{fontWeight: 'bold'}}>Submit a Status Update</a></p>
                 <br/>
                 {lastUpdatedTag(lastUpdated)}
-                <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
-                <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
-                {petsNotesTag(pets_notes)}
-                <p><span style={{fontWeight: 'bold'}}>Special Needs:</span> {specialNeeds ? 'Available': 'Unavailable'}</p>
-                {notesTag(notes)}
                 {supplyTag(supplyNeeds)}
                 {volunteerTag(volunteerNeeds)}
-
+                {notesTag(notes)}
                 <FacebookProvider appId={config.facebook.app_id}>
                     <Comments href={facebookUrl(id)} width="100%"/>
                 </FacebookProvider>
@@ -150,5 +145,12 @@ const InfoBox = (props) => {
         </div>
     )
 }
+
+// Shelter Info
+// <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
+// <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
+// {petsNotesTag(pets_notes)}
+// <p><span style={{fontWeight: 'bold'}}>Special Needs:</span> {specialNeeds ? 'Available': 'Unavailable'}</p>
+
 
 export default InfoBox

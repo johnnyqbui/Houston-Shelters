@@ -18,6 +18,15 @@ const FilterPanel = (props) => {
 
     const filters = [
         {
+            name: 'Accepting Supplies/Volunteers',
+            match: (m) => m.supplyNeeds || m.volunteerNeeds,
+        }, {
+            name: 'Need Supplies',
+            match: (m) => m.supplyNeeds && !m.supplyNeeds.match(/no\s/ig),
+        }, {
+            name: 'Need Volunteers',
+            match: (m) => m.volunteerNeeds && !m.volunteerNeeds.match(/no\s/ig),
+        }, {
             name: 'Accepting People',
             match: (m) => m.accepting,
         }, {
@@ -26,12 +35,6 @@ const FilterPanel = (props) => {
         }, {
             name: 'Pets Allowed',
             match: (m) => m.pets && m.pets.match(/yes/ig),
-        }, {
-            name: 'Need Supplies',
-            match: (m) => m.supplyNeeds && !m.supplyNeeds.match(/no\s/ig),
-        }, {
-            name: 'Need Volunteers',
-            match: (m) => m.volunteerNeeds && !m.volunteerNeeds.match(/no\s/ig),
         }, {
             name: 'Updated Within 24 Hours',
             match: (m) => {

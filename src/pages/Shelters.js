@@ -13,23 +13,6 @@ import InfoBox from '../components/InfoBox';
 
 import * as SheltersApi from '../utils/SheltersApi';
 
-import createHistory from 'history/createBrowserHistory'
-
-const history = createHistory()
-
-// Get the current location.
-const location = history.location
-
-// Listen for changes to the current location.
-const unlisten = history.listen((location, action) => {
-  // location is an object like window.location
-  console.log(action, location.pathname, location.state)
-})
-
-// Use push, replace, and go to navigate around.
-// history.push('/shelters', { some: 'state' })
-unlisten()
-
 class Shelters extends Component {
 	state = {
         showModal: true,
@@ -39,8 +22,8 @@ class Shelters extends Component {
         tempFilteredMarkers: [],
         viewport: config.map,
         currentLocation: [],
-        selectedFilter: 'Accepting People',
-        tempSelectedFilter: 'Accepting People',
+        selectedFilter: 'Accepting Donations/Volunteers',
+        tempSelectedFilter: 'Accepting Donations/Volunteers',
         selectedMarker: {},
         toggledInfo: false,
         toggledPanel: false,
@@ -97,7 +80,9 @@ class Shelters extends Component {
             }
         });
         // Set initial markers to be accepting
-        const initialMarkers = allMarkerData.filter(marker => (marker.accepting))
+        const initialMarkers = allMarkerData.filter(
+        	marker => (marker.supplyNeeds || marker.volunteerNeeds)
+        )
         this.setState({
             isLoading: false,
             allMarkers: allMarkerData,
@@ -105,20 +90,6 @@ class Shelters extends Component {
             tempFilteredMarkers: initialMarkers
         });
     }
-
-    handleUrlQuery = (id, shelter) => {
-    	const { selectedFilter } = this.state;
-
-		const queryShelter = encodeURIComponent(shelter)
-		const querySelectedFilter = encodeURIComponent(selectedFilter).replace(/%20/g,'+')
-
-		// history.push({
-		// 	pathname: `/shelters/${id}`,
-		// 	// search: `filter=${querySelectedFilter}`,
-		// 	// state: {some: 'state'}
-		// })
-    }
-
 
     handleFilteredMarkers = (selectedFilter, filteredMarkers) => {
         this.setState({
@@ -262,7 +233,7 @@ class Shelters extends Component {
             query,
             countyBounds } = this.state;
 
-        console.log(this.props.match.params.id)
+        // console.log(this.props.match.params.id)
 
 		return (
 			<div>
@@ -318,7 +289,6 @@ class Shelters extends Component {
 		                    onClearCounties={ this.clearCounties}
 
 		                    onHandleUpdateQuery={ this.handleUpdateQuery }
-		                    onUrlQuery={ this.handleUrlQuery }
 
 		                    >
 		                </Search>
