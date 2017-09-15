@@ -195,7 +195,7 @@ class Search extends Component {
 					<div className={ toggledSearchBox ? 'search-data-results' : 'search-data-results hide'}>
 						<ul>
 							{searched.map((data, index) => (
-								<Link to={`/shelters/${data.id}`} key={index}>
+
 									<li
 										className={cursor === index ? 'searchSelected' : ''}
 										onMouseOver={() => {this.handleMouseOver(index)}}
@@ -205,7 +205,6 @@ class Search extends Component {
 										}}>
 										{`${ data.shelter } at ${ data.address }, ${ data.city }`}
 									</li>
-								</Link>
 							))}
 						</ul>
 					</div>
