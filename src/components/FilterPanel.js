@@ -18,7 +18,7 @@ const FilterPanel = (props) => {
 
     const filters = [
         {
-            name: 'Accepting Supplies/Volunteers',
+            name: 'Need Supplies/Volunteers',
             match: (m) => m.supplyNeeds || m.volunteerNeeds,
         }, {
             name: 'Need Supplies',
