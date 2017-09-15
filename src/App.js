@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import './styles/App.css';
 import Meta from './components/Meta';
@@ -17,10 +17,16 @@ class App extends Component {
                 <Meta />
                 <TopNavBar />
 
-                <Redirect from="/" to="/shelters" />
-                <Route exact path='/shelters' component={Shelters}/>
+                <Route
+                    render={({ location }) => (
+                        <Switch key={location.key} location={location}>
+                            <Route exact path='/' component={Shelters}/>
+                            <Route path='/shelters/:id' component={Shelters}/>
+                            <Route path='/credits' component={Credits}/>
+                        </Switch>
+                    )}
+                />
 
-                <Route path='/credits' component={Credits}/>
 
             </div>
         )

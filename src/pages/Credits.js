@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-const Credits = () => {
+const Credits = (location) => {
+	console.log(location)
 	return (
 		<div>
 			<p>Created by Sketch City + Station</p>
