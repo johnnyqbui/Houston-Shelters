@@ -54,7 +54,6 @@ const config = {
   },
   helpNumber: {
     tel: process.env.REACT_APP_HELP_CALL_NUMBER, // optional environment variable
-    sms: process.env.REACT_APP_HELP_TEXT_NUMBER // optional environment variable
   }
 };
 
