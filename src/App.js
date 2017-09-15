@@ -17,7 +17,7 @@ class App extends Component {
                 <Meta />
                 <TopNavBar />
                 <Switch>
-                    <Route path='/shelters' component={Shelters}/>
+                    <Route path='/' component={Shelters}/>
                     <Route
                         path='/shelters/:id'
                         render={({match}) =>
