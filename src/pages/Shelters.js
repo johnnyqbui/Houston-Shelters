@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import { stringify, parse } from 'qs';
 import config from '../config';
@@ -28,7 +27,7 @@ const unlisten = history.listen((location, action) => {
 })
 
 // Use push, replace, and go to navigate around.
-// history.push('/', { some: 'state' })
+// history.push('/shelters', { some: 'state' })
 unlisten()
 
 class Shelters extends Component {
@@ -113,14 +112,11 @@ class Shelters extends Component {
 		const queryShelter = encodeURIComponent(shelter)
 		const querySelectedFilter = encodeURIComponent(selectedFilter).replace(/%20/g,'+')
 
-		history.push({
-			pathname: `/shelters`,
-			query: `${id}`,
-			search: `filter=${querySelectedFilter}`,
-			state: {some: 'state'}
-		})
-
-		console.log(this.props.location)
+		// history.push({
+		// 	pathname: `/shelters/${id}`,
+		// 	// search: `filter=${querySelectedFilter}`,
+		// 	// state: {some: 'state'}
+		// })
     }
 
 
@@ -265,6 +261,9 @@ class Shelters extends Component {
             toggledSearchBox,
             query,
             countyBounds } = this.state;
+
+        console.log(this.props.match.params.id)
+
 		return (
 			<div>
 			 	<div id="fb-root"></div>

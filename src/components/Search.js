@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import MdClear from 'react-icons/lib/md/clear';
 
 class Search extends Component {
@@ -197,15 +198,17 @@ class Search extends Component {
 					<div className={ toggledSearchBox ? 'search-data-results' : 'search-data-results hide'}>
 						<ul>
 							{searched.map((data, index) => (
-								<li key={index}
-									className={cursor === index ? 'searchSelected' : ''}
-									onMouseOver={() => {this.handleMouseOver(index)}}
-									onClick={() => {
-										this.handleClickSearch(data, query)
-										onCompleteSearch(data)
-									}}>
-									{`${ data.shelter } at ${ data.address }, ${ data.city }`}
-								</li>
+								<Link to={`/shelters/${data.id}`} key={index}>
+									<li
+										className={cursor === index ? 'searchSelected' : ''}
+										onMouseOver={() => {this.handleMouseOver(index)}}
+										onClick={() => {
+											this.handleClickSearch(data, query)
+											onCompleteSearch(data)
+										}}>
+										{`${ data.shelter } at ${ data.address }, ${ data.city }`}
+									</li>
+								</Link>
 							))}
 						</ul>
 					</div>

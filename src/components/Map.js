@@ -143,6 +143,7 @@ class Lmap extends Component {
 				{currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
 
 				<MarkerClusterGroup
+					markers={markers}
 					options={markerClusterOptions}
 					wrapperOptions={{enableDefaultStyle: true}}
 					onMarkerClick={(marker) => {
