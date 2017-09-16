@@ -123,7 +123,7 @@ const InfoBox = (props) => {
                     <a className="update-shelter-button" target="_blank"
                        href={updateUrl(id)} style={{fontWeight: 'bold'}}>Submit a Status Update</a></p>
                 <br/>
-                <p><span style={{fontWeight: 'bold'}}>Updated:</span> {moment(lastUpdated).format('L LT')}</p>
+                {lastUpdated && <p><span style={{fontWeight: 'bold'}}>Updated:</span> {moment(lastUpdated).format('L LT')}</p>}
                 <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
                 <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
               {petsNotesTag(pets_notes)}
