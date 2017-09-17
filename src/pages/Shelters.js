@@ -92,7 +92,7 @@ class Shelters extends Component {
         		showModal: false
         	})
         } else {
-        	const initialMarkers = allMarkerData.filter(m => { return m.supplyNeeds || m.volunteerNeeds })
+        	const initialMarkers = allMarkerData.filter(m => m.supplyNeeds || m.volunteerNeeds )
 	        this.setState({
 	            allMarkers: allMarkerData,
 	            filteredMarkers: initialMarkers,
