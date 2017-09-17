@@ -83,13 +83,8 @@ class Shelters extends Component {
         });
         // Set initial markers to be accepting
         const initialMarkers = allMarkerData.filter(
-        	m => {
-        		if (m.supplyNeeds || m.volunteerNeeds && m.lastUpdated) {
-                    const lastUpdatedPlus = moment(m.lastUpdated).add(24, 'hours').format();
-			        const current = moment().format();
-			        return lastUpdatedPlus > current;
-                }
-        	}
+          marker => (marker.supplyNeeds || marker.volunteerNeeds)
+        	
         )
 
         this.setState({
