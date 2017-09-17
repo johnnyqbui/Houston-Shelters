@@ -1,6 +1,7 @@
 import React from 'react';
-import moment from 'moment';
 import FaFilter from 'react-icons/lib/fa/filter';
+import moment from 'moment';
+
 
 const FilterPanel = (props) => {
     const {
@@ -18,14 +19,12 @@ const FilterPanel = (props) => {
 
     const filters = [
         {
-            name: 'Accepting People',
-            match: (m) => m.accepting,
-        }, {
-            name: 'Special Needs',
-            match: (m) => m.specialNeeds && m.accepting,
-        }, {
-            name: 'Pets Allowed',
-            match: (m) => m.pets && m.pets.match(/yes/ig),
+            name: 'Need Supplies/Volunteers',
+            match: (m) => {
+                if (m.supplyNeeds || m.volunteerNeeds && m.lastUpdated) {
+                    return getUpdated(m.lastUpdated)
+                }
+            }
         }, {
             name: 'Need Supplies',
             match: (m) => m.supplyNeeds && !m.supplyNeeds.match(/no\s/ig),
@@ -35,17 +34,30 @@ const FilterPanel = (props) => {
         }, {
             name: 'Updated Within 24 Hours',
             match: (m) => {
-                if (m.lastUpdated.length > 0) {
-                    const lastUpdatedPlus = moment(m.lastUpdated).add(24, 'hours').format();
-                    const current = moment().format();
-                    return lastUpdatedPlus > current;
+                if (m.lastUpdated) {
+                    return getUpdated(m.lastUpdated)
                 }
             },
+        }, {
+            name: 'Accepting People',
+            match: (m) => m.accepting,
+        }, {
+            name: 'Special Needs',
+            match: (m) => m.specialNeeds && m.accepting,
+        }, {
+            name: 'Pets Allowed',
+            match: (m) => m.pets && m.pets.match(/yes/ig),
         }, {
             name: 'All Shelters',
             match: (m) => true,
         }
     ];
+
+    const getUpdated = (lastUpdated) => {
+        const lastUpdatedPlus = moment(lastUpdated).add(24, 'hours').format();
+        const current = moment().format();
+        return lastUpdatedPlus > current;
+    }
 
     let matchFunctionsByName = {}
     filters.forEach((filter) => {
@@ -54,7 +66,6 @@ const FilterPanel = (props) => {
 
     const handleFilter = (value) => {
         const filtered = allMarkers.filter(matchFunctionsByName[value]);
-
         onClickFilter(value, filtered)
         onCloseSearchBox()
     }

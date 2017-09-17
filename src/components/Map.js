@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer, CircleMarker, ZoomControl } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
@@ -69,8 +70,12 @@ class Lmap extends Component {
 				}
 			})
 	  	})
+
+	  	// Temp fix
+	  	const newMarkers = markers.length > 0 ? markers : [null]
+
 		this.setState({
-			markers: markers
+			markers: newMarkers
 		})
 	}
 
@@ -139,9 +144,9 @@ class Lmap extends Component {
 				{currentLocation.length > 0 ? <CircleMarker center={currentLocation} radius={15}/> : ''}
 
 				<MarkerClusterGroup
+					markers={markers}
 					options={markerClusterOptions}
 					wrapperOptions={{enableDefaultStyle: true}}
-					markers={markers}
 					onMarkerClick={(marker) => {
 						this.centerToMarker(marker.getLatLng());
 						onOpenInfoBox()

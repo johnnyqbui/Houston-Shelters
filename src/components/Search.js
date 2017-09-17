@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import MdClear from 'react-icons/lib/md/clear';
 
 class Search extends Component {
@@ -83,7 +83,10 @@ class Search extends Component {
     }
 
     handleClickSearch = (data, query) => {
-		const { onCloseSearchBox, onHandleUpdateQuery, onClosePanel } = this.props;
+		const {
+			onCloseSearchBox,
+			onHandleUpdateQuery,
+			onClosePanel } = this.props;
 
 		if (data) {
 			this.setState({
@@ -135,6 +138,7 @@ class Search extends Component {
 
 	    // Enter
 	    if (e.keyCode === 13) {
+
 	    	this.searchData(query)
 	    	if (!data){return}
 	    	else if ((counties.length - searched.length) <= 0 && counties.length > 0) {
@@ -191,15 +195,16 @@ class Search extends Component {
 					<div className={ toggledSearchBox ? 'search-data-results' : 'search-data-results hide'}>
 						<ul>
 							{searched.map((data, index) => (
-								<li key={index}
-									className={cursor === index ? 'searchSelected' : ''}
-									onMouseOver={() => {this.handleMouseOver(index)}}
-									onClick={() => {
-										this.handleClickSearch(data, query)
-										onCompleteSearch(data)
-									}}>
-									{`${ data.shelter } at ${ data.address }, ${ data.city }`}
-								</li>
+
+									<li
+										className={cursor === index ? 'searchSelected' : ''}
+										onMouseOver={() => {this.handleMouseOver(index)}}
+										onClick={() => {
+											this.handleClickSearch(data, query)
+											onCompleteSearch(data)
+										}}>
+										{`${ data.shelter } at ${ data.address }, ${ data.city }`}
+									</li>
 							))}
 						</ul>
 					</div>

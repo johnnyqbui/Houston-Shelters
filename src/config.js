@@ -17,6 +17,8 @@ const config = {
   },
   api: {
     baseURL: process.env.REACT_APP_API_BASE_URL,
+    shelters: process.env.REACT_APP_API_SHELTERS,
+    needs: process.env.REACT_APP_API_NEEDS,
     dataEntryPortal: process.env.REACT_APP_DATA_ENTRY_PORTAL
   },
   analytics: {
@@ -52,7 +54,6 @@ const config = {
   },
   helpNumber: {
     tel: process.env.REACT_APP_HELP_CALL_NUMBER, // optional environment variable
-    sms: process.env.REACT_APP_HELP_TEXT_NUMBER // optional environment variable
   }
 };
 

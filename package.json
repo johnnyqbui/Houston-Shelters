@@ -8,11 +8,13 @@
   },
   "dependencies": {
     "gh-pages": "^1.0.0",
+    "history": "^4.7.2",
     "http-server": "^0.10.0",
     "leaflet": "^1.2.0",
     "leaflet.markercluster": "^1.1.0",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
+    "qs": "^6.5.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-facebook": "^4.0.14",
