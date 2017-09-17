@@ -19,6 +19,7 @@ class Shelters extends Component {
 	state = {
         showModal: true,
         isLoading: true,
+        noShelterMsg: false,
         allMarkers: [],
         filteredMarkers: [],
         tempFilteredMarkers: [],
@@ -81,23 +82,27 @@ class Shelters extends Component {
                 showInfo: false
             }
         });
-        // Set initial markers to be accepting
-        const initialMarkers = allMarkerData.filter(
-        	m => {
-        		if (m.supplyNeeds || m.volunteerNeeds && m.lastUpdated) {
-                    const lastUpdatedPlus = moment(m.lastUpdated).add(24, 'hours').format();
-			        const current = moment().format();
-			        return lastUpdatedPlus > current;
-                }
-        	}
-        )
+
+        const idParams = parseInt(this.props.match.params.id)
+    	const paramMarker = allMarkerData.filter(m => m.id === idParams)
+
+    	if (paramMarker.length > 0) {
+        	this.handleCompleteSearch(paramMarker[0])
+        	this.setState({
+        		showModal: false
+        	})
+        } else {
+        	const initialMarkers = allMarkerData.filter(m => { return m.supplyNeeds || m.volunteerNeeds })
+	        this.setState({
+	            allMarkers: allMarkerData,
+	            filteredMarkers: initialMarkers,
+	            tempFilteredMarkers: initialMarkers
+	        });
+        }
 
         this.setState({
-            isLoading: false,
-            allMarkers: allMarkerData,
-            filteredMarkers: initialMarkers,
-            tempFilteredMarkers: initialMarkers
-        });
+			isLoading: false
+		})
     }
 
     handleFilteredMarkers = (selectedFilter, filteredMarkers) => {
@@ -142,7 +147,6 @@ class Shelters extends Component {
         this.setState({
             toggledInfo: true
         })
-
     }
 
     handleCloseInfoBox = () => {
@@ -224,10 +228,15 @@ class Shelters extends Component {
         })
     }
 
+    updateUrlParams = (data) => {
+    	this.props.history.push(`/shelters/${data.id}`)
+    }
+
     render() {
     	const {
             showModal,
             isLoading,
+            noShelterMsg,
             allMarkers,
             filteredMarkers,
             tempFilteredMarkers,
@@ -241,11 +250,10 @@ class Shelters extends Component {
             toggledSearchBox,
             query,
             countyBounds } = this.state;
-
-        // console.log(this.props.match.params.id)
-
 		return (
 			<div>
+				{ noShelterMsg ? <div className='noShelterMsg'>Shelter ID not found</div> : <p></p> }
+
 			 	<div id="fb-root"></div>
 		        <ReactModal
 		            isOpen={this.state.showModal}
@@ -272,6 +280,8 @@ class Shelters extends Component {
 		        { isLoading ? <LoadingIcon /> :
 		            <div>
 		                <Search
+		                	match={ this.props.match }
+		                	history={ this.props.history }
 		                    allMarkers={ allMarkers }
 		                    tempFilteredMarkers={ tempFilteredMarkers }
 		                    filteredMarkers={ filteredMarkers }
@@ -298,6 +308,7 @@ class Shelters extends Component {
 		                    onClearCounties={ this.clearCounties}
 
 		                    onHandleUpdateQuery={ this.handleUpdateQuery }
+		                    updateUrlParams={ this.updateUrlParams }
 
 		                    >
 		                </Search>
@@ -330,11 +341,13 @@ class Shelters extends Component {
 		            viewport={ viewport }
 		            selectedMarker={ selectedMarker }
 		            toggledInfo={ toggledInfo }
+
 		            onSelectMarker={ this.handleSelectMarker }
 		            onOpenInfoBox={ this.handleOpenInfoBox }
 		            onCloseInfoBox={ this.handleCloseInfoBox }
 		            onClosePanel={ this.handleClosePanel }
 		            onCloseSearchBox={ this.handleCloseSearchBox }
+		            updateUrlParams={ this.updateUrlParams }
 
 		            countyBounds={ countyBounds }
 		            onClearCounties={ this.clearCounties }

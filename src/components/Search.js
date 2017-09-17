@@ -107,8 +107,8 @@ class Search extends Component {
 	    	onClosePanel,
 	    	onSetBounds,
 	    	onClearCounties,
-	    	onHandleUpdateQuery } = this.props;
-	    // up
+	    	onHandleUpdateQuery,
+	    	updateUrlParams } = this.props;
 
 	    onClearCounties()
 	    if (e.keyCode === 38) {
@@ -123,7 +123,6 @@ class Search extends Component {
 					cursor: searched.length -1
 				})
 			}
-			// down
 	    } else if (e.keyCode === 40) {
     		this.setState( prevState => ({
 				cursor: prevState.cursor + 1
@@ -138,8 +137,9 @@ class Search extends Component {
 
 	    // Enter
 	    if (e.keyCode === 13) {
-
 	    	this.searchData(query)
+	    	updateUrlParams(data)
+
 	    	if (!data){return}
 	    	else if ((counties.length - searched.length) <= 0 && counties.length > 0) {
 	    		this.setState({
@@ -148,6 +148,7 @@ class Search extends Component {
 		    	onSetBounds(counties)
 		    	onHandleUpdateQuery(query)
 	    		onCloseSearchBox()
+
 	    		return
 	    	}
 	    	const fullLocation = `${ data.shelter } at ${ data.address }, ${ data.city }`
@@ -170,7 +171,7 @@ class Search extends Component {
 
 	render() {
 		const { query, searched, cursor } = this.state;
-		const { onCompleteSearch, toggledSearchBox, toggledInfo } = this.props;
+		const { onCompleteSearch, toggledSearchBox, toggledInfo, updateUrlParams } = this.props;
 	  	return (
 				<div className={toggledInfo ? 'search-data-container open' : 'search-data-container'}>
 					<div className="search-data-bar">
@@ -195,16 +196,16 @@ class Search extends Component {
 					<div className={ toggledSearchBox ? 'search-data-results' : 'search-data-results hide'}>
 						<ul>
 							{searched.map((data, index) => (
-
-									<li
-										className={cursor === index ? 'searchSelected' : ''}
-										onMouseOver={() => {this.handleMouseOver(index)}}
-										onClick={() => {
-											this.handleClickSearch(data, query)
-											onCompleteSearch(data)
-										}}>
-										{`${ data.shelter } at ${ data.address }, ${ data.city }`}
-									</li>
+								<li key={index}
+									className={cursor === index ? 'searchSelected' : ''}
+									onMouseOver={() => {this.handleMouseOver(index)}}
+									onClick={() => {
+										this.handleClickSearch(data, query)
+										onCompleteSearch(data)
+										updateUrlParams(data)
+									}}>
+									{`${ data.shelter } at ${ data.address }, ${ data.city }`}
+								</li>
 							))}
 						</ul>
 					</div>

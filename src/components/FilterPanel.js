@@ -2,7 +2,6 @@ import React from 'react';
 import FaFilter from 'react-icons/lib/fa/filter';
 import moment from 'moment';
 
-
 const FilterPanel = (props) => {
     const {
         allMarkers,

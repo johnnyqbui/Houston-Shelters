@@ -107,7 +107,8 @@ class Lmap extends Component {
 			onCloseInfoBox,
 			onClosePanel,
 			onCloseSearchBox,
-			onClearCounties } = this.props;
+			onClearCounties,
+			updateUrlParams } = this.props;
 
 		const markerClusterOptions = {
 			showCoverageOnHover: false,
@@ -148,12 +149,15 @@ class Lmap extends Component {
 					options={markerClusterOptions}
 					wrapperOptions={{enableDefaultStyle: true}}
 					onMarkerClick={(marker) => {
+						const selectedMarker = filteredMarkers[marker.options.id]
+
 						this.centerToMarker(marker.getLatLng());
 						onOpenInfoBox()
 						onClosePanel()
 						onCloseSearchBox()
 						onClearCounties()
-						onSelectMarker(filteredMarkers[marker.options.id])
+						onSelectMarker(selectedMarker)
+						updateUrlParams(selectedMarker)
 					}}
 					onPopupClose={() => onCloseInfoBox()}
 				/>
