@@ -14,14 +14,16 @@ class App extends Component {
             <div className="App">
                 <Meta />
                 <TopNavBar />
-                <Route exact path='/' component={Shelters}/>
-                <Route exact path='/shelters' component={Shelters}/>
-                <Route
-                    path='/shelters/:id'
-                    render={({match, location, history}) =>
-                        <Shelters match={match} history={history}/>
-                }/>
-                <Route path='/credits' component={Credits} />
+                <Switch>
+                    <Route exact path='/' component={Shelters}/>
+                    <Route exact path='/shelters' component={Shelters}/>
+                    <Route
+                        path='/shelters/:id'
+                        render={({match, location, history}) =>
+                            <Shelters match={match} history={history}/>
+                    }/>
+                    <Route path='/credits' component={Credits} />
+                </Switch>
 
             </div>
         )
