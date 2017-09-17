@@ -252,8 +252,6 @@ class Shelters extends Component {
             countyBounds } = this.state;
 		return (
 			<div>
-				{ noShelterMsg ? <div className='noShelterMsg'>Shelter ID not found</div> : <p></p> }
-
 			 	<div id="fb-root"></div>
 		        <ReactModal
 		            isOpen={this.state.showModal}

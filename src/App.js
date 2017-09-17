@@ -18,6 +18,7 @@ class App extends Component {
                     <Route exact path='/' component={Shelters}/>
                     <Route exact path='/shelters' component={Shelters}/>
                     <Route
+                        exact
                         path='/shelters/:id'
                         render={({match, location, history}) =>
                             <Shelters match={match} history={history}/>
