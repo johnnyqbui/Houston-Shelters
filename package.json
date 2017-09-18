@@ -42,5 +42,5 @@
     "heroku-postbuild": "npm install --only=dev && npm run build",
     "start-static": "http-server ./build -p 5000 --cors"
   },
-  "homepage": "/"
+  "homepage": "."
 }
