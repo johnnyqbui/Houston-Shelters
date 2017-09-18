@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+
 import ReactModal from 'react-modal';
 import { stringify, parse } from 'qs';
 import moment from 'moment';
@@ -82,6 +84,7 @@ class Shelters extends Component {
                 showInfo: false
             }
         });
+        console.log(this.props)
 
         const idParams = parseInt(this.props.match.params.id)
     	const paramMarker = allMarkerData.filter(m => m.id === idParams)
