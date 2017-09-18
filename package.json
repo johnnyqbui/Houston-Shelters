@@ -40,7 +40,7 @@
     "setup-vars": "./bin/setup",
     "heroku-prebuild": "npm run setup-vars",
     "heroku-postbuild": "npm install --only=dev && npm run build",
-    "start-static": "http-server ./build -p ${PORT} --cors"
+    "start-static": "http-server ./build -p 3000 --cors"
   },
   "homepage": "/"
 }

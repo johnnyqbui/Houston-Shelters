@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import './styles/App.css';
 import Meta from './components/Meta';
@@ -16,7 +16,6 @@ class App extends Component {
                 <TopNavBar />
                 <Switch>
                     <Route exact path='/' component={Shelters}/>
-                    <Route exact path='/shelters' component={Shelters}/>
                     <Route
                         path='/shelters/:id?'
                         render={({match, location, history}) =>
