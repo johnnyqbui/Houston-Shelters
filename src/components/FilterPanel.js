@@ -19,11 +19,7 @@ const FilterPanel = (props) => {
     const filters = [
         {
             name: 'Need Supplies/Volunteers',
-            match: (m) => {
-                if (m.supplyNeeds || m.volunteerNeeds && m.lastUpdated) {
-                    return getUpdated(m.lastUpdated)
-                }
-            }
+            match: (m) => { m.supplyNeeds || m.volunteerNeeds }
         }, {
             name: 'Need Supplies',
             match: (m) => m.supplyNeeds && !m.supplyNeeds.match(/no\s/ig),
