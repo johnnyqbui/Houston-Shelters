@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-
 import ReactModal from 'react-modal';
-import { stringify, parse } from 'qs';
-import moment from 'moment';
 
 import config from '../config';
 
@@ -94,15 +90,15 @@ class Shelters extends Component {
         		showModal: false
         	})
         } else {
-        	const initialMarkers = allMarkerData.filter(m => m.supplyNeeds || m.volunteerNeeds)
+            const initialMarkers = allMarkerData.filter(m => m.supplyNeeds || m.volunteerNeeds)
 	        this.setState({
-	            allMarkers: allMarkerData,
 	            filteredMarkers: initialMarkers,
 	            tempFilteredMarkers: initialMarkers
 	        });
         }
 
         this.setState({
+            allMarkers: allMarkerData,
 			isLoading: false
 		})
     }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import MdClear from 'react-icons/lib/md/clear';
 
 class Search extends Component {
@@ -19,9 +18,6 @@ class Search extends Component {
 
 	searchData = (query) => {
 		const {
-			allMarkers,
-			filteredMarkers,
-			selectedFilter,
 			tempFilteredMarkers,
 			tempSelectedFilter,
 			onInputSearch,
@@ -85,7 +81,6 @@ class Search extends Component {
     handleClickSearch = (data, query) => {
 		const {
 			onCloseSearchBox,
-			onHandleUpdateQuery,
 			onClosePanel } = this.props;
 
 		if (data) {

@@ -146,6 +146,7 @@ const InfoBox = (props) => {
     )
 }
 
+// These info are not needed at this stage of shelter map
 // Shelter Info
 // <p><span style={{fontWeight: 'bold'}}>Accepting People?</span> {accepting ? 'Yes' : 'No' }</p>
 // <p><span style={{fontWeight: 'bold'}}>Pets Allowed?</span> {pets ? pets : 'Unknown'}</p>
