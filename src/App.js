@@ -16,6 +16,7 @@ class App extends Component {
                 <TopNavBar />
                 <Switch>
                     <Route exact path='/' component={Shelters}/>
+                    <Route exact path='/shelters' component={Shelters}/>
                     <Route
                         path='/shelters/:id?'
                         render={({match, location, history}) =>
