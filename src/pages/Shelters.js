@@ -84,18 +84,17 @@ class Shelters extends Component {
                 showInfo: false
             }
         });
-        console.log(this.props)
 
         const idParams = parseInt(this.props.match.params.id)
-    	const paramMarker = allMarkerData.filter(m => m.id === idParams)
+    	const paramMarker = allMarkerData.find(m => m.id === idParams)
 
-    	if (paramMarker.length > 0) {
-        	this.handleCompleteSearch(paramMarker[0])
+    	if (paramMarker) {
+        	this.handleCompleteSearch(paramMarker)
         	this.setState({
         		showModal: false
         	})
         } else {
-        	const initialMarkers = allMarkerData.filter(m => m.supplyNeeds || m.volunteerNeeds )
+        	const initialMarkers = allMarkerData.filter(m => m.supplyNeeds || m.volunteerNeeds)
 	        this.setState({
 	            allMarkers: allMarkerData,
 	            filteredMarkers: initialMarkers,

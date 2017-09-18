@@ -150,7 +150,6 @@ class Lmap extends Component {
 					wrapperOptions={{enableDefaultStyle: true}}
 					onMarkerClick={(marker) => {
 						const selectedMarker = filteredMarkers[marker.options.id]
-
 						this.centerToMarker(marker.getLatLng());
 						onOpenInfoBox()
 						onClosePanel()
