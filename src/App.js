@@ -16,13 +16,13 @@ class App extends Component {
                 <TopNavBar />
                 <Switch>
                     <Route exact path='/' component={Shelters}/>
-                    <Route path='/shelters' component={Shelters}/>
                     <Route
-                        path='/shelters/:id'
+                        path='/shelters/:id?'
                         render={({match, location, history}) =>
                             <Shelters match={match} history={history}/>
                     }/>
                     <Route path='/credits' component={Credits} />
+                    <Route render={() => <h1 style={{marginTop: '50px'}}>Page not found</h1>} />
                 </Switch>
 
             </div>

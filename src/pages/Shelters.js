@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
-import { stringify, parse } from 'qs';
-import moment from 'moment';
 
 import config from '../config';
 
@@ -84,23 +82,23 @@ class Shelters extends Component {
         });
 
         const idParams = parseInt(this.props.match.params.id)
-    	const paramMarker = allMarkerData.filter(m => m.id === idParams)
+    	const paramMarker = allMarkerData.find(m => m.id === idParams)
 
-    	if (paramMarker.length > 0) {
-        	this.handleCompleteSearch(paramMarker[0])
+    	if (paramMarker) {
+        	this.handleCompleteSearch(paramMarker)
         	this.setState({
         		showModal: false
         	})
         } else {
-        	const initialMarkers = allMarkerData.filter(m => m.supplyNeeds || m.volunteerNeeds )
+            const initialMarkers = allMarkerData.filter(m => m.supplyNeeds || m.volunteerNeeds)
 	        this.setState({
-	            allMarkers: allMarkerData,
 	            filteredMarkers: initialMarkers,
 	            tempFilteredMarkers: initialMarkers
 	        });
         }
 
         this.setState({
+            allMarkers: allMarkerData,
 			isLoading: false
 		})
     }
