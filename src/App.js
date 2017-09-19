@@ -19,7 +19,7 @@ class App extends Component {
                     <Route
                         path='/shelters/:id?'
                         render={({match, location, history}) =>
-                            <Shelters match={match} history={history}/>
+                            <Shelters match={match} location={location} history={history}/>
                     }/>
                     <Route path='/credits' component={Credits} />
                     <Route render={() => <h1 style={{marginTop: '50px'}}>Page not found</h1>} />
