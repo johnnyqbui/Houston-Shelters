@@ -124,10 +124,10 @@ class Lmap extends Component {
 			    boundsOptions={{ padding: [120, 120] }}
 			    viewport={ viewport }
 			    onClick={() => {
+			    	onClearCounties()
 			    	onClosePanel()
 			    	onCloseSearchBox()
 			    	onCloseInfoBox()
-			    	onClearCounties()
 			    }}
 			    doubleClickZoom={ true }
 			    zoomSnap={ false }
@@ -149,15 +149,14 @@ class Lmap extends Component {
 					wrapperOptions={{enableDefaultStyle: true}}
 					onMarkerClick={(marker) => {
 						const selectedMarker = filteredMarkers[marker.options.id]
-						this.centerToMarker(marker.getLatLng());
 						onOpenInfoBox()
 						onClosePanel()
 						onCloseSearchBox()
 						onClearCounties()
 						onSelectMarker(selectedMarker)
 						updateUrlParams(selectedMarker)
+						this.centerToMarker(marker.getLatLng());
 					}}
-					onPopupClose={() => onCloseInfoBox()}
 				/>
 		    </Map>
 	  	)

@@ -81,12 +81,17 @@ class Shelters extends Component {
             }
         });
 
+        const searchParams = this.props.location.search
         const idParams = parseInt(this.props.match.params.id)
     	const paramMarker = allMarkerData.find(m => m.id === idParams)
 
     	if (paramMarker) {
         	this.handleCompleteSearch(paramMarker)
+            this.updateUrlParams(paramMarker)
         	this.setState({
+                selectedFilter: 'All Shelters',
+                tempSelectedFilter: 'All Shelters',
+                tempFilteredMarkers: allMarkerData,
         		showModal: false
         	})
         } else {
@@ -226,8 +231,10 @@ class Shelters extends Component {
         })
     }
 
-    updateUrlParams = (data) => {
-    	this.props.history.push(`/shelters/${data.id}`)
+    updateUrlParams = (data, selectedFilter) => {
+        // console.log(selectedFilter)
+        const shelterName = data['shelter'].trim().toLowerCase().replace(/\s/g, '+')
+    	this.props.history.push(`/shelters/${data.id}/${shelterName}`)
     }
 
     render() {
