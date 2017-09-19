@@ -60,7 +60,7 @@ class Search extends Component {
 		}
 	}
 
-	handleInputClickSearch = () => {
+	handleInputClick = () => {
 		const { onOpenSearchBox, onCloseInfoBox, onClosePanel, onClearCounties } = this.props;
 		const { searched } = this.state;
 		if (searched.length > 1) {
@@ -73,8 +73,8 @@ class Search extends Component {
 
 	handleClearSearch = () => {
 		const { onHandleUpdateQuery } = this.props;
-
 		onHandleUpdateQuery('')
+
         this.setState({
             query: '',
             cursor: 0
@@ -187,7 +187,7 @@ class Search extends Component {
 						    placeholder="Search by Shelter, Address, County, or Needs (e.g. baby formula)"
 						    value={query}
 						    onChange={(e) => this.updateQuery(e.target.value)}
-						    onClick={() => this.handleInputClickSearch()}
+						    onClick={() => this.handleInputClick()}
 						    onKeyDown={(e) => this.handleKeyDown(e, searched[cursor], query)}
 					    />
 					    <MdClear

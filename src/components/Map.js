@@ -157,7 +157,6 @@ class Lmap extends Component {
 						updateUrlParams(selectedMarker)
 						this.centerToMarker(marker.getLatLng());
 					}}
-					onPopupClose={() => onCloseInfoBox()}
 				/>
 		    </Map>
 	  	)
